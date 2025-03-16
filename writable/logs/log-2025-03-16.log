@@ -1,0 +1,354 @@
+CRITICAL - 2025-03-16 07:39:52 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\MVC\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 07:40:48 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\MVC\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 07:50:13 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\MVC\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\public\\index.php')
+DEBUG - 2025-03-16 07:59:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-16 07:59:37 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "writable/session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('writable/session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('writable/session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 08:00:42 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\MVC\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\MVC\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 08:04:49 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 08:04:53 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\sportStream\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\sportStream\\public\\index.php')
+CRITICAL - 2025-03-16 08:06:40 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-16 08:06:41 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-16 08:08:40 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-16 08:08:41 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-16 08:19:11 --> CodeIgniter\Session\Exceptions\SessionException: Session: Configured save path "C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\writable\session" is not writable by the PHP process.
+[Method: GET, Route: auth]
+in SYSTEMPATH\Session\Handlers\FileHandler.php on line 103.
+ 1 SYSTEMPATH\Session\Handlers\FileHandler.php(103): CodeIgniter\Session\Exceptions\SessionException::forWriteProtectedSavePath('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session')
+ 2 [internal function]: CodeIgniter\Session\Handlers\FileHandler->open('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\writable\\session', 'ci_session')
+ 3 SYSTEMPATH\Session\Session.php(896): session_start()
+ 4 SYSTEMPATH\Session\Session.php(242): CodeIgniter\Session\Session->startSession()
+ 5 SYSTEMPATH\Config\Services.php(710): CodeIgniter\Session\Session->start()
+ 6 SYSTEMPATH\Config\BaseService.php(312): CodeIgniter\Config\Services::session(Object(Config\Session), false)
+ 7 SYSTEMPATH\Config\BaseService.php(251): CodeIgniter\Config\BaseService::__callStatic('session', [...])
+ 8 SYSTEMPATH\Config\Services.php(668): CodeIgniter\Config\BaseService::getSharedInstance('session', null)
+ 9 SYSTEMPATH\Config\BaseService.php(321): CodeIgniter\Config\Services::session()
+10 SYSTEMPATH\Config\BaseService.php(202): CodeIgniter\Config\BaseService::__callStatic('session', [])
+11 SYSTEMPATH\Common.php(1000): CodeIgniter\Config\BaseService::get('session')
+12 SYSTEMPATH\Common.php(973): service('session')
+13 APPPATH\Filters\AlreadyLoggedInFilter.php(13): session()
+14 SYSTEMPATH\Filters\Filters.php(241): App\Filters\AlreadyLoggedInFilter->before(Object(CodeIgniter\HTTP\IncomingRequest), null)
+15 SYSTEMPATH\Filters\Filters.php(221): CodeIgniter\Filters\Filters->runBefore([...])
+16 SYSTEMPATH\CodeIgniter.php(479): CodeIgniter\Filters\Filters->run('auth', 'before')
+17 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+18 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+19 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+20 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+21 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin\\OneDrive\\Desktop\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-03-16 08:26:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:29:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+ERROR - 2025-03-16 08:29:24 --> mysqli_sql_exception: Duplicate entry 'ci_session:cbcc435aef70d55ada137f9bfbb07' for key 'PRIMARY' in C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ci...', 0)
+#1 C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ci...')
+#2 C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ci...')
+#3 C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ci...', Array, false)
+#4 C:\Users\Warvin\OneDrive\Desktop\DigitalSportsHub\system\Session\Handlers\DatabaseHandler.php(199): CodeIgniter\Database\BaseBuilder->insert(Array)
+#5 [internal function]: CodeIgniter\Session\Handlers\DatabaseHandler->write('cbcc435aef70d55...', '__ci_last_regen...')
+#6 [internal function]: session_write_close()
+#7 {main}
+DEBUG - 2025-03-16 08:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:35:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:36:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:38:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:39:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:41:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:42:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:42:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:42:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:43:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:43:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:44:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:45:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:49:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:51:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:51:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:52:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:53:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:54:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:54:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:55:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 08:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:00:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:01:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:01:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:02:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:02:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:03:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:06:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:08:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:09:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:10:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:12:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:12:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:13:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:13:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:14:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:14:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:16:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:17:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:17:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:17:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:17:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:18:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:19:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:19:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:20:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:24:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:29:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:30:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
+DEBUG - 2025-03-16 09:30:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\DatabaseHandler' driver.
