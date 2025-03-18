@@ -40,7 +40,7 @@
 <body>
     <div class="anywere anywere-home"></div>
     <!--================= Header Section End Here =================-->
-    <section class="rts-player-static pt--100 pb--100">
+    <section class="pt--100 pb--100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-4"></div>
@@ -62,7 +62,7 @@
                                 <?=csrf_field();?>
                                 <div class="form">
                                     <input type="email" class="form-control" placeholder="Email" name="email"
-                                        required />
+                                        value="<?=set_value('email')?>" required />
                                     <div class="text-danger">
                                         <small><?=isset($validation)? display_error($validation,'email') : '' ?></small>
                                     </div>
@@ -74,17 +74,17 @@
                                         <small><?=isset($validation)? display_error($validation,'password') : '' ?></small>
                                     </div>
                                 </div>
-                                <div class="form">
+                                <div class="">
                                     <input type="checkbox" class="form-check-input" id="remember" />
                                     <label for="remember" class="form-label">Remember Me</label>
                                 </div>
-                                <div class="form">
+                                <div class="">
                                     <button type="submit" class="btn form-control">Login
                                         <i class="fa-solid fa-arrow-right"></i>
                                     </button>
                                 </div>
+                                <a class="forgot-password" href="<?=base_url('forgot-password')?>">Forgot password?</a>
                             </form>
-                            <a class="forgot-password" href="#">Forgot password?</a>
                         </div>
                     </div>
                 </div>

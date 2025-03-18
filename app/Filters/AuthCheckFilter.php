@@ -12,7 +12,7 @@ class AuthCheckFilter implements FilterInterface
     {
 
         if (!session()->has('loggedUser')) {
-            return redirect()->to('/')->with('fail','You must logged In!');
+            return redirect()->to('/auth')->with('fail','You must logged In!');
         }
     }
     
