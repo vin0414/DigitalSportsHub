@@ -52,7 +52,7 @@ class Home extends BaseController
             if(!$checkPassword||empty($checkPassword))
             {
                 session()->setFlashdata('fail','Invalid Password! Please try again');
-                return redirect()->to('auth/login')->withInput();
+                return redirect()->to('auth')->withInput();
             }
             else
             {
@@ -78,6 +78,77 @@ class Home extends BaseController
     //pages
     public function dashboard()
     {
-        return view('main/dashboard');
+        $title = "Digital Sports Hub";
+        $data = ['title'=>$title];
+        return view('main/dashboard',$data);
+    }
+
+    public function fetchPlayers()
+    {
+        $title = "Players";
+        $data = ['title'=>$title];
+        return view('main/players',$data);
+    }
+
+    public function newPlayer()
+    {
+
+    }
+
+    public function fetchTeams()
+    {
+        $title = "Teams";
+        $data = ['title'=>$title];
+        return view('main/teams',$data);
+    }
+
+    public function newTeam()
+    {
+
+    }
+
+    public function fetchSchedules()
+    {
+
+    }
+
+    public function newSchedule()
+    {
+
+    }
+
+    public function upload()
+    {
+
+    }
+
+    public function manageVideos()
+    {
+
+    }
+
+    public function goLive()
+    {
+
+    }
+
+    public function accounts()
+    {
+
+    }
+
+    public function recovery()
+    {
+
+    }
+
+    public function systemLogs()
+    {
+
+    }
+
+    public function myAccount()
+    {
+
     }
 }

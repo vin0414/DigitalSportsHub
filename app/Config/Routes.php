@@ -5,7 +5,6 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('dashboard','Home::dashboard');
 $routes->get('/', 'Home::index');
 $routes->get('about','Home::about');
 $routes->post('check','Home::checkAccount');
@@ -18,5 +17,7 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
-    
+    $routes->get('dashboard','Home::dashboard');
+    $routes->get('players','Home::fetchPlayers');
+    $routes->get('teams','Home::fetchTeams');
 });

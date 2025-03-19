@@ -1,121 +1,99 @@
-<!DOCTYPE html>
-<html lang="en" class="darkmode" data-tHEme="light">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Sports Hub</title>
-    <!--================= Favicon =================-->
-    <link rel="apple-touch-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <!--================= Bootstrap V5 CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap.min.css')?>">
-    <!--================= Font Awesome 5 CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/all.min.css')?>">
-    <!--================= RT Icons CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rt-icons.css')?>">
-    <!--================= Animate css =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/animate.min.css')?>">
-    <!--================= Magnific popup Plugin =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/magnific-popup.css')?>">
-    <!--================= Swiper Slider Plugin =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/swiper-bundle.min.css')?>">
-    <!--================= Mobile Menu CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/metisMenu.css')?>">
-    <!--================= Main Menu CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rtsmenu.css')?>">
-    <!--================= Main Stylesheet =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/variables/variable2.css')?>">
-    <!--================= Main Stylesheet =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/main.css')?>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css"
-        integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-
-<body>
-    <div class="anywere anywere-home"></div>
-    <!--================= Header Section End Here =================-->
-    <section class="pt--100 pb--100">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-4 login-form">
-                    <div class="card">
-                        <div class="card-body">
-                            <center>
-                                <img src="<?=base_url('assets/images/logo.jpg')?>" width="100"
-                                    style="border-radius: 50px;" alt="Logo">
-                            </center>
-                            <h4 class="text-center">Digital Sports Hub</h4>
-                            <p class="text-center">Please enter your email and password</p>
-                            <?php if(!empty(session()->getFlashdata('fail'))) : ?>
-                            <div class="alert alert-danger" role="alert">
-                                <?= session()->getFlashdata('fail'); ?>
-                            </div>
-                            <?php endif; ?>
-                            <form method="POST" class="form" autocomplete="OFF" action="<?=base_url('check')?>">
-                                <?=csrf_field();?>
-                                <div class="form">
-                                    <input type="email" class="form-control" placeholder="Email" name="email"
-                                        value="<?=set_value('email')?>" required />
-                                    <div class="text-danger">
-                                        <small><?=isset($validation)? display_error($validation,'email') : '' ?></small>
-                                    </div>
-                                </div>
-                                <div class="form">
-                                    <input type="password" class="form-control" placeholder="Password" name="password"
-                                        minlength="8" maxlength="16" required />
-                                    <div class="text-danger">
-                                        <small><?=isset($validation)? display_error($validation,'password') : '' ?></small>
-                                    </div>
-                                </div>
-                                <div class="">
-                                    <input type="checkbox" class="form-check-input" id="remember" />
-                                    <label for="remember" class="form-label">Remember Me</label>
-                                </div>
-                                <div class="">
-                                    <button type="submit" class="btn form-control">Login
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </button>
-                                </div>
-                                <a class="forgot-password" href="<?=base_url('forgot-password')?>">Forgot password?</a>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Digital Sports Hub - Login</title>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN DEMO STYLES -->
+    <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
+    <!-- END DEMO STYLES -->
+    <!-- BEGIN CUSTOM FONT -->
+    <style>
+      @import url("https://rsms.me/inter/inter.css");
+    </style>
+    <!-- END CUSTOM FONT -->
+  </head>
+  <body>
+    <!-- BEGIN DEMO THEME SCRIPT -->
+    <script src="<?=base_url('admin/js/demo-theme.min.js')?>"></script>
+    <!-- END DEMO THEME SCRIPT -->
+    <div class="page page-center">
+      <div class="container container-tight py-4">
+        <div class="text-center mb-4">
+          <!-- BEGIN NAVBAR LOGO -->
+          <a href="." class="navbar-brand navbar-brand-autodark">
+            <img src="<?=base_url('assets/images/logo.jpg')?>" width="50" style="border-radius: 50px;"/>
+          </a>
+          <!-- END NAVBAR LOGO -->
         </div>
-    </section>
-    <!--================= Scroll to Top Start =================-->
-    <div class="scroll-top-btn scroll-top-btn1"><i class="fas fa-angle-up arrow-up"></i><i
-            class="fas fa-circle-notch"></i></div>
-    <!--================= Scroll to Top End =================-->
-
-    <!--================= Jquery latest version =================-->
-    <script src="<?=base_url('assets/js/vendors/jquery-3.6.0.min.js')?>"></script>
-    <!--================= Bootstrap latest version =================-->
-    <script src="<?=base_url('assets/js/vendors/bootstrap.min.js')?>"></script>
-    <!--================= Wow.js =================-->
-    <script src="<?=base_url('assets/js/vendors/wow.min.js')?>"></script>
-    <!--================= Swiper Slider =================-->
-    <script src="<?=base_url('assets/js/vendors/swiper-bundle.min.js')?>"></script>
-    <!--================= metisMenu Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/metisMenu.min.js')?>"></script>
-    <!--================= Main Menu Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/rtsmenu.js')?>"></script>
-    <!--================= Mobile Menu Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/metisMenu.min.js')?>"></script>
-    <!--================= Magnefic Popup Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/isotope.pkgd.min.js')?>"></script>
-    <!--================= Magnefic Popup Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/jquery.magnific-popup.min.js')?>"></script>
-    <!--================= Main Script =================-->
-    <script src="<?=base_url('assets/js/main.js')?>"></script>
+        <div class="card card-md">
+          <div class="card-body">
+            <h2 class="h2 text-center mb-4">Login to your account</h2>
+            <form action="<?=base_url('check')?>" method="POST" autocomplete="off" novalidate>
+                <?=csrf_field();?>
+              <div class="mb-3">
+                <label class="form-label">Email address</label>
+                <input type="email" class="form-control" name="email" placeholder="your@email.com" value="<?=set_value('email')?>" autocomplete="off" />
+                <div class="text-danger">
+                    <small><?=isset($validation)? display_error($validation,'email') : '' ?></small>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label class="form-label">
+                  Password
+                </label>
+                <div class="input-group input-group-flat">
+                  <input type="password" class="form-control" name="password" minlength="8" maxlength="16" placeholder="Your password" autocomplete="off" />
+                  <span class="input-group-text">
+                    <a href="#" class="link-secondary" title="Show password" data-bs-toggle="tooltip">
+                      <!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-1"
+                      >
+                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                      </svg>
+                    </a>
+                  </span>
+                </div>
+                <div class="text-danger">
+                    <small><?=isset($validation)? display_error($validation,'password') : '' ?></small>
+                </div>
+              </div>
+              <div class="mb-2">
+                <label class="form-check">
+                  <input type="checkbox" class="form-check-input" />
+                  <span class="form-check-label">Remember me on this device</span>
+                </label>
+              </div>
+              <div class="form-footer">
+                <button type="submit" class="btn btn-primary w-100">Sign in</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="text-center text-secondary mt-3">Forgot password? <a href="<?=base_url('forgot-password')?>" tabindex="-1">Click here</a></div>
+      </div>
+    </div>
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="<?=base_url('admin/js/tabler.min.js')?>" defer></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <!-- BEGIN DEMO SCRIPTS -->
+    <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
+    <!-- END DEMO SCRIPTS -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"92294d248a09dda3","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}' crossorigin="anonymous"></script>
 </body>
-
 </html>
