@@ -38,16 +38,40 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('new-player')?>" class="btn btn-secondary"><i class="ti ti-plus"></i>&nbsp;New Player</a>
+                                <a href="<?=site_url('new-athlete')?>" class="btn btn-secondary">
+                                    <i class="ti ti-plus"></i>&nbsp;New Athlete
+                                </a>
                                 <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
                                 <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
                                     data-bs-target="#modal-report" aria-label="Create new report">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->
@@ -61,24 +85,24 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-cards">
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card">
-                            <div class="card-body p-4 text-center">
-                                <span class="avatar avatar-xl mb-3 rounded" style="background-image: url()"></span>
-                                <h3 class="m-0 mb-1"><a href="<?=site_url('profile')?>/">Paweł Kuna</a></h3>
-                                <div class="text-secondary">UI Designer</div>
-                                <div class="mt-3">
-                                    <span class="badge bg-success-lt">Owner</span>
+                        <div class="col-md-6 col-lg-3">
+                            <div class="card">
+                                <div class="card-body p-4 text-center">
+                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url()"></span>
+                                    <h3 class="m-0 mb-1"><a href="<?=site_url('profile')?>/">Paweł Kuna</a></h3>
+                                    <div class="text-secondary">UI Designer</div>
+                                    <div class="mt-3">
+                                        <span class="badge bg-success-lt">Owner</span>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex">
-                                <a href="#" class="card-btn">
-                                <i class="ti ti-mail"></i>&nbsp;Email
-                                </a>
-                                <a href="<?=site_url('profile')?>/" class="card-btn">
-                                <i class="ti ti-address-book"></i>&nbsp;Profile
-                                </a>
-                            </div>
+                                <div class="d-flex">
+                                    <a href="#" class="card-btn">
+                                        <i class="ti ti-mail"></i>&nbsp;Email
+                                    </a>
+                                    <a href="<?=site_url('profile')?>/" class="card-btn">
+                                        <i class="ti ti-address-book"></i>&nbsp;Profile
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -9,11 +9,17 @@ $routes->get('/', 'Home::index');
 $routes->get('about','Home::about');
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
-//ajax
+// ajax request
+///user management
 $routes->get('fetch-accounts','Home::fetchAccounts');
 $routes->post('save-account','Home::saveAccount');
 $routes->post('update','Home::updateAccount');
 $routes->post('reset','Home::resetAccount');
+///settings
+$routes->get('fetch-sports','Home::fetchSports');
+$routes->post('save-sports','Home::saveSports');
+$routes->post('save-role','Home::saveRole');
+$routes->get('fetch-role','Home::fetchRole');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -24,9 +30,10 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('dashboard','Home::dashboard');
-    $routes->get('players','Home::fetchPlayers');
+    $routes->get('athletes','Home::fetchAthletes');
     $routes->get('teams','Home::fetchTeams');
     $routes->get('accounts','Home::accounts');
     $routes->get('new-account','home::newAccount');
     $routes->get('edit-account/(:any)','home::editAccount/$1');
+    $routes->get('settings','Home::settings');
 });

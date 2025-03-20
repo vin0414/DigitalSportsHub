@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class sportsModel extends Model
+class roleModel extends Model
 {
-    protected $table            = 'sports';
-    protected $primaryKey       = 'sportsID';
+    protected $table            = 'player_role';
+    protected $primaryKey       = 'roleID';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['Name','DateCreated'];
+    protected $allowedFields    = ['roleName','sportsName','DateCreated'];
 
     // Dates
     protected $useTimestamps = false;

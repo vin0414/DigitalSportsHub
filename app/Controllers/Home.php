@@ -83,9 +83,9 @@ class Home extends BaseController
         return view('main/dashboard',$data);
     }
 
-    public function fetchPlayers()
+    public function fetchAthletes()
     {
-        $title = "Players";
+        $title = "Athletes";
         $data = ['title'=>$title];
         return view('main/players',$data);
     }
@@ -107,12 +107,12 @@ class Home extends BaseController
 
     }
 
-    public function fetchSchedules()
+    public function fetchEvents()
     {
 
     }
 
-    public function newSchedule()
+    public function newEvent()
     {
 
     }
@@ -294,6 +294,113 @@ class Home extends BaseController
     public function systemLogs()
     {
 
+    }
+
+    public function settings()
+    {
+        $title = "Settings";
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+        $data = ['title'=>$title,'sports'=>$sports];
+        return view('main/settings',$data);
+    }
+
+    public function saveSports()
+    {
+        $sportsModel = new \App\Models\sportsModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'sports'=>'required|is_unique[sports.Name]'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['Name'=>$this->request->getPost('sports'),'DateCreated'=>date('Y-m-d')];
+            $sportsModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully saved']);
+        }
+    }
+
+    public function fetchSports()
+    {
+        $sportsModel = new \App\Models\sportsModel();
+        $searchTerm = $_GET['search']['value'] ?? '';
+
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $sportsModel->like('sportsID', $searchTerm)
+                            ->orLike('Name', $searchTerm)
+                            ->orLike('DateCreated', $searchTerm);
+        }
+
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredsportsModel = clone $sportsModel;
+        if ($searchTerm) {
+            $filteredsportsModel->like('sportsID', $searchTerm)
+                            ->orLike('Name', $searchTerm)
+                            ->orLike('DateCreated', $searchTerm);
+        }
+
+        // Fetch filtered records based on limit and offset
+        $account = $sportsModel->findAll($limit, $offset);
+
+        // Count total records (without filter)
+        $totalRecords = $sportsModel->countAllResults();
+
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredsportsModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($account as $row) {
+            $response['data'][] = [
+                'id' => $row['sportsID'],
+                'name' => htmlspecialchars($row['Name'], ENT_QUOTES),
+                'date' => htmlspecialchars(date('Y-M-d',strtotime($row['DateCreated'])), ENT_QUOTES),
+                'action' =>'<button type="button" class="btn btn-sm btn-danger remove" value="' . $row['sportsID'] . '"><i class="ti ti-copy-x"></i> Remove </button>' 
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveRole()
+    {
+        $roleModel = new \App\Models\roleModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'sports_name'=>'required',
+            'role'=>'required|is_unique[player_role.roleName]'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['roleName'=>$this->request->getPost('role'),
+                    'sportsName'=>$this->request->getPost('sports_name'),
+                    'DateCreated'=>date('Y-m-d')];
+            $roleModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully saved']);
+        }
+    }
+
+    public function fetchRole()
+    {
+        
     }
 
     public function myAccount()

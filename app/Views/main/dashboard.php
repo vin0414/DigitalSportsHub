@@ -39,16 +39,39 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i class="ti ti-upload"></i>&nbsp;Upload</a>
+                                <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i
+                                        class="ti ti-upload"></i>&nbsp;Upload</a>
                                 <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
                                 <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
                                     data-bs-target="#modal-report" aria-label="Create new report">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->
@@ -95,13 +118,14 @@
                             </div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="row row-cards">
                         <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
                                     <h3 class="card-title">Recent</h3>
-                                    <div id="player-youtube" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
+                                    <div id="player-youtube" data-plyr-provider="youtube"
+                                        data-plyr-embed-id="bTqVqk7FSmY"></div>
                                 </div>
                             </div>
                         </div>
@@ -110,16 +134,14 @@
                                 <div class="card-header">
                                     <div class="card-title">Uploaded Videos</div>
                                 </div>
-                                <div class="position-relative">
+                                <div class="card-body">
                                     <div class="card">
                                         <div class="row row-0">
                                             <div class="col-3">
-                                            <!-- Photo -->
-                                            <img
-                                                src="<?=base_url('assets/images/logo.jpg')?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach"
-                                            />
+                                                <!-- Photo -->
+                                                <img src="<?=base_url('assets/images/logo.jpg')?>"
+                                                    class="w-100 h-100 object-cover card-img-start"
+                                                    alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach" />
                                             </div>
                                             <div class="col">
                                                 <div class="card-body">
@@ -132,12 +154,10 @@
                                     <div class="card">
                                         <div class="row row-0">
                                             <div class="col-3">
-                                            <!-- Photo -->
-                                            <img
-                                                src="<?=base_url('assets/images/logo.jpg')?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach"
-                                            />
+                                                <!-- Photo -->
+                                                <img src="<?=base_url('assets/images/logo.jpg')?>"
+                                                    class="w-100 h-100 object-cover card-img-start"
+                                                    alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach" />
                                             </div>
                                             <div class="col">
                                                 <div class="card-body">
@@ -150,12 +170,10 @@
                                     <div class="card">
                                         <div class="row row-0">
                                             <div class="col-3">
-                                            <!-- Photo -->
-                                            <img
-                                                src="<?=base_url('assets/images/logo.jpg')?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach"
-                                            />
+                                                <!-- Photo -->
+                                                <img src="<?=base_url('assets/images/logo.jpg')?>"
+                                                    class="w-100 h-100 object-cover card-img-start"
+                                                    alt="Beautiful blonde woman relaxing with a can of coke on a tree stump by the beach" />
                                             </div>
                                             <div class="col">
                                                 <div class="card-body">
@@ -201,9 +219,9 @@
     <script src="<?=base_url('admin/js/plyr.min.js')?>" defer></script>
     <!-- END PAGE SCRIPTS -->
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         window.Plyr && new Plyr("#player-youtube");
-      });
+    });
     </script>
     <script defer
         src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
