@@ -12,7 +12,7 @@ class playerModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['team_id','first_name','last_name','mi','date_of_birth','roleID','height','weight'];
+    protected $allowedFields    = ['team_id','first_name','last_name','mi','date_of_birth','roleID','height','weight','image'];
 
     // Dates
     protected $useTimestamps = false;

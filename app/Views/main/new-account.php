@@ -37,15 +37,37 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->
@@ -67,15 +89,16 @@
                                         <?=csrf_field()?>
                                         <div class="col-12">
                                             <label for="">Complete Name</label>
-                                            <input type="text" class="form-control" name="fullname" required/>
+                                            <input type="text" class="form-control" name="fullname" required />
                                             <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-12">
                                             <div class="row g-3">
                                                 <div class="col-lg-8">
                                                     <label for="">Email</label>
-                                                    <input type="email" class="form-control" name="email" required/>
-                                                    <div id="email-error" class="error-message text-danger text-sm"></div>
+                                                    <input type="email" class="form-control" name="email" required />
+                                                    <div id="email-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="">System Role</label>
@@ -86,7 +109,8 @@
                                                         <option>Coach</option>
                                                         <option>End-user</option>
                                                     </select>
-                                                    <div id="role-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="role-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,27 +118,32 @@
                                             <div class="form-selectgroup-boxes row mb-3">
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
-                                                        <input type="radio" name="status" value="1" class="form-selectgroup-input"
-                                                            checked />
-                                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                                        <input type="radio" name="status" value="1"
+                                                            class="form-selectgroup-input" checked />
+                                                        <span
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
                                                                 <span class="form-selectgroup-check"></span>
                                                             </span>
                                                             <span class="form-selectgroup-label-content">
-                                                                <span class="form-selectgroup-title strong mb-1">Active</span>
+                                                                <span
+                                                                    class="form-selectgroup-title strong mb-1">Active</span>
                                                             </span>
                                                         </span>
                                                     </label>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <label class="form-selectgroup-item">
-                                                        <input type="radio" name="status" value="0" class="form-selectgroup-input" />
-                                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
+                                                        <input type="radio" name="status" value="0"
+                                                            class="form-selectgroup-input" />
+                                                        <span
+                                                            class="form-selectgroup-label d-flex align-items-center p-3">
                                                             <span class="me-3">
                                                                 <span class="form-selectgroup-check"></span>
                                                             </span>
                                                             <span class="form-selectgroup-label-content">
-                                                                <span class="form-selectgroup-title strong mb-1">Inactive</span>
+                                                                <span
+                                                                    class="form-selectgroup-title strong mb-1">Inactive</span>
                                                             </span>
                                                         </span>
                                                     </label>
@@ -124,9 +153,10 @@
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" class="icon icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-2">
                                                     <path d="M12 5l0 14" />
                                                     <path d="M5 12l14 0" />
                                                 </svg>
@@ -140,7 +170,7 @@
                         <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
-                                <div class="card-title">Recently Added</div>
+                                    <div class="card-title">Recently Added</div>
                                 </div>
                                 <div class="position-relative">
                                     <div class="card-table table-responsive">
@@ -150,12 +180,12 @@
                                                 <th>Date</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($account as $row): ?>
+                                                <?php foreach($account as $row): ?>
                                                 <tr>
                                                     <td><?php echo $row['Fullname'] ?></td>
                                                     <td><?php echo date('Y-M-d',strtotime($row['DateCreated'])) ?></td>
-                                                </tr>   
-                                            <?php endforeach; ?>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -196,46 +226,41 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#frmAccount').on('submit',function(e){
-            e.preventDefault();
-            let data = $(this).serialize();
-            $.ajax({
-                    url: "<?=site_url('save-account')?>",
-                    method: "POST",
-                    data: data,
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
-                                title: 'Great!',
-                                text: "Successfully added",
-                                icon: 'success',
-                                confirmButtonText: 'Continue'
-                            }).then((result) => {
-                                // Action based on user's choice
-                                if (result.isConfirmed) {
-                                    // Perform some action when "Yes" is clicked
-                                    location.href="<?=base_url('accounts')?>";
-                                }
-                            }); 
-                        } else {
-                            var errors = response.error;
-                            // Iterate over each error and display it under the corresponding input field
-                            for (var field in errors) {
-                                $('#' + field + '-error').html('<p>' + errors[field] +
-                                    '</p>'); // Show the first error message
-                                $('#' + field).addClass(
-                                    'text-danger'); // Highlight the input field with an error
-                            }
+    $('#frmAccount').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-account')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('accounts')?>";
                         }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
                     }
-                });
-            });
+                }
+            }
+        });
+    });
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

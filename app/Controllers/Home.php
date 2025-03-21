@@ -59,6 +59,16 @@ class Home extends BaseController
                 session()->set('loggedUser', $account['accountID']);
                 session()->set('fullname', $account['Fullname']);
                 session()->set('role',$account['Role']);
+                //logs
+                date_default_timezone_set('Asia/Manila');
+                $logModel = new \App\Models\logModel();
+                $data = [
+                        'date'=>date('Y-m-d H:i:s a'),
+                        'accountID'=>session()->get('loggedUser'),
+                        'activities'=>'Logged In',
+                        'page'=>'login page'
+                        ];        
+                $logModel->save($data);
                 return redirect()->to('dashboard');
             }
         }
@@ -66,6 +76,16 @@ class Home extends BaseController
 
     public function logout()
     {
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = [
+                'date'=>date('Y-m-d H:i:s a'),
+                'accountID'=>session()->get('loggedUser'),
+                'activities'=>'Logged Out',
+                'page'=>'logout page'
+                ];        
+        $logModel->save($data);
         if(session()->has('loggedUser'))
         {
             session()->remove('loggedUser');
@@ -86,13 +106,37 @@ class Home extends BaseController
     public function fetchAthletes()
     {
         $title = "Athletes";
-        $data = ['title'=>$title];
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->findAll();
+        //players
+        $builder = $this->db->table('players a');
+        $builder->select('a.*,b.team_name,c.roleName');
+        $builder->join('teams b','b.team_id=a.team_id','LEFT');
+        $builder->join('player_role c','c.roleID=a.roleID','LEFT');
+        $players = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'team'=>$team,'players'=>$players];
         return view('main/players',$data);
     }
 
-    public function newPlayer()
+    public function newAthlete()
     {
+        $title = "New Athlete";
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->findAll();
 
+        $data = ['title'=>$title,'sports'=>$sports,'team'=>$team];
+        return view('main/new-player',$data);
+    }
+
+    public function saveAthlete()
+    {
+        
     }
 
 
@@ -111,6 +155,122 @@ class Home extends BaseController
 
         $data = ['title'=>$title,'team'=>$team,'sports'=>$sports];
         return view('main/teams',$data);
+    }
+
+    public function filterTeam()
+    {
+        $category = $this->request->getGet('category');
+        $text = $this->request->getGet('search');
+        //conditions
+        if(!empty($category) && empty($text))
+        {
+            $builder = $this->db->table('teams a');
+            $builder->select('a.*,b.Name');
+            $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
+            $builder->WHERE('a.sportsID',$category);
+            $team = $builder->get()->getResult();
+            foreach($team as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/team')?>/<?php echo $row->image ?>)"></span>
+            <h3 class="m-0 mb-1"><a
+                    href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"><?php echo $row->team_name ?></a>
+            </h3>
+            <div class="text-secondary">COACH : <?php echo $row->coach_name ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->Name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            </a>
+            <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Details
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
+        else if(!empty($category) && !empty($text))
+        {
+            $builder = $this->db->table('teams a');
+            $builder->select('a.*,b.Name');
+            $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
+            $builder->WHERE('a.sportsID',$category);
+            $builder->WHERE('a.team_name',$text);
+            $team = $builder->get()->getResult();
+            foreach($team as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/team')?>/<?php echo $row->image ?>)"></span>
+            <h3 class="m-0 mb-1"><a
+                    href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"><?php echo $row->team_name ?></a>
+            </h3>
+            <div class="text-secondary">COACH : <?php echo $row->coach_name ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->Name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            </a>
+            <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Details
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
+        else if(empty($category) && !empty($text))
+        {
+            $builder = $this->db->table('teams a');
+            $builder->select('a.*,b.Name');
+            $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
+            $builder->WHERE('a.team_name',$text);
+            $team = $builder->get()->getResult();
+            foreach($team as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/team')?>/<?php echo $row->image ?>)"></span>
+            <h3 class="m-0 mb-1"><a
+                    href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"><?php echo $row->team_name ?></a>
+            </h3>
+            <div class="text-secondary">COACH : <?php echo $row->coach_name ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->Name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            </a>
+            <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Details
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
     }
 
     public function teamDetails($id)
@@ -146,7 +306,8 @@ class Home extends BaseController
             'csrf_test_name'=>'required',
             'sports_name'=>'required',
             'team'=>'required|is_unique[teams.team_name]',
-            'coach'=>'required|is_unique[teams.accountID]',
+            'coach'=>'required',
+            'school'=>'required',
             'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]'
         ]);
 
@@ -169,8 +330,19 @@ class Home extends BaseController
                     'coach_name'=>$account['Fullname'],
                     'accountID'=>$account['accountID'],
                     'sportsID'=>$this->request->getPost('sports_name'),
+                    'school'=>$this->request->getPost('school'),
                     'image'=>$originalName];
             $teamModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new team : '.$this->request->getPost('team'),
+                    'page'=>'New Team'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
     }
@@ -260,6 +432,16 @@ class Home extends BaseController
                     'Token'=>$token_code,
                     'DateCreated'=>date('Y-m-d')];
             $accountModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Register new user',
+                    'page'=>'New Account'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully submitted']);
         }
     }
@@ -285,6 +467,16 @@ class Home extends BaseController
                     'Role'=>$this->request->getPost('role'),
                     'Status'=>$this->request->getPost('status')];
             $accountModel->update($this->request->getPost('accountID'),$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Update account for '.$this->request->getPost('fullname'),
+                    'page'=>'Edit Account'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully applied changes']);
         }
     }
@@ -295,6 +487,16 @@ class Home extends BaseController
         $accountModel = new \App\Models\AccountModel();
         $data = ['Password'=>Hash::make('Abc12345')];
         $accountModel->update($val,$data);
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = [
+                'date'=>date('Y-m-d H:i:s a'),
+                'accountID'=>session()->get('loggedUser'),
+                'activities'=>'Reset password',
+                'page'=>'Accounts'
+                ];        
+        $logModel->save($data);
         return $this->response->SetJSON(['success' => 'Successfully reset the account']);
     }
 
@@ -361,18 +563,19 @@ class Home extends BaseController
 
     }
 
-    public function systemLogs()
-    {
-
-    }
-
     public function settings()
     {
         $title = "Settings";
         //sports
         $sportsModel = new \App\Models\sportsModel();
         $sports = $sportsModel->findAll();
-        $data = ['title'=>$title,'sports'=>$sports];
+        //logs
+        $builder = $this->db->table('logs a');
+        $builder->select('a.*,b.Fullname');
+        $builder->join('accounts b','b.accountID=a.accountID','LEFT');
+        $logs = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'sports'=>$sports,'logs'=>$logs];
         return view('main/settings',$data);
     }
 
@@ -391,6 +594,16 @@ class Home extends BaseController
         {
             $data = ['Name'=>$this->request->getPost('sports'),'DateCreated'=>date('Y-m-d')];
             $sportsModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new sports',
+                    'page'=>'Settings'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully saved']);
         }
     }
@@ -464,6 +677,16 @@ class Home extends BaseController
                     'sportsName'=>$this->request->getPost('sports_name'),
                     'DateCreated'=>date('Y-m-d')];
             $roleModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new player role',
+                    'page'=>'Settings'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully saved']);
         }
     }

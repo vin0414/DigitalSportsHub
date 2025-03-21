@@ -41,7 +41,8 @@
                             <div class="btn-list">
                                 <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i
                                         class="ti ti-upload"></i>&nbsp;Upload</a>
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -57,8 +58,7 @@
                                     </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -223,11 +223,6 @@
         window.Plyr && new Plyr("#player-youtube");
     });
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

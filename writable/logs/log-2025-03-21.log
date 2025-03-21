@@ -427,3 +427,546 @@ DEBUG - 2025-03-21 03:45:28 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-03-21 03:50:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-21 03:51:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-03-21 03:51:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:26:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:27:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:27:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:27:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:27:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-21 08:27:23 --> mysqli_sql_exception: Table 'db_hub.teams' doesn't exist in C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\DigitalSportsHub\app\Controllers\Home.php(107): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->fetchTeams()
+#6 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-03-21 08:27:23 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.teams' doesn't exist
+[Method: GET, Route: teams]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`', [], false)
+ 2 APPPATH\Controllers\Home.php(107): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->fetchTeams()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 08:27:23 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.teams' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`', [], false)
+ 4 APPPATH\Controllers\Home.php(107): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->fetchTeams()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 08:27:23 --> [Caused by] mysqli_sql_exception: Table 'db_hub.teams' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`', [], false)
+ 5 APPPATH\Controllers\Home.php(107): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->fetchTeams()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-03-21 08:27:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:27:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:34:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:36:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:39:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 08:40:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:15:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:15:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-03-21 09:18:06 --> mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous in C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\DigitalSportsHub\app\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+#6 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-03-21 09:18:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+[Method: GET, Route: filter-team]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 2 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 4 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:06 --> [Caused by] mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 5 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-03-21 09:18:08 --> mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous in C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\DigitalSportsHub\app\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+#6 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-03-21 09:18:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+[Method: GET, Route: filter-team]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 2 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 4 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:08 --> [Caused by] mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 5 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-03-21 09:18:14 --> mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous in C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `...', 0)
+#1 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `...')
+#2 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `...')
+#3 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `...', Array, false)
+#4 C:\xampp\htdocs\DigitalSportsHub\app\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+#6 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\xampp\htdocs\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\xampp\htdocs\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#12 {main}
+CRITICAL - 2025-03-21 09:18:14 --> CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+[Method: GET, Route: filter-team]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 2 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 4 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-03-21 09:18:14 --> [Caused by] mysqli_sql_exception: Column 'sportsID' in where clause is ambiguous
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = \'2\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.*, `b`.`Name`
+FROM `teams` `a`
+LEFT JOIN `sports` `b` ON `b`.`sportsID`=`a`.`sportsID`
+WHERE `sportsID` = :sportsID:', [...], false)
+ 5 APPPATH\Controllers\Home.php(127): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->filterTeam()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-03-21 09:19:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:20:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:23:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:24:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:24:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:24:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:25:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:25:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:25:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:25:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:26:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:26:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:27:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:27:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:28:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:29:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:30:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:31:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:31:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:31:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:31:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:34:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:35:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:35:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:37:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:39:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:40:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:40:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:40:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:41:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:41:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:41:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:44:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:44:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:44:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:44:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:45:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:45:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:45:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:45:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:45:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:47:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:48:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:55:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:56:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:57:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:58:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:58:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:58:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:58:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:58:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 09:59:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:01:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:06:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:10:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:11:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:11:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:11:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:13:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:13:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 10:13:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:31:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:31:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:31:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:32:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:32:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:32:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:34:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:34:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:34:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:34:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:34:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:36:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:37:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:37:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:41:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:41:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:41:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:42:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:42:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:42:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:42:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:48:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:49:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:50:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:52:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:52:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:52:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:52:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:52:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:53:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 12:53:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:12:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:21:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:21:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:24:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:24:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 21:24:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:24:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:24:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:24:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-03-21 13:24:43 --> ErrorException: Undefined property: stdClass::$Date
+[Method: GET, Route: settings]
+in APPPATH\Views\main\settings.php on line 209.
+ 1 APPPATH\Views\main\settings.php(209): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined property: stdClass::$Date', 'C:\\xampp\\htdocs\\DigitalSportsHub\\app\\Views\\main\\settings.php', 209)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\DigitalSportsHub\\app\\Views\\main\\settings.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('main/settings', [], true)
+ 5 APPPATH\Controllers\Home.php(570): view('main/settings', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->settings()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-03-21 13:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:25:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:25:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:26:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:27:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:27:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:27:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 21:27:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:27:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:27:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:29:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:29:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:29:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:31:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:35:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:36:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:36:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:39:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:40:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:42:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:44:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:44:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:45:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:45:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:46:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:50:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:52:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:57:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:57:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 13:59:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:00:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:01:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:02:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:04:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:04:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:04:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:05:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:07:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:08:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:10:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:11:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:12:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:13:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:14:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:16:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:16:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:16:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:17:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:17:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:17:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:17:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:17:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:19:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:19:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:20:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:23:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:23:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:23:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:23:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:24:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:24:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 22:25:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:25:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:26:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:26:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:29:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:32:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:32:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:32:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 22:33:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-03-21 14:33:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

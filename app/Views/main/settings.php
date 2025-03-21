@@ -39,7 +39,8 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -55,8 +56,7 @@
                                     </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -91,7 +91,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">
-                                        Type of Events
+                                        System Logs
                                     </a>
                                 </li>
                             </ul>
@@ -195,10 +195,25 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="tabs-activity-8">
-                                    <h4>Activity tab</h4>
-                                    <div>
-                                        Donec ac vitae diam amet vel leo egestas consequat rhoncus in luctus amet,
-                                        facilisi sit mauris accumsan nibh habitant senectus
+                                    <div class="table-responsive">
+                                        <table class="table table-striped" id="tbl_logs">
+                                            <thead>
+                                                <th>Date</th>
+                                                <th>Account Information</th>
+                                                <th>Activities</th>
+                                                <th>Pages</th>
+                                            </thead>
+                                            <tbody>
+                                                <?php foreach($logs as $row): ?>
+                                                <tr>
+                                                    <td><?php echo $row->date ?></t>
+                                                    <td><?php echo $row->Fullname ?></td>
+                                                    <td><?php echo $row->activities ?></td>
+                                                    <td><?php echo $row->page ?></td>
+                                                </tr>
+                                                <?php endforeach; ?>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -239,6 +254,7 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    $('#tbl_logs').DataTable();
     var role = $('#tblrole').DataTable({
         "processing": true,
         "serverSide": true,
@@ -377,11 +393,6 @@
         });
     });
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

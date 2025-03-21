@@ -41,13 +41,24 @@
                                 <a href="<?=site_url('new-team')?>" class="btn btn-secondary">
                                     <i class="ti ti-plus"></i>&nbsp;New Team
                                 </a>
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -70,42 +81,48 @@
                     <form method="GET" class="row g-3" id="frmSearch">
                         <div class="col-lg-2">
                             <select name="category" class="form-select">
-                                <option value="">Category</option>
+                                <option value="">All Sports</option>
                                 <?php foreach($sports as $row): ?>
-                                    <option value="<?php echo $row['sportsID'] ?>"><?php echo $row['Name'] ?></option>
+                                <option value="<?php echo $row['sportsID'] ?>"><?php echo $row['Name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-lg-3">
-                            <input type="search" class="form-control" placeholder="Type here..." name="search"/>
+                            <input type="search" class="form-control" placeholder="Type here..." name="search" />
                         </div>
                         <div class="col-lg-2">
-                            <button type="submit" class="btn btn-primary"><i class="ti ti-search"></i>&nbsp;Search</button>
+                            <button type="submit" class="btn btn-primary"><i
+                                    class="ti ti-search"></i>&nbsp;Search</button>
                         </div>
                     </form>
-                    <br/>
-                    <div class="row row-cards">
+                    <br />
+                    <div class="row row-cards" id="results">
                         <?php if(empty($team)){ ?>
-                            <div class="col-lg-12">
-                                <div class="alert alert-warning" role="alert">No Team Has Been Added Yet</div>
-                            </div>
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning" role="alert">No Team Has Been Added Yet</div>
+                        </div>
                         <?php }else{ ?>
                         <?php foreach($team as $row): ?>
                         <div class="col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body p-4 text-center">
-                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url(<?=base_url('admin/images/team')?>/<?php echo $row->image ?>)"></span>
-                                    <h3 class="m-0 mb-1"><a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"><?php echo $row->team_name ?></a></h3>
+                                    <span class="avatar avatar-xl mb-3 rounded"
+                                        style="background-image: url(<?=base_url('admin/images/team')?>/<?php echo $row->image ?>)"></span>
+                                    <h3 class="m-0 mb-1"><a
+                                            href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"><?php echo $row->team_name ?></a>
+                                    </h3>
                                     <div class="text-secondary">COACH : <?php echo $row->coach_name ?></div>
                                     <div class="mt-3">
                                         <span class="badge bg-success-lt"><?php echo $row->Name ?></span>
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
+                                    <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>"
+                                        class="card-btn">
                                         <i class="ti ti-scoreboard"></i>&nbsp;Matches
                                     </a>
-                                    <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
+                                    <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"
+                                        class="card-btn">
                                         <i class="ti ti-address-book"></i>&nbsp;Details
                                     </a>
                                 </div>
@@ -138,128 +155,31 @@
             <!--  END FOOTER  -->
         </div>
     </div>
-    <!-- BEGIN PAGE MODALS -->
-    <div class="modal modal-blur fade" id="modal-report" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">New report</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-3">
-                        <label class="form-label">Name</label>
-                        <input type="text" class="form-control" name="example-text-input"
-                            placeholder="Your report name" />
-                    </div>
-                    <label class="form-label">Report type</label>
-                    <div class="form-selectgroup-boxes row mb-3">
-                        <div class="col-lg-6">
-                            <label class="form-selectgroup-item">
-                                <input type="radio" name="report-type" value="1" class="form-selectgroup-input"
-                                    checked />
-                                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                    <span class="me-3">
-                                        <span class="form-selectgroup-check"></span>
-                                    </span>
-                                    <span class="form-selectgroup-label-content">
-                                        <span class="form-selectgroup-title strong mb-1">Simple</span>
-                                        <span class="d-block text-secondary">Provide only basic data needed for the
-                                            report</span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                        <div class="col-lg-6">
-                            <label class="form-selectgroup-item">
-                                <input type="radio" name="report-type" value="1" class="form-selectgroup-input" />
-                                <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                    <span class="me-3">
-                                        <span class="form-selectgroup-check"></span>
-                                    </span>
-                                    <span class="form-selectgroup-label-content">
-                                        <span class="form-selectgroup-title strong mb-1">Advanced</span>
-                                        <span class="d-block text-secondary">Insert charts and additional advanced
-                                            analyses to be inserted in the report</span>
-                                    </span>
-                                </span>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <div class="mb-3">
-                                <label class="form-label">Report url</label>
-                                <div class="input-group input-group-flat">
-                                    <span class="input-group-text"> https://tabler.io/reports/ </span>
-                                    <input type="text" class="form-control ps-0" value="report-01" autocomplete="off" />
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="mb-3">
-                                <label class="form-label">Visibility</label>
-                                <select class="form-select">
-                                    <option value="1" selected>Private</option>
-                                    <option value="2">Public</option>
-                                    <option value="3">Hidden</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Client name</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="mb-3">
-                                <label class="form-label">Reporting period</label>
-                                <input type="date" class="form-control" />
-                            </div>
-                        </div>
-                        <div class="col-lg-12">
-                            <div>
-                                <label class="form-label">Additional information</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn btn-link link-secondary btn-3" data-bs-dismiss="modal"> Cancel </a>
-                    <a href="#" class="btn btn-primary btn-5 ms-auto" data-bs-dismiss="modal">
-                        <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="icon icon-2">
-                            <path d="M12 5l0 14" />
-                            <path d="M5 12l14 0" />
-                        </svg>
-                        Create new report
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- END PAGE MODALS -->
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="<?=base_url('admin/js/tabler.min.js')?>" defer></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
-    <!-- BEGIN PAGE SCRIPTS -->
-    <!-- END PAGE SCRIPTS -->
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script>
+    $('#frmSearch').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('filter-team')?>",
+            method: "GET",
+            data: data,
+            success: function(response) {
+                if (response === "") {
+                    alert("No Record(s) found. Please try again");
+                } else {
+                    $('#results').html(response);
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

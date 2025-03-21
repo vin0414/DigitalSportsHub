@@ -22,6 +22,7 @@ $routes->post('save-role','Home::saveRole');
 $routes->get('fetch-role','Home::fetchRole');
 //team
 $routes->post('save-team','Home::saveTeam');
+$routes->get('filter-team','Home::filterTeam');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -32,7 +33,9 @@ $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 $routes->group('',['filter'=>'AuthCheck'],function($routes)
 {
     $routes->get('dashboard','Home::dashboard');
+    //players
     $routes->get('athletes','Home::fetchAthletes');
+    $routes->get('new-athlete','Home::newAthlete');
     //teams
     $routes->get('teams','Home::fetchTeams');
     $routes->get('teams/details/(:any)','Home::teamDetails/$1');

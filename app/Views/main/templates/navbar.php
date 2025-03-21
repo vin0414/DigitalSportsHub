@@ -239,9 +239,6 @@
                             <a class="dropdown-item" href="<?=site_url('settings')?>">
                                 Settings
                             </a>
-                            <a class="dropdown-item" href="<?=site_url('logs')?>">
-                                Audit Trail
-                            </a>
                         </div>
                     </li>
                 </ul>

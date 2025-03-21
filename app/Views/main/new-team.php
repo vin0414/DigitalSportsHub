@@ -38,14 +38,26 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('teams')?>" class="btn btn-secondary"><i class="ti ti-arrow-left"></i> Back</a>
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('teams')?>" class="btn btn-secondary"><i
+                                        class="ti ti-arrow-left"></i> Back</a>
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -66,7 +78,7 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row g-3">
-                       <div class="col-lg-8">
+                        <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title">New Team</div>
@@ -85,8 +97,13 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <label>Name of the Team</label>
-                                            <input type="text" class="form-control" name="team" required/>
+                                            <input type="text" class="form-control" name="team" required />
                                             <div id="team-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <label>Name of School</label>
+                                            <textarea name="school" class="form-control" required></textarea>
+                                            <div id="school-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
@@ -99,20 +116,24 @@
                                                             <?php echo $row['Fullname'] ?></option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <div id="coach-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="coach-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-6">
                                                     <label>Team Logo</label>
-                                                    <input type="file" class="form-control" name="file" accept="image/*" required/>
-                                                    <div id="file-error" class="error-message text-danger text-sm"></div>
+                                                    <input type="file" class="form-control" name="file" accept="image/*"
+                                                        required />
+                                                    <div id="file-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <button type="submit" class="btn btn-primary">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                                    stroke-linejoin="round" class="icon icon-2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="icon icon-2">
                                                     <path d="M12 5l0 14" />
                                                     <path d="M5 12l14 0" />
                                                 </svg>
@@ -122,8 +143,8 @@
                                     </form>
                                 </div>
                             </div>
-                       </div>
-                       <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-4">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">Recently Added</div>
@@ -136,12 +157,12 @@
                                                 <th>Coach</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($team as $row): ?>
+                                                <?php foreach($team as $row): ?>
                                                 <tr>
                                                     <td><?php echo $row['team_name'] ?></td>
                                                     <td><?php echo $row['coach_name'] ?></td>
-                                                </tr>  
-                                            <?php endforeach;?>
+                                                </tr>
+                                                <?php endforeach;?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -182,51 +203,46 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#frmTeam').on('submit', function(e) {
-            e.preventDefault();
-            $('.error-message').html('');
-            let data = $(this).serialize();
-            $.ajax({
-                url: "<?=site_url('save-team')?>",
-                method: "POST",
-                data: new FormData(this),
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function(response) {
-                    if (response.success) {
-                        $('#frmTeam')[0].reset();
-                        Swal.fire({
-                                title: 'Great!',
-                                text: "Successfully added",
-                                icon: 'success',
-                                confirmButtonText: 'Continue'
-                            }).then((result) => {
-                                // Action based on user's choice
-                                if (result.isConfirmed) {
-                                    // Perform some action when "Yes" is clicked
-                                    location.href="<?=base_url('teams')?>";
-                                }
-                            }); 
-                    } else {
-                        var errors = response.error;
-                        // Iterate over each error and display it under the corresponding input field
-                        for (var field in errors) {
-                            $('#' + field + '-error').html('<p>' + errors[field] +
-                                '</p>'); // Show the first error message
-                            $('#' + field).addClass(
-                                'text-danger'); // Highlight the input field with an error
+    $('#frmTeam').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-team')?>",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmTeam')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('teams')?>";
                         }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
                     }
                 }
-            });
+            }
         });
+    });
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

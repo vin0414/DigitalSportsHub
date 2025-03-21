@@ -41,7 +41,8 @@
                                 <a href="<?=site_url('new-athlete')?>" class="btn btn-secondary">
                                     <i class="ti ti-plus"></i>&nbsp;New Athlete
                                 </a>
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -57,8 +58,7 @@
                                     </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -84,15 +84,46 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="row row-cards">
+                    <form method="GET" class="row g-3" id="frmSearch">
+                        <div class="col-lg-2">
+                            <select name="team" class="form-select">
+                                <option value="">All Teams</option>
+                                <?php foreach($team as $row): ?>
+                                <option value="<?php echo $row['team_id'] ?>"><?php echo $row['team_name'] ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="search" class="form-control" placeholder="Type here..." name="search" />
+                        </div>
+                        <div class="col-lg-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="ti ti-search"></i>&nbsp;Search
+                            </button>
+                        </div>
+                    </form>
+                    <br />
+                    <div class="row row-cards" id="results">
+                        <?php if(empty($players)){ ?>
+                        <div class="col-lg-12">
+                            <div class="alert alert-warning" role="alert">No Player(s) Has Been Added Yet</div>
+                        </div>
+                        <?php }else{ ?>
+                        <?php foreach($players as $row): ?>
                         <div class="col-md-6 col-lg-3">
                             <div class="card">
                                 <div class="card-body p-4 text-center">
-                                    <span class="avatar avatar-xl mb-3 rounded" style="background-image: url()"></span>
-                                    <h3 class="m-0 mb-1"><a href="<?=site_url('profile')?>/">Paweł Kuna</a></h3>
-                                    <div class="text-secondary">UI Designer</div>
+                                    <span class="avatar avatar-xl mb-3 rounded"
+                                        style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>)"></span>
+                                    <h3 class="m-0 mb-1">
+                                        <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>">
+                                            <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                                            <?php echo $row->mi ?>
+                                        </a>
+                                    </h3>
+                                    <div class="text-secondary"><?php echo $row->roleName ?></div>
                                     <div class="mt-3">
-                                        <span class="badge bg-success-lt">Owner</span>
+                                        <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -105,6 +136,8 @@
                                 </div>
                             </div>
                         </div>
+                        <?php endforeach; ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
@@ -136,13 +169,6 @@
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
-    <!-- BEGIN PAGE SCRIPTS -->
-    <!-- END PAGE SCRIPTS -->
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>

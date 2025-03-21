@@ -39,16 +39,39 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('new-account')?>" class="btn btn-secondary"><i class="ti ti-plus"></i>&nbsp;New Account</a>
-                                <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
+                                <a href="<?=site_url('new-account')?>" class="btn btn-secondary"><i
+                                        class="ti ti-plus"></i>&nbsp;New Account</a>
+                                <a href="<?=site_url('go-live')?>"
+                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                     Go Live
                                 </a>
-                                <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
-                                    data-bs-target="#modal-report" aria-label="Create new report">
+                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <path
+                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                        <path
+                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                        <path d="M7 12l4 0" />
+                                        <path d="M9 10l0 4" />
+                                    </svg>
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->
@@ -120,82 +143,76 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        var department = $('#tblaccounts').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "<?=site_url('fetch-accounts')?>",
-                "type": "GET",
-                "dataSrc": function(json) {
-                    // Handle the data if needed
-                    return json.data;
-                },
-                "error": function(xhr, error, code) {
-                    console.error("AJAX Error: " + error);
-                    alert("Error occurred while loading data.");
-                }
+    var department = $('#tblaccounts').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('fetch-accounts')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
             },
-            "searching":true,
-            "columns": [{
-                    "data": "id"
-                },
-                {
-                    "data": "email"
-                },
-                {
-                    "data": "fullname"
-                },
-                {
-                    "data": "role"
-                },
-                {
-                    "data": "status"
-                },
-                {
-                    "data": "action"
-                }
-            ]
-        });
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "id"
+            },
+            {
+                "data": "email"
+            },
+            {
+                "data": "fullname"
+            },
+            {
+                "data": "role"
+            },
+            {
+                "data": "status"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
 
-        $(document).on('click','.reset',function(){
-            Swal.fire({
-                title: 'Are you sure?',
-                text: "Do you want to reset the password of this account?",
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Continue',
-                cancelButtonText: 'No, cancel!',
-            }).then((result) => {
-                // Action based on user's choice
-                if (result.isConfirmed) {
-                    $.ajax({
-                        url:"<?=site_url('reset')?>",method:"POST",
-                        data:{value:$(this).val()},
-                        success:function(response)
-                        {
-                            if(response.success)
-                            {
-                                Swal.fire({
-                                    title: 'Great!',
-                                    text: "Successfully reset the account",
-                                    icon: 'success',
-                                })
-                            }
-                            else
-                            {
-                                alert(response);
-                            }
+    $(document).on('click', '.reset', function() {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to reset the password of this account?",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonText: 'Continue',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            // Action based on user's choice
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?=site_url('reset')?>",
+                    method: "POST",
+                    data: {
+                        value: $(this).val()
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Great!',
+                                text: "Successfully reset the account",
+                                icon: 'success',
+                            })
+                        } else {
+                            alert(response);
                         }
-                    });
-                }
-            }); 
+                    }
+                });
+            }
         });
+    });
     </script>
-    <script defer
-        src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-        integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-        data-cf-beacon='{"rayId":"922535bc6ec9a057","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"version":"2025.1.0","token":"84cae67e72b342399609db8f32d1c3ff"}'
-        crossorigin="anonymous"></script>
 </body>
 
 </html>
