@@ -186,6 +186,7 @@
                                                                 <th>Date</th>
                                                                 <th>Action</th>
                                                             </thead>
+                                                            <tbody></tbody>
                                                         </table>
                                                     </div>
                                                 </div>
@@ -238,6 +239,39 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    var role = $('#tblrole').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('fetch-role')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
+            },
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "id"
+            },
+            {
+                "data": "role"
+            },
+            {
+                "data": "sports"
+            },
+            {
+                "data": "date"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
     var sports = $('#tblsports').DataTable({
         "processing": true,
         "serverSide": true,
@@ -326,7 +360,7 @@
                         // Action based on user's choice
                         if (result.isConfirmed) {
                             // Perform some action when "Yes" is clicked
-
+                            role.ajax.reload();
                         }
                     });
                 } else {

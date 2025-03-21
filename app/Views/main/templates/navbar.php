@@ -91,7 +91,7 @@
                             <span class="nav-link-title"> Home </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Events') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Events' || $title == 'New Event') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('events')?>">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
@@ -111,7 +111,7 @@
                             <span class="nav-link-title"> Events </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Athletes') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Athletes' || $title == 'New Athlete') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('athletes')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -127,7 +127,7 @@
                             <span class="nav-link-title"> Athletes </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Teams') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'Teams' || $title == 'New Team') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('teams')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

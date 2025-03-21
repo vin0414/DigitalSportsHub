@@ -4,15 +4,15 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class playerModel extends Model
+class performanceModel extends Model
 {
-    protected $table            = 'players';
-    protected $primaryKey       = 'player_id';
+    protected $table            = 'player_performance';
+    protected $primaryKey       = 'performance_id';
     protected $useAutoIncrement = true;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['team_id','first_name','last_name','mi','date_of_birth','roleID','height','weight'];
+    protected $allowedFields    = ['player_id','match_id','points_scored','digs','blocks','assists','service_ace','errors'];
 
     // Dates
     protected $useTimestamps = false;

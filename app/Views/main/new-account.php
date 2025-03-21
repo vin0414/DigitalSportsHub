@@ -79,7 +79,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label for="">System Role</label>
-                                                    <select name="role" class="form-control" required>
+                                                    <select name="role" class="form-select" required>
                                                         <option value="">Choose</option>
                                                         <option>Super-admin</option>
                                                         <option>Organizer</option>

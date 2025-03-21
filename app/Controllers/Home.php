@@ -95,26 +95,96 @@ class Home extends BaseController
 
     }
 
+
+    //teams
     public function fetchTeams()
     {
         $title = "Teams";
-        $data = ['title'=>$title];
+        //teams
+        $builder = $this->db->table('teams a');
+        $builder->select('a.*,b.Name');
+        $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
+        $team = $builder->get()->getResult();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+
+        $data = ['title'=>$title,'team'=>$team,'sports'=>$sports];
         return view('main/teams',$data);
+    }
+
+    public function teamDetails($id)
+    {
+
+    }
+
+    public function teamResults($id)
+    {
+
     }
 
     public function newTeam()
     {
+        $title = "New Team";
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+        //coach
+        $accountModel = new \App\Models\AccountModel();
+        $account = $accountModel->WHERE('Role','Coach')->findAll();
+        //recently team added
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->orderBy('team_id', 'DESC')->limit(5)->findAll();
 
+        $data = ['title'=>$title,'sports'=>$sports,'account'=>$account,'team'=>$team];
+        return view('main/new-team',$data);
     }
 
-    public function fetchEvents()
+    public function saveTeam()
     {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'sports_name'=>'required',
+            'team'=>'required|is_unique[teams.team_name]',
+            'coach'=>'required|is_unique[teams.accountID]',
+            'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]'
+        ]);
 
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            //save the logo
+            $file->move('admin/images/team/',$originalName);
+            //save the data
+            $teamModel = new \App\Models\teamModel();
+            //get the id of the coach
+            $accountModel = new \App\Models\AccountModel();
+            $account = $accountModel->WHERE('accountID',$this->request->getPost('coach'))->first();
+            $data = ['team_name'=>$this->request->getPost('team'),
+                    'coach_name'=>$account['Fullname'],
+                    'accountID'=>$account['accountID'],
+                    'sportsID'=>$this->request->getPost('sports_name'),
+                    'image'=>$originalName];
+            $teamModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+
+    //events
+    public function Events()
+    {
+        return view('main/events');
     }
 
     public function newEvent()
     {
-
+        return view('main/new-event');
     }
 
     public function upload()
@@ -400,7 +470,56 @@ class Home extends BaseController
 
     public function fetchRole()
     {
-        
+        $roleModel = new \App\Models\roleModel();
+        $searchTerm = $_GET['search']['value'] ?? '';
+
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $roleModel->like('roleID', $searchTerm)
+                            ->orLike('roleName', $searchTerm)
+                            ->orLike('sportsName', $searchTerm)
+                            ->orLike('DateCreated', $searchTerm);
+        }
+
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredroleModel = clone $roleModel;
+        if ($searchTerm) {
+            $filteredroleModel->like('roleID', $searchTerm)
+                            ->orLike('roleName', $searchTerm)
+                            ->orLike('sportsName', $searchTerm)
+                            ->orLike('DateCreated', $searchTerm);
+        }
+
+        // Fetch filtered records based on limit and offset
+        $account = $roleModel->findAll($limit, $offset);
+
+        // Count total records (without filter)
+        $totalRecords = $roleModel->countAllResults();
+
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredroleModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($account as $row) {
+            $response['data'][] = [
+                'id' => $row['roleID'],
+                'role' => htmlspecialchars($row['roleName'], ENT_QUOTES),
+                'sports' => htmlspecialchars($row['sportsName'], ENT_QUOTES),
+                'date' => htmlspecialchars(date('Y-M-d',strtotime($row['DateCreated'])), ENT_QUOTES),
+                'action' =>'<button type="button" class="btn btn-sm btn-danger remove" value="' . $row['roleID'] . '"><i class="ti ti-copy-x"></i> Remove </button>' 
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
     }
 
     public function myAccount()

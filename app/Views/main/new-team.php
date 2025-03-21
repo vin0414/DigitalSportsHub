@@ -38,7 +38,7 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('accounts')?>" class="btn btn-secondary"><i class="ti ti-arrow-left"></i> Back</a>
+                                <a href="<?=site_url('teams')?>" class="btn btn-secondary"><i class="ti ti-arrow-left"></i> Back</a>
                                 <a href="#" class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
@@ -47,7 +47,12 @@
                                 <a href="#" class="btn btn-primary btn-6 d-sm-none btn-icon" data-bs-toggle="modal"
                                     data-bs-target="#modal-report" aria-label="Create new report">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" /><path d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" /><path d="M7 12l4 0" /><path d="M9 10l0 4" /></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" class="icon icon-2">
+                                        <path d="M12 5l0 14" />
+                                        <path d="M5 12l14 0" />
+                                    </svg>
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->
@@ -61,73 +66,49 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row g-3">
-                        <div class="col-lg-2"></div>
-                        <div class="col-lg-8">
+                       <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title"><?=$title?></div>
-                                    <?php if($account): ?>
-                                    <form method="POST" class="row g-3" id="frmAccount" autocomplete="OFF">
+                                    <div class="card-title">New Team</div>
+                                    <form method="POST" class="row g-3" enctype="multipart/form-data" id="frmTeam">
                                         <?=csrf_field()?>
-                                        <input type="hidden" name="accountID" value="<?=$account['accountID']?>"/>
-                                        <div class="col-12">
-                                            <label for="">Complete Name</label>
-                                            <input type="text" class="form-control" name="fullname" value="<?=$account['Fullname'] ?>" required/>
-                                            <div id="fullname-error" class="error-message text-danger text-sm"></div>
+                                        <div class="col-lg-12">
+                                            <label>Name of Sports</label>
+                                            <select class="form-select" name="sports_name" required>
+                                                <option value="">Choose</option>
+                                                <?php foreach($sports as $row): ?>
+                                                <option value="<?php echo $row['sportsID'] ?>">
+                                                    <?php echo $row['Name'] ?></option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <div id="sports_name-error" class="error-message text-danger text-sm"></div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-lg-12">
+                                            <label>Name of the Team</label>
+                                            <input type="text" class="form-control" name="team" required/>
+                                            <div id="team-error" class="error-message text-danger text-sm"></div>
+                                        </div>
+                                        <div class="col-lg-12">
                                             <div class="row g-3">
-                                                <div class="col-lg-8">
-                                                    <label for="">Email</label>
-                                                    <input type="email" class="form-control" name="email" value="<?=$account['Email'] ?>" required/>
-                                                    <div id="email-error" class="error-message text-danger text-sm"></div>
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <label for="">System Role</label>
-                                                    <select name="role" class="form-select" required>
+                                                <div class="col-lg-6">
+                                                    <label>Coach</label>
+                                                    <select class="form-select" name="coach" required>
                                                         <option value="">Choose</option>
-                                                        <option <?php echo ($account['Role'] == 'Super-admin') ? 'selected' : ''; ?>>Super-admin</option>
-                                                        <option <?php echo ($account['Role'] == 'Organizer') ? 'selected' : ''; ?>>Organizer</option>
-                                                        <option <?php echo ($account['Role'] == 'Coach') ? 'selected' : ''; ?>>Coach</option>
-                                                        <option <?php echo ($account['Role'] == 'End-user') ? 'selected' : ''; ?>>End-user</option>
+                                                        <?php foreach($account as $row): ?>
+                                                        <option value="<?php echo $row['accountID'] ?>">
+                                                            <?php echo $row['Fullname'] ?></option>
+                                                        <?php endforeach; ?>
                                                     </select>
-                                                    <div id="role-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="coach-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <label>Team Logo</label>
+                                                    <input type="file" class="form-control" name="file" accept="image/*" required/>
+                                                    <div id="file-error" class="error-message text-danger text-sm"></div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
-                                            <div class="form-selectgroup-boxes row mb-3">
-                                                <div class="col-lg-6">
-                                                    <label class="form-selectgroup-item">
-                                                        <input type="radio" name="status" value="1" class="form-selectgroup-input"
-                                                            checked />
-                                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                                            <span class="me-3">
-                                                                <span class="form-selectgroup-check"></span>
-                                                            </span>
-                                                            <span class="form-selectgroup-label-content">
-                                                                <span class="form-selectgroup-title strong mb-1">Active</span>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <label class="form-selectgroup-item">
-                                                        <input type="radio" name="status" value="0" class="form-selectgroup-input" />
-                                                        <span class="form-selectgroup-label d-flex align-items-center p-3">
-                                                            <span class="me-3">
-                                                                <span class="form-selectgroup-check"></span>
-                                                            </span>
-                                                            <span class="form-selectgroup-label-content">
-                                                                <span class="form-selectgroup-title strong mb-1">Inactive</span>
-                                                            </span>
-                                                        </span>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div id="status-error" class="error-message text-danger text-sm"></div>
-                                        </div>
-                                        <div class="col-12">
+                                        <div class="col-lg-12">
                                             <button type="submit" class="btn btn-primary">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -135,11 +116,35 @@
                                                     <path d="M12 5l0 14" />
                                                     <path d="M5 12l14 0" />
                                                 </svg>
-                                                Save Changes
+                                                Add Team
                                             </button>
                                         </div>
                                     </form>
-                                    <?php endif; ?>
+                                </div>
+                            </div>
+                       </div>
+                       <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">Recently Added</div>
+                                </div>
+                                <div class="position-relative">
+                                    <div class="card-table table-responsive">
+                                        <table class="table table-vcenter">
+                                            <thead>
+                                                <th>Team</th>
+                                                <th>Coach</th>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach($team as $row): ?>
+                                                <tr>
+                                                    <td><?php echo $row['team_name'] ?></td>
+                                                    <td><?php echo $row['coach_name'] ?></td>
+                                                </tr>  
+                                            <?php endforeach;?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -177,41 +182,45 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $('#frmAccount').on('submit',function(e){
+        $('#frmTeam').on('submit', function(e) {
             e.preventDefault();
+            $('.error-message').html('');
             let data = $(this).serialize();
             $.ajax({
-                    url: "<?=site_url('update')?>",
-                    method: "POST",
-                    data: data,
-                    success: function(response) {
-                        if (response.success) {
-                            Swal.fire({
+                url: "<?=site_url('save-team')?>",
+                method: "POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function(response) {
+                    if (response.success) {
+                        $('#frmTeam')[0].reset();
+                        Swal.fire({
                                 title: 'Great!',
-                                text: "Successfully applied changes",
+                                text: "Successfully added",
                                 icon: 'success',
                                 confirmButtonText: 'Continue'
                             }).then((result) => {
                                 // Action based on user's choice
                                 if (result.isConfirmed) {
                                     // Perform some action when "Yes" is clicked
-                                    location.href="<?=base_url('accounts')?>";
+                                    location.href="<?=base_url('teams')?>";
                                 }
-                            });
-                            
-                        } else {
-                            var errors = response.error;
-                            // Iterate over each error and display it under the corresponding input field
-                            for (var field in errors) {
-                                $('#' + field + '-error').html('<p>' + errors[field] +
-                                    '</p>'); // Show the first error message
-                                $('#' + field).addClass(
-                                    'text-danger'); // Highlight the input field with an error
-                            }
+                            }); 
+                    } else {
+                        var errors = response.error;
+                        // Iterate over each error and display it under the corresponding input field
+                        for (var field in errors) {
+                            $('#' + field + '-error').html('<p>' + errors[field] +
+                                '</p>'); // Show the first error message
+                            $('#' + field).addClass(
+                                'text-danger'); // Highlight the input field with an error
                         }
                     }
-                });
+                }
             });
+        });
     </script>
     <script defer
         src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
