@@ -364,7 +364,20 @@ class Home extends BaseController
 
     public function teamDetails($id)
     {
+        $title = "Team Information";
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->WHERE('team_id',$id)->first();
+        //get the details
+        $playerModel = new \App\Models\playerModel();
+        $player = $playerModel->join('player_role','player_role.roleID=players.roleID')
+                              ->WHERE('team_id',$id)->findAll();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->WHERE('sportsID',$team['sportsID'])->first();
 
+        $data = ['title'=>$title,'team'=>$team,'player'=>$player,'sports'=>$sports];
+        return view('main/team-details',$data);
     }
 
     public function teamResults($id)
