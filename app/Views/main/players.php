@@ -114,7 +114,7 @@
                             <div class="card">
                                 <div class="card-body p-4 text-center">
                                     <span class="avatar avatar-xl mb-3 rounded"
-                                        style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>)"></span>
+                                        style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>);width:100%;height:10rem;"></span>
                                     <h3 class="m-0 mb-1">
                                         <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>">
                                             <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
@@ -127,10 +127,10 @@
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <a href="#" class="card-btn">
+                                    <a href="mailto:<?php echo $row->email ?>" class="card-btn">
                                         <i class="ti ti-mail"></i>&nbsp;Email
                                     </a>
-                                    <a href="<?=site_url('profile')?>/" class="card-btn">
+                                    <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>" class="card-btn">
                                         <i class="ti ti-address-book"></i>&nbsp;Profile
                                     </a>
                                 </div>

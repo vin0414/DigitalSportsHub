@@ -134,9 +134,98 @@ class Home extends BaseController
         return view('main/new-player',$data);
     }
 
-    public function saveAthlete()
+    public function savePlayer()
     {
-        
+        $playerModel = new \App\Models\playerModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'last_name'=>'required',
+            'first_name'=>'required',
+            'mi'=>'required',
+            'sports'=>'required',
+            'team'=>'required',
+            'position'=>'required',
+            'jersey_number'=>'required',
+            'gender'=>'required',
+            'date_of_birth'=>'required',
+            'email'=>'required|valid_email',
+            'height'=>'required',
+            'weight'=>'required',
+            'address'=>'required',
+            'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            //save the profile
+            $file->move('admin/images/profile/',$originalName);
+            $data = ['team_id'=>$this->request->getPost('team'),
+                    'first_name'=>$this->request->getPost('first_name'),
+                    'last_name'=>$this->request->getPost('last_name'),
+                    'mi'=>$this->request->getPost('mi'),
+                    'date_of_birth'=>$this->request->getPost('date_of_birth'),
+                    'sportsID'=>$this->request->getPost('sports'),
+                    'roleID'=>$this->request->getPost('position'),
+                    'jersey_num'=>$this->request->getPost('jersey_number'),
+                    'gender'=>$this->request->getPost('gender'),
+                    'email'=>$this->request->getPost('email'),
+                    'height'=>$this->request->getPost('height'),
+                    'weight'=>$this->request->getPost('weight'),
+                    'address'=>$this->request->getPost('address'),
+                    'image'=>$originalName];
+            $playerModel->save($data);
+            if ($this->request->getPost('agree') !== null)
+            {
+                function generateRandomString($length = 64) {
+                    // Generate random bytes and convert them to hexadecimal
+                    $bytes = random_bytes($length);
+                    return substr(bin2hex($bytes), 0, $length);
+                }
+                $token_code = generateRandomString(64);
+                $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
+                $accountModel = new \App\Models\AccountModel();
+                $data = ['Email'=>$this->request->getPost('email'),
+                        'Password'=>Hash::make('Abc12345'),
+                        'Fullname'=>$fullname,
+                        'Role'=>'End-user',
+                        'Status'=>1,
+                        'Token'=>$token_code,
+                        'DateCreated'=>date('Y-m-d')];
+                $accountModel->save($data);
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new athlete',
+                    'page'=>'New Athlete'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function getPosition()
+    {
+        $val = $this->request->getGet('value');
+        $roleModel = new \App\Models\roleModel();
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->WHERE('sportsID',$val)->first();
+        $role = $roleModel->WHERE('sportsName',$sports['Name'])->findAll();
+        foreach($role as $row)
+        {
+            ?>
+<option value="<?php echo $row['roleID'] ?>"><?php echo $row['roleName'] ?></option>
+<?php
+        }
     }
 
 

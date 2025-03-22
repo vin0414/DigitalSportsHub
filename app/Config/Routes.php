@@ -23,6 +23,9 @@ $routes->get('fetch-role','Home::fetchRole');
 //team
 $routes->post('save-team','Home::saveTeam');
 $routes->get('filter-team','Home::filterTeam');
+//player
+$routes->post('save-player','Home::savePlayer');
+$routes->get('get-position','Home::getPosition');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
