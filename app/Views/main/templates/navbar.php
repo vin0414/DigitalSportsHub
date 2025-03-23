@@ -66,7 +66,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
+                    <a href="<?=site_url('my-account')?>" class="dropdown-item">Profile</a>
                     <div class="dropdown-divider"></div>
                     <a href="<?=site_url('logout')?>" class="dropdown-item">Logout</a>
                 </div>
@@ -111,7 +111,8 @@
                             <span class="nav-link-title"> Events </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Athletes' || $title == 'New Athlete') ? 'active' : '' ?>">
+                    <li
+                        class="nav-item <?= ($title == 'Athletes' || $title == 'New Athlete' || $title == 'Profile' || $title == 'Edit Profile') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('athletes')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -127,7 +128,8 @@
                             <span class="nav-link-title"> Athletes </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Teams' || $title == 'New Team') ? 'active' : '' ?>">
+                    <li
+                        class="nav-item <?= ($title == 'Teams' || $title == 'New Team' || $title == 'Team Information' || $title == 'Team Scoreboard') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('teams')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

@@ -117,9 +117,8 @@
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>"
-                                        class="card-btn">
-                                        <i class="ti ti-scoreboard"></i>&nbsp;Matches
+                                    <a href="<?=site_url('teams/score')?>/<?php echo $row->team_id ?>" class="card-btn">
+                                        <i class="ti ti-scoreboard"></i>&nbsp;Scoreboard
                                     </a>
                                     <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>"
                                         class="card-btn">
@@ -162,6 +161,7 @@
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $('#frmSearch').on('submit', function(e) {
         e.preventDefault();
@@ -172,7 +172,11 @@
             data: data,
             success: function(response) {
                 if (response === "") {
-                    alert("No Record(s) found. Please try again");
+                    Swal.fire({
+                        title: 'Sorry!',
+                        text: "No Record(s) found. Please try again",
+                        icon: 'warning',
+                    });
                 } else {
                     $('#results').html(response);
                 }

@@ -134,6 +134,148 @@ class Home extends BaseController
         return view('main/new-player',$data);
     }
 
+    public function playerProfile($id)
+    {
+        $title = "Profile";
+        //players
+        $playerModel = new \App\Models\playerModel();
+        $player = $playerModel->join('player_role','player_role.roleID=players.roleID')->WHERE('player_id',$id)->first();
+        //recent match
+        $matchModel = new \App\Models\matchModel();
+        $match = $matchModel
+            ->WHERE('team1_id',$player['team_id'])
+            ->ORWHERE('team2_id',$player['team_id'])
+            ->orderBy('match_id','DESC')->first();
+
+        //stats
+        $builder = $this->db->table('player_performance');
+        $builder->select('*');
+        $builder->WHERE('player_id',$id)->WHERE('match_id',$match['match_id']);
+        $recentStats = $builder->get()->getResult();
+        //all stats
+        $sql = "SELECT stat_type,sum(stat_value)total FROM player_performance where player_id=:id: group by stat_type";
+        $query = $this->db->query($sql,['id'=>$id]);
+        $stats = $query->getResult();
+
+        $data = ['title'=>$title,'player'=>$player,'recent'=>$recentStats,'stats'=>$stats];
+        return view('main/player-profile',$data);
+    }
+
+    public function editProfile($id)
+    {
+        $title = "Edit Profile";
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->findAll();
+        //player
+        $playerModel = new \App\Models\playerModel();
+        $player = $playerModel->WHERE('player_id',$id)->first();
+
+        $data = ['title'=>$title,'sports'=>$sports,'team'=>$team,'player'=>$player];
+        return view('main/edit-profile',$data);
+    }
+
+    public function editPlayer()
+    {
+        $playerModel = new \App\Models\playerModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'last_name'=>'required',
+            'first_name'=>'required',
+            'mi'=>'required',
+            'sports'=>'required',
+            'team'=>'required',
+            'position'=>'required',
+            'jersey_number'=>'required',
+            'gender'=>'required',
+            'date_of_birth'=>'required',
+            'email'=>'required|valid_email',
+            'height'=>'required',
+            'weight'=>'required',
+            'address'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            if(empty($originalName))
+            {
+                $data = ['team_id'=>$this->request->getPost('team'),
+                        'first_name'=>$this->request->getPost('first_name'),
+                        'last_name'=>$this->request->getPost('last_name'),
+                        'mi'=>$this->request->getPost('mi'),
+                        'date_of_birth'=>$this->request->getPost('date_of_birth'),
+                        'sportsID'=>$this->request->getPost('sports'),
+                        'roleID'=>$this->request->getPost('position'),
+                        'jersey_num'=>$this->request->getPost('jersey_number'),
+                        'gender'=>$this->request->getPost('gender'),
+                        'email'=>$this->request->getPost('email'),
+                        'height'=>$this->request->getPost('height'),
+                        'weight'=>$this->request->getPost('weight'),
+                        'address'=>$this->request->getPost('address')];
+                $playerModel->update($this->request->getPost('player_id'),$data);
+            }
+            else
+            {
+                $file->move('admin/images/profile/',$originalName);
+                $data = ['team_id'=>$this->request->getPost('team'),
+                        'first_name'=>$this->request->getPost('first_name'),
+                        'last_name'=>$this->request->getPost('last_name'),
+                        'mi'=>$this->request->getPost('mi'),
+                        'date_of_birth'=>$this->request->getPost('date_of_birth'),
+                        'sportsID'=>$this->request->getPost('sports'),
+                        'roleID'=>$this->request->getPost('position'),
+                        'jersey_num'=>$this->request->getPost('jersey_number'),
+                        'gender'=>$this->request->getPost('gender'),
+                        'email'=>$this->request->getPost('email'),
+                        'height'=>$this->request->getPost('height'),
+                        'weight'=>$this->request->getPost('weight'),
+                        'address'=>$this->request->getPost('address'),
+                        'image'=>$originalName];
+                $playerModel->update($this->request->getPost('player_id'),$data);
+            }
+
+            if ($this->request->getPost('agree') !== null)
+            {
+                function generateRandomString($length = 64) {
+                    // Generate random bytes and convert them to hexadecimal
+                    $bytes = random_bytes($length);
+                    return substr(bin2hex($bytes), 0, $length);
+                }
+                $token_code = generateRandomString(64);
+                $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
+                $accountModel = new \App\Models\AccountModel();
+                $data = ['Email'=>$this->request->getPost('email'),
+                        'Password'=>Hash::make('Abc12345'),
+                        'Fullname'=>$fullname,
+                        'Role'=>'End-user',
+                        'Status'=>1,
+                        'Token'=>$token_code,
+                        'DateCreated'=>date('Y-m-d')];
+                $accountModel->save($data);
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Update existing athlete',
+                    'page'=>'Edit Athlete'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully save changes']);
+        }
+    }
+
     public function savePlayer()
     {
         $playerModel = new \App\Models\playerModel();
@@ -213,6 +355,134 @@ class Home extends BaseController
         }
     }
 
+    public function filterPlayers()
+    {
+        $team = $this->request->getGet('team');
+        $text = "%".$this->request->getGet('search')."%";
+
+        if(!empty($team) && empty($text))
+        {
+            $builder = $this->db->table('players a');
+            $builder->select('a.*,b.team_name,c.roleName');
+            $builder->join('teams b','b.team_id=a.team_id','LEFT');
+            $builder->join('player_role c','c.roleID=a.roleID','LEFT');
+            $builder->WHERE('a.team_id',$team);
+            $players = $builder->get()->getResult();
+            foreach($players as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>);width:100%;height:10rem;"></span>
+            <h3 class="m-0 mb-1">
+                <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>">
+                    <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                    <?php echo $row->mi ?>
+                </a>
+            </h3>
+            <div class="text-secondary"><?php echo $row->roleName ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="mailto:<?php echo $row->email ?>" class="card-btn">
+                <i class="ti ti-mail"></i>&nbsp;Email
+            </a>
+            <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Profile
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
+        else if(!empty($team) && !empty($text))
+        {
+            $builder = $this->db->table('players a');
+            $builder->select('a.*,b.team_name,c.roleName');
+            $builder->join('teams b','b.team_id=a.team_id','LEFT');
+            $builder->join('player_role c','c.roleID=a.roleID','LEFT');
+            $builder->WHERE('a.team_id',$team);
+            $builder->LIKE('a.last_name',$text);
+            $players = $builder->get()->getResult();
+            foreach($players as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>);width:100%;height:10rem;"></span>
+            <h3 class="m-0 mb-1">
+                <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>">
+                    <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                    <?php echo $row->mi ?>
+                </a>
+            </h3>
+            <div class="text-secondary"><?php echo $row->roleName ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="mailto:<?php echo $row->email ?>" class="card-btn">
+                <i class="ti ti-mail"></i>&nbsp;Email
+            </a>
+            <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Profile
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
+        else if(empty($team) && !empty($text))
+        {
+            $builder = $this->db->table('players a');
+            $builder->select('a.*,b.team_name,c.roleName');
+            $builder->join('teams b','b.team_id=a.team_id','LEFT');
+            $builder->join('player_role c','c.roleID=a.roleID','LEFT');
+            $builder->LIKE('a.last_name',$text);
+            $players = $builder->get()->getResult();
+            foreach($players as $row)
+            {
+                ?>
+<div class="col-md-6 col-lg-3">
+    <div class="card">
+        <div class="card-body p-4 text-center">
+            <span class="avatar avatar-xl mb-3 rounded"
+                style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>);width:100%;height:10rem;"></span>
+            <h3 class="m-0 mb-1">
+                <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>">
+                    <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                    <?php echo $row->mi ?>
+                </a>
+            </h3>
+            <div class="text-secondary"><?php echo $row->roleName ?></div>
+            <div class="mt-3">
+                <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
+            </div>
+        </div>
+        <div class="d-flex">
+            <a href="mailto:<?php echo $row->email ?>" class="card-btn">
+                <i class="ti ti-mail"></i>&nbsp;Email
+            </a>
+            <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>" class="card-btn">
+                <i class="ti ti-address-book"></i>&nbsp;Profile
+            </a>
+        </div>
+    </div>
+</div>
+<?php
+            }
+        }
+    }
+
     public function getPosition()
     {
         $val = $this->request->getGet('value');
@@ -275,8 +545,8 @@ class Home extends BaseController
             </div>
         </div>
         <div class="d-flex">
-            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
-                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            <a href="<?=site_url('teams/score')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Scoreboard
             </a>
             <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
                 <i class="ti ti-address-book"></i>&nbsp;Details
@@ -312,8 +582,8 @@ class Home extends BaseController
             </div>
         </div>
         <div class="d-flex">
-            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
-                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            <a href="<?=site_url('teams/score')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Scoreboard
             </a>
             <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
                 <i class="ti ti-address-book"></i>&nbsp;Details
@@ -348,8 +618,8 @@ class Home extends BaseController
             </div>
         </div>
         <div class="d-flex">
-            <a href="<?=site_url('teams/results')?>/<?php echo $row->team_id ?>" class="card-btn">
-                <i class="ti ti-scoreboard"></i>&nbsp;Matches
+            <a href="<?=site_url('teams/score')?>/<?php echo $row->team_id ?>" class="card-btn">
+                <i class="ti ti-scoreboard"></i>&nbsp;Scoreboard
             </a>
             <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" class="card-btn">
                 <i class="ti ti-address-book"></i>&nbsp;Details
@@ -375,14 +645,47 @@ class Home extends BaseController
         //sports
         $sportsModel = new \App\Models\sportsModel();
         $sports = $sportsModel->WHERE('sportsID',$team['sportsID'])->first();
+        //matches
+        $builder = $this->db->table('matches a');
+        $builder->select('a.date,a.location,a.result,b.team_name as team1,c.team_name as team2');
+        $builder->join('teams b','b.team_id=a.team1_id','LEFT');
+        $builder->join('teams c','c.team_id=a.team2_id','LEFT');
+        $builder->WHERE('a.team1_id',$id);
+        $builder->orWhere('a.team2_id', $id);
+        $builder->orderBy('a.date','DESC');
+        $match = $builder->get()->getResult();
+        //stats
+        $builder = $this->db->table('team_stats');
+        $builder->select('SUM(wins)win,SUM(losses)loss,SUM(draws)draw');
+        $builder->WHERE('team_id',$id);
+        $builder->groupBy('team_id');
+        $stats = $builder->get()->getResult();
+        //achievement
+        $teamAchievementModel = new \App\Models\teamAchievementModel();
+        $achievement = $teamAchievementModel->join('achievements','achievements.achievement_id=team_achievements.achievement_id')->WHERE('team_id',$id)->findAll();
 
-        $data = ['title'=>$title,'team'=>$team,'player'=>$player,'sports'=>$sports];
+        $data = ['title'=>$title,'team'=>$team,'player'=>$player,'sports'=>$sports,'match'=>$match,'stats'=>$stats,'achievement'=>$achievement];
         return view('main/team-details',$data);
     }
 
     public function teamResults($id)
     {
+        $title = "Team Scoreboard";
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->WHERE('team_id',$id)->first();
+        //scores
+        $builder = $this->db->table('team_stats a');
+        $builder->select('a.*,b.Fullname,d.team_name as team1,e.team_name as team2');
+        $builder->join('accounts b','b.accountID=a.coachID','LEFT');
+        $builder->join('matches c','c.match_id=a.match_id','LEFT');
+        $builder->join('teams d','d.team_id=c.team1_id','LEFT');
+        $builder->join('teams e','e.team_id=c.team2_id','LEFT');
+        $builder->WHERE('a.team_id',$id);
+        $score = $builder->get()->getResult();
 
+        $data = ['title'=>$title,'team'=>$team,'score'=>$score];
+        return view('main/team-match',$data);
     }
 
     public function newTeam()
@@ -660,6 +963,20 @@ class Home extends BaseController
         return $this->response->setJSON($response);
     }
 
+    public function news()
+    {
+        $title = "News";
+        $data = ['title'=>$title];
+        return view('main/news',$data);
+    }
+
+    public function shops()
+    {
+        $title = "Shops";
+        $data = ['title'=>$title];
+        return view('main/shops',$data);
+    }
+
     public function recovery()
     {
 
@@ -845,6 +1162,96 @@ class Home extends BaseController
         }
         // Return the response as JSON
         return $this->response->setJSON($response);
+    }
+
+    public function fetchAchievement()
+    {
+        $achievementModel = new \App\Models\achievementModel();
+        $searchTerm = $_GET['search']['value'] ?? '';
+
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $achievementModel->like('title', $searchTerm)
+                            ->orLike('type', $searchTerm)
+                            ->orLike('description', $searchTerm)
+                            ->orLike('criteria', $searchTerm);
+        }
+
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredachievementModel = clone $achievementModel;
+        if ($searchTerm) {
+            $filteredachievementModel->like('title', $searchTerm)
+                            ->orLike('type', $searchTerm)
+                            ->orLike('description', $searchTerm)
+                            ->orLike('criteria', $searchTerm);
+        }
+
+        // Fetch filtered records based on limit and offset
+        $account = $achievementModel->findAll($limit, $offset);
+
+        // Count total records (without filter)
+        $totalRecords = $achievementModel->countAllResults();
+
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredachievementModel->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($account as $row) {
+            $response['data'][] = [
+                'title' => $row['name'],
+                'type' => htmlspecialchars($row['type'], ENT_QUOTES),
+                'description' => htmlspecialchars($row['description'], ENT_QUOTES),
+                'criteria' => $row['criteria'],
+                'action' =>'<button type="button" class="btn btn-sm btn-danger remove" value="' . $row['achievement_id'] . '"><i class="ti ti-copy-x"></i> Remove </button>' 
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveAchievement()
+    {
+        $achievementModel = new \App\Models\achievementModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'title'=>'required|is_unique[achievements.name]',
+            'type'=>'required',
+            'description'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['name'=>$this->request->getPost('title'),
+                    'description'=>$this->request->getPost('description'),
+                    'type'=>$this->request->getPost('type'),
+                    'criteria'=>$this->request->getPost('criteria'),
+                    'date_created'=>date('Y-m-d')];
+            $achievementModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new achievement',
+                    'page'=>'Settings'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
     }
 
     public function myAccount()

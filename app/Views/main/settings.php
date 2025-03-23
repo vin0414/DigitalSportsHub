@@ -90,6 +90,11 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
+                                    <a href="#tabs-achievement-8" class="nav-link" data-bs-toggle="tab">
+                                        Achievements
+                                    </a>
+                                </li>
+                                <li class="nav-item">
                                     <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">
                                         System Logs
                                     </a>
@@ -194,6 +199,71 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="tabs-achievement-8">
+                                    <div class="row g-3">
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <form method="POST" class="row g-3" id="frmAchievement">
+                                                        <?=csrf_field() ?>
+                                                        <div class="col-lg-12">
+                                                            <label>Title of Achievement</label>
+                                                            <input type="text" class="form-control" name="title"
+                                                                required />
+                                                            <div id="title-error"
+                                                                class="error-message text-danger text-sm"></div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label>Type of Achievement</label>
+                                                            <select name="type" class="form-select" required>
+                                                                <option value="">Choose</option>
+                                                                <option>Team</option>
+                                                                <option>Player</option>
+                                                            </select>
+                                                            <div id="type-error"
+                                                                class="error-message text-danger text-sm"></div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label>Description</label>
+                                                            <textarea name="description" class="form-control"
+                                                                required></textarea>
+                                                            <div id="description-error"
+                                                                class="error-message text-danger text-sm"></div>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <label>Criteria (Optional)</label>
+                                                            <textarea name="criteria" class="form-control"></textarea>
+                                                        </div>
+                                                        <div class="col-lg-12">
+                                                            <button type="submit" class="form-control btn btn-primary">
+                                                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-8">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-striped table-bordered"
+                                                            id="tblachievement">
+                                                            <thead>
+                                                                <th>Title</th>
+                                                                <th>Type</th>
+                                                                <th>Description</th>
+                                                                <th>Criteria</th>
+                                                                <th>Action</th>
+                                                            </thead>
+                                                            <tbody></tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="tab-pane fade" id="tabs-activity-8">
                                     <div class="table-responsive">
                                         <table class="table table-striped" id="tbl_logs">
@@ -255,6 +325,39 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
     $('#tbl_logs').DataTable();
+    var table = $('#tblachievement').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('fetch-achievement')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
+            },
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "title"
+            },
+            {
+                "data": "type"
+            },
+            {
+                "data": "description"
+            },
+            {
+                "data": "criteria"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
     var role = $('#tblrole').DataTable({
         "processing": true,
         "serverSide": true,
@@ -377,6 +480,43 @@
                         if (result.isConfirmed) {
                             // Perform some action when "Yes" is clicked
                             role.ajax.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmAchievement').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-achievement')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmAchievement')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            table.ajax.reload();
                         }
                     });
                 } else {

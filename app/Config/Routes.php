@@ -20,12 +20,16 @@ $routes->get('fetch-sports','Home::fetchSports');
 $routes->post('save-sports','Home::saveSports');
 $routes->post('save-role','Home::saveRole');
 $routes->get('fetch-role','Home::fetchRole');
+$routes->get('fetch-achievement','Home::fetchAchievement');
+$routes->post('save-achievement','Home::saveAchievement');
 //team
 $routes->post('save-team','Home::saveTeam');
 $routes->get('filter-team','Home::filterTeam');
 //player
 $routes->post('save-player','Home::savePlayer');
 $routes->get('get-position','Home::getPosition');
+$routes->get('filter-players','Home::filterPlayers');
+$routes->post('edit-player','Home::editPlayer');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -39,10 +43,12 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //players
     $routes->get('athletes','Home::fetchAthletes');
     $routes->get('new-athlete','Home::newAthlete');
+    $routes->get('athletes/profile/(:any)','Home::playerProfile/$1');
+    $routes->get('athletes/edit-profile/(:any)','Home::editProfile/$1');
     //teams
     $routes->get('teams','Home::fetchTeams');
     $routes->get('teams/details/(:any)','Home::teamDetails/$1');
-    $routes->get('teams/results/(:any)','Home::teamResults/$1');
+    $routes->get('teams/score/(:any)','Home::teamResults/$1');
     $routes->get('new-team','Home::newTeam');
     //accounts
     $routes->get('accounts','Home::accounts');
@@ -51,6 +57,16 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //events
     $routes->get('events','Home::Events');
     $routes->get('new-event','Home::newEvent');
+    //shops
+    $routes->get('shops','Home::shops');
+    //videos
+    $routes->get('videos','Home::videos');
+    $routes->get('go-live','Home::goLive');
+    //news
+    $routes->get('news','Home::news');
     //settings
     $routes->get('settings','Home::settings');
+    $routes->get('recovery','Home::recovery');
+    //accounts
+    $routes->get('my-account','Home::myAccount');
 });

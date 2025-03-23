@@ -12,7 +12,7 @@ class performanceModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['player_id','match_id','points_scored','digs','blocks','assists','service_ace','errors'];
+    protected $allowedFields    = ['player_id','match_id','team_id','sportsID','stat_type','stat_value','date','description'];
 
     // Dates
     protected $useTimestamps = false;

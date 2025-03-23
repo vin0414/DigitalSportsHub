@@ -130,7 +130,8 @@
                                     <a href="mailto:<?php echo $row->email ?>" class="card-btn">
                                         <i class="ti ti-mail"></i>&nbsp;Email
                                     </a>
-                                    <a href="<?=site_url('profile')?>/<?php echo $row->player_id ?>" class="card-btn">
+                                    <a href="<?=site_url('athletes/profile')?>/<?php echo $row->player_id ?>"
+                                        class="card-btn">
                                         <i class="ti ti-address-book"></i>&nbsp;Profile
                                     </a>
                                 </div>
@@ -169,6 +170,30 @@
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmSearch').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('filter-players')?>",
+            method: "GET",
+            data: data,
+            success: function(response) {
+                if (response === "") {
+                    Swal.fire({
+                        title: 'Sorry!',
+                        text: "No Record(s) found. Please try again",
+                        icon: 'warning',
+                    });
+                } else {
+                    $('#results').html(response);
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

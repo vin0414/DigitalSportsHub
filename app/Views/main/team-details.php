@@ -11,6 +11,12 @@
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('visualization', "1", {
+        packages: ['corechart']
+    });
+    </script>
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -87,12 +93,24 @@
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <div class="card-title"><?=$title?></div>
+                                    <div class="card-title"><i class="ti ti-address-book"></i>&nbsp;<?=$title?></div>
                                     <?php if($team):?>
                                     <div class="row g-3">
                                         <div class="col-lg-4">
-                                            <img src="<?=base_url('admin/images/team/')?><?php echo $team['image'] ?>"
-                                                style="border-radius:25px;" />
+                                            <div class="row g-3">
+                                                <div class="col-lg-12">
+                                                    <img src="<?=base_url('admin/images/team/')?><?php echo $team['image'] ?>"
+                                                        style="border-radius:25px;" />
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <span><i class="ti ti-chart-bar"></i>&nbsp;Team Stats</span>
+                                                            <div id="chartContainer"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="col-lg-8">
                                             <span>Team</span>
@@ -108,8 +126,7 @@
                                                 </div>
                                             </div>
                                             <span class="form-label">Name of School</span>
-                                            <textarea class="form-control" style="height:100px;"
-                                                readonly><?php echo $team['school'] ?></textarea>
+                                            <h1><?php echo $team['school'] ?></h1>
                                             <br />
                                             <div class="card">
                                                 <div class="card-header">
@@ -117,13 +134,19 @@
                                                         <li class="nav-item">
                                                             <a href="#tabs-home-8" class="nav-link active"
                                                                 data-bs-toggle="tab">
-                                                                Players
+                                                                <i class="ti ti-play-handball"></i>&nbsp;Players
                                                             </a>
                                                         </li>
                                                         <li class="nav-item">
                                                             <a href="#tabs-profile-8" class="nav-link"
                                                                 data-bs-toggle="tab">
-                                                                Match History
+                                                                <i class="ti ti-history-toggle"></i>&nbsp;Match History
+                                                            </a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a href="#tabs-achievement-8" class="nav-link"
+                                                                data-bs-toggle="tab">
+                                                                <i class="ti ti-award"></i>&nbsp;Achievements
                                                             </a>
                                                         </li>
                                                     </ul>
@@ -132,7 +155,7 @@
                                                     <div class="tab-content">
                                                         <div class="tab-pane fade active show" id="tabs-home-8">
                                                             <div class="table-responsive">
-                                                                <table class="table table-striped">
+                                                                <table class="table table-striped table-bordered">
                                                                     <thead>
                                                                         <th>#</th>
                                                                         <th>Last Name</th>
@@ -142,8 +165,16 @@
                                                                         <th>Age</th>
                                                                         <th>Height</th>
                                                                         <th>Weight</th>
+                                                                        <th><i class="ti ti-dots"></i></th>
                                                                     </thead>
                                                                     <tbody>
+                                                                        <?php if(empty($player)){ ?>
+                                                                        <tr>
+                                                                            <td colspan="9">
+                                                                                <center>No Player(s) Added</center>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <?php }else{ ?>
                                                                         <?php foreach($player as $row): ?>
                                                                         <?php
                                                                         $dob = $row['date_of_birth'];
@@ -160,14 +191,85 @@
                                                                             <td><?php echo $age->y ?></td>
                                                                             <td><?php echo $row['height'] ?>cm</td>
                                                                             <td><?php echo $row['weight'] ?>kgs</td>
+                                                                            <td>
+                                                                                <a href="<?=site_url('athletes/profile/')?><?php echo $row['player_id'] ?>"
+                                                                                    class="btn btn-primary btn-sm">
+                                                                                    <i
+                                                                                        class="ti ti-user-search"></i>&nbsp;View
+                                                                                </a>
+                                                                            </td>
                                                                         </tr>
                                                                         <?php endforeach; ?>
+                                                                        <?php } ?>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
                                                         </div>
                                                         <div class="tab-pane fade" id="tabs-profile-8">
-
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-bordered">
+                                                                    <thead>
+                                                                        <th>Date</th>
+                                                                        <th>Match</th>
+                                                                        <th>Results</th>
+                                                                        <th>Location</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php if(empty($match)){ ?>
+                                                                        <tr>
+                                                                            <td colspan="4">
+                                                                                <center>No Match History</center>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <?php }else{ ?>
+                                                                        <?php foreach($match as $row): ?>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <?php echo date('Y-M-d',strtotime($row->date)) ?>
+                                                                            </td>
+                                                                            <td><?php echo $row->team1 ?> VS
+                                                                                <?php echo $row->team2 ?></td>
+                                                                            <td><?php echo $row->result ?></td>
+                                                                            <td><?php echo $row->location ?></td>
+                                                                        </tr>
+                                                                        <?php endforeach; ?>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div class="tab-pane fade" id="tabs-achievement-8">
+                                                            <div class="table-responsive">
+                                                                <table class="table table-striped table-bordered">
+                                                                    <thead>
+                                                                        <th>#</th>
+                                                                        <th>Achievements</th>
+                                                                        <th>Earned At</th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <?php if(empty($achievement)){ ?>
+                                                                        <tr>
+                                                                            <td colspan="3">
+                                                                                <center>No Achievement(s) found</center>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <?php }else { ?>
+                                                                        <?php foreach($achievement as $row): ?>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <?php echo $row['team_achievement_id'] ?>
+                                                                            </td>
+                                                                            <td>
+                                                                                <b><?php echo $row['name'] ?></b><br />
+                                                                                <small><?php echo $row['description'] ?></small>
+                                                                            </td>
+                                                                            <td><?php echo $row['earned_at'] ?></td>
+                                                                        </tr>
+                                                                        <?php endforeach; ?>
+                                                                        <?php } ?>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -208,45 +310,37 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
-    <!-- END DEMO SCRIPTS -->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-    $('#frmAccount').on('submit', function(e) {
-        e.preventDefault();
-        let data = $(this).serialize();
-        $.ajax({
-            url: "<?=site_url('update')?>",
-            method: "POST",
-            data: data,
-            success: function(response) {
-                if (response.success) {
-                    Swal.fire({
-                        title: 'Great!',
-                        text: "Successfully applied changes",
-                        icon: 'success',
-                        confirmButtonText: 'Continue'
-                    }).then((result) => {
-                        // Action based on user's choice
-                        if (result.isConfirmed) {
-                            // Perform some action when "Yes" is clicked
-                            location.href = "<?=base_url('accounts')?>";
-                        }
-                    });
+    google.charts.setOnLoadCallback(charts);
 
-                } else {
-                    var errors = response.error;
-                    // Iterate over each error and display it under the corresponding input field
-                    for (var field in errors) {
-                        $('#' + field + '-error').html('<p>' + errors[field] +
-                            '</p>'); // Show the first error message
-                        $('#' + field).addClass(
-                            'text-danger'); // Highlight the input field with an error
-                    }
-                }
+    function charts() {
+        var data = google.visualization.arrayToDataTable([
+            ["Category", "Value"],
+            <?php 
+            foreach ($stats as $row){
+                echo "['Win', ".$row->win."],";
+                echo "['Loss', ".$row->loss."],";
+                echo "['Draw', ".$row->draw."],";
             }
-        });
-    });
+            ?>
+        ]);
+
+        var options = {
+            title: '',
+            pieHole: 0.5,
+            legend: 'bottom',
+            backgroundColor: {
+                fill: 'transparent'
+            },
+            chartArea: {
+                width: '90%', // Optional: Adjust width of the chart area
+                height: '80%' // Optional: Adjust height of the chart area
+            },
+        };
+        /* Instantiate and draw the chart.*/
+        var chart = new google.visualization.PieChart(document.getElementById('chartContainer'));
+        chart.draw(data, options);
+    }
     </script>
 </body>
 
