@@ -138,7 +138,7 @@
                         <div class="col-lg-9">
                             <div class="card">
                                 <div class="card-body">
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                     <div class="card-title">Recent</div>
                                 </div>
                                 <div class="card-body">
-                                    
+
                                 </div>
                             </div>
                         </div>

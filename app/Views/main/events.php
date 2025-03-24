@@ -11,12 +11,6 @@
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-    google.charts.load('visualization', "1", {
-        packages: ['corechart']
-    });
-    </script>
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -44,6 +38,9 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
+                                <a href="<?=site_url('new-event')?>" class="btn btn-secondary">
+                                    <i class="ti ti-plus"></i>&nbsp;New Event
+                                </a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -81,9 +78,7 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="row row-cards">
-                        
-                    </div>
+                    <div id='calendar'></div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -115,6 +110,55 @@
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <script>
+    <?php $eventData = array();?>
+    <?php 
+        $eventModel = new \App\Models\eventModel();
+        $event = $eventModel->WHERE('Status',1)->findAll();
+        foreach($event as $row)
+        {
+            $tempArray = array( "title" =>$row['event_title'],"description" =>$row['event_description'],"start" => $row['start_date'],"end" => $row['end_date']);
+            array_push($eventData, $tempArray);
+        }
+      ?>
+    const jsonData = <?php echo json_encode($eventData); ?>;
+    var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
+        initialView: "dayGridMonth",
+        headerToolbar: {
+            start: 'title', // will normally be on the left. if RTL, will be on the right
+            center: '',
+            end: 'today prev,next' // will normally be on the right. if RTL, will be on the left
+        },
+        selectable: true,
+        editable: true,
+        views: {
+            month: {
+                titleFormat: {
+                    month: "long",
+                    year: "numeric"
+                }
+            },
+            agendaWeek: {
+                titleFormat: {
+                    month: "long",
+                    year: "numeric",
+                    day: "numeric"
+                }
+            },
+            agendaDay: {
+                titleFormat: {
+                    month: "short",
+                    year: "numeric",
+                    day: "numeric"
+                }
+            }
+        },
+        events: jsonData
+    });
+
+    calendar.render();
+    </script>
 </body>
 
 </html>
