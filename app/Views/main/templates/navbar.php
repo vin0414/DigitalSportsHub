@@ -162,7 +162,7 @@
                             <span class="nav-link-title"> News </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown <?= ($title == 'Videos') ? 'active' : '' ?>">
+                    <li class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-plugins" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">

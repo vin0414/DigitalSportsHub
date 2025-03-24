@@ -32,14 +32,12 @@
                     <div class="row g-2 align-items-center">
                         <div class="col">
                             <!-- Page pre-title -->
-                            <div class="page-pretitle">Overview</div>
+                            <div class="page-pretitle">Digital Sports Hub</div>
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i
-                                        class="ti ti-upload"></i>&nbsp;Upload</a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -83,76 +81,7 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="row row-cards">
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-users"></i>&nbsp;Total Users</div>
-                                    <h1 class="text-center"><?=$total?></h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-play-handball"></i>&nbsp;Players</div>
-                                    <h1 class="text-center"><?=$player?></h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-users-group"></i>&nbsp;Teams</div>
-                                    <h1 class="text-center"><?=$team?></h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-calendar"></i>&nbsp;Events</div>
-                                    <h1 class="text-center">0</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-brand-youtube"></i>&nbsp;Videos</div>
-                                    <h1 class="text-center">0</h1>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-2">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title"><i class="ti ti-building-store"></i>&nbsp;Shops</div>
-                                    <h1 class="text-center"><?=$shop?></h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <br />
-                    <div class="row row-cards">
-                        <div class="col-lg-9">
-                            <div class="card">
-                                <div class="card-body">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">Recent</div>
-                                </div>
-                                <div class="card-body">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                
                 </div>
             </div>
             <!-- END PAGE BODY -->

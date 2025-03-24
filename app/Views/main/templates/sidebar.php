@@ -116,7 +116,7 @@
                         <span class="nav-link-title"> Go Live </span>
                     </a>
                 </li>
-                <li class="nav-item <?= ($title == 'Upload') ? 'active' : '' ?>">
+                <li class="nav-item <?= ($title == 'Upload' || $title == 'Upload Video') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('upload')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->

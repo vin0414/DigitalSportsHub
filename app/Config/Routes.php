@@ -30,6 +30,11 @@ $routes->post('save-player','Home::savePlayer');
 $routes->get('get-position','Home::getPosition');
 $routes->get('filter-players','Home::filterPlayers');
 $routes->post('edit-player','Home::editPlayer');
+//map
+$routes->get('shop-location','Home::shopLocation');
+$routes->post('save-shop','Home::saveShop');
+$routes->get('fetch-shop','Home::fetchShop');
+$routes->post('edit-shop','Home::editShop');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -60,7 +65,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //shops
     $routes->get('shops','Home::shops');
     //videos
-    $routes->get('videos','Home::videos');
+    $routes->get('videos','Home::manageVideos');
+    $routes->get('upload','Home::upload');
     $routes->get('go-live','Home::goLive');
     //news
     $routes->get('news','Home::news');

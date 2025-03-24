@@ -118,7 +118,7 @@
                                             <select class="form-select" name="sports" id="sports" required>
                                                 <option value="">Choose sports</option>
                                                 <?php foreach($sports as $row): ?>
-                                                <option value="<?php echo $row['sportsID'] ?>">
+                                                <option value="<?php echo $row['sportsID'] ?>" <?php echo ($player['sportsID'] == $row['sportsID']) ? 'selected' : ''; ?>>
                                                     <?php echo $row['Name'] ?></option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -129,7 +129,7 @@
                                             <select class="form-select" name="team" required>
                                                 <option value="">Choose team</option>
                                                 <?php foreach($team as $row): ?>
-                                                <option value="<?php echo $row['team_id'] ?>">
+                                                <option value="<?php echo $row['team_id'] ?>" <?php echo ($player['team_id'] == $row['team_id']) ? 'selected' : ''; ?>>
                                                     <?php echo $row['team_name'] ?></option>
                                                 <?php endforeach; ?>
                                             </select>
@@ -158,14 +158,14 @@
                                             <div class="form-selectgroup">
                                                 <label class="form-selectgroup-item">
                                                     <input type="radio" name="gender" value="male"
-                                                        class="form-selectgroup-input" checked />
+                                                        class="form-selectgroup-input" <?php echo ($player['gender'] == "male") ? 'checked' : ''; ?>/>
                                                     <span class="form-selectgroup-label">
                                                         <i class="ti ti-mars"></i>&nbsp;Male
                                                     </span>
                                                 </label>
                                                 <label class="form-selectgroup-item">
                                                     <input type="radio" name="gender" value="female"
-                                                        class="form-selectgroup-input" />
+                                                        class="form-selectgroup-input" <?php echo ($player['gender'] == "female") ? 'checked' : ''; ?>/>
                                                     <span class="form-selectgroup-label">
                                                         <i class="ti ti-gender-femme"></i>&nbsp;Female
                                                     </span>
@@ -207,8 +207,8 @@
                                     <div id="address-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label class="form-label">Image</label>
-                                    <input type="file" class="form-control" name="file" accept="image/*" required />
+                                    <label class="form-label">Image (Optional)</label>
+                                    <input type="file" class="form-control" name="file" accept="image/*"/>
                                     <div id="file-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
@@ -260,6 +260,23 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+    $(document).ready(function(){
+        loadRole();
+    });
+    function loadRole()
+    {
+        var val = $('#sports').val();
+        $.ajax({
+            url: "<?=site_url('get-position')?>",
+            method: "GET",
+            data: {
+                value: val
+            },
+            success: function(response) {
+                $('#position').append(response);
+            }
+        });
+    }
     $('#sports').change(function() {
         var val = $(this).val();
         $('#position').empty();

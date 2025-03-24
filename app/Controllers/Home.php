@@ -99,7 +99,20 @@ class Home extends BaseController
     public function dashboard()
     {
         $title = "Digital Sports Hub";
-        $data = ['title'=>$title];
+        //total user
+        $accountModel = new \App\Models\AccountModel();
+        $account = $accountModel->countAllResults();
+        //players
+        $playerModel = new \App\Models\playerModel();
+        $player = $playerModel->countAllResults();
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->countAllResults();
+        //shops
+        $shopModel = new \App\Models\shopModel();
+        $shop = $shopModel->countAllResults();
+
+        $data = ['title'=>$title,'total'=>$account,'player'=>$player,'team'=>$team,'shop'=>$shop];
         return view('main/dashboard',$data);
     }
 
@@ -196,6 +209,7 @@ class Home extends BaseController
             'height'=>'required',
             'weight'=>'required',
             'address'=>'required',
+            'file'=>'uploaded[file]|is_image[file]|max_size[file,2048]|permit_empty'
         ]);
 
         if(!$validation)
@@ -206,7 +220,7 @@ class Home extends BaseController
         {
             $file = $this->request->getFile('file');
             $originalName = date('YmdHis').$file->getClientName();
-            if(empty($originalName))
+            if(empty($file->getClientName()))
             {
                 $data = ['team_id'=>$this->request->getPost('team'),
                         'first_name'=>$this->request->getPost('first_name'),
@@ -245,22 +259,28 @@ class Home extends BaseController
 
             if ($this->request->getPost('agree') !== null)
             {
-                function generateRandomString($length = 64) {
-                    // Generate random bytes and convert them to hexadecimal
-                    $bytes = random_bytes($length);
-                    return substr(bin2hex($bytes), 0, $length);
-                }
-                $token_code = generateRandomString(64);
-                $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
+                //check if user already had the account
                 $accountModel = new \App\Models\AccountModel();
-                $data = ['Email'=>$this->request->getPost('email'),
-                        'Password'=>Hash::make('Abc12345'),
-                        'Fullname'=>$fullname,
-                        'Role'=>'End-user',
-                        'Status'=>1,
-                        'Token'=>$token_code,
-                        'DateCreated'=>date('Y-m-d')];
-                $accountModel->save($data);
+                $account = $accountModel->WHERE('Email',$this->request->getPost('email'))->first();
+                if(empty($account))
+                {
+                    function generateRandomString($length = 64) {
+                        // Generate random bytes and convert them to hexadecimal
+                        $bytes = random_bytes($length);
+                        return substr(bin2hex($bytes), 0, $length);
+                    }
+                    $token_code = generateRandomString(64);
+                    $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
+                    
+                    $data = ['Email'=>$this->request->getPost('email'),
+                            'Password'=>Hash::make('Abc12345'),
+                            'Fullname'=>$fullname,
+                            'Role'=>'End-user',
+                            'Status'=>1,
+                            'Token'=>$token_code,
+                            'DateCreated'=>date('Y-m-d')];
+                    $accountModel->save($data);
+                }
             }
             //logs
             date_default_timezone_set('Asia/Manila');
@@ -756,7 +776,9 @@ class Home extends BaseController
     //events
     public function Events()
     {
-        return view('main/events');
+        $title = "Events";
+        $data = ['title'=>$title];
+        return view('main/events',$data);
     }
 
     public function newEvent()
@@ -766,17 +788,23 @@ class Home extends BaseController
 
     public function upload()
     {
-
+        $title = "Upload Video";
+        $data = ['title'=>$title];
+        return view('main/upload',$data);
     }
 
     public function manageVideos()
     {
-
+        $title = "Videos";
+        $data = ['title'=>$title];
+        return view('main/manage-videos',$data);
     }
 
     public function goLive()
     {
-
+        $title = "Go Live";
+        $data = ['title'=>$title];
+        return view('main/live',$data);
     }
 
     public function accounts()
@@ -973,8 +1001,138 @@ class Home extends BaseController
     public function shops()
     {
         $title = "Shops";
-        $data = ['title'=>$title];
+        //shops
+        $shopModel = new \App\Models\shopModel();
+        $shop = $shopModel->findAll();
+
+        $data = ['title'=>$title,'shop'=>$shop];
         return view('main/shops',$data);
+    }
+
+    public function fetchShop()
+    {
+        $id = $this->request->getGet('value');
+        $shopModel = new \App\Models\shopModel();
+        $shop = $shopModel->WHERE('shop_id',$id)->first();
+        if($shop)
+        {
+            ?>
+            <form method="POST" class="row g-3" id="frmEditShop">
+                <?=csrf_field()?>
+                <input type="hidden" id="shop_id" name="shop_id" value="<?=$shop['shop_id']?>"/>
+                <input type="hidden" id="longitude" name="longitude" value="<?=$shop['longitude']?>"/>
+                <input type="hidden" id="latitude" name="latitude" value="<?=$shop['latitude']?>"/>
+                <div class="col-lg-12">
+                    <label class="form-label">Name of the Shop</label>
+                    <input type="text" class="form-control" name="name_shop" value="<?=$shop['shop_name']?>" required/>
+                    <div id="name_shop-error" class="error-message text-danger text-sm"></div>
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label">Address</label>
+                    <textarea name="address" class="form-control" required><?=$shop['address']?></textarea>
+                    <div id="address-error" class="error-message text-danger text-sm"></div>
+                </div>
+                <div class="col-lg-12">
+                    <label class="form-label">Website</label>
+                    <input type="text" class="form-control" name="website" value="<?=$shop['website']?>" required/>
+                    <div id="website-error" class="error-message text-danger text-sm"></div>
+                </div>
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-primary save">
+                        <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+                    </button>
+                </div>
+            </form>
+            <?php
+        }
+    }
+
+    public function editShop()
+    {
+        $shopModel = new \App\Models\shopModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'name_shop'=>'required',
+            'address'=>'required',
+            'website'=>'required'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['longitude'=>$this->request->getPost('longitude'),
+                    'latitude'=>$this->request->getPost('latitude'),
+                    'shop_name'=>$this->request->getPost('name_shop'),
+                    'address'=>$this->request->getPost('address'),
+                    'website'=>$this->request->getPost('website'),
+                    'date'=>date('Y-m-d')];
+            $shopModel->update($this->request->getPost('shop_id'),$data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Edit shop : '.$this->request->getPost('name_shop'),
+                    'page'=>'Shops'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
+    }
+
+    public function shopLocation()
+    {
+        $shopModel = new \App\Models\shopModel();
+        $shops = $shopModel->findAll();
+        $locations = [];
+        foreach($shops as $row)
+        {
+            $locations[] = ['latitude'=>$row['latitude'],
+                            'longitude'=>$row['longitude'],
+                            'shop_name' => $row['shop_name'],
+                            'address' => $row['address'],
+                            'website'=>$row['website']];
+        }
+        echo json_encode($locations);
+    }
+
+    public function saveShop()
+    {
+        $shopModel = new \App\Models\shopModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'name_shop'=>'required|is_unique[shops.shop_name]',
+            'address'=>'required',
+            'website'=>'required'
+        ]);
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $data = ['longitude'=>$this->request->getPost('longitude'),
+                    'latitude'=>$this->request->getPost('latitude'),
+                    'shop_name'=>$this->request->getPost('name_shop'),
+                    'address'=>$this->request->getPost('address'),
+                    'website'=>$this->request->getPost('website'),
+                    'date'=>date('Y-m-d')];
+            $shopModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new shop : '.$this->request->getPost('name_shop'),
+                    'page'=>'Shops'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
     }
 
     public function recovery()
