@@ -111,8 +111,15 @@ class Home extends BaseController
         //shops
         $shopModel = new \App\Models\shopModel();
         $shop = $shopModel->countAllResults();
+        //events
+        $eventModel = new \App\Models\eventModel();
+        $event = $eventModel->WHERE('status',1)->ORDERBY('event_id','DESC')->limit(5)->findAll();
+        //count all approved events
+        $totalEvents = $eventModel->WHERE('status',1)->countAllResults();
 
-        $data = ['title'=>$title,'total'=>$account,'player'=>$player,'team'=>$team,'shop'=>$shop];
+        $data = ['title'=>$title,'total'=>$account,'player'=>$player,
+                'team'=>$team,'shop'=>$shop,'event'=>$event,
+                'total_event'=>$totalEvents];
         return view('main/dashboard',$data);
     }
 
@@ -135,16 +142,20 @@ class Home extends BaseController
 
     public function newAthlete()
     {
-        $title = "New Athlete";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
-        //team
-        $teamModel = new \App\Models\teamModel();
-        $team = $teamModel->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "New Athlete";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
+            //team
+            $teamModel = new \App\Models\teamModel();
+            $team = $teamModel->findAll();
 
-        $data = ['title'=>$title,'sports'=>$sports,'team'=>$team];
-        return view('main/new-player',$data);
+            $data = ['title'=>$title,'sports'=>$sports,'team'=>$team];
+            return view('main/new-player',$data);
+        }
+        return redirect()->back(); 
     }
 
     public function playerProfile($id)
@@ -176,19 +187,23 @@ class Home extends BaseController
 
     public function editProfile($id)
     {
-        $title = "Edit Profile";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
-        //team
-        $teamModel = new \App\Models\teamModel();
-        $team = $teamModel->findAll();
-        //player
-        $playerModel = new \App\Models\playerModel();
-        $player = $playerModel->WHERE('player_id',$id)->first();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Edit Profile";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
+            //team
+            $teamModel = new \App\Models\teamModel();
+            $team = $teamModel->findAll();
+            //player
+            $playerModel = new \App\Models\playerModel();
+            $player = $playerModel->WHERE('player_id',$id)->first();
 
-        $data = ['title'=>$title,'sports'=>$sports,'team'=>$team,'player'=>$player];
-        return view('main/edit-profile',$data);
+            $data = ['title'=>$title,'sports'=>$sports,'team'=>$team,'player'=>$player];
+            return view('main/edit-profile',$data);
+        }
+        return redirect()->back();
     }
 
     public function editPlayer()
@@ -710,19 +725,23 @@ class Home extends BaseController
 
     public function newTeam()
     {
-        $title = "New Team";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
-        //coach
-        $accountModel = new \App\Models\AccountModel();
-        $account = $accountModel->WHERE('Role','Coach')->findAll();
-        //recently team added
-        $teamModel = new \App\Models\teamModel();
-        $team = $teamModel->orderBy('team_id', 'DESC')->limit(5)->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "New Team";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
+            //coach
+            $accountModel = new \App\Models\AccountModel();
+            $account = $accountModel->WHERE('Role','Coach')->findAll();
+            //recently team added
+            $teamModel = new \App\Models\teamModel();
+            $team = $teamModel->orderBy('team_id', 'DESC')->limit(5)->findAll();
 
-        $data = ['title'=>$title,'sports'=>$sports,'account'=>$account,'team'=>$team];
-        return view('main/new-team',$data);
+            $data = ['title'=>$title,'sports'=>$sports,'account'=>$account,'team'=>$team];
+            return view('main/new-team',$data);
+        }
+        return redirect()->back();
     }
 
     public function saveTeam()
@@ -783,7 +802,240 @@ class Home extends BaseController
 
     public function newEvent()
     {
-        return view('main/new-event');
+        $title = "New Event";
+        //events per account
+        $eventModel = new \App\Models\eventModel();
+        $event = $eventModel->WHERE('accountID',session()->get('loggedUser'))
+                            ->orderBy('event_id', 'desc') 
+                            ->limit(5)  // Limit to 5 records
+                            ->findAll(); 
+
+        $data = ['title'=>$title,'event'=>$event];
+        return view('main/new-event',$data);
+    }
+
+    public function manageEvent()
+    {
+        $title = "Manage Event";
+        //my request
+        $eventModel = new \App\Models\eventModel();
+        $event = $eventModel->WHERE('accountID',session()->get('loggedUser'))->findAll();
+
+        $data = ['title'=>$title,'event'=>$event];
+        return view('main/manage-event',$data);
+    }
+
+    public function cancelEvent()
+    {
+        $eventModel = new \App\Models\eventModel();
+        $val = $this->request->getPost('value');
+        $data = ['status'=>2];
+        $eventModel->update($val,$data);
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = [
+                'date'=>date('Y-m-d H:i:s a'),
+                'accountID'=>session()->get('loggedUser'),
+                'activities'=>'Cancelled the selected event',
+                'page'=>'Manage Event'
+                ];        
+        $logModel->save($data);
+        echo "success";        
+    }
+
+    public function acceptEvent()
+    {
+        $eventModel = new \App\Models\eventModel();
+        $val = $this->request->getPost('value');
+        $data = ['status'=>1];
+        $eventModel->update($val,$data);
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = [
+                'date'=>date('Y-m-d H:i:s a'),
+                'accountID'=>session()->get('loggedUser'),
+                'activities'=>'Accepted the selected event',
+                'page'=>'Manage Event'
+                ];        
+        $logModel->save($data);
+        echo "success";    
+    }
+
+    public function rejectEvent()
+    {
+        $eventModel = new \App\Models\eventModel();
+        $val = $this->request->getPost('value');
+        $data = ['status'=>2];
+        $eventModel->update($val,$data);
+        //logs
+        date_default_timezone_set('Asia/Manila');
+        $logModel = new \App\Models\logModel();
+        $data = [
+                'date'=>date('Y-m-d H:i:s a'),
+                'accountID'=>session()->get('loggedUser'),
+                'activities'=>'Rejected the selected event',
+                'page'=>'Manage Event'
+                ];        
+        $logModel->save($data);
+        echo "success";    
+    }
+
+    public function fetchEvent()
+    {
+        $eventModel = new \App\Models\eventModel();
+        $searchTerm = $_GET['search']['value'] ?? '';
+
+        // Apply the search filter for the main query
+        if ($searchTerm) {
+            $eventModel->like('event_title', $searchTerm)
+                            ->orLike('event_description', $searchTerm)
+                            ->orLike('start_date', $searchTerm)
+                            ->orLike('end_date', $searchTerm);
+        }
+
+        // Pagination: Get the 'start' and 'length' from the request (these are sent by DataTables)
+        $limit = $_GET['length'] ?? 10;  // Number of records per page, default is 10
+        $offset = $_GET['start'] ?? 0;   // Starting record for pagination, default is 0
+
+        // Clone the model for counting filtered records, while keeping the original for data fetching
+        $filteredeventModel = clone $eventModel;
+        if ($searchTerm) {
+            $filteredeventModel->like('event_title', $searchTerm)
+                            ->orLike('event_description', $searchTerm)
+                            ->orLike('start_date', $searchTerm)
+                            ->orLike('end_date', $searchTerm);
+        }
+
+        // Fetch filtered records based on limit and offset
+        $account = $eventModel->WHERE('status',0)->findAll($limit, $offset);
+
+        // Count total records (without filter)
+        $totalRecords = $eventModel->WHERE('status',0)->countAllResults();
+
+        // Count filtered records (with filter)
+        $filteredRecords = $filteredeventModel->WHERE('status',0)->countAllResults();
+
+        $response = [
+            "draw" => $_GET['draw'],
+            "recordsTotal" => $totalRecords,
+            "recordsFiltered" => $filteredRecords,
+            'data' => [] 
+        ];
+        foreach ($account as $row) {
+            $response['data'][] = [
+                'event' => '<b>'.$row['event_title'].'</b><br/><label>'.$row['event_location'].'</label><br/><small>'.$row['event_description'].'</small>',
+                'type' => htmlspecialchars($row['event_type'], ENT_QUOTES),
+                'date' => $row['start_date'].'-'.$row['end_date'],
+                'action' => '<span class="dropdown">
+                              <button class="btn dropdown-toggle align-text-top" data-bs-boundary="viewport" data-bs-toggle="dropdown">Actions</button>
+                              <div class="dropdown-menu dropdown-menu-end">
+                                <button type="button" class="dropdown-item accept" value="'.$row['event_id'].'"> Accept </button>
+                                <button type="button" class="dropdown-item reject" value="'.$row['event_id'].'"> Reject </button>
+                              </div>
+                            </span>'
+            ];
+        }
+        // Return the response as JSON
+        return $this->response->setJSON($response);
+    }
+
+    public function saveEvent()
+    {
+        $eventModel = new \App\Models\eventModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'event_title'=>'required',
+            'event_description'=>'required',
+            'event_location'=>'required',
+            'event_type'=>'required',
+            'from_date'=>'required',
+            'to_date'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            if ($this->request->getPost('agree') !== null)
+            {
+                if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer")
+                {
+                    //direct save and approved
+                    $data = ['accountID'=>session()->get('loggedUser'),
+                            'event_title'=>$this->request->getPost('event_title'),
+                            'event_description'=>$this->request->getPost('event_description'),
+                            'event_location'=>$this->request->getPost('event_location'),
+                            'event_type'=>$this->request->getPost('event_type'),
+                            'start_date'=>$this->request->getPost('from_date'),
+                            'end_date'=>$this->request->getPost('to_date'),
+                            'status'=>1,
+                            'registration'=>1,
+                            'date'=>date('Y-m-d')];
+                    $eventModel->save($data); 
+                }
+                else
+                {
+                    $data = ['accountID'=>session()->get('loggedUser'),
+                            'event_title'=>$this->request->getPost('event_title'),
+                            'event_description'=>$this->request->getPost('event_description'),
+                            'event_location'=>$this->request->getPost('event_location'),
+                            'event_type'=>$this->request->getPost('event_type'),
+                            'start_date'=>$this->request->getPost('from_date'),
+                            'end_date'=>$this->request->getPost('to_date'),
+                            'status'=>0,
+                            'registration'=>1,
+                            'date'=>date('Y-m-d')];
+                    $eventModel->save($data); 
+                }
+            }
+            else
+            {
+                if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer")
+                {
+                    //direct save and approved
+                    $data = ['accountID'=>session()->get('loggedUser'),
+                            'event_title'=>$this->request->getPost('event_title'),
+                            'event_description'=>$this->request->getPost('event_description'),
+                            'event_location'=>$this->request->getPost('event_location'),
+                            'event_type'=>$this->request->getPost('event_type'),
+                            'start_date'=>$this->request->getPost('from_date'),
+                            'end_date'=>$this->request->getPost('to_date'),
+                            'status'=>1,
+                            'registration'=>0,
+                            'date'=>date('Y-m-d')];
+                    $eventModel->save($data); 
+                }
+                else
+                {
+                    $data = ['accountID'=>session()->get('loggedUser'),
+                            'event_title'=>$this->request->getPost('event_title'),
+                            'event_description'=>$this->request->getPost('event_description'),
+                            'event_location'=>$this->request->getPost('event_location'),
+                            'event_type'=>$this->request->getPost('event_type'),
+                            'start_date'=>$this->request->getPost('from_date'),
+                            'end_date'=>$this->request->getPost('to_date'),
+                            'status'=>0,
+                            'registration'=>0,
+                            'date'=>date('Y-m-d')];
+                    $eventModel->save($data); 
+                }
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new event',
+                    'page'=>'New Event'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully submitted']);
+        }
     }
 
     public function upload()
@@ -816,23 +1068,31 @@ class Home extends BaseController
 
     public function newAccount()
     {
-        $title = "New Account";
-        //get the top 5 recently added
-        $accountModel = new \App\Models\AccountModel();
-        $account = $accountModel->orderBy('accountID', 'DESC')->limit(5)->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "New Account";
+            //get the top 5 recently added
+            $accountModel = new \App\Models\AccountModel();
+            $account = $accountModel->orderBy('accountID', 'DESC')->limit(5)->findAll();
 
-        $data = ['title'=>$title,'account'=>$account];
-        return view('main/new-account',$data);
+            $data = ['title'=>$title,'account'=>$account];
+            return view('main/new-account',$data);
+        }
+        return redirect()->back();
     }
 
     public function editAccount($id)
     {
-        $title = "Edit Account";
-        //get the account information
-        $accountModel = new \App\Models\AccountModel();
-        $account = $accountModel->WHERE('Token',$id)->first();
-        $data = ['title'=>$title,'account'=>$account];
-        return view('main/edit-account',$data);
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Edit Account";
+            //get the account information
+            $accountModel = new \App\Models\AccountModel();
+            $account = $accountModel->WHERE('Token',$id)->first();
+            $data = ['title'=>$title,'account'=>$account];
+            return view('main/edit-account',$data);
+        }
+        return redirect()->back();
     }
 
     public function saveAccount()
@@ -1142,18 +1402,22 @@ class Home extends BaseController
 
     public function settings()
     {
-        $title = "Settings";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
-        //logs
-        $builder = $this->db->table('logs a');
-        $builder->select('a.*,b.Fullname');
-        $builder->join('accounts b','b.accountID=a.accountID','LEFT');
-        $logs = $builder->get()->getResult();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Settings";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
+            //logs
+            $builder = $this->db->table('logs a');
+            $builder->select('a.*,b.Fullname');
+            $builder->join('accounts b','b.accountID=a.accountID','LEFT');
+            $logs = $builder->get()->getResult();
 
-        $data = ['title'=>$title,'sports'=>$sports,'logs'=>$logs];
-        return view('main/settings',$data);
+            $data = ['title'=>$title,'sports'=>$sports,'logs'=>$logs];
+            return view('main/settings',$data);
+        }
+        return redirect()->back();
     }
 
     public function saveSports()

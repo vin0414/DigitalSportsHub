@@ -39,39 +39,12 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('new-account')?>" class="btn btn-secondary"><i
-                                        class="ti ti-plus"></i>&nbsp;New Account</a>
-                                <a href="<?=site_url('go-live')?>"
+                                <a href="<?=site_url('new-account')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                        <path
-                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                        <path d="M7 12l4 0" />
-                                        <path d="M9 10l0 4" />
-                                    </svg>
-                                    Go Live
+                                    <i class="ti ti-plus"></i>&nbsp;New Account
                                 </a>
-                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                        <path
-                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                        <path d="M7 12l4 0" />
-                                        <path d="M9 10l0 4" />
-                                    </svg>
+                                <a href="<?=site_url('new-account')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                    <i class="ti ti-plus"></i>  
                                 </a>
                             </div>
                             <!-- BEGIN MODAL -->

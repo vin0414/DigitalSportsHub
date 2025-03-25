@@ -12,7 +12,7 @@ class eventModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['accountID','event_title','event_description','event_type',
+    protected $allowedFields    = ['accountID','event_title','event_description','event_location','event_type',
                                     'start_date','end_date','status','registration','date'];
 
     // Dates

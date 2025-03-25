@@ -1,4 +1,4 @@
-<aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+<aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="light">
     <div class="container-fluid">
         <!-- BEGIN NAVBAR TOGGLER -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
@@ -12,6 +12,7 @@
                 <img src="<?=base_url('assets/images/logo.jpg')?>" width="50" style="border-radius: 50px;" />
             </a>
         </div>
+        <h6 class="text-center">Digital Sports Hub</h6>
         <!-- END NAVBAR LOGO -->
         <div class="navbar-nav flex-row d-lg-none">
             <div class="d-none d-lg-flex">
@@ -96,6 +97,7 @@
                         <span class="nav-link-title"> Home </span>
                     </a>
                 </li>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item <?= ($title == 'Live') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('go-live')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -133,6 +135,7 @@
                         <span class="nav-link-title"> Upload </span>
                     </a>
                 </li>
+                <?php endif; ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>

@@ -35,6 +35,12 @@ $routes->get('shop-location','Home::shopLocation');
 $routes->post('save-shop','Home::saveShop');
 $routes->get('fetch-shop','Home::fetchShop');
 $routes->post('edit-shop','Home::editShop');
+//events
+$routes->post('save-event','Home::saveEvent');
+$routes->post('cancel-event','Home::cancelEvent');
+$routes->get('fetch-event','Home::fetchEvent');
+$routes->post('accept-event','Home::acceptEvent');
+$routes->post('reject-event','Home::rejectEvent');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -62,6 +68,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //events
     $routes->get('events','Home::Events');
     $routes->get('new-event','Home::newEvent');
+    $routes->get('manage-event','Home::manageEvent');
     //shops
     $routes->get('shops','Home::shops');
     //videos

@@ -112,7 +112,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title"><i class="ti ti-calendar"></i>&nbsp;Events</div>
-                                    <h1 class="text-center">0</h1>
+                                    <h1 class="text-center"><?=$total_event?></h1>
                                 </div>
                             </div>
                         </div>
@@ -145,10 +145,29 @@
                         <div class="col-lg-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title">Recent</div>
+                                    <div class="card-title"><i class="ti ti-calendar-week"></i>&nbsp;Incoming Events</div>
                                 </div>
-                                <div class="card-body">
-
+                                <div class="position-relative">
+                                    <div class="card-table table-responsive">
+                                        <table class="table table-vcenter">
+                                            <tbody>
+                                            <?php if(empty($event)){ ?>
+                                                <tr>
+                                                    <td><center><span>No Event(s) found</span></center></td>
+                                                </tr>
+                                            <?php }else { ?>
+                                            <?php foreach($event as $row): ?>
+                                                <tr>
+                                                    <td>
+                                                        <b><?php echo $row['event_title'] ?></b><br/>
+                                                        <small><?php echo substr($row['event_description'],0,50) ?>...</small>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                         </div>

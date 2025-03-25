@@ -11,6 +11,8 @@
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
     google.charts.load('visualization', "1", {
@@ -83,9 +85,9 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div class="row row-cards">
+                    <div class="row g-3">
                         <div class="col-lg-4">
-
+                            <div id="panorama" style="border-radius: 10px;"></div>
                         </div>
                         <div class="col-lg-8">
                             <div class="card">
@@ -180,7 +182,7 @@
                                                         <?php foreach($recent as $row): ?>
                                                         <tr>
                                                             <td><?php echo $row->stat_type ?></td>
-                                                            <td><?php echo $row->stat_value ?></td>
+                                                            <td class="text-center"><?php echo $row->stat_value ?></td>
                                                         </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
@@ -224,6 +226,10 @@
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script>
+    pannellum.viewer('panorama', {
+        "type": "equirectangular",
+        "panorama": "<?=base_url('admin/images/profile/Kobe-1.jpg')?>"
+    });
     google.charts.setOnLoadCallback(playerCharts);
 
     function playerCharts() {

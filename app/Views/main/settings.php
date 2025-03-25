@@ -37,38 +37,6 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
-                        <div class="col-auto ms-auto d-print-none">
-                            <div class="btn-list">
-                                <a href="<?=site_url('go-live')?>"
-                                    class="btn btn-primary btn-5 d-none d-sm-inline-block">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                        <path
-                                            d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
-                                        <path
-                                            d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
-                                        <path d="M7 12l4 0" />
-                                        <path d="M9 10l0 4" />
-                                    </svg>
-                                    Go Live
-                                </a>
-                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" class="icon icon-2">
-                                        <path d="M12 5l0 14" />
-                                        <path d="M5 12l14 0" />
-                                    </svg>
-                                </a>
-                            </div>
-                            <!-- BEGIN MODAL -->
-                            <!-- END MODAL -->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -81,22 +49,22 @@
                             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
                                 <li class="nav-item">
                                     <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
-                                        Sports
+                                        <i class="ti ti-olympics"></i>&nbsp;Sports
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#tabs-profile-8" class="nav-link" data-bs-toggle="tab">
-                                        Player's Role
+                                        <i class="ti ti-user-pin"></i>&nbsp;Player's Role
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#tabs-achievement-8" class="nav-link" data-bs-toggle="tab">
-                                        Achievements
+                                        <i class="ti ti-target-arrow"></i>&nbsp;Achievements
                                     </a>
                                 </li>
                                 <li class="nav-item">
                                     <a href="#tabs-activity-8" class="nav-link" data-bs-toggle="tab">
-                                        System Logs
+                                        <i class="ti ti-clipboard-data"></i>&nbsp;System Logs
                                     </a>
                                 </li>
                             </ul>
