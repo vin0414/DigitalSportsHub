@@ -136,35 +136,49 @@
                     <br />
                     <div class="row row-cards">
                         <div class="col-lg-9">
-                            <div class="card">
-                                <div class="card-body">
-
+                            <div class="row row-cards row-deck">
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-title">Views</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="card-title">Video Analytics</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="card-title"><i class="ti ti-calendar-week"></i>&nbsp;Incoming Events</div>
+                                    <div class="card-title"><i class="ti ti-calendar-week"></i>&nbsp;Incoming Events
+                                    </div>
                                 </div>
                                 <div class="position-relative">
                                     <div class="card-table table-responsive">
                                         <table class="table table-vcenter">
                                             <tbody>
-                                            <?php if(empty($event)){ ?>
-                                                <tr>
-                                                    <td><center><span>No Event(s) found</span></center></td>
-                                                </tr>
-                                            <?php }else { ?>
-                                            <?php foreach($event as $row): ?>
+                                                <?php if(empty($event)){ ?>
                                                 <tr>
                                                     <td>
-                                                        <b><?php echo $row['event_title'] ?></b><br/>
+                                                        <center><span>No Event(s) found</span></center>
+                                                    </td>
+                                                </tr>
+                                                <?php }else { ?>
+                                                <?php foreach($event as $row): ?>
+                                                <tr>
+                                                    <td>
+                                                        <b><?php echo $row['event_title'] ?></b><br />
                                                         <small><?php echo substr($row['event_description'],0,50) ?>...</small>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                            <?php } ?>
+                                                <?php endforeach; ?>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>
