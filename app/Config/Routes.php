@@ -77,6 +77,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('go-live','Home::goLive');
     //news
     $routes->get('news','Home::news');
+    $routes->get('news/topic/(:any)','Home::topic/$1');
+    $routes->get('new-article','Home::newPost');
     //settings
     $routes->get('settings','Home::settings');
     $routes->get('recovery','Home::recovery');

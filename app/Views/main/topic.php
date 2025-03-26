@@ -33,11 +33,14 @@
                         <div class="col">
                             <!-- Page pre-title -->
                             <div class="page-pretitle">Digital Sports Hub</div>
-                            <h2 class="page-title"><?=$title?></h2>
+                            <h2 class="page-title"><?=$news['news_type']?></h2>
                         </div>
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
+                                <a href="<?=site_url('news')?>" class="btn btn-secondary">
+                                    <i class="ti ti-arrow-left"></i> Back
+                                </a>
                                 <a href="<?=site_url('new-article')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -73,41 +76,21 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-lg-8">
-                            <form method="GET" class="row g-3" id="frmSearch">
-                                <div class="col-lg-3">
-                                    <input type="date" class="form-control" name="date"/>
+                            <div class="row g-3">
+                                <div class="col-lg-12">
+                                    <div><b style="font-size:2rem;"><?=$news['topic']?></b></div>
+                                    <div><b>Author : <?=$news['author']?></b></div>
+                                    <label><small>Date : <?=date('M, d Y',strtotime($news['date'])) ?></small></label>
                                 </div>
-                                <div class="col-lg-2">
-                                    <button type="submit" class="btn btn-primary">
-                                        <i class="ti ti-search"></i>&nbsp;Search
-                                    </button>
-                                </div>
-                            </form>
-                            <br/>
-                            <div class="row row-cards">
-                                <div class="space-y">
-                                <?php foreach($news as $row): ?>
-                                    <div class="card">
-                                        <div class="row row-0">
-                                            <div class="col-3">
-                                            <img
-                                                src="<?=base_url('admin/images/news/')?><?=$row['image']?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="<?=$row['topic'] ?>"
-                                            />
-                                            </div>
-                                            <div class="col">
-                                            <div class="card-body">
-                                                <a href="<?=site_url('news/topic/')?><?=$row['topic']?>"><b><?=$row['topic'] ?></b></a><br/>
-                                                <small><?=$row['news_type']?></small>
-                                                <p class="text-secondary">
-                                                <?=substr($row['details'],0,150) ?>...
-                                                </p>
-                                            </div>
-                                            </div>
+                                <div class="col-lg-12">
+                                    <div class="row g-2">
+                                        <div class="col-lg-12">
+                                        <img src="<?=base_url('admins/images/news/')?><?=$news['image']?>" width="100%"/>
+                                        </div>
+                                        <div class="col-lg-12">
+                                        <div style="text-align: justify;"><?=$news['details']?></div>
                                         </div>
                                     </div>
-                                <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -115,11 +98,11 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">
-                                        <i class="ti ti-calendar-week"></i>&nbsp;Headlines
+                                        <i class="ti ti-calendar-week"></i>&nbsp;Recent News
                                     </div>
                                 </div>
                                 <div class="position-relative">
-                                <?php foreach($headlines as $row): ?>
+                                <?php foreach($recent as $row): ?>
                                     <div class="card">
                                         <div class="row row-0">
                                             <div class="col-3">

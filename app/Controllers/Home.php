@@ -1251,13 +1251,51 @@ class Home extends BaseController
         return $this->response->setJSON($response);
     }
 
+    //news
+
     public function news()
     {
         $title = "News";
-        $data = ['title'=>$title];
+        //headlines
+        $newsModel  = new \App\Models\newsModel();
+        $headlines = $newsModel->WHERE('headline',1)->orderBy('news_id','DESC')->limit(5)->findAll();
+        //topic
+        $news = $newsModel->WHERE('headline',0)->orderBy('news_id','DESC')->limit(10)->findAll();
+
+        $data = ['title'=>$title,'headlines'=>$headlines,'news'=>$news];
         return view('main/news',$data);
     }
 
+    public function newPost()
+    {
+        $title = "New Article";
+        //recent
+        $newsModel  = new \App\Models\newsModel();
+        $recent = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+
+        $data = ['title'=>$title,'recent'=>$recent,'sports'=>$sports];
+        return view('main/new-post',$data);
+    }
+
+    public function topic($id)
+    {
+        $title = "Topic";
+        //topic
+        $newsModel = new \App\Models\newsModel();
+        $news = $newsModel->WHERE('topic',$id)->first();
+        //recent
+        $newsModel  = new \App\Models\newsModel();
+        $recent = $newsModel->WHERE('topic!=',$id)->orderBy('news_id','DESC')->limit(5)->findAll();
+
+        $data = ['title'=>$title,'news'=>$news,'recent'=>$recent];
+        return view('main/topic',$data);
+    }
+
+
+    //shops
     public function shops()
     {
         $title = "Shops";
@@ -1394,6 +1432,8 @@ class Home extends BaseController
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
     }
+
+    //settings
 
     public function recovery()
     {

@@ -215,8 +215,8 @@
                         <span class="nav-link-title"> New Account </span>
                     </a>
                 </li>
-                <li class="nav-item <?= ($title == 'New Post') ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?=site_url('new-post')?>">
+                <li class="nav-item <?= ($title == 'New Article') ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?=site_url('new-article')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -227,7 +227,7 @@
                                 <path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
                             </svg>
                         </span>
-                        <span class="nav-link-title"> New Post </span>
+                        <span class="nav-link-title"> New Article </span>
                     </a>
                 </li>
                 <li class="nav-item mt-3">
