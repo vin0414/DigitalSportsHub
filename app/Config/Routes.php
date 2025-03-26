@@ -79,6 +79,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('news','Home::news');
     $routes->get('news/topic/(:any)','Home::topic/$1');
     $routes->get('new-article','Home::newPost');
+    $routes->get('manage-news','Home::manageNews');
     //settings
     $routes->get('settings','Home::settings');
     $routes->get('recovery','Home::recovery');

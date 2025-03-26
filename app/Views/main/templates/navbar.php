@@ -146,7 +146,7 @@
                             <span class="nav-link-title"> Teams </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article') ? 'active' : '' ?>">
+                    <li class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article' ||$title == 'Manage') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('news')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"

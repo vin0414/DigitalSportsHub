@@ -1287,11 +1287,23 @@ class Home extends BaseController
         $newsModel = new \App\Models\newsModel();
         $news = $newsModel->WHERE('topic',$id)->first();
         //recent
-        $newsModel  = new \App\Models\newsModel();
         $recent = $newsModel->WHERE('topic!=',$id)->orderBy('news_id','DESC')->limit(5)->findAll();
 
         $data = ['title'=>$title,'news'=>$news,'recent'=>$recent];
         return view('main/topic',$data);
+    }
+
+    public function manageNews()
+    {
+        $title = "Manage";
+        $newsModel = new \App\Models\newsModel();
+        //recent
+        $recent = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
+        //news
+        $news = $newsModel->findAll();
+
+        $data = ['title'=>$title,'recent'=>$recent,'news'=>$news];
+        return view('main/manage-news',$data);
     }
 
 
