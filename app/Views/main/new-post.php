@@ -202,11 +202,11 @@
                 $('.error-message').html('');
                 var details = document.querySelector('.ql-editor').innerHTML;
                 $('#frmArticle').append("<textarea name='details' style='display:none;'>"+details+"</textarea>");
-                let data = $('#frmArticle').serialize();
+                var formData = new FormData($('#frmArticle')[0]);
                 $.ajax({
                     url: "<?=site_url('save-as-draft')?>",
                     method: "POST",
-                    data: new FormData(this),
+                    data: formData,
                     contentType: false,
                     cache: false,
                     processData: false,

@@ -1258,7 +1258,7 @@ class Home extends BaseController
         $title = "News";
         //headlines
         $newsModel  = new \App\Models\newsModel();
-        $news = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
+        $news = $newsModel->orderBy('news_id','DESC')->limit(9)->findAll();
 
         $data = ['title'=>$title,'news'=>$news];
         return view('main/news',$data);
@@ -1442,7 +1442,230 @@ class Home extends BaseController
 
     public function saveDraft()
     {
-        
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'article'=>'required',
+            'author'=>'required',
+            'date'=>'required',
+            'category'=>'required',
+            'details'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $newsModel = new \App\Models\newsModel();
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            $details = str_replace('""','',$this->request->getPost('details'));
+            if ($this->request->getPost('agree') !== null)
+            {
+                //save the logo
+                if(!empty($file->getClientName()))
+                {
+                    $file->move('admin/images/news/',$originalName);
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'image'=>$originalName,
+                                'headline'=>1,
+                                'status'=>3,
+                                'accountID'=>session()->get('loggedUser')
+                            ];
+                    $newsModel->save($data);
+                }
+                else
+                {
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'headline'=>1,
+                                'status'=>3,
+                                'accountID'=>session()->get('loggedUser')
+                            ];
+                    $newsModel->save($data);
+                }
+            }
+            else
+            {
+                if(!empty($file->getClientName()))
+                {
+                    $file->move('admin/images/news/',$originalName);
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'image'=>$originalName,
+                                'headline'=>0,
+                                'status'=>3,
+                                'accountID'=>session()->get('loggedUser')
+                            ];
+                    $newsModel->save($data);
+                }
+                else
+                {
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'headline'=>0,
+                                'status'=>3,
+                                'accountID'=>session()->get('loggedUser')
+                            ];
+                    $newsModel->save($data);
+                }
+            }
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
+    }
+
+    public function filterNews()
+    {
+        $newsModel = new \App\Models\newsModel();
+        $date = $this->request->getGet('date');
+        $type = $this->request->getGet('type');
+        if(!empty($date)&& empty($type))
+        {
+            $news = $newsModel->WHERE('date',$date)->findAll();
+            foreach($news as $row)
+            {
+                ?>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card card-sm">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                        <div style="width:100%;">
+                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                            <div class="text-secondary">
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                    <?=date('M,d Y',strtotime($row['date']))?>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    <?php if($row['status']==1): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                    <?php elseif($row['status']==3): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                    <?php else : ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                    <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+        else if(!empty($date)&& !empty($type))
+        {
+            $news = $newsModel->WHERE('date',$date)->WHERE('status',$type)->findAll();
+            foreach($news as $row)
+            {
+                ?>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card card-sm">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                        <div style="width:100%;">
+                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                            <div class="text-secondary">
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                    <?=date('M,d Y',strtotime($row['date']))?>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    <?php if($row['status']==1): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                    <?php elseif($row['status']==3): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                    <?php else : ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                    <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+        else if(empty($date)&& !empty($type))
+        {
+            $news = $newsModel->WHERE('status',$type)->findAll();
+            foreach($news as $row)
+            {
+                ?>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="card card-sm">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
+                    </a>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                        <div style="width:100%;">
+                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                            <div class="text-secondary">
+                                <div class="row g-3">
+                                    <div class="col-lg-6">
+                                    <?=date('M,d Y',strtotime($row['date']))?>
+                                    </div>
+                                    <div class="col-lg-6">
+                                    <?php if($row['status']==1): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                    <?php elseif($row['status']==3): ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                    <?php else : ?>
+                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                    <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <?php
+            }
+        }
     }
 
     public function topic($id)

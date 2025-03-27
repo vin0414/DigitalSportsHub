@@ -12,7 +12,6 @@
                 <img src="<?=base_url('assets/images/logo.jpg')?>" width="50" style="border-radius: 50px;" />
             </a>
         </div>
-        <h6 class="text-center">Digital Sports Hub</h6>
         <!-- END NAVBAR LOGO -->
         <div class="navbar-nav flex-row d-lg-none">
             <div class="d-none d-lg-flex">

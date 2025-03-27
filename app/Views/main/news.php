@@ -80,9 +80,9 @@
                                 <div class="col-lg-2">
                                     <select class="form-select" name="type">
                                         <option value="">Filter</option>
-                                        <option>Published</option>
-                                        <option>Draft</option>
-                                        <option>Archive</option>
+                                        <option value="1">Published</option>
+                                        <option value="3">Draft</option>
+                                        <option value="2">Archive</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-2">
@@ -97,7 +97,7 @@
                                 <?php if(empty($news)){ ?>
                                     <div class="alert alert-warning" role="alert">No Post(s) Has Been Added Yet</div>
                                 <?php }else { ?>
-                                <div class="row row-cards">
+                                <div class="row row-cards" id="results">
                                 <?php foreach($news as $row): ?>
                                     <div class="col-sm-6 col-lg-4">
                                         <div class="card card-sm">
@@ -107,20 +107,26 @@
                                         <div class="card-body">
                                             <div class="d-flex align-items-center">
                                             <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
-                                            <div>
-                                                <div><a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a></div>
+                                            <div style="width:100%;">
+                                                <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
                                                 <div class="text-secondary">
-                                                    <?=date('M,d Y',strtotime($row['date']))?>
-                                                    <?php if($row['status']==1): ?>
-                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
-                                                    <?php elseif($row['status']==0): ?>
-                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
-                                                    <?php else : ?>
-                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
-                                                    <?php endif; ?>
+                                                    <div class="row g-3">
+                                                        <div class="col-lg-6">
+                                                        <?=date('M,d Y',strtotime($row['date']))?>
+                                                        </div>
+                                                        <div class="col-lg-6">
+                                                        <?php if($row['status']==1): ?>
+                                                            <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                            <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                                        <?php elseif($row['status']==3): ?>
+                                                            <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                            <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                                        <?php else : ?>
+                                                            <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                            <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                                        <?php endif; ?>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             </div>
@@ -164,6 +170,29 @@
         <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
         <!-- END DEMO SCRIPTS -->
         <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+        $('#frmSearch').on('submit', function(e) {
+            e.preventDefault();
+            let data = $(this).serialize();
+            $.ajax({
+                url: "<?=site_url('filter-news')?>",
+                method: "GET",
+                data: data,
+                success: function(response) {
+                    if (response === "") {
+                        Swal.fire({
+                            title: 'Sorry!',
+                            text: "No Record(s) found. Please try again",
+                            icon: 'warning',
+                        });
+                    } else {
+                        $('#results').html(response);
+                    }
+                }
+            });
+        });
+        </script>
 </body>
 
 </html>

@@ -122,7 +122,7 @@
                                                 </div>
                                                 <div class="col-lg-4">
                                                     <label class="form-selectgroup-item">
-                                                        <input type="radio" name="status" value="0"
+                                                        <input type="radio" name="status" value="3"
                                                             class="form-selectgroup-input" />
                                                         <span
                                                             class="form-selectgroup-label d-flex align-items-center p-3">
