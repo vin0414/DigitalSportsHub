@@ -76,19 +76,23 @@
                 <div class="container-xl">
                     <div class="row row-cards">
                         <div class="col-lg-8">
-                            <div class="row g-3">
-                                <div class="col-lg-12">
-                                    <div><b style="font-size:2rem;"><?=$news['topic']?></b></div>
-                                    <div><b>Author : <?=$news['author']?></b></div>
-                                    <label><small>Date : <?=date('M, d Y',strtotime($news['date'])) ?></small></label>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="row g-2">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row g-3">
                                         <div class="col-lg-12">
-                                        <img src="<?=base_url('admins/images/news/')?><?=$news['image']?>" width="100%"/>
+                                            <div><b style="font-size:2rem;"><?=$news['topic']?></b></div>
+                                            <div><b>Author : <?=$news['author']?></b></div>
+                                            <label><small>Date : <?=date('M, d Y',strtotime($news['date'])) ?></small></label>
                                         </div>
                                         <div class="col-lg-12">
-                                        <div style="text-align: justify;"><?=$news['details']?></div>
+                                            <div class="row g-2">
+                                                <div class="col-lg-12">
+                                                <img src="<?=base_url('admin/images/news/')?><?=$news['image']?>" width="100%"/>
+                                                </div>
+                                                <div class="col-lg-12">
+                                                <div style="text-align: justify;"><?=$news['details']?></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

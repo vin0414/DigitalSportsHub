@@ -1280,6 +1280,65 @@ class Home extends BaseController
         return view('main/new-post',$data);
     }
 
+    public function savePost()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'article'=>'required|is_unique[news.topic]',
+            'author'=>'required',
+            'date'=>'required',
+            'category'=>'required',
+            'details'=>'required',
+            'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $newsModel = new \App\Models\newsModel();
+            if ($this->request->getPost('agree') !== null)
+            {
+                $file = $this->request->getFile('file');
+                $originalName = date('YmdHis').$file->getClientName();
+                //save the logo
+                $file->move('admin/images/news/',$originalName);
+                $details = str_replace('""','',$this->request->getPost('details'));
+
+                $data = ['date'=>$this->request->getPost('date'),
+                        'author'=>$this->request->getPost('author'),
+                        'topic'=>$this->request->getPost('article'),
+                        'news_type'=>$this->request->getPost('category'),
+                        'details'=>$details,
+                        'image'=>$originalName,
+                        'headline'=>1,
+                        'accountID'=>session()->get('loggedUser')];
+                $newsModel->save($data);
+            }
+            else
+            {
+                $file = $this->request->getFile('file');
+                $originalName = date('YmdHis').$file->getClientName();
+                //save the logo
+                $file->move('admin/images/news/',$originalName);
+                $details = str_replace('""','',$this->request->getPost('details'));
+
+                $data = ['date'=>$this->request->getPost('date'),
+                        'author'=>$this->request->getPost('author'),
+                        'topic'=>$this->request->getPost('article'),
+                        'news_type'=>$this->request->getPost('category'),
+                        'details'=>$details,
+                        'image'=>$originalName,
+                        'headline'=>0,
+                        'accountID'=>session()->get('loggedUser')];
+                $newsModel->save($data);
+            }
+            return $this->response->SetJSON(['success' => 'Successfully save and published']);
+        }
+    }
+
     public function topic($id)
     {
         $title = "Topic";

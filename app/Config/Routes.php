@@ -41,6 +41,8 @@ $routes->post('cancel-event','Home::cancelEvent');
 $routes->get('fetch-event','Home::fetchEvent');
 $routes->post('accept-event','Home::acceptEvent');
 $routes->post('reject-event','Home::rejectEvent');
+//news
+$routes->post('save-post','Home::savePost');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

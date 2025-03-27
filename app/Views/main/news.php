@@ -89,6 +89,9 @@
                             <br/>
                             <div class="row row-cards">
                                 <div class="space-y">
+                                <?php if(empty($news)){ ?>
+                                    <div class="alert alert-warning" role="alert">No Post(s) Has Been Added Yet</div>
+                                <?php }else { ?>
                                 <?php foreach($news as $row): ?>
                                     <div class="card">
                                         <div class="row row-0">
@@ -104,13 +107,14 @@
                                                 <a href="<?=site_url('news/topic/')?><?=$row['topic']?>"><b><?=$row['topic'] ?></b></a><br/>
                                                 <small><?=$row['news_type']?></small>
                                                 <p class="text-secondary">
-                                                <?=substr($row['details'],0,150) ?>...
+                                                <?=substr($row['details'],0,500) ?>...
                                                 </p>
                                             </div>
                                             </div>
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
+                                <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -122,6 +126,9 @@
                                     </div>
                                 </div>
                                 <div class="position-relative">
+                                <?php if(empty($headlines)){ ?>
+                                    <div style="padding:5px;margin:5px;">No headline(s) Has Been Added Yet</div>
+                                <?php }else{ ?>
                                 <?php foreach($headlines as $row): ?>
                                     <div class="card">
                                         <div class="row row-0">
@@ -144,6 +151,7 @@
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
+                                <?php } ?>
                                 </div>
                             </div>
                         </div>
