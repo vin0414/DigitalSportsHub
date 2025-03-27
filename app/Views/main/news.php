@@ -38,9 +38,6 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('manage-news')?>" class="btn btn-secondary">
-                                    <i class="ti ti-news"></i>&nbsp;Manage
-                                </a>
                                 <a href="<?=site_url('new-article')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -75,10 +72,18 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row row-cards">
-                        <div class="col-lg-8">
+                        <div class="col-lg-12">
                             <form method="GET" class="row g-3" id="frmSearch">
                                 <div class="col-lg-3">
                                     <input type="date" class="form-control" name="date"/>
+                                </div>
+                                <div class="col-lg-2">
+                                    <select class="form-select" name="type">
+                                        <option value="">Filter</option>
+                                        <option>Published</option>
+                                        <option>Draft</option>
+                                        <option>Archive</option>
+                                    </select>
                                 </div>
                                 <div class="col-lg-2">
                                     <button type="submit" class="btn btn-primary">
@@ -86,71 +91,44 @@
                                     </button>
                                 </div>
                             </form>
-                            <br/>
+                            <br />
                             <div class="row row-cards">
                                 <div class="space-y">
                                 <?php if(empty($news)){ ?>
                                     <div class="alert alert-warning" role="alert">No Post(s) Has Been Added Yet</div>
                                 <?php }else { ?>
+                                <div class="row row-cards">
                                 <?php foreach($news as $row): ?>
-                                    <div class="card">
-                                        <div class="row row-0">
-                                            <div class="col-3">
-                                            <img
-                                                src="<?=base_url('admin/images/news/')?><?=$row['image']?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="<?=$row['topic'] ?>"
-                                            />
-                                            </div>
-                                            <div class="col">
-                                            <div class="card-body">
-                                                <a href="<?=site_url('news/topic/')?><?=$row['topic']?>"><b><?=$row['topic'] ?></b></a><br/>
-                                                <small><?=$row['news_type']?></small>
-                                                <p class="text-secondary">
-                                                <?=substr($row['details'],0,500) ?>...
-                                                </p>
-                                            </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php endforeach; ?>
-                                <?php } ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <div class="card-title">
-                                        <i class="ti ti-calendar-week"></i>&nbsp;Headlines
-                                    </div>
-                                </div>
-                                <div class="position-relative">
-                                <?php if(empty($headlines)){ ?>
-                                    <div style="padding:5px;margin:5px;">No headline(s) Has Been Added Yet</div>
-                                <?php }else{ ?>
-                                <?php foreach($headlines as $row): ?>
-                                    <div class="card">
-                                        <div class="row row-0">
-                                            <div class="col-3">
-                                            <img
-                                                src="<?=base_url('admin/images/news/')?><?=$row['image']?>"
-                                                class="w-100 h-100 object-cover card-img-start"
-                                                alt="<?=$row['topic'] ?>"
-                                            />
-                                            </div>
-                                            <div class="col">
-                                            <div class="card-body">
-                                                <a href="<?=site_url('news/topic/')?><?=$row['topic']?>"><b><?=$row['topic'] ?></b></a><br/>
-                                                <small><?=$row['news_type']?></small>
-                                                <p class="text-secondary">
-                                                <?=substr($row['details'],0,100) ?>...
-                                                </p>
+                                    <div class="col-sm-6 col-lg-4">
+                                        <div class="card card-sm">
+                                        <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+                                        <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
+                                        </a>
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                            <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                                            <div>
+                                                <div><a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a></div>
+                                                <div class="text-secondary">
+                                                    <?=date('M,d Y',strtotime($row['date']))?>
+                                                    <?php if($row['status']==1): ?>
+                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                                    <?php elseif($row['status']==0): ?>
+                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                                    <?php else : ?>
+                                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                                    <?php endif; ?>
+                                                </div>
                                             </div>
                                             </div>
                                         </div>
+                                        </div>
                                     </div>
                                 <?php endforeach; ?>
+                                </div>
                                 <?php } ?>
                                 </div>
                             </div>

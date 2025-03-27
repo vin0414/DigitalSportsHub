@@ -80,9 +80,10 @@
                                 <div class="card-body">
                                     <div class="row g-3">
                                         <div class="col-lg-12">
-                                            <div><b style="font-size:2rem;"><?=$news['topic']?></b></div>
+                                            <div><b style="font-size:1.8rem;"><?=$news['topic']?></b></div>
                                             <div><b>Author : <?=$news['author']?></b></div>
                                             <label><small>Date : <?=date('M, d Y',strtotime($news['date'])) ?></small></label>
+                                            <a class="btn btn-primary btn-sm" href="<?=site_url('news/edit')?>/<?=$news['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-2">
@@ -105,7 +106,10 @@
                                         <i class="ti ti-calendar-week"></i>&nbsp;Recent News
                                     </div>
                                 </div>
-                                <div class="position-relative">
+                                <div class="card-body">
+                                <?php if(empty($recent)){ ?>
+                                    <div style="padding:5px;margin:5px;">No Post(s) Has Been Added Yet</div>
+                                <?php }else{ ?>
                                 <?php foreach($recent as $row): ?>
                                     <div class="card">
                                         <div class="row row-0">
@@ -128,6 +132,7 @@
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
+                                <?php } ?>
                                 </div>
                             </div>
                         </div>

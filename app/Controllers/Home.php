@@ -1258,25 +1258,34 @@ class Home extends BaseController
         $title = "News";
         //headlines
         $newsModel  = new \App\Models\newsModel();
-        $headlines = $newsModel->WHERE('headline',1)->orderBy('news_id','DESC')->limit(5)->findAll();
-        //topic
-        $news = $newsModel->WHERE('headline',0)->orderBy('news_id','DESC')->limit(10)->findAll();
+        $news = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
 
-        $data = ['title'=>$title,'headlines'=>$headlines,'news'=>$news];
+        $data = ['title'=>$title,'news'=>$news];
         return view('main/news',$data);
+    }
+
+    public function editPost($id)
+    {
+        $title = "Edit Post";
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+        //news
+        $newsModel = new \App\Models\newsModel();
+        $news = $newsModel->WHERE('topic',$id)->first();
+
+        $data = ['title'=>$title,'sports'=>$sports,'news'=>$news];
+        return view('main/edit-post',$data);
     }
 
     public function newPost()
     {
         $title = "New Article";
-        //recent
-        $newsModel  = new \App\Models\newsModel();
-        $recent = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
         //sports
         $sportsModel = new \App\Models\sportsModel();
         $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'recent'=>$recent,'sports'=>$sports];
+        $data = ['title'=>$title,'sports'=>$sports];
         return view('main/new-post',$data);
     }
 
@@ -1314,6 +1323,7 @@ class Home extends BaseController
                         'details'=>$details,
                         'image'=>$originalName,
                         'headline'=>1,
+                        'status'=>1,
                         'accountID'=>session()->get('loggedUser')];
                 $newsModel->save($data);
             }
@@ -1332,11 +1342,107 @@ class Home extends BaseController
                         'details'=>$details,
                         'image'=>$originalName,
                         'headline'=>0,
+                        'status'=>1,
                         'accountID'=>session()->get('loggedUser')];
                 $newsModel->save($data);
             }
             return $this->response->SetJSON(['success' => 'Successfully save and published']);
         }
+    }
+
+    public function modifyPost()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'article'=>'required',
+            'author'=>'required',
+            'date'=>'required',
+            'category'=>'required',
+            'details'=>'required',
+            'status'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $newsModel = new \App\Models\newsModel();
+            $news_id = $this->request->getPost('news_id');
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            $details = str_replace('""','',$this->request->getPost('details'));
+            if ($this->request->getPost('agree') !== null)
+            {
+                //save the logo
+                if(!empty($file->getClientName()))
+                {
+                    $file->move('admin/images/news/',$originalName);
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'image'=>$originalName,
+                                'headline'=>1,
+                                'status'=>$this->request->getPost('status'),
+                            ];
+                    $newsModel->update($news_id,$data);
+                }
+                else
+                {
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'headline'=>1,
+                                'status'=>$this->request->getPost('status'),
+                            ];
+                    $newsModel->update($news_id,$data);
+                }
+            }
+            else
+            {
+                if(!empty($file->getClientName()))
+                {
+                    $file->move('admin/images/news/',$originalName);
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'image'=>$originalName,
+                                'headline'=>0,
+                                'status'=>$this->request->getPost('status'),
+                            ];
+                    $newsModel->update($news_id,$data);
+                }
+                else
+                {
+                    $data = [
+                                'date'=>$this->request->getPost('date'),
+                                'author'=>$this->request->getPost('author'),
+                                'topic'=>$this->request->getPost('article'),
+                                'news_type'=>$this->request->getPost('category'),
+                                'details'=>$details,
+                                'headline'=>0,
+                                'status'=>$this->request->getPost('status'),
+                            ];
+                    $newsModel->update($news_id,$data);
+                }
+            }
+            return $this->response->SetJSON(['success' => 'Successfully applied changes']);
+        }
+    }
+
+    public function saveDraft()
+    {
+        
     }
 
     public function topic($id)
@@ -1346,25 +1452,11 @@ class Home extends BaseController
         $newsModel = new \App\Models\newsModel();
         $news = $newsModel->WHERE('topic',$id)->first();
         //recent
-        $recent = $newsModel->WHERE('topic!=',$id)->orderBy('news_id','DESC')->limit(5)->findAll();
+        $recent = $newsModel->WHERE('topic!=',$id)->orderBy('news_id','DESC')->limit(3)->findAll();
 
         $data = ['title'=>$title,'news'=>$news,'recent'=>$recent];
         return view('main/topic',$data);
     }
-
-    public function manageNews()
-    {
-        $title = "Manage";
-        $newsModel = new \App\Models\newsModel();
-        //recent
-        $recent = $newsModel->orderBy('news_id','DESC')->limit(5)->findAll();
-        //news
-        $news = $newsModel->findAll();
-
-        $data = ['title'=>$title,'recent'=>$recent,'news'=>$news];
-        return view('main/manage-news',$data);
-    }
-
 
     //shops
     public function shops()

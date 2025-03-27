@@ -43,6 +43,8 @@ $routes->post('accept-event','Home::acceptEvent');
 $routes->post('reject-event','Home::rejectEvent');
 //news
 $routes->post('save-post','Home::savePost');
+$routes->post('modify-post','Home::modifyPost');
+$routes->post('save-as-draft','Home::saveDraft');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -81,7 +83,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('news','Home::news');
     $routes->get('news/topic/(:any)','Home::topic/$1');
     $routes->get('new-article','Home::newPost');
-    $routes->get('manage-news','Home::manageNews');
+    $routes->get('news/edit/(:any)','Home::editPost/$1');
     //settings
     $routes->get('settings','Home::settings');
     $routes->get('recovery','Home::recovery');
