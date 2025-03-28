@@ -116,10 +116,13 @@ class Home extends BaseController
         $event = $eventModel->WHERE('status',1)->ORDERBY('event_id','DESC')->limit(5)->findAll();
         //count all approved events
         $totalEvents = $eventModel->WHERE('status',1)->countAllResults();
+        //videos
+        $videoModel = new \App\Models\videoModel();
+        $video = $videoModel->countAllResults();
 
         $data = ['title'=>$title,'total'=>$account,'player'=>$player,
                 'team'=>$team,'shop'=>$shop,'event'=>$event,
-                'total_event'=>$totalEvents];
+                'total_event'=>$totalEvents,'video'=>$video];
         return view('main/dashboard',$data);
     }
 
@@ -1041,14 +1044,56 @@ class Home extends BaseController
     public function upload()
     {
         $title = "Upload Video";
-        $data = ['title'=>$title];
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+
+        $data = ['title'=>$title,'sports'=>$sports];
         return view('main/upload',$data);
+    }
+
+    public function saveVideo()
+    {
+        $videoModel = new \App\Models\videoModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'title'=>'required',
+            'category'=>'required',
+            'details'=>'required',
+            'date'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            //save the video
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            $file->move('admin/videos/',$originalName);
+            //save data
+            $data = ['file_name'=>$this->request->getPost('title'),
+                    'description'=>$this->request->getPost('details'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'file'=>$originalName,
+                    'sportName'=>$this->request->getPost('category'),
+                    'date'=>date('Y-m-d'),
+                    'status'=>1];
+            $videoModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully uploaded']);
+        }
     }
 
     public function manageVideos()
     {
         $title = "Videos";
-        $data = ['title'=>$title];
+        //videos
+        $videoModel = new \App\Models\videoModel();
+        $video = $videoModel->findAll();
+
+        $data = ['title'=>$title,'video'=>$video];
         return view('main/manage-videos',$data);
     }
 

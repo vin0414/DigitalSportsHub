@@ -93,10 +93,12 @@
                                         <div class="col-lg-12">
                                             <label class="form-label">Details</label>
                                             <div id="editor" class="form-control" style="height:200px;"></div>
+                                            <div id="details-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Attachment</label>
                                             <input type="file" class="form-control" name="file" required/>
+                                            <div id="file-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-check form-check-inline">

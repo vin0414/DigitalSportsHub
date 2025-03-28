@@ -95,60 +95,41 @@
                     </form>
                     <br />
                     <div class="row row-cards">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="card card-sm">
-                            <a href="#" class="d-block">
-                                <img src="<?=base_url('assets/images/logo.jpg')?>" class="card-img-top"/>
-                            </a>
-                            <div class="card-body">
-                                <div class="d-flex align-items-center">
-                                <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>)"></span>
-                                <div>
-                                    <div>Paweł Kuna</div>
-                                    <div class="text-secondary">3 days ago</div>
-                                </div>
-                                <div class="ms-auto">
-                                    <a href="#" class="text-secondary">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/eye -->
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-1"
-                                    >
-                                        <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-                                        <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
-                                    </svg>
-                                    467
-                                    </a>
-                                    <a href="#" class="ms-3 text-secondary">
-                                    <!-- Download SVG icon from http://tabler.io/icons/icon/heart -->
-                                    <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        width="24"
-                                        height="24"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        stroke="currentColor"
-                                        stroke-width="2"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        class="icon icon-2"
-                                    >
-                                        <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                                    </svg>
-                                    67
-                                    </a>
+                        <div class="space-y">
+                        <?php if(empty($video)){ ?>
+                            <div class="alert alert-warning" role="alert">No video(s) Has Been Added Yet</div>
+                        <?php }else { ?>
+                        <div class="row row-cards" id="results">
+                        <?php foreach($video as $row): ?>
+                            <div class="col-sm-6 col-lg-4">
+                                <div class="card card-sm">
+                                <a href="">
+                                <video src="<?=base_url('admin/videos/clips/')?><?=$row['file']?>" class="card-img-top"></video>
+                                </a>
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                    <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/logo.jpg')?>);"></span>
+                                    <div style="width:100%;">
+                                        <a href=""><?=$row['file_name'] ?></a><br/>
+                                        <small><?php echo substr($row['description'],0,100) ?>...</small>
+                                        <div class="text-secondary">
+                                            <div class="row g-3">
+                                                <div class="col-lg-6">
+                                                <?=date('M,d Y',strtotime($row['date']))?>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                <a href="" style="float:right;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </div>
                                 </div>
                                 </div>
                             </div>
-                            </div>
+                        <?php endforeach; ?>
+                        </div>
+                        <?php } ?>
                         </div>
                     </div>
                 </div>

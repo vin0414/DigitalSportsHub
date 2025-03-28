@@ -74,7 +74,7 @@
                     <div class="row row-cards">
                         <div class="col-lg-12">
                             <form method="GET" class="row g-3" id="frmSearch">
-                                <div class="col-lg-3">
+                                <div class="col-lg-2">
                                     <input type="date" class="form-control" name="date"/>
                                 </div>
                                 <div class="col-lg-2">

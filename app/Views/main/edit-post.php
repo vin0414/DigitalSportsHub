@@ -95,6 +95,7 @@
                                         <div class="col-lg-12">
                                             <label class="form-label">Details</label>
                                             <div id="editor" class="form-control" style="height:200px;"><?=$news['details']?></div>
+                                            <div id="details-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Attachment</label>

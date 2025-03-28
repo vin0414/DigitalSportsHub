@@ -12,7 +12,7 @@ class videoModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['file_name','accountID','file','cover_photo','date'];
+    protected $allowedFields    = ['file_name','description','accountID','file','sportName','date','status','Token'];
 
     // Dates
     protected $useTimestamps = false;

@@ -120,7 +120,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title"><i class="ti ti-brand-youtube"></i>&nbsp;Videos</div>
-                                    <h1 class="text-center">0</h1>
+                                    <h1 class="text-center"><?=$video?></h1>
                                 </div>
                             </div>
                         </div>
