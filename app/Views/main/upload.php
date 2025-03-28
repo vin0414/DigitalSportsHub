@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
+
     #video-upload {
         padding: 10px;
         margin-bottom: 20px;
@@ -20,13 +21,8 @@
     }
 
     #video-preview {
-        border:1px solid #000;
+        border: 1px solid #000;
         border-radius: 10px;
-    }
-    #thumbnail {
-        margin-top: 20px;
-        max-width: 100px;
-        max-height: 100px;
     }
     </style>
 </head>
@@ -53,6 +49,8 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
+                                <a href="<?=site_url('videos')?>" class="btn btn-secondary">
+                                    <i class="ti ti-arrow-left"></i> Back</a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -109,8 +107,10 @@
                                                     <div class="row g-2">
                                                         <div class="col-lg-12">
                                                             <label class="form-label">Title</label>
-                                                            <input type="text" class="form-control" name="title" required/>
-                                                            <div id="title-error" class="error-message text-danger text-sm"></div>
+                                                            <input type="text" class="form-control" name="title"
+                                                                required />
+                                                            <div id="title-error"
+                                                                class="error-message text-danger text-sm"></div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <div class="row g-3">
@@ -119,27 +119,34 @@
                                                                     <select name="category" class="form-select">
                                                                         <option value="">Choose</option>
                                                                         <?php foreach($sports as $row): ?>
-                                                                            <option><?=$row['Name'] ?></option>
+                                                                        <option><?=$row['Name'] ?></option>
                                                                         <?php endforeach; ?>
                                                                     </select>
-                                                                    <div id="category-error" class="error-message text-danger text-sm"></div>
+                                                                    <div id="category-error"
+                                                                        class="error-message text-danger text-sm"></div>
                                                                 </div>
                                                                 <div class="col-lg-6">
                                                                     <label class="form-label">Date</label>
-                                                                    <input type="date" class="form-control" name="date" required/>
-                                                                    <div id="date-error" class="error-message text-danger text-sm"></div>
+                                                                    <input type="date" class="form-control" name="date"
+                                                                        required />
+                                                                    <div id="date-error"
+                                                                        class="error-message text-danger text-sm"></div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <label class="form-label">Details</label>
-                                                            <textarea name="details" class="form-control" style="height:150px;" required></textarea>
-                                                            <div id="details-error" class="error-message text-danger text-sm"></div>
+                                                            <textarea name="details" class="form-control"
+                                                                style="height:150px;" required></textarea>
+                                                            <div id="details-error"
+                                                                class="error-message text-danger text-sm"></div>
                                                         </div>
                                                         <div class="col-lg-12">
                                                             <label class="form-label">Attach</label>
-                                                            <input type="file" id="video-upload" name="file" class="form-control" accept="video/*" required/>
-                                                            <div id="file-error" class="error-message text-danger text-sm"></div>
+                                                            <input type="file" id="video-upload" name="file"
+                                                                class="form-control" accept="video/*" required />
+                                                            <div id="file-error"
+                                                                class="error-message text-danger text-sm"></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -153,20 +160,28 @@
                                                             </video>
                                                         </div>
                                                         <div class="col-lg-12">
-                                                            <label class="form-label">Filename</label>
-                                                            <input type="text" class="form-control" name="filename" id="filename" readonly/>
-                                                        </div>
-                                                        <div class="col-lg-12">
-                                                            <label class="form-label">File Extension</label>
-                                                            <input type="text" class="form-control" name="extension" id="extension" readonly/>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">File size</label>
+                                                                    <input type="text" class="form-control" name="size"
+                                                                        id="size" readonly />
+                                                                </div>
+                                                                <div class="col-lg-6">
+                                                                    <label class="form-label">Type of File</label>
+                                                                    <input type="text" class="form-control"
+                                                                        name="file_type" id="file_type" readonly />
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
-                                        <button type="submit" class="btn btn-primary" id="btnSubmit"><i class="ti ti-device-floppy"></i>&nbsp;Save Video</button>
-                                        <button type="button" class="btn btn-primary" id="loading" style="display:none;">Loading....</button>
+                                            <button type="submit" class="btn btn-primary" id="btnSubmit"><i
+                                                    class="ti ti-device-floppy"></i>&nbsp;Save Video</button>
+                                            <button type="button" class="btn btn-primary" id="loading"
+                                                style="display:none;">Loading....</button>
                                         </div>
                                     </form>
                                 </div>
@@ -205,72 +220,74 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.getElementById('video-upload').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            
-            if (file && file.type.startsWith('video')) {
-                const videoPreview = document.getElementById('video-preview');
-                const videoSource = document.getElementById('video-source');
-                
-                const videoUrl = URL.createObjectURL(file);
-                videoSource.src = videoUrl;
-                
-                // Show the video preview
-                videoPreview.style.display = 'block';
-                
-                // Load and play the video
-                videoPreview.load();
-                videoPreview.pause();
-            } else {
-                alert('Please upload a valid video file.');
-            }
-        });
+    document.getElementById('video-upload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
 
-        $('#frmUpload').on('submit', function(e) {
-            e.preventDefault();
-            $('.error-message').html('');
-            var formData = new FormData(this);
-            $.ajax({
-                url: "<?=site_url('save-video')?>",
-                method: "POST",
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                beforeSend: function() {
-                    $('#loading').show();
-                    $('#btnSubmit').hide();
-                },
-                success: function(response) {
-                    $('#loading').hide();
-                    $('#btnSubmit').show();
-                    if (response.success) {
-                        $('#frmUpload')[0].reset();
-                        Swal.fire({
-                            title: 'Great!',
-                            text: "Successfully uploaded",
-                            icon: 'success',
-                            confirmButtonText: 'Continue'
-                        }).then((result) => {
-                            // Action based on user's choice
-                            if (result.isConfirmed) {
-                                // Perform some action when "Yes" is clicked
-                                location.href = "<?=base_url('videos')?>";
-                            }
-                        });
-                    } else {
-                        var errors = response.error;
-                        // Iterate over each error and display it under the corresponding input field
-                        for (var field in errors) {
-                            $('#' + field + '-error').html('<p>' + errors[field] +
-                                '</p>'); // Show the first error message
-                            $('#' + field).addClass(
-                                'text-danger'); // Highlight the input field with an error
+        if (file && file.type.startsWith('video')) {
+            const videoPreview = document.getElementById('video-preview');
+            const videoSource = document.getElementById('video-source');
+
+            const videoUrl = URL.createObjectURL(file);
+            videoSource.src = videoUrl;
+
+            // Show the video preview
+            videoPreview.style.display = 'block';
+
+            // Load and play the video
+            videoPreview.load();
+            videoPreview.pause();
+            $('#size').attr("value", (file.size / (1024 * 1024)).toFixed(2) + "MB");
+            $('#file_type').attr("value", file.type);
+        } else {
+            alert('Please upload a valid video file.');
+        }
+    });
+
+    $('#frmUpload').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        var formData = new FormData(this);
+        $.ajax({
+            url: "<?=site_url('save-video')?>",
+            method: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            beforeSend: function() {
+                $('#loading').show();
+                $('#btnSubmit').hide();
+            },
+            success: function(response) {
+                $('#loading').hide();
+                $('#btnSubmit').show();
+                if (response.success) {
+                    $('#frmUpload')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully uploaded",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('videos')?>";
                         }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
                     }
                 }
-            });
+            }
         });
+    });
     </script>
 </body>
 

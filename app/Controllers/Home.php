@@ -1052,6 +1052,20 @@ class Home extends BaseController
         return view('main/upload',$data);
     }
 
+    public function playVideo($id)
+    {
+        $title = "Play Video";
+        $data = ['title'=>$title];
+        return view('main/play',$data);
+    }
+
+    public function editVideo($id)
+    {
+        $title = "Edit Video";
+        $data = ['title'=>$title];
+        return view('main/edit-video',$data);
+    }
+
     public function saveVideo()
     {
         $videoModel = new \App\Models\videoModel();
@@ -1069,6 +1083,13 @@ class Home extends BaseController
         }
         else
         {
+            //generate Token
+            function generateRandomString($length = 16) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token_code = generateRandomString(16);
             //save the video
             $file = $this->request->getFile('file');
             $originalName = date('YmdHis').$file->getClientName();
@@ -1080,8 +1101,20 @@ class Home extends BaseController
                     'file'=>$originalName,
                     'sportName'=>$this->request->getPost('category'),
                     'date'=>date('Y-m-d'),
-                    'status'=>1];
+                    'status'=>1,
+                    'Token'=>$token_code
+                ];
             $videoModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Uploaded new video',
+                    'page'=>'Upload'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully uploaded']);
         }
     }
@@ -1391,6 +1424,16 @@ class Home extends BaseController
                         'accountID'=>session()->get('loggedUser')];
                 $newsModel->save($data);
             }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Posted news :'.$this->request->getPost('article'),
+                    'page'=>'New Post'
+                    ];        
+            $logModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully save and published']);
         }
     }
@@ -1588,41 +1631,46 @@ class Home extends BaseController
             foreach($news as $row)
             {
                 ?>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card card-sm">
-                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
-                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
-                        <div style="width:100%;">
-                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
-                            <div class="text-secondary">
-                                <div class="row g-3">
-                                    <div class="col-lg-6">
-                                    <?=date('M,d Y',strtotime($row['date']))?>
-                                    </div>
-                                    <div class="col-lg-6">
-                                    <?php if($row['status']==1): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
-                                    <?php elseif($row['status']==3): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
-                                    <?php else : ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
-                                    <?php endif; ?>
-                                    </div>
-                                </div>
+<div class="col-sm-6 col-lg-4">
+    <div class="card card-sm">
+        <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+            <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top"
+                style="width: 100%; height: 200px;" />
+        </a>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <span class="avatar avatar-2 me-3 rounded"
+                    style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                <div style="width:100%;">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                    <div class="text-secondary">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <?=date('M,d Y',strtotime($row['date']))?>
+                            </div>
+                            <div class="col-lg-6">
+                                <?php if($row['status']==1): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                <?php elseif($row['status']==3): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                <?php else : ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
-                <?php
+            </div>
+        </div>
+    </div>
+</div>
+<?php
             }
         }
         else if(!empty($date)&& !empty($type))
@@ -1631,41 +1679,46 @@ class Home extends BaseController
             foreach($news as $row)
             {
                 ?>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card card-sm">
-                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
-                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
-                        <div style="width:100%;">
-                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
-                            <div class="text-secondary">
-                                <div class="row g-3">
-                                    <div class="col-lg-6">
-                                    <?=date('M,d Y',strtotime($row['date']))?>
-                                    </div>
-                                    <div class="col-lg-6">
-                                    <?php if($row['status']==1): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
-                                    <?php elseif($row['status']==3): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
-                                    <?php else : ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
-                                    <?php endif; ?>
-                                    </div>
-                                </div>
+<div class="col-sm-6 col-lg-4">
+    <div class="card card-sm">
+        <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+            <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top"
+                style="width: 100%; height: 200px;" />
+        </a>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <span class="avatar avatar-2 me-3 rounded"
+                    style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                <div style="width:100%;">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                    <div class="text-secondary">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <?=date('M,d Y',strtotime($row['date']))?>
+                            </div>
+                            <div class="col-lg-6">
+                                <?php if($row['status']==1): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                <?php elseif($row['status']==3): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                <?php else : ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
-                <?php
+            </div>
+        </div>
+    </div>
+</div>
+<?php
             }
         }
         else if(empty($date)&& !empty($type))
@@ -1674,41 +1727,46 @@ class Home extends BaseController
             foreach($news as $row)
             {
                 ?>
-                <div class="col-sm-6 col-lg-4">
-                    <div class="card card-sm">
-                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
-                    <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top" style="width: 100%; height: 200px;"/>
-                    </a>
-                    <div class="card-body">
-                        <div class="d-flex align-items-center">
-                        <span class="avatar avatar-2 me-3 rounded" style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
-                        <div style="width:100%;">
-                            <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
-                            <div class="text-secondary">
-                                <div class="row g-3">
-                                    <div class="col-lg-6">
-                                    <?=date('M,d Y',strtotime($row['date']))?>
-                                    </div>
-                                    <div class="col-lg-6">
-                                    <?php if($row['status']==1): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-primary text-white" style="float:right;">Published</span>
-                                    <?php elseif($row['status']==3): ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
-                                    <?php else : ?>
-                                        <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>" style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
-                                        <span class="badge bg-danger text-white" style="float:right;">Archive</span>
-                                    <?php endif; ?>
-                                    </div>
-                                </div>
+<div class="col-sm-6 col-lg-4">
+    <div class="card card-sm">
+        <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>">
+            <img src="<?=base_url('admin/images/news/')?><?=$row['image']?>" class="card-img-top"
+                style="width: 100%; height: 200px;" />
+        </a>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <span class="avatar avatar-2 me-3 rounded"
+                    style="background-image: url(<?=base_url('assets/images/avatar.jpg')?>);"></span>
+                <div style="width:100%;">
+                    <a href="<?=site_url('news/topic/')?><?=$row['topic'] ?>"><?=$row['topic'] ?></a>
+                    <div class="text-secondary">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <?=date('M,d Y',strtotime($row['date']))?>
+                            </div>
+                            <div class="col-lg-6">
+                                <?php if($row['status']==1): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-primary text-white" style="float:right;">Published</span>
+                                <?php elseif($row['status']==3): ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-secondary text-white" style="float:right;">Draft</span>
+                                <?php else : ?>
+                                <a href="<?=site_url('news/edit')?>/<?=$row['topic'] ?>"
+                                    style="float:right;margin-left:10px;"><i class="ti ti-edit"></i>&nbsp;Edit</a>
+                                <span class="badge bg-danger text-white" style="float:right;">Archive</span>
+                                <?php endif; ?>
                             </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
-                <?php
+            </div>
+        </div>
+    </div>
+</div>
+<?php
             }
         }
     }
@@ -1746,33 +1804,33 @@ class Home extends BaseController
         if($shop)
         {
             ?>
-            <form method="POST" class="row g-3" id="frmEditShop">
-                <?=csrf_field()?>
-                <input type="hidden" id="shop_id" name="shop_id" value="<?=$shop['shop_id']?>"/>
-                <input type="hidden" id="longitude" name="longitude" value="<?=$shop['longitude']?>"/>
-                <input type="hidden" id="latitude" name="latitude" value="<?=$shop['latitude']?>"/>
-                <div class="col-lg-12">
-                    <label class="form-label">Name of the Shop</label>
-                    <input type="text" class="form-control" name="name_shop" value="<?=$shop['shop_name']?>" required/>
-                    <div id="name_shop-error" class="error-message text-danger text-sm"></div>
-                </div>
-                <div class="col-lg-12">
-                    <label class="form-label">Address</label>
-                    <textarea name="address" class="form-control" required><?=$shop['address']?></textarea>
-                    <div id="address-error" class="error-message text-danger text-sm"></div>
-                </div>
-                <div class="col-lg-12">
-                    <label class="form-label">Website</label>
-                    <input type="text" class="form-control" name="website" value="<?=$shop['website']?>" required/>
-                    <div id="website-error" class="error-message text-danger text-sm"></div>
-                </div>
-                <div class="col-lg-12">
-                    <button type="submit" class="btn btn-primary save">
-                        <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
-                    </button>
-                </div>
-            </form>
-            <?php
+<form method="POST" class="row g-3" id="frmEditShop">
+    <?=csrf_field()?>
+    <input type="hidden" id="shop_id" name="shop_id" value="<?=$shop['shop_id']?>" />
+    <input type="hidden" id="longitude" name="longitude" value="<?=$shop['longitude']?>" />
+    <input type="hidden" id="latitude" name="latitude" value="<?=$shop['latitude']?>" />
+    <div class="col-lg-12">
+        <label class="form-label">Name of the Shop</label>
+        <input type="text" class="form-control" name="name_shop" value="<?=$shop['shop_name']?>" required />
+        <div id="name_shop-error" class="error-message text-danger text-sm"></div>
+    </div>
+    <div class="col-lg-12">
+        <label class="form-label">Address</label>
+        <textarea name="address" class="form-control" required><?=$shop['address']?></textarea>
+        <div id="address-error" class="error-message text-danger text-sm"></div>
+    </div>
+    <div class="col-lg-12">
+        <label class="form-label">Website</label>
+        <input type="text" class="form-control" name="website" value="<?=$shop['website']?>" required />
+        <div id="website-error" class="error-message text-danger text-sm"></div>
+    </div>
+    <div class="col-lg-12">
+        <button type="submit" class="btn btn-primary save">
+            <i class="ti ti-device-floppy"></i>&nbsp;Save Changes
+        </button>
+    </div>
+</form>
+<?php
         }
     }
 

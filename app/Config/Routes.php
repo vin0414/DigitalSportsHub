@@ -82,6 +82,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('videos','Home::manageVideos');
     $routes->get('upload','Home::upload');
     $routes->get('go-live','Home::goLive');
+    $routes->get('videos/play/(:any)','Home::playVideo/$1');
+    $routes->get('videos/edit/(:any)','Home::editVideo/$1');
     //news
     $routes->get('news','Home::news');
     $routes->get('news/topic/(:any)','Home::topic/$1');

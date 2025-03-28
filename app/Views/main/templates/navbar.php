@@ -91,7 +91,8 @@
                             <span class="nav-link-title"> Home </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'Events' || $title == 'New Event' || $title == 'Manage Event') ? 'active' : '' ?>">
+                    <li
+                        class="nav-item <?= ($title == 'Events' || $title == 'New Event' || $title == 'Manage Event') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('events')?>">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">
                                 <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
@@ -146,7 +147,8 @@
                             <span class="nav-link-title"> Teams </span>
                         </a>
                     </li>
-                    <li class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article' ||$title == 'Manage') ? 'active' : '' ?>">
+                    <li
+                        class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article' ||$title == 'Manage') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('news')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -162,7 +164,8 @@
                             <span class="nav-link-title"> News </span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video') ? 'active' : '' ?>">
+                    <li
+                        class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video' || $title == 'Play Video' || $title == 'Edit Video') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-plugins" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">

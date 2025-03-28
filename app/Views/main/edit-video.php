@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
     <style>
     @import url("https://rsms.me/inter/inter.css");
+
+    #video-upload {
+        padding: 10px;
+        margin-bottom: 20px;
+        cursor: pointer;
+    }
+
+    #video-preview {
+        border: 1px solid #000;
+        border-radius: 10px;
+    }
     </style>
 </head>
 
@@ -38,8 +49,8 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i
-                                        class="ti ti-upload"></i>&nbsp;Upload</a>
+                                <a href="<?=site_url('videos')?>" class="btn btn-secondary">
+                                    <i class="ti ti-arrow-left"></i> Back</a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -83,61 +94,6 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <form method="GET" class="row g-3" id="frmSearch">
-                        <div class="col-lg-5">
-                            <input type="search" class="form-control" placeholder="Type here..." name="search" />
-                        </div>
-                        <div class="col-lg-2">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="ti ti-search"></i>&nbsp;Search
-                            </button>
-                        </div>
-                    </form>
-                    <br />
-                    <div class="row row-cards">
-                        <div class="space-y">
-                            <?php if(empty($video)){ ?>
-                            <div class="alert alert-warning" role="alert">No video(s) Has Been Added Yet</div>
-                            <?php }else { ?>
-                            <div class="row row-cards" id="results">
-                                <?php foreach($video as $row): ?>
-                                <div class="col-sm-6 col-lg-4">
-                                    <div class="card card-sm">
-                                        <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
-                                            <video src="<?=base_url('admin/videos/')?><?=$row['file']?>"
-                                                class="card-img-top"></video>
-                                        </a>
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <span class="avatar avatar-2 me-3 rounded"
-                                                    style="background-image: url(<?=base_url('assets/images/logo.jpg')?>);"></span>
-                                                <div style="width:100%;">
-                                                    <a
-                                                        href="<?=site_url('videos/play/')?><?=$row['Token']?>"><?=$row['file_name'] ?></a><br />
-                                                    <small><?php echo substr($row['description'],0,100) ?>...</small>
-                                                    <div class="text-secondary">
-                                                        <div class="row g-3">
-                                                            <div class="col-lg-6">
-                                                                <?=date('M,d Y',strtotime($row['date']))?>
-                                                            </div>
-                                                            <div class="col-lg-6">
-                                                                <a href="<?=site_url('videos/edit/')?><?=$row['Token']?>"
-                                                                    style="float:right;">
-                                                                    <i class="ti ti-edit"></i>&nbsp;Edit
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <?php endforeach; ?>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -167,6 +123,32 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    document.getElementById('video-upload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+
+        if (file && file.type.startsWith('video')) {
+            const videoPreview = document.getElementById('video-preview');
+            const videoSource = document.getElementById('video-source');
+
+            const videoUrl = URL.createObjectURL(file);
+            videoSource.src = videoUrl;
+
+            // Show the video preview
+            videoPreview.style.display = 'block';
+
+            // Load and play the video
+            videoPreview.load();
+            videoPreview.pause();
+            $('#size').attr("value", (file.size / (1024 * 1024)).toFixed(2) + "MB");
+            $('#file_type').attr("value", file.type);
+        } else {
+            alert('Please upload a valid video file.');
+        }
+    });
+    </script>
 </body>
 
 </html>
