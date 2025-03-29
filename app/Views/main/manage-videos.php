@@ -112,9 +112,10 @@
                                                 <span class="avatar avatar-2 me-3 rounded"
                                                     style="background-image: url(<?=base_url('assets/images/logo.jpg')?>);"></span>
                                                 <div style="width:100%;">
-                                                    <a
-                                                        href="<?=site_url('videos/play/')?><?=$row['Token']?>"><?=$row['file_name'] ?></a><br />
-                                                    <small><?php echo substr($row['description'],0,100) ?>...</small>
+                                                    <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
+                                                        <?=substr($row['file_name'],0,40) ?>...
+                                                    </a><br />
+                                                    <small><?php echo substr($row['description'],0,50) ?>...</small>
                                                     <div class="text-secondary">
                                                         <div class="row g-3">
                                                             <div class="col-lg-6">
@@ -123,7 +124,7 @@
                                                             <div class="col-lg-6">
                                                                 <a href="<?=site_url('videos/edit/')?><?=$row['Token']?>"
                                                                     style="float:right;">
-                                                                    <i class="ti ti-edit"></i>&nbsp;Edit
+                                                                    <i class="ti ti-edit"></i>&nbsp;Edit Video
                                                                 </a>
                                                             </div>
                                                         </div>

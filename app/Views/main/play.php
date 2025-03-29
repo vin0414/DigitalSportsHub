@@ -94,6 +94,92 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
+                    <div class="row g-3">
+                        <div class="col-lg-8">
+                            <div class="row g-2">
+                                <div class="col-lg-12">
+                                    <video id="video-preview" width="100%" controls>
+                                        <source src="<?=base_url('admin/videos/')?><?=$video['file']?>"
+                                            type="video/mp4">
+                                        <source src="<?=base_url('admin/videos/')?><?=$video['file']?>"
+                                            type="video/webm">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row g-2">
+                                        <div class="col-lg-9">
+                                            <label class="form-label" style="font-size: 1.5rem;">
+                                                <?=$video['file_name']?>
+                                            </label>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <a href="<?=site_url('videos/edit/')?><?=$video['Token']?>"
+                                                class="btn btn-secondary" style="float:right;">
+                                                <i class="ti ti-edit"></i>&nbsp;Edit Video
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="row g-3">
+                                        <div class="col-lg-9">
+                                            <div class="badge bg-default">
+                                                <label><b>Posted Date :</b> </label>
+                                                <?=date('Y-M-d',strtotime($video['date']))?>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="badge bg-default" style="float:right;">
+                                                <label><b>Category :</b> </label> <?=$video['sportName']?>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="card card-body">
+                                        <label class="form-label"><b>Description</b></label>
+                                        <?=$video['description']?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-title">
+                                        <i class="ti ti-calendar-week"></i>&nbsp;Recent Videos
+                                    </div>
+                                </div>
+                                <div class="position-relative">
+                                    <?php if(empty($recent)): ?>
+                                    <div style="padding:5px;margin:5px;">No video(s) Has Been Added Yet</div>
+                                    <?php else : ?>
+                                    <?php foreach($recent as $row): ?>
+                                    <div class="row row-0">
+                                        <div class="col-5">
+                                            <video src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                                class="w-100 h-100 object-cover card-img-start"
+                                                alt="<?=$row['file_name'] ?>"></video>
+                                        </div>
+                                        <div class="col">
+                                            <div class="card-body">
+                                                <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
+                                                    <b><?=substr($row['file_name'],0,25) ?></b>...
+                                                </a><br />
+                                                <small><?=$row['sportName']?></small>
+                                                <p class="text-secondary">
+                                                    <?=substr($row['description'],0,50) ?>...
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php endforeach; ?>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->

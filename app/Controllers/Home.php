@@ -1055,7 +1055,15 @@ class Home extends BaseController
     public function playVideo($id)
     {
         $title = "Play Video";
-        $data = ['title'=>$title];
+        //video
+        $videoModel = new \App\Models\videoModel();
+        $video = $videoModel->WHERE('Token',$id)->first();
+        //all videos
+        $recent = $videoModel->WHERE('Token!=',$id)
+                          ->orderBy('video_id','DESC')
+                          ->limit(5)->findAll();
+
+        $data = ['title'=>$title,'video'=>$video,'recent'=>$recent];
         return view('main/play',$data);
     }
 
