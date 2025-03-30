@@ -1070,8 +1070,71 @@ class Home extends BaseController
     public function editVideo($id)
     {
         $title = "Edit Video";
-        $data = ['title'=>$title];
+        //video
+        $videoModel = new \App\Models\videoModel();
+        $video = $videoModel->WHERE('Token',$id)->first();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
+
+        $data = ['title'=>$title,'video'=>$video,'sports'=>$sports];
         return view('main/edit-video',$data);
+    }
+
+    public function modifyVideo()
+    {
+        $videoModel = new \App\Models\videoModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'title'=>'required',
+            'category'=>'required',
+            'details'=>'required',
+            'date'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $id = $this->request->getPost('video_id');
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            if(empty($file->getClientName()))
+            {
+                //save data
+                $data = ['file_name'=>$this->request->getPost('title'),
+                        'description'=>$this->request->getPost('details'),
+                        'sportName'=>$this->request->getPost('category'),
+                        'date'=>$this->request->getPost('date'),
+                    ];
+                $videoModel->update($id,$data);
+            }
+            else
+            {
+                $file->move('admin/videos/',$originalName);
+                //edit data
+                $data = ['file_name'=>$this->request->getPost('title'),
+                        'description'=>$this->request->getPost('details'),
+                        'file'=>$originalName,
+                        'sportName'=>$this->request->getPost('category'),
+                        'date'=>$this->request->getPost('date'),
+                    ];
+                $videoModel->update($id,$data);
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Edit the selected video',
+                    'page'=>'Upload'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully uploaded']);
+        }
     }
 
     public function saveVideo()
@@ -1108,7 +1171,7 @@ class Home extends BaseController
                     'accountID'=>session()->get('loggedUser'),
                     'file'=>$originalName,
                     'sportName'=>$this->request->getPost('category'),
-                    'date'=>date('Y-m-d'),
+                    'date'=>$this->request->getPost('date'),
                     'status'=>1,
                     'Token'=>$token_code
                 ];
@@ -1145,6 +1208,7 @@ class Home extends BaseController
         return view('main/live',$data);
     }
 
+    //accounts
     public function accounts()
     {
         $title = "Accounts";

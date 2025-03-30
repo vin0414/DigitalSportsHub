@@ -48,6 +48,7 @@ $routes->post('save-as-draft','Home::saveDraft');
 $routes->get('filter-news','Home::filterNews');
 //video
 $routes->post('save-video','Home::saveVideo');
+$routes->post('edit-video','Home::modifyVideo');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

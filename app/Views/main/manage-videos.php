@@ -84,8 +84,10 @@
             <div class="page-body">
                 <div class="container-xl">
                     <form method="GET" class="row g-3" id="frmSearch">
-                        <div class="col-lg-5">
-                            <input type="search" class="form-control" placeholder="Type here..." name="search" />
+                        <div class="col-lg-2">
+                            <select name="category" class="form-select">
+                                <option value="">Filter</option>
+                            </select>
                         </div>
                         <div class="col-lg-2">
                             <button type="submit" class="btn btn-primary">
