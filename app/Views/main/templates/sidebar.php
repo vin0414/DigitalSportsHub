@@ -156,7 +156,7 @@
                         <span class="nav-link-title"> Upload </span>
                     </a>
                 </li>
-                <li class="nav-item dropdown">
+                <li class="nav-item dropdown <?= ($title == 'New Match' || $title == "All Matches") ? 'active' : '' ?>">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
                         data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -180,13 +180,14 @@
                         </span>
                         <span class="nav-link-title"> Matches </span>
                     </a>
-                    <div class="dropdown-menu">
+                    <div class="dropdown-menu <?= ($title == 'New Match' || $title == "All Matches") ? 'show' : '' ?>">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
-                                <a class="dropdown-item" href="<?=site_url('new-match')?>"><i
-                                        class="ti ti-vs"></i>&nbsp;New Match </a>
-                                <a class="dropdown-item" href="<?=site_url('matches')?>"><i
-                                        class="ti ti-history-toggle"></i>&nbsp;All Matches</a>
+                                <a class="dropdown-item <?= ($title == 'New Match') ? 'active' : '' ?>"
+                                    href="<?=site_url('new-match')?>"><i class="ti ti-vs"></i>&nbsp;New Match </a>
+                                <a class="dropdown-item <?= ($title == "All Matches") ? 'active' : '' ?>"
+                                    href="<?=site_url('matches')?>"><i class="ti ti-history-toggle"></i>&nbsp;All
+                                    Matches</a>
                             </div>
                         </div>
                     </div>

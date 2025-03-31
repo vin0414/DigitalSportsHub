@@ -80,7 +80,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('shops','Home::shops');
     //matches
     $routes->get('new-match','Home::newMatch');
-    $routes->get('all-matches','Home::allMatch');
+    $routes->get('matches','Home::allMatch');
     //videos
     $routes->get('videos','Home::manageVideos');
     $routes->get('upload','Home::upload');

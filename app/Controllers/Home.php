@@ -1872,7 +1872,20 @@ class Home extends BaseController
     public function newMatch()
     {
         $title = "New Match";
-        $data = ['title'=>$title];
+        //incoming matches 
+        $today = date('Y-m-d');
+        $NewDate=date('Y-m-d', strtotime('+3 days'));
+        $builder = $this->db->table('matches a');
+        $builder->select('a.*,b.team_name as team1,c.team_name as team2');
+        $builder->join('teams b','b.team_id=a.team1_id','LEFT'); 
+        $builder->join('teams c','c.team_id=a.team2_id','LEFT'); 
+        $builder->WHERE('a.date>=',$today)->WHERE('a.date<=',$NewDate);
+        $matches = $builder->get()->getResult();
+        //team
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->findAll();
+        
+        $data = ['title'=>$title,'matches'=>$matches,'team'=>$team];
         return view('main/create-match',$data);
     }
 
