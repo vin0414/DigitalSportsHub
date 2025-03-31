@@ -11,6 +11,13 @@
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+    google.charts.load('visualization', "1", {
+        packages: ['corechart']
+    });
+    </script>
     <style>
     @import url("https://rsms.me/inter/inter.css");
     </style>
@@ -136,18 +143,42 @@
                     <br />
                     <div class="row row-cards">
                         <div class="col-lg-9">
-                            <div class="row row-cards row-deck">
-                                <div class="col-lg-6">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <div class="card-title">Views</div>
+                            <div class="row g-3">
+                                <div class="col-lg-12">
+                                    <div class="row row-cards row-deck">
+                                        <div class="col-lg-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="card-title"><i class="ti ti-live-view"></i>&nbsp;Daily Views</div>
+                                                    <div id="viewChart"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="card-title"><i class="ti ti-trending-up"></i>&nbsp;Viewers Trend</div>
+                                                    <div id="videoChart"></div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="card-title">Video Analytics</div>
+                                            <div class="card-title"><i class="ti ti-cast"></i>&nbsp;Live Streaming</div>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered" id="tbl_trend">
+                                                    <thead>
+                                                        <th>Videos</th>
+                                                        <th>Views</th>
+                                                        <th>Users</th>
+                                                        <th>Ave. Duration</th>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -215,6 +246,58 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script>
+        $('#tbl_trend').DataTable();
+        google.charts.setOnLoadCallback(viewCharts);
+        google.charts.setOnLoadCallback(videoCharts);
+
+        function viewCharts() {
+            var data = google.visualization.arrayToDataTable([
+                ["Date", "Total"],
+                <?php 
+                    foreach ($views as $row){
+                        echo "['".$row->date."',".$row->total."],";
+                    }
+                    ?>
+            ]);
+
+            var options = {
+                title: '',
+                legend: { position: 'bottom' },
+                backgroundColor: {
+                    fill: 'transparent'
+                },
+            };
+            /* Instantiate and draw the chart.*/
+            var chart = new google.visualization.LineChart(document.getElementById('viewChart'));
+            chart.draw(data, options);
+        }
+
+        function videoCharts() {
+            var data = google.visualization.arrayToDataTable([
+                ["Title", "Total"],
+                <?php 
+                    foreach ($video_view as $row){
+                        echo "['".$row->file_name."',".$row->total."],";
+                    }
+                    ?>
+            ]);
+
+            var options = {
+                title: '',
+                legend: { position: 'bottom' },
+                backgroundColor: {
+                    fill: 'transparent'
+                },
+            };
+            /* Instantiate and draw the chart.*/
+            var chart = new google.visualization.ColumnChart(document.getElementById('videoChart'));
+            chart.draw(data, options);
+        }
+    </script>
 </body>
 
 </html>

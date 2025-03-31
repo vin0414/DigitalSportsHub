@@ -165,7 +165,7 @@
                         </a>
                     </li>
                     <li
-                        class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video' || $title == 'Play Video' || $title == 'Edit Video') ? 'active' : '' ?>">
+                        class="nav-item dropdown <?= ($title == 'Videos' || $title == 'Upload Video' || $title == 'Play Video' || $title == 'Edit Video' || $title == 'Live Streaming') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-plugins" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" role="button" aria-expanded="false">
                             <span class="nav-link-icon d-md-none d-lg-inline-block">

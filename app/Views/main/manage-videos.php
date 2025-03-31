@@ -87,7 +87,16 @@
                         <div class="col-lg-2">
                             <select name="category" class="form-select">
                                 <option value="">Filter</option>
+                                <?php foreach($sports as $row): ?>
+                                    <option><?=$row['Name'] ?></option>
+                                <?php endforeach; ?>
                             </select>
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="date" class="form-control" name="date"/>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="keyword" placeholder="Type here..."/>
                         </div>
                         <div class="col-lg-2">
                             <button type="submit" class="btn btn-primary">

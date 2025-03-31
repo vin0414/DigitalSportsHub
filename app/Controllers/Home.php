@@ -119,10 +119,24 @@ class Home extends BaseController
         //videos
         $videoModel = new \App\Models\videoModel();
         $video = $videoModel->countAllResults();
+        //total views per day
+        $builder = $this->db->table('views');
+        $builder->select('date,SUM(total_view)total');
+        $builder->groupBy('date');
+        $views = $builder->get()->getResult();
+        //views per video
+        $builder = $this->db->table('views a');
+        $builder->select(',b.file_name,SUM(a.total_view)total');
+        $builder->join('videos b','b.video_id=a.video_id','LEFT');
+        $builder->groupBy('a.video_id');
+        $video_view = $builder->get()->getResult();
+        //video trends
+
 
         $data = ['title'=>$title,'total'=>$account,'player'=>$player,
                 'team'=>$team,'shop'=>$shop,'event'=>$event,
-                'total_event'=>$totalEvents,'video'=>$video];
+                'total_event'=>$totalEvents,'video'=>$video,
+                'video_view'=>$video_view,'views'=>$views];
         return view('main/dashboard',$data);
     }
 
@@ -557,7 +571,7 @@ class Home extends BaseController
     public function filterTeam()
     {
         $category = $this->request->getGet('category');
-        $text = $this->request->getGet('search');
+        $text = "%".$this->request->getGet('search')."%";
         //conditions
         if(!empty($category) && empty($text))
         {
@@ -601,7 +615,7 @@ class Home extends BaseController
             $builder->select('a.*,b.Name');
             $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
             $builder->WHERE('a.sportsID',$category);
-            $builder->WHERE('a.team_name',$text);
+            $builder->LIKE('a.team_name',$text);
             $team = $builder->get()->getResult();
             foreach($team as $row)
             {
@@ -637,7 +651,7 @@ class Home extends BaseController
             $builder = $this->db->table('teams a');
             $builder->select('a.*,b.Name');
             $builder->join('sports b','b.sportsID=a.sportsID','LEFT');
-            $builder->WHERE('a.team_name',$text);
+            $builder->LIKE('a.team_name',$text);
             $team = $builder->get()->getResult();
             foreach($team as $row)
             {
@@ -1196,14 +1210,17 @@ class Home extends BaseController
         //videos
         $videoModel = new \App\Models\videoModel();
         $video = $videoModel->findAll();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'video'=>$video];
+        $data = ['title'=>$title,'video'=>$video,'sports'=>$sports];
         return view('main/manage-videos',$data);
     }
 
     public function goLive()
     {
-        $title = "Go Live";
+        $title = "Live Streaming";
         $data = ['title'=>$title];
         return view('main/live',$data);
     }

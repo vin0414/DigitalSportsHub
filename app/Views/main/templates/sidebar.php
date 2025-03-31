@@ -97,7 +97,7 @@
                     </a>
                 </li>
                 <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
-                <li class="nav-item <?= ($title == 'Live') ? 'active' : '' ?>">
+                <li class="nav-item <?= ($title == 'Live Streaming') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('go-live')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
