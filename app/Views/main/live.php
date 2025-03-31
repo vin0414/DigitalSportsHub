@@ -70,11 +70,32 @@
             <div class="page-body">
                 <div class="container-xl">
                     <div class="row g-3">
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title"><?=$title?></div>
-                                    
+                                    <div class="row g-2">
+                                        <div class="col-lg-12">
+                                            <video id="local" autoplay muted width="100%" controls>
+                                            </video>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <button type="button" class="btn btn-primary" onclick="start(this)">
+                                                Start video
+                                            </button>
+                                            <button type="button" class="btn btn-danger" id="stream"
+                                                onclick="stream(this)" disabled>
+                                                Go Live
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="card-title">Matches</div>
                                 </div>
                             </div>
                         </div>
@@ -110,6 +131,73 @@
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    const local = document.querySelector("video#local");
+    let peerConnection;
+    const channel = new BroadcastChannel("stream-video");
+    channel.onmessage = e => {
+        if (e.data.type === "icecandidate") {
+            peerConnection?.addIceCandidate(e.data.candidate);
+        } else if (e.data.type === "answer") {
+            console.log("Received answer")
+            peerConnection?.setRemoteDescription(e.data);
+        }
+    }
+    // function to ask for camera and microphone permission
+    // and stream to #local video element
+    function start(e) {
+        e.disabled = true;
+        document.getElementById("stream").disabled = false; // enable the stream button
+        navigator.mediaDevices.getUserMedia({
+                audio: true,
+                video: true
+            })
+            .then((stream) => local.srcObject = stream);
+    }
+
+    function stream(e) {
+        e.disabled = true;
+
+        const config = {};
+        peerConnection = new RTCPeerConnection(config); // local peer connection
+
+        // add ice candidate event listener
+        peerConnection.addEventListener("icecandidate", e => {
+            let candidate = null;
+
+            // prepare a candidate object that can be passed through browser channel
+            if (e.candidate !== null) {
+                candidate = {
+                    candidate: e.candidate.candidate,
+                    sdpMid: e.candidate.sdpMid,
+                    sdpMLineIndex: e.candidate.sdpMLineIndex,
+                };
+            }
+            channel.postMessage({
+                type: "icecandidate",
+                candidate
+            });
+        });
+
+        // add media tracks to the peer connection
+        local.srcObject.getTracks()
+            .forEach(track => peerConnection.addTrack(track, local.srcObject));
+
+        // Create offer and send through the browser channel
+        peerConnection.createOffer({
+                offerToReceiveAudio: true,
+                offerToReceiveVideo: true
+            })
+            .then(async offer => {
+                await peerConnection.setLocalDescription(offer);
+                console.log("Created offer, sending...");
+                channel.postMessage({
+                    type: "offer",
+                    sdp: offer.sdp
+                });
+            });
+    }
+    </script>
 </body>
 
 </html>

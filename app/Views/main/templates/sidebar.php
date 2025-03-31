@@ -96,6 +96,28 @@
                         <span class="nav-link-title"> Home </span>
                     </a>
                 </li>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Coach" ||session()->get('role')=="End-user"): ?>
+                <li class="nav-item">
+                    <a class="nav-link" href="<?=site_url('watch-now')?>">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <!-- Download SVG icon from http://tabler.io/icons/icon/home -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-video-plus">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z" />
+                                <path
+                                    d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z" />
+                                <path d="M7 12l4 0" />
+                                <path d="M9 10l0 4" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title"> Watch Now </span>
+                    </a>
+                </li>
+                <?php endif; ?>
                 <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item <?= ($title == 'Live Streaming') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('go-live')?>">
@@ -134,13 +156,48 @@
                         <span class="nav-link-title"> Upload </span>
                     </a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
+                        data-bs-auto-close="false" role="button" aria-expanded="true">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <!-- Download SVG icon from http://tabler.io/icons/icon/layout-2 -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-scoreboard">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M3 5m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+                                <path d="M12 5v2" />
+                                <path d="M12 10v1" />
+                                <path d="M12 14v1" />
+                                <path d="M12 18v1" />
+                                <path d="M7 3v2" />
+                                <path d="M17 3v2" />
+                                <path d="M15 10.5v3a1.5 1.5 0 0 0 3 0v-3a1.5 1.5 0 0 0 -3 0z" />
+                                <path d="M6 9h1.5a1.5 1.5 0 0 1 0 3h-.5h.5a1.5 1.5 0 0 1 0 3h-1.5" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title"> Matches </span>
+                    </a>
+                    <div class="dropdown-menu">
+                        <div class="dropdown-menu-columns">
+                            <div class="dropdown-menu-column">
+                                <a class="dropdown-item" href="<?=site_url('new-match')?>"><i
+                                        class="ti ti-vs"></i>&nbsp;New Match </a>
+                                <a class="dropdown-item" href="<?=site_url('matches')?>"><i
+                                        class="ti ti-history-toggle"></i>&nbsp;All Matches</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
                 <?php endif; ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>
                 <li class="nav-item <?= ($title == 'New Event') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-event')?>">
-                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                        <span ss="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/package -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -155,9 +212,10 @@
                                 <path d="M19 16v6" />
                             </svg>
                         </span>
-                        <span class="nav-link-title"> New Event </span>
+                        <span class="nav-link-title"> &nbsp;&nbsp;New Event </span>
                     </a>
                 </li>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item <?= ($title == 'New Athlete') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-athlete')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -214,6 +272,7 @@
                         <span class="nav-link-title"> New Account </span>
                     </a>
                 </li>
+
                 <li class="nav-item <?= ($title == 'New Article') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-article')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -229,6 +288,8 @@
                         <span class="nav-link-title"> New Article </span>
                     </a>
                 </li>
+                <?php endif; ?>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">System</h6>
                 </li>
@@ -247,6 +308,33 @@
                             </svg>
                         </span>
                         <span class="nav-link-title"> Settings </span>
+                    </a>
+                </li>
+                <?php endif; ?>
+                <li class="nav-item mt-3">
+                    <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Account Settings</h6>
+                </li>
+                <li class="nav-item <?= ($title == 'My Account') ? 'active' : '' ?>">
+                    <a class="nav-link" href="<?=site_url('account')?>">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block">
+                            <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-user-cog">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h2.5" />
+                                <path d="M19.001 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                                <path d="M19.001 15.5v1.5" />
+                                <path d="M19.001 21v1.5" />
+                                <path d="M22.032 17.25l-1.299 .75" />
+                                <path d="M17.27 20l-1.3 .75" />
+                                <path d="M15.97 17.25l1.3 .75" />
+                                <path d="M20.733 20l1.3 .75" />
+                            </svg>
+                        </span>
+                        <span class="nav-link-title"> My Account </span>
                     </a>
                 </li>
             </ul>

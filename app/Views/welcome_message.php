@@ -122,7 +122,7 @@
                                     <li class="has-dropdown">
                                         <a class="menu-item active1" href="<?=base_url('/')?>">Home</a>
                                     </li>
-                                    <li><a class="menu-item" href="<?=base_url('about')?>">About</a></li>
+                                    <li><a class="menu-item" href="<?=base_url('watch-now')?>">Watch</a></li>
                                     <li class="has-dropdown"><a class="menu-item" href="#">Pages</a>
                                         <ul class="dropdown-ul mega-dropdown">
                                             <li class="mega-dropdown-li">

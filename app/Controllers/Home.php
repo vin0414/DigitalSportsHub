@@ -15,11 +15,6 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
-    public function about()
-    {
-        return view('about');
-    }
-
     public function auth()
     {
         return view('auth/login');
@@ -1871,6 +1866,21 @@ class Home extends BaseController
 
         $data = ['title'=>$title,'news'=>$news,'recent'=>$recent];
         return view('main/topic',$data);
+    }
+
+    //matches
+    public function newMatch()
+    {
+        $title = "New Match";
+        $data = ['title'=>$title];
+        return view('main/create-match',$data);
+    }
+
+    public function allMatch()
+    {
+        $title = "All Matches";
+        $data = ['title'=>$title];
+        return view('main/match',$data);
     }
 
     //shops

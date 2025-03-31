@@ -6,7 +6,6 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 $routes->get('/', 'Home::index');
-$routes->get('about','Home::about');
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
 // ajax request
@@ -79,6 +78,9 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('manage-event','Home::manageEvent');
     //shops
     $routes->get('shops','Home::shops');
+    //matches
+    $routes->get('new-match','Home::newMatch');
+    $routes->get('all-matches','Home::allMatch');
     //videos
     $routes->get('videos','Home::manageVideos');
     $routes->get('upload','Home::upload');
