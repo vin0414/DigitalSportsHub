@@ -1220,6 +1220,86 @@ class Home extends BaseController
         return view('main/live',$data);
     }
 
+    public function filterVideos()
+    {
+        $category = $this->request->getGet('sport');
+        $date = $this->request->getGet('date');
+        $text = "%".$this->request->getGet('keyword')."%";
+        
+        $videoModel = new \App\Models\videoModel();
+        if(!empty($category))
+        {
+            $videos = $videoModel->WHERE('sportName',$category);
+        }
+        if(!empty($category) && !empty($date))
+        {
+            $videos = $videoModel->WHERE('sportName',$category)->WHERE('date',$date);
+        }
+        if(!empty($category) && !empty($date) && empty($text))
+        {
+            $videos = $videoModel->WHERE('sportName',$category)
+                                ->WHERE('date',$date)
+                                ->LIKE('file_name',$text);
+        }
+        if(!empty($category) && empty($text))
+        {
+            $videos = $videoModel->WHERE('sportName',$category)
+                                ->LIKE('file_name',$text);
+        }
+        if(!empty($date))
+        {
+            $videos = $videoModel->WHERE('date',$date);
+        }
+
+        if(!empty($date)&&!empty($text))
+        {
+            $videos = $videoModel->WHERE('date',$date)->LIKE('file_name',$text);
+        }
+
+        if(!empty($text))
+        {
+            $videos = $videoModel->LIKE('file_name',$text);
+        }
+        $result = $videos->findAll();
+        foreach($result as $row)
+        {
+            ?>
+<div class="col-sm-6 col-lg-4">
+    <div class="card card-sm">
+        <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
+            <video src="<?=base_url('admin/videos/')?><?=$row['file']?>" class="card-img-top"></video>
+        </a>
+        <div class="card-body">
+            <div class="d-flex align-items-center">
+                <span class="avatar avatar-2 me-3 rounded"
+                    style="background-image: url(<?=base_url('assets/images/logo.jpg')?>);"></span>
+                <div style="width:100%;">
+                    <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
+                        <?=substr($row['file_name'],0,40) ?>...
+                    </a><br />
+                    <small><?php echo substr($row['description'],0,50) ?>...</small>
+                    <div class="text-secondary">
+                        <div class="row g-3">
+                            <div class="col-lg-6">
+                                <?=date('M,d Y',strtotime($row['date']))?>
+                            </div>
+                            <div class="col-lg-6">
+                                <a href="<?=site_url('videos/edit/')?><?=$row['Token']?>" style="float:right;">
+                                    <i class="ti ti-edit"></i>&nbsp;Edit Video
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+        }
+
+    }
+
     //accounts
     public function accounts()
     {
@@ -1892,8 +1972,60 @@ class Home extends BaseController
     public function allMatch()
     {
         $title = "All Matches";
-        $data = ['title'=>$title];
+        //matches
+        $builder = $this->db->table('matches a');
+        $builder->select('a.*,b.team_name as team1,c.team_name as team2');
+        $builder->join('teams b','b.team_id=a.team1_id','LEFT');
+        $builder->join('teams c','c.team_id=a.team2_id','LEFT');
+        $builder->groupBy('a.match_id');
+        $matches = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'matches'=>$matches];
         return view('main/match',$data);
+    }
+
+    public function saveMatch()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'date'=>'required',
+            'time'=>'required',
+            'team1'=>'required',
+            'team2'=>'required',
+            'location'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $matchModel = new \App\Models\matchModel();
+            $data = [
+                'date'=>$this->request->getPost('date'),
+                'time'=>$this->request->getPost('time'),
+                'team1_id'=>$this->request->getPost('team1'),
+                'team1_score'=>0,
+                'team2_id'=>$this->request->getPost('team2'),
+                'team2_score'=>0,
+                'location'=>$this->request->getPost('location'),
+                'result'=>'-'
+            ];
+            $matchModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function scoreMatch($id)
+    {
+        $title = "Match Details";
+        //match
+        $matchModel  = new \App\Models\matchModel();
+        $match = $matchModel->WHERE('match_id',$id)->first();
+        
+        $data = ['title'=>$title,'match'=>$match];
+        return view('main/scoreboard',$data);
     }
 
     //shops

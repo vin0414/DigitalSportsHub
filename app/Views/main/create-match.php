@@ -49,12 +49,12 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('videos')?>"
+                                <a href="<?=site_url('dashboard')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <i class="ti ti-arrow-left"></i> Back
                                 </a>
-                                <a href="<?=site_url('go-live')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                <a href="<?=site_url('dashboard')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <i class="ti ti-arrow-left"></i>
                                 </a>
@@ -145,12 +145,16 @@
                                     <div style="padding:5px;margin:5px;">No Incoming Matche(s) Yet</div>
                                     <?php else : ?>
                                     <?php foreach($matches as $row): ?>
-                                    <div style="padding:10px;margin:10;border-radius:10px;">
+                                    <?php 
+                                    $date = DateTime::createFromFormat('H:i', $row->time); 
+                                    $formattedTime = $date->format('h:i A');
+                                    ?>
+                                    <div style="padding:10px;margin:10px;border-radius:10px;">
                                         <label style="font-size:1rem;font-weight:bold;">
                                             <?php echo $row->team1 ?> vs <?php echo $row->team2 ?>
                                         </label><br />
                                         <small><?php echo $row->location ?> | <?php echo $row->date ?> |
-                                            <?php echo $row->time ?></small>
+                                            <?php echo $formattedTime ?></small>
                                     </div>
                                     <?php endforeach; ?>
                                     <?php endif; ?>
@@ -189,7 +193,43 @@
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script>
+    $('#frmMatch').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('save-match')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            $('#frmMatch')[0].reset();
+                            // Perform some action when "Yes" is clicked
+                            location.href = "<?=base_url('new-match')?>";
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

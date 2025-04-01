@@ -96,9 +96,8 @@
                         <span class="nav-link-title"> Home </span>
                     </a>
                 </li>
-                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Coach" ||session()->get('role')=="End-user"): ?>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?=site_url('watch-now')?>">
+                    <a class="nav-link" href="<?=site_url('watch-now')?>" target="_blank">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/home -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -117,7 +116,6 @@
                         <span class="nav-link-title"> Watch Now </span>
                     </a>
                 </li>
-                <?php endif; ?>
                 <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item <?= ($title == 'Live Streaming') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('go-live')?>">
@@ -156,7 +154,8 @@
                         <span class="nav-link-title"> Upload </span>
                     </a>
                 </li>
-                <li class="nav-item dropdown <?= ($title == 'New Match' || $title == "All Matches") ? 'active' : '' ?>">
+                <li
+                    class="nav-item dropdown <?= ($title == 'New Match' || $title == "All Matches" || $title == "Match Details") ? 'active' : '' ?>">
                     <a class="nav-link dropdown-toggle" href="#navbar-layout" data-bs-toggle="dropdown"
                         data-bs-auto-close="false" role="button" aria-expanded="true">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -180,7 +179,8 @@
                         </span>
                         <span class="nav-link-title"> Matches </span>
                     </a>
-                    <div class="dropdown-menu <?= ($title == 'New Match' || $title == "All Matches") ? 'show' : '' ?>">
+                    <div
+                        class="dropdown-menu <?= ($title == 'New Match' || $title == "All Matches" || $title == "Match Details") ? 'show' : '' ?>">
                         <div class="dropdown-menu-columns">
                             <div class="dropdown-menu-column">
                                 <a class="dropdown-item <?= ($title == 'New Match') ? 'active' : '' ?>"
@@ -188,6 +188,12 @@
                                 <a class="dropdown-item <?= ($title == "All Matches") ? 'active' : '' ?>"
                                     href="<?=site_url('matches')?>"><i class="ti ti-history-toggle"></i>&nbsp;All
                                     Matches</a>
+                                <?php if($title == "Match Details"): ?>
+                                <a class="dropdown-item <?= ($title == "Match Details") ? 'active' : '' ?>"
+                                    href="javascript:void(0);">
+                                    <i class="ti ti-soccer-field"></i>&nbsp;Match Details
+                                </a>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>

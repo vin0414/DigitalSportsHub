@@ -50,12 +50,12 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('dashboard')?>"
+                                <a href="<?=site_url('matches')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <i class="ti ti-arrow-left"></i> Back
                                 </a>
-                                <a href="<?=site_url('dashboard')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                <a href="<?=site_url('matches')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
                                     <i class="ti ti-arrow-left"></i>
                                 </a>
@@ -72,45 +72,54 @@
                 <div class="container-xl">
                     <div class="card">
                         <div class="card-body">
-                            <div class="card-title"><i class="ti ti-tournament"></i>&nbsp;<?=$title?></div>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-striped" id="tblMatch">
-                                    <thead>
-                                        <th>#</th>
-                                        <th>Date</th>
-                                        <th>Time</th>
-                                        <th>Team 1</th>
-                                        <th>Team 2</th>
-                                        <th>Location</th>
-                                        <th>Result</th>
-                                        <th>Action</th>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($matches as $row): ?>
-                                        <tr>
-                                            <td><?php echo $row->match_id ?></td>
-                                            <td><?php echo $row->date ?></td>
-                                            <td><?php echo date('h:i A',strtotime($row->time)) ?></td>
-                                            <td>
-                                                <?php echo $row->team1 ?><br />
-                                                Score : <?php echo $row->team1_score ?>
-                                            </td>
-                                            <td>
-                                                <?php echo $row->team2 ?><br />
-                                                Score : <?php echo $row->team2_score ?>
-                                            </td>
-                                            <td><?php echo $row->location ?></td>
-                                            <td><?php echo $row->result ?></td>
-                                            <td>
-                                                <a href="<?=site_url('match-details')?>/<?php echo $row->match_id ?>"
-                                                    class="btn btn-primary">
-                                                    <i class="ti ti-soccer-field"></i>&nbsp;Score Board
-                                                </a>
-                                            </td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
+                            <div class="card-title"><i class="ti ti-soccer-field"></i>&nbsp;<?=$title?></div>
+                            <div class="row g-3">
+                                <div class="col-lg-12">
+                                    <div class="row g-3">
+                                        <div class="col-lg-6">
+                                            <?php
+                                            $teamModel = new \App\Models\teamModel();
+                                            $team1 = $teamModel->WHERE('team_id',$match['team1_id'])->first();
+                                            ?>
+                                            <h1 class="text-center"><?php echo $team1['team_name'] ?></h1>
+                                            <small>
+                                                <center><?php echo $team1['school'] ?></center>
+                                            </small>
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <th>Players</th>
+                                                        <th>Jersey #</th>
+                                                        <th>Position</th>
+                                                        <th>Stats</th>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <?php
+                                            $teamModel = new \App\Models\teamModel();
+                                            $team2 = $teamModel->WHERE('team_id',$match['team2_id'])->first();
+                                            ?>
+                                            <h1 class="text-center"><?php echo $team2['team_name'] ?></h1>
+                                            <small>
+                                                <center><?php echo $team2['school'] ?></center>
+                                            </small>
+                                            <br />
+                                            <div class="table-responsive">
+                                                <table class="table table-striped table-bordered">
+                                                    <thead>
+                                                        <th>Players</th>
+                                                        <th>Jersey #</th>
+                                                        <th>Position</th>
+                                                        <th>Stats</th>
+                                                    </thead>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -147,9 +156,6 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    $('#tblMatch').DataTable();
-    </script>
 </body>
 
 </html>

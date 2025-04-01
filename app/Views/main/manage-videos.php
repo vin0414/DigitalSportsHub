@@ -85,18 +85,18 @@
                 <div class="container-xl">
                     <form method="GET" class="row g-3" id="frmSearch">
                         <div class="col-lg-2">
-                            <select name="category" class="form-select">
+                            <select name="sport" class="form-select">
                                 <option value="">Filter</option>
                                 <?php foreach($sports as $row): ?>
-                                    <option><?=$row['Name'] ?></option>
+                                <option><?php echo $row['Name'] ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="col-lg-2">
-                            <input type="date" class="form-control" name="date"/>
+                            <input type="date" class="form-control" name="date" />
                         </div>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" name="keyword" placeholder="Type here..."/>
+                            <input type="text" class="form-control" name="keyword" placeholder="Type here..." />
                         </div>
                         <div class="col-lg-2">
                             <button type="submit" class="btn btn-primary">
@@ -179,6 +179,30 @@
     <!-- END GLOBAL MANDATORY SCRIPTS -->
     <!-- BEGIN DEMO SCRIPTS -->
     <script src="<?=base_url('admin/js/demo.min.js')?>" defer></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmSearch').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('filter-videos')?>",
+            method: "GET",
+            data: data,
+            success: function(response) {
+                if (response === "") {
+                    Swal.fire({
+                        title: 'Sorry!',
+                        text: "No Record(s) found. Please try again",
+                        icon: 'warning',
+                    });
+                } else {
+                    $('#results').html(response);
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

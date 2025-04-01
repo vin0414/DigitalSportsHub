@@ -8,6 +8,8 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Home::index');
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
+//pages
+$routes->get('watch-now','Home::watchNow');
 // ajax request
 ///user management
 $routes->get('fetch-accounts','Home::fetchAccounts');
@@ -48,6 +50,9 @@ $routes->get('filter-news','Home::filterNews');
 //video
 $routes->post('save-video','Home::saveVideo');
 $routes->post('edit-video','Home::modifyVideo');
+$routes->get('filter-videos','Home::filterVideos');
+//matches
+$routes->post('save-match','Home::saveMatch');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -81,6 +86,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     //matches
     $routes->get('new-match','Home::newMatch');
     $routes->get('matches','Home::allMatch');
+    $routes->get('match-details/(:any)','Home::scoreMatch/$1');
     //videos
     $routes->get('videos','Home::manageVideos');
     $routes->get('upload','Home::upload');
