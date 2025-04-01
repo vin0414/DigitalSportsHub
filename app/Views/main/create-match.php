@@ -142,7 +142,7 @@
                                 </div>
                                 <div class="position-relative">
                                     <?php if(empty($matches)): ?>
-                                    <div style="padding:5px;margin:5px;">No Incoming Matche(s) Yet</div>
+                                    <div style="padding:5px;margin:5px;">No Incoming Match(es) Yet</div>
                                     <?php else : ?>
                                     <?php foreach($matches as $row): ?>
                                     <?php 

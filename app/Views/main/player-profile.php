@@ -11,7 +11,7 @@
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <link href="<?=base_url('admin/css/demo.min.css')?>" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css" />
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"></script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
@@ -228,7 +228,7 @@
     <script>
     pannellum.viewer('panorama', {
         "type": "equirectangular",
-        "panorama": "<?=base_url('admin/images/profile/Kobe-1.jpg')?>"
+        "panorama": "<?=base_url('admin/images/profile/')?><?=$player['image']?>"
     });
     google.charts.setOnLoadCallback(playerCharts);
 

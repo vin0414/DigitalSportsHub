@@ -90,10 +90,54 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                         <th>Players</th>
-                                                        <th>Jersey #</th>
+                                                        <th>#</th>
                                                         <th>Position</th>
                                                         <th>Stats</th>
+                                                        <th>Action</th>
                                                     </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $db = db_connect();
+                                                        $builder = $db->table('players a');
+                                                        $builder->select('a.player_id,a.last_name,a.first_name,a.mi,a.jersey_num,b.roleName');
+                                                        $builder->join('player_role b','b.roleID=a.roleID','LEFT');
+                                                        $builder->WHERE('a.team_id',$team1['team_id']);
+                                                        $list = $builder->get()->getResult();
+                                                        foreach($list as $row):
+                                                         ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $row->last_name ?>,&nbsp;<?php echo $row->first_name ?>&nbsp;<?php echo $row->mi ?>
+                                                            </td>
+                                                            <td><?php echo $row->jersey_num ?></td>
+                                                            <td><?php echo $row->roleName ?></td>
+                                                            <td>
+                                                                <?php
+                                                                $builder = $db->table('player_performance');
+                                                                $builder->select('stat_type,stat_value');
+                                                                $builder->WHERE('player_id',$row->player_id)
+                                                                        ->WHERE('match_id',$match['match_id']);
+                                                                $stats = $builder->get()->getResult();
+                                                                foreach($stats as $s) 
+                                                                {
+                                                                    ?>
+                                                                <small><?php echo $s->stat_type ?></small> :
+                                                                <small><?php echo $s->stat_value ?></small><br />
+                                                                <?php
+                                                                } 
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-primary add"
+                                                                    value="<?php echo $row->player_id ?>"><i
+                                                                        class="ti ti-circle-dashed-plus"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        endforeach;
+                                                        ?>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -111,10 +155,54 @@
                                                 <table class="table table-striped table-bordered">
                                                     <thead>
                                                         <th>Players</th>
-                                                        <th>Jersey #</th>
+                                                        <th>#</th>
                                                         <th>Position</th>
                                                         <th>Stats</th>
+                                                        <th>Action</th>
                                                     </thead>
+                                                    <tbody>
+                                                        <?php
+                                                        $db = db_connect();
+                                                        $builder = $db->table('players a');
+                                                        $builder->select('a.player_id,a.last_name,a.first_name,a.mi,a.jersey_num,b.roleName');
+                                                        $builder->join('player_role b','b.roleID=a.roleID','LEFT');
+                                                        $builder->WHERE('a.team_id',$team2['team_id']);
+                                                        $list = $builder->get()->getResult();
+                                                        foreach($list as $row):
+                                                         ?>
+                                                        <tr>
+                                                            <td>
+                                                                <?php echo $row->last_name ?>,&nbsp;<?php echo $row->first_name ?>&nbsp;<?php echo $row->mi ?>
+                                                            </td>
+                                                            <td><?php echo $row->jersey_num ?></td>
+                                                            <td><?php echo $row->roleName ?></td>
+                                                            <td>
+                                                                <?php
+                                                                $builder = $db->table('player_performance');
+                                                                $builder->select('stat_type,stat_value');
+                                                                $builder->WHERE('player_id',$row->player_id)
+                                                                        ->WHERE('match_id',$match['match_id']);
+                                                                $stats = $builder->get()->getResult();
+                                                                foreach($stats as $s) 
+                                                                {
+                                                                    ?>
+                                                                <small><?php echo $s->stat_type ?></small> :
+                                                                <small><?php echo $s->stat_value ?></small><br />
+                                                                <?php
+                                                                } 
+                                                                ?>
+                                                            </td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-primary add2"
+                                                                    value="<?php echo $row->player_id ?>"><i
+                                                                        class="ti ti-circle-dashed-plus"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        <?php
+                                                        endforeach;
+                                                        ?>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>
@@ -156,6 +244,213 @@
     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <div class="modal modal-blur fade" id="stats1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Player Stats</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmStat1">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="player" id="player_1" />
+                        <input type="hidden" name="match_id" value="<?=$match['match_id']?>" />
+                        <div class="col-lg-12">
+                            <label>Match ID : <?=$match['match_id']?></label>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row g-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label">Stats</label>
+                                    <select name="stat_type" class="form-select" required>
+                                        <option value="">Choose</option>
+                                        <option value="PTS">Points</option>
+                                        <option value="BLK">Blocks</option>
+                                        <option value="REB">Rebounds</option>
+                                        <option value="AST">Assists</option>
+                                        <option value="STL">Steals</option>
+                                        <option value="TO">Turnovers</option>
+                                        <option value="K">Kills</option>
+                                        <option value="DIG">Digs</option>
+                                        <option value="SA">Service Aces</option>
+                                        <option value="G">Goals</option>
+                                        <option value="T">Tackles</option>
+                                        <option value="SOG">Shots On Goal</option>
+                                        <option value="S">Smaches</option>
+                                        <option value="DS">Drop Shots</option>
+                                        <option value="A">Aces</option>
+                                        <option value="SE">Service Errors</option>
+                                    </select>
+                                    <div id="stat_type-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label">Value</label>
+                                    <input type="number" class="form-control" name="value" min="0" required />
+                                    <div id="value-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary form-control">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal modal-blur fade" id="stats2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Player Stats</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" class="row g-3" id="frmStat2">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="player" id="player_2" />
+                        <input type="hidden" name="match_id" value="<?=$match['match_id']?>" />
+                        <div class="col-lg-12">
+                            <label>Match ID : <?=$match['match_id']?></label>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row g-3">
+                                <div class="col-lg-6">
+                                    <label class="form-label">Stats</label>
+                                    <select name="stat_type" class="form-select" required>
+                                        <option value="">Choose</option>
+                                        <option value="PTS">Points</option>
+                                        <option value="BLK">Blocks</option>
+                                        <option value="REB">Rebounds</option>
+                                        <option value="AST">Assists</option>
+                                        <option value="STL">Steals</option>
+                                        <option value="TO">Turnovers</option>
+                                        <option value="K">Kills</option>
+                                        <option value="DIG">Digs</option>
+                                        <option value="SA">Service Aces</option>
+                                        <option value="G">Goals</option>
+                                        <option value="T">Tackles</option>
+                                        <option value="SOG">Shots On Goal</option>
+                                        <option value="S">Smaches</option>
+                                        <option value="DS">Drop Shots</option>
+                                        <option value="A">Aces</option>
+                                        <option value="SE">Service Errors</option>
+                                    </select>
+                                    <div id="stat_type-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label class="form-label">Value</label>
+                                    <input type="number" class="form-control" name="value" min="0" required />
+                                    <div id="value-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary form-control">
+                                <i class="ti ti-device-floppy"></i>&nbsp;Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    $(document).on('click', '.add', function() {
+        $('#player_1').attr("value", $(this).val());
+        $('#stats1').modal('show');
+    });
+
+    $(document).on('click', '.add2', function() {
+        $('#player_2').attr("value", $(this).val());
+        $('#stats2').modal('show');
+    });
+
+    $('#frmStat1').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('stats')?>",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmStat1')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+
+    $('#frmStat2').on('submit', function(e) {
+        e.preventDefault();
+        $('.error-message').html('');
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('stats')?>",
+            method: "POST",
+            data: new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(response) {
+                if (response.success) {
+                    $('#frmStat2')[0].reset();
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.reload();
+                        }
+                    });
+                } else {
+                    var errors = response.error;
+                    // Iterate over each error and display it under the corresponding input field
+                    for (var field in errors) {
+                        $('#' + field + '-error').html('<p>' + errors[field] +
+                            '</p>'); // Show the first error message
+                        $('#' + field).addClass(
+                            'text-danger'); // Highlight the input field with an error
+                    }
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>

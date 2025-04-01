@@ -15,6 +15,11 @@ class Home extends BaseController
         return view('welcome_message');
     }
 
+    public function watchNow()
+    {
+        
+    }
+
     public function auth()
     {
         return view('auth/login');
@@ -179,6 +184,7 @@ class Home extends BaseController
         //recent match
         $matchModel = new \App\Models\matchModel();
         $match = $matchModel
+            ->WHERE('result<>','-')
             ->WHERE('team1_id',$player['team_id'])
             ->ORWHERE('team2_id',$player['team_id'])
             ->orderBy('match_id','DESC')->first();
@@ -186,7 +192,7 @@ class Home extends BaseController
         //stats
         $builder = $this->db->table('player_performance');
         $builder->select('*');
-        $builder->WHERE('player_id',$id)->WHERE('match_id',$match['match_id']);
+        $builder->WHERE('player_id',value: $id)->WHERE('match_id',$match['match_id']);
         $recentStats = $builder->get()->getResult();
         //all stats
         $sql = "SELECT stat_type,sum(stat_value)total FROM player_performance where player_id=:id: group by stat_type";
@@ -1052,13 +1058,17 @@ class Home extends BaseController
 
     public function upload()
     {
-        $title = "Upload Video";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Upload Video";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'sports'=>$sports];
-        return view('main/upload',$data);
+            $data = ['title'=>$title,'sports'=>$sports];
+            return view('main/upload',$data);
+        }
+        return redirect()->back();
     }
 
     public function playVideo($id)
@@ -1201,23 +1211,36 @@ class Home extends BaseController
 
     public function manageVideos()
     {
-        $title = "Videos";
-        //videos
-        $videoModel = new \App\Models\videoModel();
-        $video = $videoModel->findAll();
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Videos";
+            //videos
+            $videoModel = new \App\Models\videoModel();
+            $video = $videoModel->findAll();
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'video'=>$video,'sports'=>$sports];
-        return view('main/manage-videos',$data);
+            $data = ['title'=>$title,'video'=>$video,'sports'=>$sports];
+            return view('main/manage-videos',$data);
+        }
+        return redirect()->back();
     }
 
     public function goLive()
     {
-        $title = "Live Streaming";
-        $data = ['title'=>$title];
-        return view('main/live',$data);
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Live Streaming";
+            //matches today
+            $date = date('Y-m-d');
+            $matchModel = new \App\Models\matchModel();
+            $match = $matchModel->WHERE('date',$date)->findAll();
+            
+            $data = ['title'=>$title,'match'=>$match];
+            return view('main/live',$data);
+        }
+        return redirect()->back();
     }
 
     public function filterVideos()
@@ -1303,9 +1326,13 @@ class Home extends BaseController
     //accounts
     public function accounts()
     {
-        $title = "Accounts";
-        $data = ['title'=>$title];
-        return view('main/accounts',$data);
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Accounts";
+            $data = ['title'=>$title];
+            return view('main/accounts',$data);
+        }
+        return redirect()->back();
     }
 
     public function newAccount()
@@ -1508,27 +1535,35 @@ class Home extends BaseController
 
     public function editPost($id)
     {
-        $title = "Edit Post";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
-        //news
-        $newsModel = new \App\Models\newsModel();
-        $news = $newsModel->WHERE('topic',$id)->first();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Edit Post";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
+            //news
+            $newsModel = new \App\Models\newsModel();
+            $news = $newsModel->WHERE('topic',$id)->first();
 
-        $data = ['title'=>$title,'sports'=>$sports,'news'=>$news];
-        return view('main/edit-post',$data);
+            $data = ['title'=>$title,'sports'=>$sports,'news'=>$news];
+            return view('main/edit-post',$data);
+        }
+        return redirect()->back();
     }
 
     public function newPost()
     {
-        $title = "New Article";
-        //sports
-        $sportsModel = new \App\Models\sportsModel();
-        $sports = $sportsModel->findAll();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "New Article";
+            //sports
+            $sportsModel = new \App\Models\sportsModel();
+            $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'sports'=>$sports];
-        return view('main/new-post',$data);
+            $data = ['title'=>$title,'sports'=>$sports];
+            return view('main/new-post',$data);
+        }
+        return redirect()->back();
     }
 
     public function savePost()
@@ -1951,37 +1986,45 @@ class Home extends BaseController
     //matches
     public function newMatch()
     {
-        $title = "New Match";
-        //incoming matches 
-        $today = date('Y-m-d');
-        $NewDate=date('Y-m-d', strtotime('+3 days'));
-        $builder = $this->db->table('matches a');
-        $builder->select('a.*,b.team_name as team1,c.team_name as team2');
-        $builder->join('teams b','b.team_id=a.team1_id','LEFT'); 
-        $builder->join('teams c','c.team_id=a.team2_id','LEFT'); 
-        $builder->WHERE('a.date>=',$today)->WHERE('a.date<=',$NewDate);
-        $matches = $builder->get()->getResult();
-        //team
-        $teamModel = new \App\Models\teamModel();
-        $team = $teamModel->findAll();
-        
-        $data = ['title'=>$title,'matches'=>$matches,'team'=>$team];
-        return view('main/create-match',$data);
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "New Match";
+            //incoming matches 
+            $today = date('Y-m-d');
+            $NewDate=date('Y-m-d', strtotime('+3 days'));
+            $builder = $this->db->table('matches a');
+            $builder->select('a.*,b.team_name as team1,c.team_name as team2');
+            $builder->join('teams b','b.team_id=a.team1_id','LEFT'); 
+            $builder->join('teams c','c.team_id=a.team2_id','LEFT'); 
+            $builder->WHERE('a.date>=',$today)->WHERE('a.date<=',$NewDate);
+            $matches = $builder->get()->getResult();
+            //team
+            $teamModel = new \App\Models\teamModel();
+            $team = $teamModel->findAll();
+            
+            $data = ['title'=>$title,'matches'=>$matches,'team'=>$team];
+            return view('main/create-match',$data);
+        }
+        return redirect()->back();
     }
 
     public function allMatch()
     {
-        $title = "All Matches";
-        //matches
-        $builder = $this->db->table('matches a');
-        $builder->select('a.*,b.team_name as team1,c.team_name as team2');
-        $builder->join('teams b','b.team_id=a.team1_id','LEFT');
-        $builder->join('teams c','c.team_id=a.team2_id','LEFT');
-        $builder->groupBy('a.match_id');
-        $matches = $builder->get()->getResult();
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "All Matches";
+            //matches
+            $builder = $this->db->table('matches a');
+            $builder->select('a.*,b.team_name as team1,c.team_name as team2');
+            $builder->join('teams b','b.team_id=a.team1_id','LEFT');
+            $builder->join('teams c','c.team_id=a.team2_id','LEFT');
+            $builder->groupBy('a.match_id');
+            $matches = $builder->get()->getResult();
 
-        $data = ['title'=>$title,'matches'=>$matches];
-        return view('main/match',$data);
+            $data = ['title'=>$title,'matches'=>$matches];
+            return view('main/match',$data);
+        }
+        return redirect()->back();
     }
 
     public function saveMatch()
@@ -2019,13 +2062,54 @@ class Home extends BaseController
 
     public function scoreMatch($id)
     {
-        $title = "Match Details";
-        //match
-        $matchModel  = new \App\Models\matchModel();
-        $match = $matchModel->WHERE('match_id',$id)->first();
-        
-        $data = ['title'=>$title,'match'=>$match];
-        return view('main/scoreboard',$data);
+        if(session()->get('role')=="Super-admin" || session()->get('role')=="Organizer")
+        {
+            $title = "Match Details";
+            //match
+            $matchModel  = new \App\Models\matchModel();
+            $match = $matchModel->WHERE('match_id',$id)->first();
+            
+            $data = ['title'=>$title,'match'=>$match];
+            return view('main/scoreboard',$data);
+        }
+        return redirect()->back();
+    }
+
+    public function stats()
+    {
+        $performanceModel = new \App\Models\performanceModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'match_id'=>'required',
+            'player'=>'required',
+            'stat_type'=>'required',
+            'value'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            //get the details of the match
+            $matchModel = new \App\Models\matchModel();
+            $match = $matchModel->WHERE('match_id',$this->request->getPost('match_id'))->first();
+            //get the team and sports ID
+            $playerModel = new \App\Models\playerModel();
+            $player = $playerModel->WHERE('player_id',$this->request->getPost('player'))->first();
+            
+            $data = ['player_id'=>$this->request->getPost('player'),
+                      'match_id'=>$match['match_id'],
+                      'team_id'=>$player['team_id'],
+                      'sportsID'=>$player['sportsID'],
+                      'stat_type'=>$this->request->getPost('stat_type'),
+                      'stat_value'=>$this->request->getPost('value'),
+                      'date'=>$match['date'],
+                      'description'=>'-'];
+            $performanceModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
     }
 
     //shops

@@ -89,7 +89,7 @@
                                         <?php foreach($matches as $row): ?>
                                         <tr>
                                             <td><?php echo $row->match_id ?></td>
-                                            <td><?php echo $row->date ?></td>
+                                            <td><?php echo date('Y-M-d',strtotime($row->date)) ?></td>
                                             <td><?php echo date('h:i A',strtotime($row->time)) ?></td>
                                             <td>
                                                 <?php echo $row->team1 ?><br />
@@ -104,7 +104,7 @@
                                             <td>
                                                 <a href="<?=site_url('match-details')?>/<?php echo $row->match_id ?>"
                                                     class="btn btn-primary">
-                                                    <i class="ti ti-soccer-field"></i>&nbsp;Score Board
+                                                    <i class="ti ti-soccer-field"></i>&nbsp;Details
                                                 </a>
                                             </td>
                                         </tr>

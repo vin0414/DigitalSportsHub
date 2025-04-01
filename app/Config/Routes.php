@@ -53,6 +53,7 @@ $routes->post('edit-video','Home::modifyVideo');
 $routes->get('filter-videos','Home::filterVideos');
 //matches
 $routes->post('save-match','Home::saveMatch');
+$routes->post('stats','Home::stats');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

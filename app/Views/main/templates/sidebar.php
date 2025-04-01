@@ -322,7 +322,7 @@
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Account Settings</h6>
                 </li>
                 <li class="nav-item <?= ($title == 'My Account') ? 'active' : '' ?>">
-                    <a class="nav-link" href="<?=site_url('account')?>">
+                    <a class="nav-link" href="<?=site_url('my-account')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
                             <!-- Download SVG icon from http://tabler.io/icons/icon/checkbox -->
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

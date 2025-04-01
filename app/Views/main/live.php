@@ -81,11 +81,17 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <button type="button" class="btn btn-primary" onclick="start(this)">
-                                                Start video
+                                                <i class="ti ti-player-play"></i>&nbsp;Start
+                                            </button>
+                                            <button type="button" class="btn btn-primary" onclick="stop(this)">
+                                                <i class="ti ti-player-stop"></i>&nbsp;Stop
+                                            </button>
+                                            <button type="button" class="btn btn-secondary">
+                                                <i class="ti ti-download"></i>&nbsp;Download
                                             </button>
                                             <button type="button" class="btn btn-danger" id="stream"
                                                 onclick="stream(this)" disabled>
-                                                Go Live
+                                                <i class="ti ti-building-broadcast-tower"></i>&nbsp;Live
                                             </button>
                                         </div>
                                     </div>
@@ -94,8 +100,14 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="card-title">Matches</div>
+                                <div class="card-header">
+                                    <div class="card-title">Upcoming Matches</div>
+                                </div>
+                                <div class="position-relative">
+                                    <?php if(empty($matches)): ?>
+                                    <div style="padding:5px;margin:5px;">No Incoming Match(es) Yet</div>
+                                    <?php else : ?>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
