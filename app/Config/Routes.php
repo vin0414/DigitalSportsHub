@@ -54,6 +54,13 @@ $routes->get('filter-videos','Home::filterVideos');
 //matches
 $routes->post('save-match','Home::saveMatch');
 $routes->post('stats','Home::stats');
+$routes->post('add-score-team-1','Home::addScore1');
+$routes->post('minus-score-team-1','Home::minusScore1');
+$routes->post('add-score-team-2','Home::addScore2');
+$routes->post('minus-score-team-2','Home::minusScore2');
+$routes->get('team1-score','Home::teamHome');
+$routes->get('team2-score','Home::teamGuest');
+$routes->post('end-game','Home::endGame');
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {
@@ -90,7 +97,7 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('match-details/(:any)','Home::scoreMatch/$1');
     //videos
     $routes->get('videos','Home::manageVideos');
-    $routes->get('upload','Home::upload');
+    $routes->get('upload-video','Home::uploadVideo');
     $routes->get('go-live','Home::goLive');
     $routes->get('videos/play/(:any)','Home::playVideo/$1');
     $routes->get('videos/edit/(:any)','Home::editVideo/$1');

@@ -45,7 +45,7 @@
                         <!-- Page title actions -->
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('upload')?>" class="btn btn-secondary"><i
+                                <a href="<?=site_url('upload-video')?>" class="btn btn-secondary"><i
                                         class="ti ti-upload"></i>&nbsp;Upload</a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">

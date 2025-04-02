@@ -85,7 +85,6 @@
                     <div class="top-bar">
                         <div class="top-bar-inner">
                             <div class="top-bar-left">
-                                <a href="#" class="get-ticket-btn">Get Ticket</a>
                                 <ul class="social-wrapper">
                                     <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                     <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -102,8 +101,15 @@
                                 </ul>
                             </div>
                             <div class="top-bar-mid">
+                            <?php if(!empty($game)): ?>
                                 <span class="tag">LIVE</span>
-                                <div class="live-match">GOLD KING <span>VS</span> ROYAL UP</div>
+                                <?php
+                                $teamModel = new \App\Models\teamModel();
+                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
+                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
+                                ?>
+                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></div>
+                            <?php endif; ?>
                             </div>
                             <div class="top-bar-right">
                                 <a href="" class="login-btn">LOG IN</a>
@@ -111,223 +117,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="navbar-inner">
-                        <a href="<?=base_url('/')?>" class="logo">
-                            <img src="assets/images/logo.jpg" width="50" alt="sportius-logo"></a>
-                        <a href="<?=base_url('/')?>" class="logo-sticky">
-                            <img src="assets/images/logo.jpg" width="50" alt="kester-logo"></a>
-                        <div class="rts-menu">
-                            <nav class="menus menu-toggle">
-                                <ul class="nav__menu">
-                                    <li class="has-dropdown">
-                                        <a class="menu-item active1" href="<?=base_url('/')?>">Home</a>
-                                    </li>
-                                    <li><a class="menu-item" href="<?=base_url('watch-now')?>">Watch</a></li>
-                                    <li class="has-dropdown"><a class="menu-item" href="#">Pages</a>
-                                        <ul class="dropdown-ul mega-dropdown">
-                                            <li class="mega-dropdown-li">
-                                                <ul class="mega-dropdown-ul">
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="team.html">Team Details</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="team-details.html">Player Details</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="history.html">History</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="awards.html">Awards</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="faq.html">FAQ</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-dropdown-li">
-                                                <ul class="mega-dropdown-ul">
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="gallery.html">Gallery</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="event.html">Event</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="event-details.html">Event Details</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="error.html">Error</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="mega-dropdown-li">
-                                                <ul class="mega-dropdown-ul">
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="match-schedule.html">Match Schedule</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="match-result.html">Match
-                                                            Result</a>
-                                                    </li>
-                                                    <li class="dropdown-li"><a class="dropdown-link"
-                                                            href="league-standings.html">Point Table</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="menu-item" href="#">Shop near me</a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-item" href="">News</a>
-                                    </li>
-                                    <li><a class="menu-item" href="">Contact</a></li>
-                                </ul>
-                            </nav>
-                        </div>
-                        <div class="header-action-items header-action-items1">
-                            <div class="search-part">
-                                <div class="search-icon action-item icon"><i class="fa-solid fa-magnifying-glass"></i>
-                                </div>
-                                <div class="search-input-area">
-                                    <div class="container">
-                                        <div class="search-input-inner">
-                                            <select class="custom-select select-hidden">
-                                                <option value="hide">All Catagories</option>
-                                                <option value="all">All</option>
-                                                <option value="league">League</option>
-                                                <option value="club">Club</option>
-                                                <option value="team">Team</option>
-                                                <option value="player">Player</option>
-                                                <option value="match">Match</option>
-                                                <option value="score">Score</option>
-                                            </select>
-                                            <div class="input-div">
-                                                <div class="search-input-icon"><i
-                                                        class="fa-solid fa-magnifying-glass"></i></div>
-                                                <input id="searchInput1" class="search-input" type="text"
-                                                    placeholder="Search by keyword or #">
-                                            </div>
-                                            <div class="search-close-icon">
-                                                <i class="fa-solid fa-circle-xmark"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="cart action-item">
-                                <div class="cart-nav">
-                                    <div class="basket-icon cart-icon icon">
-                                        <a href="#">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="hamburger-menu aitem d-block">
-                            <div class="hamburger-menu-inner">
-                                <span></span>
-                                <span class=""></span>
-                                <span></span>
-                            </div>
-                        </a>
-                    </div>
+                    <?=view('templates/header')?>
                 </div>
             </div>
         </div>
 
         <!--================= Slide Bar Start Here =================-->
-        <aside class="slide-bar">
-            <div class="offset-sidebar">
-                <button class="slide-bar-close ml--30"><i class="fa-solid fa-circle-xmark"></i></button>
-                <div class="offset-widget offset-logo mb-30">
-                    <a href="<?=base_url('/')?>">
-                        <img src="<?=base_url('assets/images/logo.png')?>" alt="logo">
-                    </a>
-                </div>
-            </div>
-            <!-- side-mobile-menu start -->
-            <nav class="side-mobile-menu side-mobile-menu1">
-                <ul id="mobile-menu-active">
-                    <li class="has-dropdown firstlvl">
-                        <a class="mm-link" href="<?=base_url('/')?>">Home</a>
-                    </li>
-                    <li><a class="mm-link" href="<?=base_url('about')?>">About</a></li>
-                    <li class="has-dropdown firstlvl">
-                        <a class="mm-link" href="index.html">Pages <i class="rt-angle-down"></i></a>
-                        <ul class="sub-menu mega-dropdown-mobile">
-                            <li class="mega-dropdown-li">
-                                <ul class="mega-dropdown-ul mm-show">
-                                    <li class="dropdown-li"><a class="dropdown-link" href="team.html">Team Details</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="team-details.html">Player
-                                            Details</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="history.html">History</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="faq.html">FAQ</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="mega-dropdown-li">
-                                <ul class="mega-dropdown-ul mm-show">
-                                    <li class="dropdown-li"><a class="dropdown-link" href="gallery.html">Gallery</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="event.html">Event</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="event-details.html">Event
-                                            Details</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="error.html">Error</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="mega-dropdown-li">
-                                <ul class="mega-dropdown-ul mm-show">
-                                    <li class="dropdown-li"><a class="dropdown-link" href="match-schedule.html">Match
-                                            Schedule</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="match-result.html">Match
-                                            Result</a>
-                                    </li>
-                                    <li class="dropdown-li"><a class="dropdown-link" href="league-standings.html">Point
-                                            Table</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown firstlvl">
-                        <a class="mm-link" href="index.html">Shop <i class="rt-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li><a href="shop.html">Shop</a></li>
-                            <li><a href="product-details.html">Product Details</a></li>
-                            <li><a href="cart.html">cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="account.html">My Account</a></li>
-                            <li><a href="thank-you.html">Thank You</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown firstlvl">
-                        <a class="mm-link" href="news-details.html">News <i class="rt-angle-down"></i></a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">News</a></li>
-                            <li><a href="blog-details.html">News Details</a></li>
-                        </ul>
-                    </li>
-                    <li><a class="mm-link" href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
-            <!-- side-mobile-menu end -->
-            <div class="side-bar-social-links">
-                <a href="#0" class="platform"><i class="fab fa-facebook-f"></i></a>
-                <a href="#0" class="platform"><i class="fab fa-twitter"></i></a>
-                <a href="#0" class="platform"><i class="fab fa-behance"></i></a>
-                <a href="#0" class="platform"><i class="fab fa-youtube"></i></a>
-            </div>
-        </aside>
+        <?=view('templates/sidebar')?>
         <!--================= Slide Bar Start Here =================-->
 
         <!--================= Banner Section Start Here =================-->
@@ -1702,11 +1498,6 @@
                 <div class="bottom-area-inner">
                     <span class="copyright">COPYRIGHT & DESIGN BY <span
                             class="brand">KESTER</span>&nbsp;<?=date('Y') ?></span>
-                    <div class="footer-bottom-links">
-                        <a href="#">TERMS & CONDITONS</a>
-                        <a href="#">FAQ</a>
-                        <a href="#">CAREER</a>
-                    </div>
                 </div>
             </div>
         </div>
