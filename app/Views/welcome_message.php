@@ -101,19 +101,20 @@
                                 </ul>
                             </div>
                             <div class="top-bar-mid">
-                            <?php if(!empty($game)): ?>
+                                <?php if(!empty($game)): ?>
                                 <span class="tag">LIVE</span>
                                 <?php
                                 $teamModel = new \App\Models\teamModel();
                                 $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
                                 $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
                                 ?>
-                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></div>
-                            <?php endif; ?>
+                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span>
+                                    <?=$team2['team_name']?></div>
+                                <?php endif; ?>
                             </div>
                             <div class="top-bar-right">
-                                <a href="" class="login-btn">LOG IN</a>
-                                <a href="" class="sign-up-btn">SIGN UP</a>
+                                <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
+                                <a href="<?=site_url('register')?>" class="sign-up-btn">SIGN UP</a>
                             </div>
                         </div>
                     </div>

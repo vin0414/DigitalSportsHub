@@ -5,9 +5,12 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
+//auth
 $routes->get('/', 'Home::index');
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
+//fan
+$routes->post('validate','User::validateUser');
 //pages
 $routes->get('watch-now','Home::watchNow');
 // ajax request
@@ -61,6 +64,12 @@ $routes->post('minus-score-team-2','Home::minusScore2');
 $routes->get('team1-score','Home::teamHome');
 $routes->get('team2-score','Home::teamGuest');
 $routes->post('end-game','Home::endGame');
+
+$routes->group('',['filter'=>'UserAlreadyLoggedIn'],function($routes)
+{
+    $routes->get('login','User::login');
+    $routes->get('reset-password','User::resetPassword');
+});
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
 {

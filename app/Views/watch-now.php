@@ -101,19 +101,20 @@
                                 </ul>
                             </div>
                             <div class="top-bar-mid">
-                            <?php if(!empty($game)): ?>
+                                <?php if(!empty($game)): ?>
                                 <span class="tag">LIVE</span>
                                 <?php
                                 $teamModel = new \App\Models\teamModel();
                                 $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
                                 $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
                                 ?>
-                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></div>
-                            <?php endif; ?>
+                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span>
+                                    <?=$team2['team_name']?></div>
+                                <?php endif; ?>
                             </div>
                             <div class="top-bar-right">
-                                <a href="" class="login-btn">LOG IN</a>
-                                <a href="" class="sign-up-btn">SIGN UP</a>
+                                <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
+                                <a href="<?=site_url('register')?>" class="sign-up-btn">SIGN UP</a>
                             </div>
                         </div>
                     </div>
@@ -170,12 +171,13 @@
                             <div class="item">
                                 <video id="remote" autoplay controls></video>
                                 <?php if(!empty($game)): ?>
-                                <span class="tag text-danger">LIVE</span> <?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?>
+                                <span class="tag text-danger">LIVE</span> <?=$team1['team_name']?> <span>VS</span>
+                                <?=$team2['team_name']?>
                                 <?php endif; ?>
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            
+
                         </div>
                     </div>
                 </div>
@@ -297,33 +299,36 @@
     <!--================= Main Script =================-->
     <script src="<?=base_url('assets/js/main.js')?>"></script>
     <script>
-        const remote = document.querySelector("video#remote");
-        let peerConnection;
+    const remote = document.querySelector("video#remote");
+    let peerConnection;
 
-        const channel = new BroadcastChannel("stream-video");
-        channel.onmessage = e => {
+    const channel = new BroadcastChannel("stream-video");
+    channel.onmessage = e => {
         if (e.data.type === "icecandidate") {
             peerConnection?.addIceCandidate(e.data.candidate)
         } else if (e.data.type === "offer") {
-                console.log("Received offer")
-                handleOffer(e.data)
-            }
+            console.log("Received offer")
+            handleOffer(e.data)
         }
+    }
 
-        function handleOffer(offer) {
+    function handleOffer(offer) {
         const config = {};
         peerConnection = new RTCPeerConnection(config);
         peerConnection.addEventListener("track", e => remote.srcObject = e.streams[0]);
         peerConnection.addEventListener("icecandidate", e => {
             let candidate = null;
             if (e.candidate !== null) {
-            candidate = {
+                candidate = {
                     candidate: e.candidate.candidate,
                     sdpMid: e.candidate.sdpMid,
                     sdpMLineIndex: e.candidate.sdpMLineIndex,
                 }
             }
-            channel.postMessage({ type: "icecandidate", candidate })
+            channel.postMessage({
+                type: "icecandidate",
+                candidate
+            })
         });
         peerConnection.setRemoteDescription(offer)
             .then(() => peerConnection.createAnswer())
@@ -335,7 +340,7 @@
                     sdp: answer.sdp,
                 });
             });
-        }
+    }
     </script>
 </body>
 

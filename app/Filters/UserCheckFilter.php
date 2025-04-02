@@ -6,14 +6,14 @@ use CodeIgniter\Filters\FilterInterface;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 
-class AuthCheckFilter implements FilterInterface
+class UserCheckFilter implements FilterInterface
 {
     public function before(RequestInterface $request, $arguments = null)
     {
 
-        if (!session()->has('loggedUser')) {
+        if (!session()->has('loggedInUser')) {
             session()->setFlashdata('fail','You must logged In!');
-            return redirect()->to('/auth')->withInput();
+            return redirect()->to('/login')->withInput();
         }
     }
     
