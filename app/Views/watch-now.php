@@ -82,42 +82,7 @@
         <div class="navbar-sticky">
             <div class="navbar-part navbar-part1">
                 <div class="container">
-                    <div class="top-bar">
-                        <div class="top-bar-inner">
-                            <div class="top-bar-left">
-                                <ul class="social-wrapper">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                                    <li><a href="#">
-                                            <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                    fill="white" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="top-bar-mid">
-                                <?php if(!empty($game)): ?>
-                                <span class="tag">LIVE</span>
-                                <?php
-                                $teamModel = new \App\Models\teamModel();
-                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
-                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
-                                ?>
-                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span>
-                                    <?=$team2['team_name']?></div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="top-bar-right">
-                                <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
-                                <a href="<?=site_url('register')?>" class="sign-up-btn">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?=view('templates/topbar')?>
                     <?=view('templates/header')?>
                 </div>
             </div>
@@ -171,6 +136,11 @@
                             <div class="item">
                                 <video id="remote" autoplay controls></video>
                                 <?php if(!empty($game)): ?>
+                                <?php
+                                $teamModel = new \App\Models\teamModel();
+                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
+                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
+                                ?>
                                 <span class="tag text-danger">LIVE</span> <?=$team1['team_name']?> <span>VS</span>
                                 <?=$team2['team_name']?>
                                 <?php endif; ?>
@@ -188,88 +158,7 @@
 
 
     <!--================= Footer Start Here =================-->
-    <div class="footer footer1 baseball">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-logo"><img src="assets/images/logo3.png" alt="footer-logo">
-                            </div>
-                            <p class="footer-text">It was the end of a period in the 1980s
-                                in which it seemed like every NBA Finals
-                                matchup featured the Celtics sports club.</p>
-                            <div class="social-links">
-                                <a href="#0" class="platform"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-twitter"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-behance"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6">
-                        <div class="footer-widget">
-                            <h3 class="footer-widget-title"> QUICK LINKS</h3>
-                            <ul class="widget-items cata-widget">
-                                <li class="widget-list-item"><a href="about.html">ABOUT CLUB</a></li>
-                                <li class="widget-list-item"><a href="contact.html">CONTACTS</a></li>
-                                <li class="widget-list-item"><a href="price-table.html">PRICE TABLE</a></li>
-                                <li class="widget-list-item"><a href="shop.html">SHOP</a></li>
-                                <li class="widget-list-item"><a href="our-players.html">OUR PLAYERS</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="footer-widget news-widget">
-                            <h3 class="footer-widget-title"> POST GALLERY</h3>
-                            <div class="recent-post">
-                                <div class="picture"><a href="blog-details.html"><img
-                                            src="assets/images/blog/small-post4.png" alt="side-post-image"></a></div>
-                                <div class="content">
-                                    <span class="news-date">June 21, 2023</span>
-                                    <a href="blog-details.html" class="recent-post-title">A batter who's catches
-                                        a pitch while batting</a>
-                                </div>
-                            </div>
-                            <div class="recent-post">
-                                <div class="picture"><a href="blog-details.html"><img
-                                            src="assets/images/blog/small-post5.png" alt="side-post-image"></a></div>
-                                <div class="content">
-                                    <span class="news-date">June 21, 2023</span>
-                                    <a href="blog-details.html" class="recent-post-title">A batter who's catches
-                                        a pitch while batting</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="footer-widget address-widget">
-                            <h3 class="footer-widget-title"> GET IN TOUCH</h3>
-                            <ul>
-                                <li class="widget-list-item"><i class="fas fa-envelope-open"></i><a
-                                        href="mailto:info@webmail.com">INFO@WEBMAIL.COM</a></li>
-                                <li class="widget-list-item"><i class="fas fa-phone"></i><a href="tel:09877788890">098
-                                        777
-                                        888 90</a></li>
-                                <li class="widget-list-item"><i class="fas fa-map-marker-alt"></i> <span>USA, CALIFORNIA
-                                        20,
-                                        FIRST <br>
-                                        AVENUE, CALIFORNIA</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="bottom-area-inner">
-                    <span class="copyright">COPYRIGHT & DESIGN BY <span
-                            class="brand">KESTER</span>&nbsp;<?=date('Y') ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?=view('templates/footer');?>
     <!--================= Footer End Here =================-->
 
 

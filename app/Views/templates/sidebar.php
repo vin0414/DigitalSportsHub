@@ -5,6 +5,10 @@
             <a href="<?=base_url('/')?>">
                 <img src="<?=base_url('assets/images/logo.jpg')?>" alt="logo">
             </a>
+            <hr />
+            <?php if(!empty(session()->get('loggedInUser'))): ?>
+            <a href="javascript:void(0);" class="login-btn text-white">Welcome, <?=session()->get('fullname')?></a>
+            <?php endif; ?>
         </div>
     </div>
     <!-- side-mobile-menu start -->
@@ -13,49 +17,25 @@
             <li class="has-dropdown firstlvl">
                 <a class="mm-link" href="<?=base_url('/')?>">Home</a>
             </li>
-            <li><a class="mm-link" href="<?=base_url('about')?>">About</a></li>
-            <li class="has-dropdown firstlvl">
-                <a class="mm-link" href="index.html">Pages <i class="rt-angle-down"></i></a>
-                <ul class="sub-menu mega-dropdown-mobile">
-                    <li class="mega-dropdown-li">
-                        <ul class="mega-dropdown-ul mm-show">
-                            <li class="dropdown-li"><a class="dropdown-link" href="team.html">Team Details</a>
-                            </li>
-                            <li class="dropdown-li"><a class="dropdown-link" href="team-details.html">Player
-                                    Details</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="mega-dropdown-li">
-                        <ul class="mega-dropdown-ul mm-show">
-                            <li class="dropdown-li"><a class="dropdown-link" href="gallery.html">Gallery</a>
-                            </li>
-                            <li class="dropdown-li"><a class="dropdown-link" href="event.html">Event</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="mega-dropdown-li">
-                        <ul class="mega-dropdown-ul mm-show">
-                            <li class="dropdown-li"><a class="dropdown-link" href="match-schedule.html">Match
-                                    Schedule</a>
-                            </li>
-                            <li class="dropdown-li"><a class="dropdown-link" href="match-result.html">Match
-                                    Result</a>
-                            </li>
-                            <li class="dropdown-li"><a class="dropdown-link" href="league-standings.html">Point
-                                    Table</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+            <li><a class="mm-link" href="<?=base_url('watch-now')?>">Watch Now</a></li>
+            <li>
+                <a class="mm-link" href="<?=site_url('latest-events')?>">Events</a>
             </li>
-            <li class="has-dropdown firstlvl">
-                <a class="mm-link" href="index.html">Shop</a>
+            <li>
+                <a class="mm-link" href="<?=site_url('shop-near-me')?>">Shop Near Me</a>
             </li>
-            <li class="has-dropdown firstlvl">
-                <a class="mm-link" href="news-details.html">News</a>
+            <li>
+                <a class="mm-link" href="<?=site_url('latest-news')?>">News</a>
             </li>
-            <li><a class="mm-link" href="contact.html">Contact</a></li>
+            <li><a class="mm-link" href="<?=site_url('contact-us')?>">Contact</a></li>
+            <li>
+                <?php if(empty(session()->get('loggedInUser'))): ?>
+                <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
+                <a href="<?=site_url('sign-up')?>" class="sign-up-btn">SIGN UP</a>
+                <?php else : ?>
+                <a href="<?=site_url('sign-out')?>" class="sign-up-btn">Sign Out</a>
+                <?php endif; ?>
+            </li>
         </ul>
     </nav>
     <!-- side-mobile-menu end -->

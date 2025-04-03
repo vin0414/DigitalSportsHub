@@ -35,6 +35,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css"
         integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .video-background {
+            position: relative;
+            width: 100%;
+            height: 100%; /* Adjust this based on your needs (full height or specific size) */
+            overflow: hidden;
+        }
+
+        #background-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: fill; /* This makes the video cover the entire container */
+            transform: translate(-50%, -50%); /* This centers the video */
+            z-index: -1; /* Keeps the video in the background */
+        }
+    </style>
 </head>
 
 <body>
@@ -82,42 +101,7 @@
         <div class="navbar-sticky">
             <div class="navbar-part navbar-part1">
                 <div class="container">
-                    <div class="top-bar">
-                        <div class="top-bar-inner">
-                            <div class="top-bar-left">
-                                <ul class="social-wrapper">
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                                    <li><a href="#">
-                                            <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                xmlns="http://www.w3.org/2000/svg">
-                                                <path
-                                                    d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                    fill="white" />
-                                            </svg>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="top-bar-mid">
-                                <?php if(!empty($game)): ?>
-                                <span class="tag">LIVE</span>
-                                <?php
-                                $teamModel = new \App\Models\teamModel();
-                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
-                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
-                                ?>
-                                <div class="live-match"><?=$team1['team_name']?> <span>VS</span>
-                                    <?=$team2['team_name']?></div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="top-bar-right">
-                                <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
-                                <a href="<?=site_url('register')?>" class="sign-up-btn">SIGN UP</a>
-                            </div>
-                        </div>
-                    </div>
+                    <?=view('templates/topbar')?>
                     <?=view('templates/header')?>
                 </div>
             </div>
@@ -164,156 +148,40 @@
                     <h1 class="section-title">LATEST NEWS</h1>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="left-post-inner">
-                            <div class="post-inner small">
-                                <div class="item small-post">
-                                    <a href="blog-details.html" class="gallery-picture">
-                                    </a>
-                                    <div class="contents-wrapper">
-                                        <div class="contents text-start">
-                                            <div class="d-block">
-                                                <div class="heading d-flex">
-                                                    <p class="tag">BASKETBALL</p>
-                                                    <span class="blog-date">JULY 21, 2023</span>
-                                                </div>
-                                                <div class="gallery-title">
-                                                    <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                        Basketball Battle match</a>
-                                                </div>
-                                            </div>
-                                            <div class="author-info">
-                                                <div class="content">
-                                                    <a href="blog-details.html" class="read-more">READ MORE</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="post-inner small">
-                                <div class="item small-post two">
-                                    <a href="blog-details.html" class="gallery-picture">
-                                    </a>
-                                    <div class="contents-wrapper">
-                                        <div class="contents text-start">
-                                            <div class="d-block">
-                                                <div class="heading d-flex">
-                                                    <p class="tag">PLAYER</p>
-                                                    <span class="blog-date">JULY 21, 2023</span>
-                                                </div>
-                                                <div class="gallery-title">
-                                                    <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                        Basketball Battle match</a>
-                                                </div>
-                                            </div>
-                                            <div class="author-info">
-                                                <div class="content">
-                                                    <a href="blog-details.html" class="read-more">READ MORE</a>
+                    <div class="col-lg-12 col-md-6">
+                        <div class="row">
+                        <?php foreach($news as $row): ?>
+                            <div class="col-lg-4">
+                                <div class="left-post-inner" style="background: url(<?=base_url('admin/images/news/')?><?=$row['image'] ?>);background-size: cover;">
+                                    <div class="post-inner small">
+                                        <div class="item small-post">
+                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>" class="gallery-picture">
+                                            </a>
+                                            <div class="contents-wrapper">
+                                                <div class="contents text-start">
+                                                    <div class="d-block">
+                                                        <div class="heading d-flex">
+                                                            <p class="tag"><?=$row['news_type'] ?></p>
+                                                            <span class="blog-date"><?=date('M d Y',strtotime($row['date'])) ?></span>
+                                                        </div>
+                                                        <div class="gallery-title">
+                                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>">
+                                                            <?=$row['topic'] ?>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="author-info">
+                                                        <div class="content">
+                                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>" class="read-more">READ MORE</a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <div class="post-inner">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">BASKETBALL</p>
-                                                <span class="blog-date">JULY 21, 2023</span>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="premier-league-area side-table-item side-item">
-                            <div class="side-item-inner">
-                                <h3 class="side-content-title">PREMIER LEAGUE</h3>
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr class="head-tr">
-                                            <th scope="col">Rank</th>
-                                            <th scope="col">Player</th>
-                                            <th scope="col">PTS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td><span class="position-number">1</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-1.svg"
-                                                        alt="flag">rON eMRICH</span></td>
-                                            <td><span class="win-count">125</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">2</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-2.svg"
-                                                        alt="flag">Henry</span></td>
-                                            <td><span class="win-count">121</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">3</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-3.svg"
-                                                        alt="flag">Benjamin</span></td>
-                                            <td><span class="win-count">113</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">4</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-4.svg"
-                                                        alt="flag">Alexander</span></td>
-                                            <td><span class="win-count">109</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">5</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-5.svg"
-                                                        alt="flag">Jackson</span></td>
-                                            <td><span class="win-count">102</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">6</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-6.svg"
-                                                        alt="flag">Gabriel</span></td>
-                                            <td><span class="win-count">99</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">7</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-7.svg"
-                                                        alt="flag">Maverick</span></td>
-                                            <td><span class="win-count">91</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">8</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-8.svg"
-                                                        alt="flag">Thomas</span></td>
-                                            <td><span class="win-count">86</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">9</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/flag-9.svg"
-                                                        alt="flag">Christopher</span></td>
-                                            <td><span class="win-count">78</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                        <?php endforeach;?>
                         </div>
                     </div>
                 </div>
@@ -391,74 +259,24 @@
                         <div class="right-side-content">
                             <div class="section-title-area section-ttile-area2">
                                 <h1 class="section-title">POINT TABLE</h1>
-                                <a href="#" class="view-btn">VIEW ALL <svg xmlns="http://www.w3.org/2000/svg" width="7"
-                                        height="10" viewBox="0 0 7 10" fill="none">
-                                        <path
-                                            d="M0.722898 0.000164177C0.581981 -0.0029352 0.443599 0.0379148 0.326992 0.117098C0.210385 0.196281 0.121345 0.309883 0.0722539 0.442009C0.0231624 0.574135 0.0164578 0.718253 0.0530719 0.854366C0.0896861 0.990478 0.1678 1.11175 0.276553 1.20141L4.4261 4.75627L0.276553 8.30988C0.201323 8.36517 0.13832 8.43536 0.0914884 8.51613C0.0446573 8.5969 0.0150075 8.6865 0.00439536 8.77925C-0.00621682 8.87201 0.00243752 8.96594 0.0298163 9.0552C0.0571951 9.14446 0.102708 9.22713 0.163506 9.29799C0.224304 9.36884 0.299077 9.42631 0.383142 9.46693C0.467206 9.50755 0.558753 9.53036 0.652047 9.53396C0.745341 9.53756 0.838373 9.52191 0.925317 9.48789C1.01226 9.45387 1.09125 9.40227 1.15732 9.33631L5.90818 5.27148C5.98278 5.20781 6.04269 5.12879 6.08377 5.03973C6.12485 4.95066 6.14613 4.85372 6.14613 4.75564C6.14613 4.65756 6.12485 4.56063 6.08377 4.47156C6.04269 4.3825 5.98278 4.3034 5.90818 4.23973L1.15732 0.170989C1.03731 0.064389 0.883374 0.00394085 0.722898 0.000164177Z"
-                                            fill="white" />
-                                    </svg>
-                                </a>
                             </div>
                             <div class="table-area">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr class="head-tr">
-                                            <th scope="col">POS</th>
                                             <th scope="col">TEAM</th>
-                                            <th scope="col">W</th>
-                                            <th scope="col">L</th>
-                                            <th scope="col">PTS</th>
+                                            <th scope="col">WIN</th>
+                                            <th scope="col">LOSS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    <?php foreach($team as $row): ?>
                                         <tr>
-                                            <td><span class="position-number">1</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-1.svg" alt="">
-                                                    Mancon</span></td>
-                                            <td><span class="win-count">9</span></td>
-                                            <td><span class="win-count">2</span></td>
-                                            <td><span class="win-count">0.912</span></td>
+                                            <td><?=$row->team_name ?></td>
+                                            <td class="text-center"><?=$row->W ?></td>
+                                            <td class="text-center"><?=$row->L ?></td>
                                         </tr>
-                                        <tr>
-                                            <td><span class="position-number">2</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-2.svg"
-                                                        alt="">Weston</span></td>
-                                            <td><span class="win-count">7</span></td>
-                                            <td><span class="win-count">3</span></td>
-                                            <td><span class="win-count">0.833</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">3</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-3.svg"
-                                                        alt="">Bulls</span></td>
-                                            <td><span class="win-count">5</span></td>
-                                            <td><span class="win-count">4</span></td>
-                                            <td><span class="win-count">0.945</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">4</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-4.svg"
-                                                        alt="">Manhut</span></td>
-                                            <td><span class="win-count">5</span></td>
-                                            <td><span class="win-count">4</span></td>
-                                            <td><span class="win-count">0.879</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">5</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-5.svg"
-                                                        alt="">Miland</span></td>
-                                            <td><span class="win-count">4</span></td>
-                                            <td><span class="win-count">2</span></td>
-                                            <td><span class="win-count">0.912</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td><span class="position-number">6</span></td>
-                                            <td><span class="player"><img src="assets/images/icons/club-6.svg"
-                                                        alt="">Interko</span></td>
-                                            <td><span class="win-count">3</span></td>
-                                            <td><span class="win-count">2</span></td>
-                                            <td><span class="win-count">0.912</span></td>
-                                        </tr>
+                                    <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -475,85 +293,42 @@
     <section class="rts-next-match home-four pt--100">
         <div class="container">
             <div class="section-inner">
-                <div class="section-title-area text-center section-ttile-area2">
+                <div class="section-title-area text-center section-tile-area2">
                     <h1 class="section-title">UPCOMING Match</h1>
                 </div>
+                <?php
+                $date = date('Y-m-d');
+                $matchModel = new \App\Models\matchModel();
+                $matches = $matchModel->WHERE('date',$date)->findAll();
+                ?>
                 <div class="row">
+                    <?php foreach($matches as $row): ?>
+                    <?php 
+                    $teamModel = new \App\Models\teamModel();
+                    $team1 = $teamModel->WHERE('team_id',$row['team1_id'])->first();
+                    $team2 = $teamModel->WHERE('team_id',$row['team2_id'])->first();
+                    ?>    
                     <div class="col-lg-4">
                         <div class="match-wrapper">
                             <div class="logo">
-                                <img src="assets/images/icons/club-7.svg" alt="">
+                                <img src="<?=base_url('admin/images/team/')?><?=$team1['image']?>" style="width:75px;" alt="">
                             </div>
-                            <div class="content">
-                                <p class="date">August 11, 2023</p>
-                                <p class="time">5:45 Pm</p>
-                                <h3 class="team">Dragons <span>VS</span> Manhut</h3>
+                            <div class="content" style="margin:5px;">
+                                <p class="date"><?=date('M d,Y',strtotime($row['date']))?></p>
+                                <p class="time"><?=date('h:i A',strtotime($row['time']))?></p>
+                                <h4 class="team"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></h4>
                             </div>
                             <div class="logo">
-                                <img src="assets/images/icons/club-8.svg" alt="">
+                                <img src="<?=base_url('admin/images/team/')?><?=$team2['image']?>" style="width:75px;" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
-                        <div class="match-wrapper">
-                            <div class="logo">
-                                <img src="assets/images/icons/club-9.svg" alt="">
-                            </div>
-                            <div class="content">
-                                <p class="date">August 11, 2023</p>
-                                <p class="time">5:45 Pm</p>
-                                <h3 class="team">Weston <span>VS</span> Miland</h3>
-                            </div>
-                            <div class="logo">
-                                <img src="assets/images/icons/club-10.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="match-wrapper">
-                            <div class="logo">
-                                <img src="assets/images/icons/club-11.svg" alt="">
-                            </div>
-                            <div class="content">
-                                <p class="date">August 11, 2023</p>
-                                <p class="time">5:45 Pm</p>
-                                <h3 class="team">Bulls <span>VS</span> Interko</h3>
-                            </div>
-                            <div class="logo">
-                                <img src="assets/images/icons/club-12.svg" alt="">
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
     </section>
     <!--================= Next Match Section End Here =================-->
-
-
-    <!--================= Newsletter Start Here =================-->
-    <section class="rts-newsletter-section2 home-four section-gap-100">
-        <div class="container">
-            <div class="newsletter-inner">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h3 class="title">Watch The Basketball Finals game replay</h3>
-                        <form>
-                            <div class="form">
-                                <input type="text" class="form-control" id="username" placeholder="Enter Your Email"
-                                    required />
-                            </div>
-                            <div class="button">
-                                <button type="submit" class="btn">SUBSCRIBE</button>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-6"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--================= Newsletter End Here =================-->
 
 
     <!--================= Team Section Start Here =================-->
@@ -563,116 +338,30 @@
                 <h1 class="title">PLAYERS</h1>
                 <div class="swiper-slider-btn">
                     <div class="slider-btn slide-prev">
-                        <i class="fal fa-chevron-left"></i>
+                        <i class="fa fa-chevron-left"></i>
                     </div>
                     <div class="slider-btn slide-next">
-                        <i class="fal fa-chevron-right"></i>
+                        <i class="fa fa-chevron-right"></i>
                     </div>
                 </div>
             </div>
             <div class="team-section-inner">
                 <div class="swiper rts-teamSlider2">
                     <div class="swiper-wrapper">
+                        <?php foreach($players as $row): ?>
                         <div class="swiper-slide">
                             <div class="team-wraper">
                                 <div class="player-card">
-                                    <a class="image" href="team-details.html"><img src="assets/images/team/team10.png"
-                                            alt=""></a>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#">
-                                                <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                        fill="white" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    <a class="image" href="">
+                                        <img src="<?=base_url('admin/images/profile/')?><?=$row['image']?>" style="width:100%;height:250px;"/>
+                                    </a>
                                 </div>
                                 <div class="profile">
-                                    <a href="team-details.html" class="name">DAVID WILLIAM</a>
+                                    <a href="" class="name"><?=$row['last_name']?>, <?=$row['first_name']?> <?=$row['mi']?></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="team-wraper">
-                                <div class="player-card">
-                                    <a class="image" href="team-details.html"><img src="assets/images/team/team11.png"
-                                            alt=""></a>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#">
-                                                <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                        fill="white" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="profile">
-                                    <a href="team-details.html" class="name">Robert Horry</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="team-wraper">
-                                <div class="player-card">
-                                    <a class="image" href="team-details.html"><img src="assets/images/team/team12.png"
-                                            alt=""></a>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#">
-                                                <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                        fill="white" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="profile">
-                                    <a href="team-details.html" class="name">John Havlicek</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="team-wraper">
-                                <div class="player-card">
-                                    <a class="image" href="team-details.html"><img src="assets/images/team/team13.png"
-                                            alt=""></a>
-                                    <ul class="social-area">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                        <li><a href="#">
-                                                <svg width="18" height="13" viewBox="0 0 18 13" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M14.5781 1.66406C16.3828 4.34375 17.2852 7.35156 16.957 10.8242C16.957 10.8242 16.957 10.8516 16.9297 10.8516C15.7266 11.7539 14.3594 12.4375 12.9102 12.875C12.8828 12.9023 12.8828 12.875 12.8555 12.875C12.5547 12.4375 12.2812 12 12.0352 11.5352C12.0352 11.5078 12.0352 11.4805 12.0625 11.4531C12.5 11.2891 12.9102 11.0977 13.3203 10.8516C13.3477 10.8516 13.3477 10.7969 13.3203 10.7695C13.2383 10.7148 13.1562 10.6602 13.0742 10.5781C13.0469 10.5781 13.0469 10.5781 13.0195 10.5781C10.4219 11.7812 7.57812 11.7812 4.95312 10.5781C4.92578 10.5781 4.89844 10.5781 4.89844 10.5781C4.81641 10.6602 4.73438 10.7148 4.65234 10.7695C4.59766 10.7969 4.625 10.8516 4.65234 10.8516C5.03516 11.0977 5.47266 11.2891 5.91016 11.4531C5.9375 11.4805 5.9375 11.5078 5.9375 11.5352C5.69141 12 5.41797 12.4375 5.11719 12.875C5.08984 12.875 5.0625 12.9023 5.0625 12.875C3.61328 12.4375 2.24609 11.7539 1.04297 10.8516C1.01562 10.8516 1.01562 10.8242 1.01562 10.8242C0.742188 7.81641 1.31641 4.78125 3.39453 1.66406C3.39453 1.66406 3.39453 1.66406 3.42188 1.66406C4.46094 1.17188 5.55469 0.84375 6.67578 0.652344C6.70312 0.625 6.73047 0.652344 6.73047 0.652344C6.89453 0.925781 7.03125 1.22656 7.14062 1.5C8.37109 1.30859 9.60156 1.30859 10.832 1.5C10.9414 1.22656 11.0781 0.925781 11.2422 0.652344C11.2422 0.652344 11.2695 0.625 11.2969 0.652344C12.418 0.84375 13.5117 1.17188 14.5508 1.66406C14.5781 1.66406 14.5781 1.66406 14.5781 1.66406ZM6.32031 8.99219C7.11328 8.99219 7.76953 8.25391 7.76953 7.37891C7.76953 6.47656 7.14062 5.76562 6.32031 5.76562C5.52734 5.76562 4.87109 6.47656 4.87109 7.37891C4.87109 8.25391 5.52734 8.99219 6.32031 8.99219ZM11.6523 8.99219C12.4727 8.99219 13.1016 8.25391 13.1016 7.37891C13.1289 6.47656 12.4727 5.76562 11.6523 5.76562C10.8594 5.76562 10.2305 6.47656 10.2305 7.37891C10.2305 8.25391 10.8594 8.99219 11.6523 8.99219Z"
-                                                        fill="white" />
-                                                </svg>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="profile">
-                                    <a href="team-details.html" class="name">Sam Jones</a>
-                                </div>
-                            </div>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -688,684 +377,47 @@
                 <div class="section-title-area section-title-area1">
                     <h1 class="title">MEDIA</h1>
                 </div>
-                <div class="filter-button-group">
-                    <button class="filter-btn active" data-show=".home">ALL</button>
-                    <button class="filter-btn" data-show=".highlights">HIGHLIGHTS</button>
-                    <button class="filter-btn" data-show=".interview">INTERVIEWS</button>
-                    <button class="filter-btn" data-show=".video">VIDEO</button>
-                    <button class="filter-btn" data-show=".audio">AUDIO</button>
-                </div>
             </div>
             <div class="filterd-items home">
                 <div class="gallery-grid">
                     <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
+                        <div class="col-lg-12">
+                            <div class="row">
+                            <?php foreach($videos as $row): ?>
+                                <div class="col-lg-4">
+                                    <div class="item small-post">
+                                        <span class="post-icon">
+                                            <img src="<?=base_url('assets/images/logo.jpg')?>" alt="">
+                                        </span>
+                                        <div class="video-background">
+                                            <video id="background-video">
+                                            <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                            type="video/webm">
+                                            <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                            type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
                                         </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
+                                        <div class="contents-wrapper">
+                                            <div class="contents text-start">
+                                                <div class="d-block">
+                                                    <div class="heading d-flex">
+                                                        <p class="tag">HIGHLIGHTS</p>
+                                                    </div>
+                                                    <div class="gallery-title">
+                                                        <a href="<?=site_url('watch/')?><?=$row['Token']?>"><?=$row['file_name']?></a>
+                                                    </div>
+                                                </div>
+                                                <div class="author-info">
+                                                    <div class="content">
+                                                        <a href="<?=site_url('watch/')?><?=$row['Token']?>" class="read-more">Watch Now</a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="video-section-inner text-center">
-                                    <div class="play-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                                class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post three">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two four">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filterd-items highlights hide">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="video-section-inner text-center">
-                                    <div class="play-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                                class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post three">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two four">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filterd-items interview hide">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="video-section-inner text-center">
-                                    <div class="play-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                                class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post three">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two four">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filterd-items video hide">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="video-section-inner text-center">
-                                    <div class="play-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                                class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post three">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two four">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="filterd-items audio hide">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item">
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="video-section-inner text-center">
-                                    <div class="play-video">
-                                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                                class="fas fa-play"></i></a>
-                                    </div>
-                                </div>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">You're going to want to hop on
-                                                    the Yandi bandwagon</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-12">
-                            <div class="item small-post three">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/volume.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item small-post two four">
-                                <span class="post-icon">
-                                    <img src="assets/images/icons/camera.svg" alt="">
-                                </span>
-                                <a href="blog-details.html" class="gallery-picture"></a>
-                                <div class="contents-wrapper">
-                                    <div class="contents text-start">
-                                        <div class="d-block">
-                                            <div class="heading d-flex">
-                                                <p class="tag">HIGHLIGHTS</p>
-                                            </div>
-                                            <div class="gallery-title">
-                                                <a href="blog-details.html">Clash of Titans in the Upcoming
-                                                    Basketball Battle match</a>
-                                            </div>
-                                        </div>
-                                        <div class="author-info">
-                                            <div class="content">
-                                                <a href="blog-details.html" class="read-more">READ MORE</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
@@ -1375,134 +427,8 @@
     </div>
     <!--================= Gallery Section End Here =================-->
 
-
-    <!--================= Sponsors Section Start Here =================-->
-    <div class="rts-sponsors-section pt--100 pb--100">
-        <div class="container">
-            <div class="sponsors-section-inner">
-                <div class="swiper rts-brandSlider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/7.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/8.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/9.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/10.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/11.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                        <div class="swiper-slide">
-                            <a href="#" class="sponsor-single">
-                                <div class="sponsors-logo"><img src="assets/images/brands/12.png" alt="sponsor"></div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--================= Sponsors Table Section End Here =================-->
-
-
     <!--================= Footer Start Here =================-->
-    <div class="footer footer1 baseball">
-        <div class="container">
-            <div class="footer-inner">
-                <div class="row">
-                    <div class="col-xl-4 col-md-6">
-                        <div class="footer-widget">
-                            <div class="footer-logo"><img src="assets/images/logo3.png" alt="footer-logo">
-                            </div>
-                            <p class="footer-text">It was the end of a period in the 1980s
-                                in which it seemed like every NBA Finals
-                                matchup featured the Celtics sports club.</p>
-                            <div class="social-links">
-                                <a href="#0" class="platform"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-twitter"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-behance"></i></a>
-                                <a href="#0" class="platform"><i class="fab fa-youtube"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-2 col-md-6 col-sm-6">
-                        <div class="footer-widget">
-                            <h3 class="footer-widget-title"> QUICK LINKS</h3>
-                            <ul class="widget-items cata-widget">
-                                <li class="widget-list-item"><a href="about.html">ABOUT CLUB</a></li>
-                                <li class="widget-list-item"><a href="contact.html">CONTACTS</a></li>
-                                <li class="widget-list-item"><a href="price-table.html">PRICE TABLE</a></li>
-                                <li class="widget-list-item"><a href="shop.html">SHOP</a></li>
-                                <li class="widget-list-item"><a href="our-players.html">OUR PLAYERS</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="footer-widget news-widget">
-                            <h3 class="footer-widget-title"> POST GALLERY</h3>
-                            <div class="recent-post">
-                                <div class="picture"><a href="blog-details.html"><img
-                                            src="assets/images/blog/small-post4.png" alt="side-post-image"></a></div>
-                                <div class="content">
-                                    <span class="news-date">June 21, 2023</span>
-                                    <a href="blog-details.html" class="recent-post-title">A batter who's catches
-                                        a pitch while batting</a>
-                                </div>
-                            </div>
-                            <div class="recent-post">
-                                <div class="picture"><a href="blog-details.html"><img
-                                            src="assets/images/blog/small-post5.png" alt="side-post-image"></a></div>
-                                <div class="content">
-                                    <span class="news-date">June 21, 2023</span>
-                                    <a href="blog-details.html" class="recent-post-title">A batter who's catches
-                                        a pitch while batting</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-3 col-md-6">
-                        <div class="footer-widget address-widget">
-                            <h3 class="footer-widget-title"> GET IN TOUCH</h3>
-                            <ul>
-                                <li class="widget-list-item"><i class="fas fa-envelope-open"></i><a
-                                        href="mailto:info@webmail.com">INFO@WEBMAIL.COM</a></li>
-                                <li class="widget-list-item"><i class="fas fa-phone"></i><a href="tel:09877788890">098
-                                        777
-                                        888 90</a></li>
-                                <li class="widget-list-item"><i class="fas fa-map-marker-alt"></i> <span>USA, CALIFORNIA
-                                        20,
-                                        FIRST <br>
-                                        AVENUE, CALIFORNIA</span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom-area">
-            <div class="container">
-                <div class="bottom-area-inner">
-                    <span class="copyright">COPYRIGHT & DESIGN BY <span
-                            class="brand">KESTER</span>&nbsp;<?=date('Y') ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?=view('templates/footer');?>
     <!--================= Footer End Here =================-->
 
 

@@ -88,11 +88,14 @@
                                         <button type="submit" class="btn btn-primary w-100">Sign in</button>
                                     </div>
                                 </form>
+                                <div class="text-center text-secondary mt-3">Don't have account yet?
+                                    <a href="<?=site_url('sign-up')?>" tabindex="-1">Sign up</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="text-center text-secondary mt-3">Don't have account yet?
-                            <a href="<?=site_url('register')?>" tabindex="-1">Register here</a>
-                        </div>
+                        </div> 
+                    </div>
+                    <div class="text-center text-secondary mt-3">
+                        <a href="<?=site_url('/')?>" tabindex="-1">Back to Home</a>
                     </div>
                 </div>
                 <div class="col-lg d-none d-lg-block">

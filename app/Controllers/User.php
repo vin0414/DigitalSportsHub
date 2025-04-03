@@ -16,6 +16,11 @@ class User extends BaseController
         return view('login');
     }
 
+    public function signUp()
+    {
+        return view('signup');
+    }
+
     public function validateUser()
     {
         $validation = $this->validate([
@@ -45,6 +50,16 @@ class User extends BaseController
                 session()->set('fullname', $user['Fullname']);
                 return redirect()->to('/');
             }
+        }
+    }
+
+    public function signout()
+    {
+        if(session()->has('loggedInUser'))
+        {
+            session()->remove('loggedInUser');
+            session()->destroy();
+            return redirect()->to('/?access=out')->with('fail', 'You are logged out!');
         }
     }
 }

@@ -18,10 +18,24 @@ class Home extends BaseController
         $date = date('Y-m-d');
         $time = date('H:i');
         $matchModel = new \App\Models\matchModel();
-        //in game 
         $game = $matchModel->WHERE('date',$date)->WHERE('time <=',$time)->WHERE('status',1)->first();
+        //players
+        $playerModel = new \App\Models\playerModel();
+        $players = $playerModel->findAll();
+        //teams
+        $builder = $this->db->table('teams a');
+        $builder->select('a.team_name,SUM(b.wins)W,SUM(b.losses)L');
+        $builder->join('team_stats b','b.team_id=a.team_id','LEFT');
+        $builder->groupBy('a.team_id')->orderBy('W','DESC')->limit(10);
+        $teams = $builder->get()->getResult();
+        //latest news
+        $newsModel  = new \App\Models\newsModel();
+        $news = $newsModel->WHERE('headline',1)->limit(3)->findAll();
+        //videos
+        $videoModel = new \App\Models\videoModel();
+        $videos = $videoModel->orderBy('video_id','DESC')->limit(6)->findAll();
 
-        $data = ['title'=>$title,'game'=>$game];
+        $data = ['title'=>$title,'game'=>$game,'players'=>$players,'team'=>$teams,'news'=>$news,'videos'=>$videos];
         return view('welcome_message',$data);
     }
 
@@ -33,8 +47,8 @@ class Home extends BaseController
         $date = date('Y-m-d');
         $time = date('H:i');
         $matchModel = new \App\Models\matchModel();
-        //in game 
         $game = $matchModel->WHERE('date',$date)->WHERE('time <=',$time)->WHERE('status',1)->first();
+        
 
         $data = ['title'=>$title,'game'=>$game];
         return view('watch-now',$data);
@@ -2211,6 +2225,7 @@ class Home extends BaseController
 
     public function endGame()
     {
+        $teamStatsModel = new \App\Models\teamStatsModel();
         $matchModel = new \App\Models\matchModel();
         $teamModel = new \App\Models\teamModel();
         $match_id = $this->request->getPost('match');
@@ -2219,22 +2234,80 @@ class Home extends BaseController
         if($match['team1_score']>$match['team2_score'])
         {
             //team1 win
-            $team = $teamModel->WHERE('team_id',$match['team1_id'])->first();
-            $data = ['result'=>$team['team_name'].' wins','status'=>0];
+            $team1 = $teamModel->WHERE('team_id',$match['team1_id'])->first();
+            $data = ['result'=>$team1['team_name'].' wins','status'=>0];
             $matchModel->update($match_id,$data);
+            //team 1 stats
+            $data = ['team_id'=>$match['team1_id'],
+                    'wins'=>1,
+                    'losses'=>0,
+                    'draws'=>0,
+                    'score'=>$match['team1_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team1['accountID']];
+            $teamStatsModel->save($data);
+            //team 2
+            $team2 = $teamModel->WHERE('team_id',$match['team2_id'])->first();
+            $data = ['team_id'=>$match['team2_id'],
+                    'wins'=>0,
+                    'losses'=>1,
+                    'draws'=>0,
+                    'score'=>$match['team2_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team2['accountID']];
+            $teamStatsModel->save($data);
         }
         else if($match['team1_score']<$match['team2_score'])
         {
             //team win
-            $team = $teamModel->WHERE('team_id',$match['team2_id'])->first();
-            $data = ['result'=>$team['team_name'].' wins','status'=>0];
+            $team2 = $teamModel->WHERE('team_id',$match['team2_id'])->first();
+            $data = ['result'=>$team2['team_name'].' wins','status'=>0];
             $matchModel->update($match_id,$data);
+            //team 2 stats
+            $data = ['team_id'=>$match['team2_id'],
+                    'wins'=>1,
+                    'losses'=>0,
+                    'draws'=>0,
+                    'score'=>$match['team2_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team2['accountID']];
+            $teamStatsModel->save($data);
+            //team 1
+            $team1 = $teamModel->WHERE('team_id',$match['team1_id'])->first();
+            $data = ['team_id'=>$match['team1_id'],
+                    'wins'=>0,
+                    'losses'=>1,
+                    'draws'=>0,
+                    'score'=>$match['team1_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team1['accountID']];
+            $teamStatsModel->save($data);
         }
         else
         {
             //draw
             $data = ['result'=>'Draw','status'=>0];
             $matchModel->update($match_id,$data);
+            $team2 = $teamModel->WHERE('team_id',$match['team2_id'])->first();
+            //team 2 stats
+            $data = ['team_id'=>$match['team2_id'],
+                    'wins'=>0,
+                    'losses'=>0,
+                    'draws'=>1,
+                    'score'=>$match['team1_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team2['accountID']];
+            $teamStatsModel->save($data);
+            //team 1
+            $team1 = $teamModel->WHERE('team_id',$match['team1_id'])->first();
+            $data = ['team_id'=>$match['team1_id'],
+                    'wins'=>0,
+                    'losses'=>0,
+                    'draws'=>1,
+                    'score'=>$match['team1_score'],
+                    'match_id'=>$match_id,
+                    'coachID'=>$team1['accountID']];
+            $teamStatsModel->save($data);
         }
         return $this->response->SetJSON(['success' => 'Successfully ended']);
     }

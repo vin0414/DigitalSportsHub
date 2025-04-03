@@ -7,12 +7,21 @@ use CodeIgniter\Router\RouteCollection;
  */
 //auth
 $routes->get('/', 'Home::index');
+$routes->get('latest-news','Home::latestNews');
+$routes->get('latest-news/stories/(:any)','Home::stories/$1');
+$routes->get('watch-now','Home::watchNow');
+$routes->get('watch/(:any)','Home::watch/$1');
+$routes->get('latest-events','Home::latestEvents');
+$routes->get('latest-events/details/(:any)','Home::eventDetails/$1');
+$routes->get('shop-near-me','Home::shopNearMe');
+$routes->get('contact-us','Home::contactUs');
+
+//authentication
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
 //fan
 $routes->post('validate','User::validateUser');
-//pages
-$routes->get('watch-now','Home::watchNow');
+$routes->get('sign-out','User::signout');
 // ajax request
 ///user management
 $routes->get('fetch-accounts','Home::fetchAccounts');
@@ -69,6 +78,7 @@ $routes->group('',['filter'=>'UserAlreadyLoggedIn'],function($routes)
 {
     $routes->get('login','User::login');
     $routes->get('reset-password','User::resetPassword');
+    $routes->get('sign-up','User::signUp');
 });
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)
