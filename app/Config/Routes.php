@@ -21,6 +21,7 @@ $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
 //fan
 $routes->post('validate','User::validateUser');
+$routes->post('register','User::register');
 $routes->get('sign-out','User::signout');
 // ajax request
 ///user management

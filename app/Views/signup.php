@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-label">
-                                           Re-enter Password
+                                            Re-enter Password
                                         </label>
                                         <div class="input-group input-group-flat">
                                             <input type="password" name="confirm_password" class="form-control"
@@ -112,9 +112,12 @@
                                     </div>
                                     <div class="mb-2">
                                         <label class="form-check">
-                                            <input type="checkbox" class="form-check-input" />
-                                            <span class="form-check-label">Remember me on this device</span>
+                                            <input type="checkbox" class="form-check-input" name="agreement" required />
+                                            <span class="form-check-label">I agree with the terms and conditions</span>
                                         </label>
+                                        <div class="text-danger">
+                                            <small><?=isset($validation)? display_error($validation,'agreement') : '' ?></small>
+                                        </div>
                                     </div>
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-primary w-100">Create new account</button>

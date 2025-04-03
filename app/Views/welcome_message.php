@@ -36,23 +36,27 @@
         integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .video-background {
-            position: relative;
-            width: 100%;
-            height: 100%; /* Adjust this based on your needs (full height or specific size) */
-            overflow: hidden;
-        }
+    .video-background {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        /* Adjust this based on your needs (full height or specific size) */
+        overflow: hidden;
+    }
 
-        #background-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            object-fit: fill; /* This makes the video cover the entire container */
-            transform: translate(-50%, -50%); /* This centers the video */
-            z-index: -1; /* Keeps the video in the background */
-        }
+    #background-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+        /* This makes the video cover the entire container */
+        transform: translate(-50%, -50%);
+        /* This centers the video */
+        z-index: -1;
+        /* Keeps the video in the background */
+    }
     </style>
 </head>
 
@@ -150,29 +154,34 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-6">
                         <div class="row">
-                        <?php foreach($news as $row): ?>
+                            <?php foreach($news as $row): ?>
                             <div class="col-lg-4">
-                                <div class="left-post-inner" style="background: url(<?=base_url('admin/images/news/')?><?=$row['image'] ?>);background-size: cover;">
+                                <div class="left-post-inner"
+                                    style="background: url(<?=base_url('admin/images/news/')?><?=$row['image'] ?>);background-size: cover;">
                                     <div class="post-inner small">
                                         <div class="item small-post">
-                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>" class="gallery-picture">
+                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>"
+                                                class="gallery-picture">
                                             </a>
                                             <div class="contents-wrapper">
                                                 <div class="contents text-start">
                                                     <div class="d-block">
                                                         <div class="heading d-flex">
                                                             <p class="tag"><?=$row['news_type'] ?></p>
-                                                            <span class="blog-date"><?=date('M d Y',strtotime($row['date'])) ?></span>
+                                                            <span
+                                                                class="blog-date"><?=date('M d Y',strtotime($row['date'])) ?></span>
                                                         </div>
                                                         <div class="gallery-title">
-                                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>">
-                                                            <?=$row['topic'] ?>
+                                                            <a
+                                                                href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>">
+                                                                <?=$row['topic'] ?>
                                                             </a>
                                                         </div>
                                                     </div>
                                                     <div class="author-info">
                                                         <div class="content">
-                                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>" class="read-more">READ MORE</a>
+                                                            <a href="<?=site_url('latest-news/stories/')?><?=$row['topic'] ?>"
+                                                                class="read-more">READ MORE</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -181,7 +190,7 @@
                                     </div>
                                 </div>
                             </div>
-                        <?php endforeach;?>
+                            <?php endforeach;?>
                         </div>
                     </div>
                 </div>
@@ -270,13 +279,13 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <?php foreach($team as $row): ?>
+                                        <?php foreach($team as $row): ?>
                                         <tr>
                                             <td><?=$row->team_name ?></td>
                                             <td class="text-center"><?=$row->W ?></td>
                                             <td class="text-center"><?=$row->L ?></td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                        <?php endforeach; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -301,17 +310,25 @@
                 $matchModel = new \App\Models\matchModel();
                 $matches = $matchModel->WHERE('date',$date)->findAll();
                 ?>
+                <?php if(empty($matches)): ?>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <center>No Scheduled match(es)</center>
+                    </div>
+                </div>
+                <?php else : ?>
                 <div class="row">
                     <?php foreach($matches as $row): ?>
                     <?php 
                     $teamModel = new \App\Models\teamModel();
                     $team1 = $teamModel->WHERE('team_id',$row['team1_id'])->first();
                     $team2 = $teamModel->WHERE('team_id',$row['team2_id'])->first();
-                    ?>    
+                    ?>
                     <div class="col-lg-4">
                         <div class="match-wrapper">
                             <div class="logo">
-                                <img src="<?=base_url('admin/images/team/')?><?=$team1['image']?>" style="width:75px;" alt="">
+                                <img src="<?=base_url('admin/images/team/')?><?=$team1['image']?>" style="width:75px;"
+                                    alt="">
                             </div>
                             <div class="content" style="margin:5px;">
                                 <p class="date"><?=date('M d,Y',strtotime($row['date']))?></p>
@@ -319,17 +336,19 @@
                                 <h4 class="team"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></h4>
                             </div>
                             <div class="logo">
-                                <img src="<?=base_url('admin/images/team/')?><?=$team2['image']?>" style="width:75px;" alt="">
+                                <img src="<?=base_url('admin/images/team/')?><?=$team2['image']?>" style="width:75px;"
+                                    alt="">
                             </div>
                         </div>
                     </div>
                     <?php endforeach; ?>
+                    <?php endif;?>
                 </div>
             </div>
         </div>
     </section>
     <!--================= Next Match Section End Here =================-->
-
+    <hr>
 
     <!--================= Team Section Start Here =================-->
     <div class="rts-team-section home-four pb--100">
@@ -353,11 +372,13 @@
                             <div class="team-wraper">
                                 <div class="player-card">
                                     <a class="image" href="">
-                                        <img src="<?=base_url('admin/images/profile/')?><?=$row['image']?>" style="width:100%;height:250px;"/>
+                                        <img src="<?=base_url('admin/images/profile/')?><?=$row['image']?>"
+                                            style="width:100%;height:250px;" />
                                     </a>
                                 </div>
                                 <div class="profile">
-                                    <a href="" class="name"><?=$row['last_name']?>, <?=$row['first_name']?> <?=$row['mi']?></a>
+                                    <a href="" class="name"><?=$row['last_name']?>, <?=$row['first_name']?>
+                                        <?=$row['mi']?></a>
                                 </div>
                             </div>
                         </div>
@@ -383,7 +404,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="row">
-                            <?php foreach($videos as $row): ?>
+                                <?php foreach($videos as $row): ?>
                                 <div class="col-lg-4">
                                     <div class="item small-post">
                                         <span class="post-icon">
@@ -391,10 +412,10 @@
                                         </span>
                                         <div class="video-background">
                                             <video id="background-video">
-                                            <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
-                                            type="video/webm">
-                                            <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
-                                            type="video/mp4">
+                                                <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                                    type="video/webm">
+                                                <source src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                                    type="video/mp4">
                                                 Your browser does not support the video tag.
                                             </video>
                                         </div>
@@ -405,19 +426,21 @@
                                                         <p class="tag">HIGHLIGHTS</p>
                                                     </div>
                                                     <div class="gallery-title">
-                                                        <a href="<?=site_url('watch/')?><?=$row['Token']?>"><?=$row['file_name']?></a>
+                                                        <a
+                                                            href="<?=site_url('watch/')?><?=$row['Token']?>"><?=$row['file_name']?></a>
                                                     </div>
                                                 </div>
                                                 <div class="author-info">
                                                     <div class="content">
-                                                        <a href="<?=site_url('watch/')?><?=$row['Token']?>" class="read-more">Watch Now</a>
+                                                        <a href="<?=site_url('watch/')?><?=$row['Token']?>"
+                                                            class="read-more">Watch Now</a>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                                <?php endforeach; ?>
                             </div>
                         </div>
                     </div>

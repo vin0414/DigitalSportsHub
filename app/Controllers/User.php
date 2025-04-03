@@ -53,6 +53,26 @@ class User extends BaseController
         }
     }
 
+    public function register()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'name'=>'required|is_unique[users.Fullname]',
+            'email'=>'required|valid_email|is_unique[users.Email]',
+            'password'=>'required|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
+            'confirm_password'=>'required|matches[password]|min_length[8]|max_length[12]|regex_match[/[A-Z]/]|regex_match[/[a-z]/]|regex_match[/[0-9]/]',
+            'agreement'=>'required'
+        ]);
+        if(!$validation)
+        {
+            return view('signup',['validation'=>$this->validator]);
+        }
+        else
+        {
+
+        }
+    }
+
     public function signout()
     {
         if(session()->has('loggedInUser'))
