@@ -80,6 +80,9 @@ $routes->group('',['filter'=>'UserAlreadyLoggedIn'],function($routes)
     $routes->get('login','User::login');
     $routes->get('reset-password','User::resetPassword');
     $routes->get('sign-up','User::signUp');
+    $routes->get('success/(:any)','Home::successLink/$1');
+    $routes->get('resend/(:any)','Home::resend/$1');
+    $routes->get('activate/(:any)','Home::activateAccount/$1');
 });
 
 $routes->group('',['filter'=>'AlreadyLoggedIn'],function($routes)

@@ -69,7 +69,45 @@ class User extends BaseController
         }
         else
         {
-
+            $status = 0;$date = date('Y-m-d');
+            $hash_password = Hash::make($this->request->getPost('password'));
+            function generateRandomString($length = 64) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token_code = generateRandomString(64);
+            //save
+            $userModel = new \App\Models\userModel();
+            $data = ['Email'=>$this->request->getPost('email'), 
+                    'Password'=>$hash_password,
+                    'Fullname'=>$this->request->getPost('name'),
+                    'Status'=>$status,
+                    'Token'=>$token_code,
+                    'DateCreated'=>$date];
+            $userModel->save($data);
+            //send email activation link
+            $email = \Config\Services::email();
+            $email->setTo($this->request->getPost('email'));
+            $email->setFrom("vinmogate@gmail.com","Digital Sports Hub");
+            $imgURL = "assets/images/logo.jpg";
+            $email->attach($imgURL);
+            $cid = $email->setAttachmentCID($imgURL);
+            $template = "<center>
+            <img src='cid:". $cid ."' width='100'/>
+            <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+            <tr><td><center><h1>Account Activation</h1></center></td></tr>
+            <tr><td><center>Hi, ".$this->request->getPost('fullname')."</center></td></tr>
+            <tr><td><p><center>Please click the link below to activate your account.</center></p></td><tr>
+            <tr><td><center><b>".anchor('activate/'.$token_code,'Activate Account')."</b></center></td></tr>
+            <tr><td><p><center>If you did not sign-up in Digital Sports Hub Website,<br/> please ignore this message or contact us @ digitalsportshub@gmail.com</center></p></td></tr>
+            <tr><td><center>IT Support</center></td></tr></tbody></table></center>";
+            $subject = "Account Activation | Digital Sports Hub";
+            $email->setSubject($subject);
+            $email->setMessage($template);
+            $email->send();
+            session()->setFlashdata('success','Great! Successfully sent activation link');
+            return redirect()->to('/success/'.$token_code)->withInput();
         }
     }
 

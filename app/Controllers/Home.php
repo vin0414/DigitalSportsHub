@@ -54,6 +54,51 @@ class Home extends BaseController
         return view('watch-now',$data);
     }
 
+    public function successLink($id)
+    {
+        $data = ['token'=>$id];
+        return view('success-page',$data);
+    }
+
+    public function resend($id)
+    {
+        $userModel = new \App\Models\userModel();
+        $user = $userModel->WHERE('Token',$id)->first();
+        //send email activation link
+        $email = \Config\Services::email();
+        $email->setTo($user['Email']);
+        $email->setFrom("vinmogate@gmail.com","Digital Sports Hub");
+        $imgURL = "assets/images/logo.jpg";
+        $email->attach($imgURL);
+        $cid = $email->setAttachmentCID($imgURL);
+        $template = "<center>
+        <img src='cid:". $cid ."' width='100'/>
+        <table style='padding:20px;background-color:#ffffff;' border='0'><tbody>
+        <tr><td><center><h1>Account Activation</h1></center></td></tr>
+        <tr><td><center>Hi, ".$user['Fullname']."</center></td></tr>
+        <tr><td><p><center>Please click the link below to activate your account.</center></p></td><tr>
+        <tr><td><center><b>".anchor('activate/'.$id,'Activate Account')."</b></center></td></tr>
+        <tr><td><p><center>If you did not sign-up in Digital Sports Hub Website,<br/> please ignore this message or contact us @ digitalsportshub@gmail.com</center></p></td></tr>
+        <tr><td><center>IT Support</center></td></tr></tbody></table></center>";
+        $subject = "Account Activation | Digital Sports Hub";
+        $email->setSubject($subject);
+        $email->setMessage($template);
+        $email->send();
+        session()->setFlashdata('success','Great! Successfully sent activation link');
+        return redirect()->to('/success/'.$id)->withInput();
+    }
+
+    public function activateAccount($id)
+    {
+        $userModel = new \App\Models\userModel();
+        $user = $userModel->WHERE('Token',$id)->first();
+        $values = ['Status'=>1];
+        $userModel->update($user['user_id'],$values);
+        session()->set('loggedInUser', $user['user_id']);
+        session()->set('fullname', $user['Fullname']);
+        return $this->response->redirect(site_url('/'));
+    }
+
     public function auth()
     {
         return view('auth/login');
