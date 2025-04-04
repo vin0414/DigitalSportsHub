@@ -2256,7 +2256,7 @@ class Home extends BaseController
         $match_id = $this->request->getGet('match');
         $team_id = $this->request->getGet('team');
         $match = $matchModel->WHERE('match_id',$match_id)->WHERE('team1_id',$team_id)->first();
-        echo $match['team1_score'];
+        echo !empty($match['team1_score']) ? $match['team1_score'] : 0;
     }
 
     public function teamGuest()
@@ -2265,7 +2265,7 @@ class Home extends BaseController
         $match_id = $this->request->getGet('match');
         $team_id = $this->request->getGet('team');
         $match = $matchModel->WHERE('match_id',$match_id)->WHERE('team2_id',$team_id)->first();
-        echo $match['team2_score'];
+        echo !empty($match['team2_score']) ? $match['team2_score'] : 0;
     }
 
     public function endGame()
@@ -2499,7 +2499,9 @@ class Home extends BaseController
 
     public function recovery()
     {
-
+        $title = "Recovery";
+        $data = ['title'=>$title];
+        return view('main/recovery',$data);
     }
 
     public function settings()
