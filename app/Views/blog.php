@@ -100,7 +100,7 @@
                         <div class="page-path">
                             <ul>
                                 <li><a class="home-page-link" href="/">Home</a></li>
-                                <li><a class="current-page" href="#"><?=$title?></a></li>
+                                <li><a class="current-page" href="<?=site_url('latest-news')?>"><?=$title?></a></li>
                             </ul>
                         </div>
                         <h1 class="banner-heading">Latest News</h1>

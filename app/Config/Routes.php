@@ -13,6 +13,7 @@ $routes->get('watch-now','Home::watchNow');
 $routes->get('watch/(:any)','Home::watch/$1');
 $routes->get('latest-events','Home::latestEvents');
 $routes->get('latest-events/details/(:any)','Home::eventDetails/$1');
+$routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
 $routes->get('shop-near-me','Home::shopNearMe');
 $routes->get('contact-us','Home::contactUs');
 

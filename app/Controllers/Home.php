@@ -72,8 +72,19 @@ class Home extends BaseController
         $eventModel = new \App\Models\eventModel();
         $events = $eventModel->WHERE('event_title',$id)->first();
         
-        $data = ['title'=>$title,'events'=>$events];
+        $data = ['title'=>$title,'event'=>$events];
         return view('event-details',$data);
+    }
+
+    public function eventRegistration($id)
+    {
+        $title = "Events";
+        //event details
+        $eventModel = new \App\Models\eventModel();
+        $events = $eventModel->WHERE('event_title',$id)->first();
+
+        $data = ['title'=>$title,'events'=>$events];
+        return view('event-registration',$data);
     }
 
     public function latestNews()
