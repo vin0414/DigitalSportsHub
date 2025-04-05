@@ -93,28 +93,21 @@
         <!--================= Slide Bar Start Here =================-->
 
         <!--================= Banner Section Start Here =================-->
-        <section class="banner banner3 home-four">
-            <div class="banner-single banner-bg banner-single-2">
-                <div class="video-section-inner text-center">
-                    <div class="play-video">
-                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                class="fas fa-play"></i></a>
-                    </div>
-                </div>
+        <div class="banner banner1">
+            <div class="inner-page-banner banner-bg">
                 <div class="container">
                     <div class="banner-content">
-                        <div class="flex-wrap d-flex">
-                            <span class="blog-catagory-tag">BASKETBALL</span>
+                        <div class="page-path">
+                            <ul>
+                                <li><a class="home-page-link" href="/">Home</a></li>
+                                <li><a class="current-page" href="#"><?=$title?></a></li>
+                            </ul>
                         </div>
-                        <h1 class="banner-heading">Exploring World of Basketball</h1>
-                        <p class="desc">Whether you're a dedicated fan, a casual observer, or just starting to discover
-                            the sport <br>
-                            you'll find a wealth of information and inspiration here.</p>
+                        <h1 class="banner-heading">Watch Now</h1>
                     </div>
                 </div>
             </div>
-            </div>
-        </section>
+        </div>
         <!--================= Banner Section End Here =================-->
 
     </header>

@@ -54,6 +54,71 @@ class Home extends BaseController
         return view('watch-now',$data);
     }
 
+    public function latestEvents()
+    {
+        $title = "Events";
+        //events
+        $eventModel = new \App\Models\eventModel();
+        $events = $eventModel->WHERE('status',1)->orderBy('date','DESC')->findAll();
+        
+        $data = ['title'=>$title,'events'=>$events];
+        return view('latest-events',$data);
+    }
+
+    public function eventDetails($id)
+    {
+        $title = "Events";
+        //events
+        $eventModel = new \App\Models\eventModel();
+        $events = $eventModel->WHERE('event_title',$id)->first();
+        
+        $data = ['title'=>$title,'events'=>$events];
+        return view('event-details',$data);
+    }
+
+    public function latestNews()
+    {
+        $title = "News";
+        //all news
+        $newsModel = new \App\Models\newsModel();
+        $news = $newsModel->findAll();
+        //headlines
+        $headlines = $newsModel->WHERE('headline',1)->findAll();
+
+        $data = ['title'=>$title,'news'=>$news,'headlines'=>$headlines];
+        return view('latest-news',$data);
+    }
+
+    public function stories($id)
+    {
+        $title = "News";
+        //headlines
+        $newsModel = new \App\Models\newsModel();
+        $news = $newsModel->WHERE('topic',$id)->first();
+        $headlines = $newsModel->WHERE('headline',1)->findAll();
+
+        $data = ['title'=>$title,'headlines'=>$headlines,'news'=>$news];
+        return view('blog',$data);
+    }
+
+    public function shopNearMe()
+    {
+        $title = "Shop";
+        //all shops
+        $shopModel = new \App\Models\shopModel();
+        $shop = $shopModel->orderBy('shop_id','DESC')->limit(5)->findAll();
+
+        $data = ['title'=>$title,'shop'=>$shop];
+        return view('shop-near-me',$data);
+    }
+
+    public function contactUs()
+    {
+        $title = "Contact Us";
+        $data = ['title'=>$title];
+        return view('contact-us',$data);
+    }
+
     public function successLink($id)
     {
         $data = ['token'=>$id];
