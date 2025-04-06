@@ -167,7 +167,7 @@
                         </div>
                         <?php if($event['registration']==1): ?>
                         <a href="<?=site_url('latest-events/register/')?><?=$event['event_id']?>"
-                            class="side-action-btn book-seat-btn">Register</a>
+                            class="side-action-btn book-seat-btn">Register Now</a>
                         <?php endif; ?>
                     </div>
                 </div>

@@ -81,10 +81,13 @@ class Home extends BaseController
         $title = "Events";
         //event details
         $eventModel = new \App\Models\eventModel();
-        $events = $eventModel->WHERE('event_title',$id)->first();
-
+        $events = $eventModel->WHERE('event_id',$id)->first();
+        if($events['registration']==1):
         $data = ['title'=>$title,'events'=>$events];
         return view('event-registration',$data);
+        else :
+        return redirect()->back();
+        endif;
     }
 
     public function latestNews()
