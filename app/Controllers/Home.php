@@ -1002,8 +1002,11 @@ class Home extends BaseController
         $builder->join('events b','b.event_id=a.event_id','LEFT');
         $builder->groupby('a.register_id');
         $members = $builder->get()->getResult();
+        //teams
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->findAll();
 
-        $data = ['title'=>$title,'event'=>$event,'members'=>$members];
+        $data = ['title'=>$title,'event'=>$event,'members'=>$members,'team'=>$team];
         return view('main/manage-event',$data);
     }
 
@@ -1216,6 +1219,55 @@ class Home extends BaseController
                     'page'=>'New Event'
                     ];        
             $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully submitted']);
+        }
+    }
+
+    public function addRemarks()
+    {
+        $registerModel = new \App\Models\registerModel();
+        $teamModel = new \App\Models\teamModel();
+        $playerModel = new \App\Models\playerModel();
+        $validation = $this->validate([
+            'csrf_test_name'=>'required'
+        ]);
+        if(!$validation)
+        {
+            echo "Invalid Request";
+        }
+        else
+        {
+            $id = $this->request->getPost('id');
+            $status = $this->request->getPost('status');
+            $team = $this->request->getPost('team');
+            //update
+            $data = ['status'=>1,'remarks'=>$status];
+            $registerModel->update($id,$data);
+            //get the player details from event registration
+            $player = $registerModel->WHERE('register_id',$id)->first();
+            $team_id = $teamModel->WHERE('team_id',$team)->first();
+            $nameParts = explode(" ", $player['fullname']);
+            $firstName = $nameParts[0];
+            $lastName = array_pop($nameParts);
+            $middleInitial = '';
+            if (count($nameParts) > 1) {
+                $middleInitial = strtoupper(substr($nameParts[1], 0, 1));
+            }
+            //save the records with assigned team
+            $record = ['team_id'=>$team,
+                        'first_name'=>$firstName,
+                        'last_name'=>$lastName,
+                        'mi'=>$middleInitial,
+                        'date_of_birth'=>$player['birth_date'],
+                        'sportsID'=>$team_id['sportsID'],
+                        'roleID'=>0,
+                        'jersey_num'=>0,
+                        'gender'=>'Male',
+                        'email'=>$player['email'],
+                        'height'=>0,
+                        'weight'=>0,
+                        'address'=>$player['address']];
+            $playerModel->save($record);
             return $this->response->SetJSON(['success' => 'Successfully submitted']);
         }
     }

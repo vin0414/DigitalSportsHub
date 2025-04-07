@@ -58,6 +58,7 @@ $routes->post('cancel-event','Home::cancelEvent');
 $routes->get('fetch-event','Home::fetchEvent');
 $routes->post('accept-event','Home::acceptEvent');
 $routes->post('reject-event','Home::rejectEvent');
+$routes->post('add-remarks','Home::addRemarks');
 //news
 $routes->post('save-post','Home::savePost');
 $routes->post('modify-post','Home::modifyPost');

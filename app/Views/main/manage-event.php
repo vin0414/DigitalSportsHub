@@ -123,7 +123,8 @@
                                 <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                                 <div class="tab-pane fade active show" id="tabs-home-8">
                                     <div class="table-responsive">
-                                        <table class="table table-selectable card-table table-vcenter datatable" id="tblincoming">
+                                        <table class="table table-selectable card-table table-vcenter datatable"
+                                            id="tblincoming">
                                             <thead>
                                                 <th>Event and Description</th>
                                                 <th>Type</th>
@@ -147,31 +148,32 @@
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($event as $row): ?>
-                                            <tr>
-                                                <td><?php echo $row['event_title'] ?></td>
-                                                <td><small><?php echo $row['event_description'] ?></small></td>
-                                                <td><?php echo $row['event_location'] ?></td>
-                                                <td><?php echo date('Y-M-d',strtotime($row['start_date'])) ?></td>
-                                                <td><?php echo date('Y-M-d',strtotime($row['end_date']))  ?></td>
-                                                <td>
-                                                    <?php if($row['status']==0):?>
+                                                <?php foreach($event as $row): ?>
+                                                <tr>
+                                                    <td><?php echo $row['event_title'] ?></td>
+                                                    <td><small><?php echo $row['event_description'] ?></small></td>
+                                                    <td><?php echo $row['event_location'] ?></td>
+                                                    <td><?php echo date('Y-M-d',strtotime($row['start_date'])) ?></td>
+                                                    <td><?php echo date('Y-M-d',strtotime($row['end_date']))  ?></td>
+                                                    <td>
+                                                        <?php if($row['status']==0):?>
                                                         <span class="badge bg-warning text-white">Pending</span>
-                                                    <?php elseif($row['status']==1): ?>
+                                                        <?php elseif($row['status']==1): ?>
                                                         <span class="badge bg-success text-white">Approved</span>
-                                                    <?php else : ?>
+                                                        <?php else : ?>
                                                         <span class="badge bg-danger text-white">Cancelled</span>
-                                                    <?php endif;?>
-                                                </td>
-                                                <td>
-                                                    <?php if($row['status']==0): ?>
-                                                    <button type="button" class="btn btn-danger cancel" value="<?php echo $row['event_id'] ?>">
-                                                    <i class="ti ti-cancel"></i>&nbsp;Cancel
-                                                    </button>
-                                                    <?php endif; ?>
-                                                </td>
-                                            </tr>
-                                            <?php endforeach; ?>
+                                                        <?php endif;?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($row['status']==0): ?>
+                                                        <button type="button" class="btn btn-danger cancel"
+                                                            value="<?php echo $row['event_id'] ?>">
+                                                            <i class="ti ti-cancel"></i>&nbsp;Cancel
+                                                        </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -191,8 +193,8 @@
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($members as $row): ?>
-                                            <?php
+                                                <?php foreach($members as $row): ?>
+                                                <?php
                                             $dob = $row->birth_date;
                                             $dob = new DateTime($dob);
                                             $now = new DateTime();
@@ -209,13 +211,14 @@
                                                     <td><?=$row->remarks?></td>
                                                     <td>
                                                         <?php if($row->status==0): ?>
-                                                        <button type="button" class="btn btn-primary evaluate" value="<?=$row->register_id?>">
+                                                        <button type="button" class="btn btn-primary evaluate"
+                                                            value="<?=$row->register_id?>">
                                                             <i class="ti ti-settings"></i>&nbsp;Evaluate
                                                         </button>
                                                         <?php endif; ?>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>   
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -235,32 +238,33 @@
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($event as $row): ?>
-                                            <tr>
-                                                <td><?php echo $row['event_id'] ?></td>
-                                                <td><?php echo $row['event_title'] ?></td>
-                                                <td><small><?php echo $row['event_description'] ?></small></td>
-                                                <td><?php echo $row['event_location'] ?></td>
-                                                <td><?php echo date('Y-M-d',strtotime($row['start_date'])) ?></td>
-                                                <td><?php echo date('Y-M-d',strtotime($row['end_date']))  ?></td>
-                                                <td>
-                                                    <?php if($row['status']==0):?>
+                                                <?php foreach($event as $row): ?>
+                                                <tr>
+                                                    <td><?php echo $row['event_id'] ?></td>
+                                                    <td><?php echo $row['event_title'] ?></td>
+                                                    <td><small><?php echo $row['event_description'] ?></small></td>
+                                                    <td><?php echo $row['event_location'] ?></td>
+                                                    <td><?php echo date('Y-M-d',strtotime($row['start_date'])) ?></td>
+                                                    <td><?php echo date('Y-M-d',strtotime($row['end_date']))  ?></td>
+                                                    <td>
+                                                        <?php if($row['status']==0):?>
                                                         <span class="badge bg-warning text-white">Pending</span>
-                                                    <?php elseif($row['status']==1): ?>
+                                                        <?php elseif($row['status']==1): ?>
                                                         <span class="badge bg-success text-white">Approved</span>
-                                                    <?php else : ?>
+                                                        <?php else : ?>
                                                         <span class="badge bg-danger text-white">Cancelled</span>
-                                                    <?php endif;?>
-                                                </td>
-                                                <td>
-                                                    <?php if($row['status']==0): ?>
-                                                    <button type="button" class="btn btn-danger cancel" value="<?php echo $row['event_id'] ?>">
-                                                    <i class="ti ti-cancel"></i>&nbsp;Cancel
-                                                    </button>
-                                                    <?php endif; ?>
-                                                </td>
-                                            </tr>
-                                            <?php endforeach; ?>
+                                                        <?php endif;?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($row['status']==0): ?>
+                                                        <button type="button" class="btn btn-danger cancel"
+                                                            value="<?php echo $row['event_id'] ?>">
+                                                            <i class="ti ti-cancel"></i>&nbsp;Cancel
+                                                        </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -279,8 +283,8 @@
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>
-                                            <?php foreach($members as $row): ?>
-                                            <?php
+                                                <?php foreach($members as $row): ?>
+                                                <?php
                                             $dob = $row->birth_date;
                                             $dob = new DateTime($dob);
                                             $now = new DateTime();
@@ -297,13 +301,14 @@
                                                     <td><?=$row->remarks?></td>
                                                     <td>
                                                         <?php if($row->status==0): ?>
-                                                        <button type="button" class="btn btn-primary evaluate" value="<?=$row->register_id?>">
+                                                        <button type="button" class="btn btn-primary evaluate"
+                                                            value="<?=$row->register_id?>">
                                                             <i class="ti ti-settings"></i>&nbsp;Evaluate
                                                         </button>
                                                         <?php endif; ?>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>  
+                                                <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
@@ -338,14 +343,37 @@
     </div>
 
     <div class="modal modal-blur fade" id="evaluateModal" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-md" role="document">
+        <div class="modal-dialog modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Evaluation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    
+                    <form method="POST" class="row g-3" id="frmUpdate">
+                        <?=csrf_field()?>
+                        <input type="hidden" name="id" id="id" />
+                        <div class="col-lg-12">
+                            <label class="form-label">Remarks</label>
+                            <select class="form-select" name="status" required>
+                                <option value="">Choose</option>
+                                <option>Passed</option>
+                                <option>Failed</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+                            <label class="form-label">Team</label>
+                            <select class="form-select" name="team" required>
+                                <option value="">Choose</option>
+                                <?php foreach($team as $row): ?>
+                                <option value="<?=$row['team_id']?>"><?=$row['team_name']?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div class="col-lg-12">
+                            <button type="submit" class="btn btn-primary form-control">Save Changes</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -362,160 +390,188 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).on('click','.evaluate',function(){
-            $('#evaluateModal').modal('show');
-        });
-        $('#tblregistration').DataTable();
-        var table = $('#tblincoming').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "ajax": {
-                "url": "<?=site_url('fetch-event')?>",
-                "type": "GET",
-                "dataSrc": function(json) {
-                    // Handle the data if needed
-                    return json.data;
-                },
-                "error": function(xhr, error, code) {
-                    console.error("AJAX Error: " + error);
-                    alert("Error occurred while loading data.");
+    $(document).on('click', '.evaluate', function() {
+        $('#evaluateModal').modal('show');
+        $('#id').attr("value", $(this).val());
+    });
+
+    $('#frmUpdate').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('add-remarks')?>",
+            method: "POST",
+            data: data,
+            success: function(response) {
+                if (response.success) {
+                    Swal.fire({
+                        title: 'Great!',
+                        text: "Successfully added",
+                        icon: 'success',
+                        confirmButtonText: 'Continue'
+                    }).then((result) => {
+                        // Action based on user's choice
+                        if (result.isConfirmed) {
+                            // Perform some action when "Yes" is clicked
+                            location.reload();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Error!',
+                        text: response,
+                        icon: 'warning',
+                    });
                 }
+            }
+        });
+    });
+
+    $('#tblregistration').DataTable();
+    var table = $('#tblincoming').DataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "<?=site_url('fetch-event')?>",
+            "type": "GET",
+            "dataSrc": function(json) {
+                // Handle the data if needed
+                return json.data;
             },
-            "searching": true,
-            "columns": [{
-                    "data": "event"
-                },
-                {
-                    "data": "type"
-                },
-                {
-                    "data": "date"
-                },
-                {
-                    "data": "action"
-                }
-            ]
-        });
+            "error": function(xhr, error, code) {
+                console.error("AJAX Error: " + error);
+                alert("Error occurred while loading data.");
+            }
+        },
+        "searching": true,
+        "columns": [{
+                "data": "event"
+            },
+            {
+                "data": "type"
+            },
+            {
+                "data": "date"
+            },
+            {
+                "data": "action"
+            }
+        ]
+    });
 
-        $(document).on('click','.accept',function(){
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to accept this event?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, accept it!"
-                }).then((result) => {
-                if (result.isConfirmed) 
-                {
-                    $.ajax({
-                        url:"<?=site_url('accept-event')?>",
-                        method:"POST",data:{value:$(this).val()},
-                        success:function(response)
-                        {
-                            if(response==="success")
-                            {
-                                Swal.fire({
-                                    title: "Great!",
-                                    text: "The event has been accepted",
-                                    icon: "success"
-                                });
-                                table.ajax.reload();
-                            }
-                            else
-                            {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: response,
-                                    icon: "warning"
-                                });
-                            }
+    $(document).on('click', '.accept', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to accept this event?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, accept it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?=site_url('accept-event')?>",
+                    method: "POST",
+                    data: {
+                        value: $(this).val()
+                    },
+                    success: function(response) {
+                        if (response === "success") {
+                            Swal.fire({
+                                title: "Great!",
+                                text: "The event has been accepted",
+                                icon: "success"
+                            });
+                            table.ajax.reload();
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: response,
+                                icon: "warning"
+                            });
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
+    });
 
-        $(document).on('click','.reject',function(){
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to reject this event?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, reject it!"
-                }).then((result) => {
-                if (result.isConfirmed) 
-                {
-                    $.ajax({
-                        url:"<?=site_url('reject-event')?>",
-                        method:"POST",data:{value:$(this).val()},
-                        success:function(response)
-                        {
-                            if(response==="success")
-                            {
-                                Swal.fire({
-                                    title: "Great!",
-                                    text: "The event has been rejected",
-                                    icon: "success"
-                                });
-                                table.ajax.reload();
-                            }
-                            else
-                            {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: response,
-                                    icon: "warning"
-                                });
-                            }
+    $(document).on('click', '.reject', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to reject this event?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, reject it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?=site_url('reject-event')?>",
+                    method: "POST",
+                    data: {
+                        value: $(this).val()
+                    },
+                    success: function(response) {
+                        if (response === "success") {
+                            Swal.fire({
+                                title: "Great!",
+                                text: "The event has been rejected",
+                                icon: "success"
+                            });
+                            table.ajax.reload();
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: response,
+                                icon: "warning"
+                            });
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
+    });
 
-        $('#tblrequest').DataTable();
-        $(document).on('click','.cancel',function(){
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to cancel this event?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, cancel it!"
-                }).then((result) => {
-                if (result.isConfirmed) 
-                {
-                    $.ajax({
-                        url:"<?=site_url('cancel-event')?>",
-                        method:"POST",data:{value:$(this).val()},
-                        success:function(response)
-                        {
-                            if(response==="success")
-                            {
-                                Swal.fire({
-                                    title: "Cancelled!",
-                                    text: "The event has been cancelled",
-                                    icon: "success"
-                                });
-                            }
-                            else
-                            {
-                                Swal.fire({
-                                    title: "Error",
-                                    text: response,
-                                    icon: "warning"
-                                });
-                            }
+    $('#tblrequest').DataTable();
+    $(document).on('click', '.cancel', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to cancel this event?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, cancel it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: "<?=site_url('cancel-event')?>",
+                    method: "POST",
+                    data: {
+                        value: $(this).val()
+                    },
+                    success: function(response) {
+                        if (response === "success") {
+                            Swal.fire({
+                                title: "Cancelled!",
+                                text: "The event has been cancelled",
+                                icon: "success"
+                            });
+                        } else {
+                            Swal.fire({
+                                title: "Error",
+                                text: response,
+                                icon: "warning"
+                            });
                         }
-                    });
-                }
-            });
+                    }
+                });
+            }
         });
+    });
     </script>
 </body>
 
