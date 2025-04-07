@@ -93,68 +93,73 @@
         <!--================= Slide Bar Start Here =================-->
 
         <!--================= Banner Section Start Here =================-->
-        <section class="banner banner3 home-four">
-            <div class="banner-single banner-bg banner-single-2">
-                <div class="video-section-inner text-center">
-                    <div class="play-video">
-                        <a class="popup-video" href="https://www.youtube.com/watch?v=G4t6TqG5LM8"><i
-                                class="fas fa-play"></i></a>
-                    </div>
-                </div>
+        <div class="banner banner1">
+            <div class="inner-page-banner banner-bg">
                 <div class="container">
                     <div class="banner-content">
-                        <div class="flex-wrap d-flex">
-                            <span class="blog-catagory-tag">BASKETBALL</span>
+                        <div class="page-path">
+                            <ul>
+                                <li><a class="home-page-link" href="/">Home</a></li>
+                                <li><a class="current-page" href="<?=site_url('contact-us')?>"><?=$title?></a></li>
+                            </ul>
                         </div>
-                        <h1 class="banner-heading">Exploring World of Basketball</h1>
-                        <p class="desc">Whether you're a dedicated fan, a casual observer, or just starting to discover
-                            the sport <br>
-                            you'll find a wealth of information and inspiration here.</p>
+                        <h1 class="banner-heading">Contact Us</h1>
                     </div>
                 </div>
             </div>
-            </div>
-        </section>
+        </div>
         <!--================= Banner Section End Here =================-->
 
     </header>
     <!--================= Header Section End Here =================-->
 
 
-    <!--================= Gallery Section Start Here =================-->
-    <div class="rts-gallery-section home-four">
+    <div class="contact-area">
         <div class="container">
-            <div class="top-wrap">
-                <div class="section-title-area section-title-area1">
-                    <h1 class="title">LIVE STREAMING</h1>
-                </div>
-            </div>
-            <div class="filterd-items home">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="item">
-                                <video id="remote" autoplay controls></video>
-                                <?php if(!empty($game)): ?>
-                                <?php
-                                $teamModel = new \App\Models\teamModel();
-                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
-                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
-                                ?>
-                                <span class="tag text-danger">LIVE</span> <?=$team1['team_name']?> <span>VS</span>
-                                <?=$team2['team_name']?>
-                                <?php endif; ?>
-                            </div>
+            <div class="address-box">
+                <div class="contact-area-inner">
+                    <div class="row align-items-start">
+                        <div class="col-lg-6 col-md-12">
+                            <div class="map">
+                                <p><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247457.5172042079!2d120.65457473574595!3d14.280976533613943!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397d4eae8163c71%3A0xf0c4d0843bdde727!2sCavite!5e0!3m2!1sen!2sph!4v1744003962230!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></p>
+                            </div>  
                         </div>
-                        <div class="col-lg-3">
-
+                        <div class="col-lg-6 col-md-12">
+                            <form class="contact-form mb-10">
+                                <h3 class="post-title mb-35">GET IN TOUCH</h3>
+                                <div class="info-form">
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-box name mb-20">
+                                                <input type="text" name="fullname" placeholder="Your Name" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="input-box email mail-input mb-20">
+                                                <input type="email" name="email" placeholder="Your E-mail"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-12 col-sm-12">
+                                            <div class="input-box message text-input mb-20">
+                                                <textarea name="message" cols="30" rows="10"
+                                                    placeholder="Write Your Message" required></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 mb-15">
+                                            <button type="submit" class="form-btn form-btn4">
+                                                Submit
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--================= Gallery Section End Here =================-->
 
 
     <!--================= Footer Start Here =================-->

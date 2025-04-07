@@ -5,7 +5,7 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-//auth
+//pages
 $routes->get('/', 'Home::index');
 $routes->get('latest-news','Home::latestNews');
 $routes->get('latest-news/stories/(:any)','Home::stories/$1');
@@ -16,6 +16,8 @@ $routes->get('latest-events/details/(:any)','Home::eventDetails/$1');
 $routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
 $routes->get('shop-near-me','Home::shopNearMe');
 $routes->get('contact-us','Home::contactUs');
+//functions for user 
+$routes->post('register-now','User::registerNow');
 
 //authentication
 $routes->post('check','Home::checkAccount');

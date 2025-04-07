@@ -99,10 +99,20 @@
                                         <i class="ti ti-calendar-week"></i>&nbsp;My Request
                                     </a>
                                 </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-register-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-calendar-week"></i>&nbsp;Registration
+                                    </a>
+                                </li>
                                 <?php else : ?>
-                                    <li class="nav-item">
+                                <li class="nav-item">
                                     <a href="#tabs-profile-8" class="nav-link active" data-bs-toggle="tab">
                                         <i class="ti ti-calendar-week"></i>&nbsp;My Request
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="#tabs-register-8" class="nav-link" data-bs-toggle="tab">
+                                        <i class="ti ti-calendar-week"></i>&nbsp;Registration
                                     </a>
                                 </li>
                                 <?php endif; ?>
@@ -166,8 +176,52 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="tabs-register-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="tblregistration">
+                                            <thead>
+                                                <th>Event</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Fullname</th>
+                                                <th>Email</th>
+                                                <th>Age</th>
+                                                <th>Address</th>
+                                                <th>Remarks</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach($members as $row): ?>
+                                            <?php
+                                            $dob = $row->birth_date;
+                                            $dob = new DateTime($dob);
+                                            $now = new DateTime();
+                                            $age = $now->diff($dob);
+                                            ?>
+                                                <tr>
+                                                    <td><?=$row->event_title ?></td>
+                                                    <td><?=$row->start_date ?></td>
+                                                    <td><?=$row->end_date ?></td>
+                                                    <td><?=$row->fullname ?></td>
+                                                    <td><?=$row->email ?></td>
+                                                    <td><?=$age->y ?></td>
+                                                    <td><?=$row->address ?></td>
+                                                    <td><?=$row->remarks?></td>
+                                                    <td>
+                                                        <?php if($row->status==0): ?>
+                                                        <button type="button" class="btn btn-primary evaluate" value="<?=$row->register_id?>">
+                                                            <i class="ti ti-settings"></i>&nbsp;Evaluate
+                                                        </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>   
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <?php else : ?>
-                                    <div class="tab-pane fade active show" id="tabs-profile-8">
+                                <div class="tab-pane fade active show" id="tabs-profile-8">
                                     <div class="table-responsive">
                                         <table class="table table-striped table-bordered" id="tblrequest">
                                             <thead>
@@ -211,6 +265,49 @@
                                         </table>
                                     </div>
                                 </div>
+                                <div class="tab-pane fade" id="tabs-register-8">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped" id="tblregistration">
+                                            <thead>
+                                                <th>Event</th>
+                                                <th>From</th>
+                                                <th>To</th>
+                                                <th>Fullname</th>
+                                                <th>Email</th>
+                                                <th>Age</th>
+                                                <th>Address</th>
+                                                <th>Action</th>
+                                            </thead>
+                                            <tbody>
+                                            <?php foreach($members as $row): ?>
+                                            <?php
+                                            $dob = $row->birth_date;
+                                            $dob = new DateTime($dob);
+                                            $now = new DateTime();
+                                            $age = $now->diff($dob);
+                                            ?>
+                                                <tr>
+                                                    <td><?=$row->event_title ?></td>
+                                                    <td><?=$row->start_date ?></td>
+                                                    <td><?=$row->end_date ?></td>
+                                                    <td><?=$row->fullname ?></td>
+                                                    <td><?=$row->email ?></td>
+                                                    <td><?=$age->y ?></td>
+                                                    <td><?=$row->address ?></td>
+                                                    <td><?=$row->remarks?></td>
+                                                    <td>
+                                                        <?php if($row->status==0): ?>
+                                                        <button type="button" class="btn btn-primary evaluate" value="<?=$row->register_id?>">
+                                                            <i class="ti ti-settings"></i>&nbsp;Evaluate
+                                                        </button>
+                                                        <?php endif; ?>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>  
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                                 <?php endif; ?>
                             </div>
                         </div>
@@ -239,6 +336,21 @@
             <!--  END FOOTER  -->
         </div>
     </div>
+
+    <div class="modal modal-blur fade" id="evaluateModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Evaluation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
     <script src="<?=base_url('admin/js/tabler.min.js')?>" defer></script>
     <!-- END GLOBAL MANDATORY SCRIPTS -->
@@ -250,6 +362,10 @@
     <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
+        $(document).on('click','.evaluate',function(){
+            $('#evaluateModal').modal('show');
+        });
+        $('#tblregistration').DataTable();
         var table = $('#tblincoming').DataTable({
             "processing": true,
             "serverSide": true,

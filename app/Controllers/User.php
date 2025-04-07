@@ -120,4 +120,36 @@ class User extends BaseController
             return redirect()->to('/?access=out')->with('fail', 'You are logged out!');
         }
     }
+
+    public function registerNow()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'fullname'=>'required',
+            'email'=>'required|valid_email',
+            'phone'=>'required|regex_match[/^[0-9]{11}$/]',
+            'birth_date'=>'required',
+            'address'=>'required'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $registerModel = new \App\Models\registerModel();
+            $data = ['event_id'=>$this->request->getPost('event'),
+                    'fullname'=>$this->request->getPost('fullname'),
+                    'email'=>$this->request->getPost('email'),
+                    'phone'=>$this->request->getPost('phone'),
+                    'birth_date'=>$this->request->getPost('birth_date'),
+                    'address'=>$this->request->getPost('address'),
+                    'status'=>0,
+                    'remarks'=>'',
+                    'datecreated'=>date('Y-m-d')];
+            $registerModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully registered']);
+        }
+    }
 }

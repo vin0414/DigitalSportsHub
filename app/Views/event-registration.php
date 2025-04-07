@@ -115,45 +115,51 @@
 
 
     <!--================= Gallery Section Start Here =================-->
-    <div class="rts-event-details-section section-gap">
+    <div class="rts-player-static pt--100 pb--100">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3"></div>
                 <div class="col-lg-6 event-side-info">
-                    <div class="info-box">
+                    <div class="info-box" style="background:white;">
                         <div class="info-top">
                             <span class="info-title">Register Now - <?=$events['event_title']?></span>
                         </div>
                         <div class="info-body">
-                            <form action="" method="POST" class="row g-3" id="frmRegister">
+                            <form method="POST" class="row g-3" id="frmRegister">
                                 <?=csrf_field()?>
+                                <input type="hidden" name="event" value="<?=$id?>"/>
                                 <div class="col-lg-12">
                                     <label>Complete Name</label>
                                     <input type="text" class="form-control" name="fullname"
-                                        placeholder="e.g. Juan Dela Cruz" required />
+                                        placeholder="e.g. Juan Dela Cruz" value="<?=set_value('fullname')?>" required />
+                                    <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                 </div>
-                                <div class="col-lg-12">
+                                <div cs="col-lg-12">
                                     <label>Email Address</label>
                                     <input type="email" class="form-control" name="email"
-                                        placeholder="e.g. juan.delacruz@gmail.com" required />
+                                        placeholder="e.g. juan.delacruz@gmail.com" value="<?=set_value('email')?>" required />
+                                    <div id="email-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="row g-3">
                                         <div class="col-lg-6">
                                             <label>Contact No</label>
                                             <input type="phone" class="form-control" name="phone"
-                                                placeholder="e.g. 09123456789" required />
+                                                placeholder="e.g. 09123456789" value="<?=set_value('phone')?>" minlength="11" maxlength="11" required />
+                                            <div id="phone-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Birth Date</label>
-                                            <input type="date" class="form-control" name="birth_date" required />
+                                            <input type="date" class="form-control" name="birth_date" value="<?=set_value('birth_date')?>" required />
+                                            <div id="birth_date-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <label>Address</label>
                                     <textarea name="address" class="form-control" style="height:150px;"
-                                        required></textarea>
+                                        required><?=set_value('address')?></textarea>
+                                    <div id="address-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">Register</button>
@@ -199,6 +205,37 @@
     <script src="<?=base_url('assets/js/vendors/jquery.magnific-popup.min.js')?>"></script>
     <!--================= Main Script =================-->
     <script src="<?=base_url('assets/js/main.js')?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        $('#frmRegister').on('submit',function(e){
+            e.preventDefault();
+            let data = $(this).serialize();
+            $.ajax({
+                url:"<?=base_url('register-now')?>",
+                method:"POST",data:data,
+                success:function(response)
+                {
+                    if (response.success) {
+                        $('#frmRegister')[0].reset();
+                        Swal.fire({
+                            title: 'Great!',
+                            text: "Successfully registered",
+                            icon: 'success',
+                        });
+                    } else {
+                        var errors = response.error;
+                        // Iterate over each error and display it under the corresponding input field
+                        for (var field in errors) {
+                            $('#' + field + '-error').html('<p>' + errors[field] +
+                                '</p>'); // Show the first error message
+                            $('#' + field).addClass(
+                                'text-danger'); // Highlight the input field with an error
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

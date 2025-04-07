@@ -83,7 +83,7 @@ class Home extends BaseController
         $eventModel = new \App\Models\eventModel();
         $events = $eventModel->WHERE('event_id',$id)->first();
         if($events['registration']==1):
-        $data = ['title'=>$title,'events'=>$events];
+        $data = ['title'=>$title,'events'=>$events,'id'=>$id];
         return view('event-registration',$data);
         else :
         return redirect()->back();
@@ -996,8 +996,14 @@ class Home extends BaseController
         //my request
         $eventModel = new \App\Models\eventModel();
         $event = $eventModel->WHERE('accountID',session()->get('loggedUser'))->findAll();
+        //registered user
+        $builder = $this->db->table('event_registration a');
+        $builder->select('a.*,b.event_title,b.start_date,b.end_date');
+        $builder->join('events b','b.event_id=a.event_id','LEFT');
+        $builder->groupby('a.register_id');
+        $members = $builder->get()->getResult();
 
-        $data = ['title'=>$title,'event'=>$event];
+        $data = ['title'=>$title,'event'=>$event,'members'=>$members];
         return view('main/manage-event',$data);
     }
 
