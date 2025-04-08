@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <link rel="apple-touch-icon" href="<?=base_url('assets/images/logo.jpg')?>">
     <link rel="shortcut icon" type="image/x-icon" href="<?=base_url('assets/images/logo.jpg')?>">
-    <title>Digital Sports Hub - Login</title>
+    <title>Digital Sports Hub - Forgot Password</title>
     <!-- BEGIN GLOBAL MANDATORY STYLES -->
     <link href="<?=base_url('admin/css/tabler.min.css')?>" rel="stylesheet" />
     <!-- END GLOBAL MANDATORY STYLES -->
@@ -39,12 +39,16 @@
                     <h2 class="h2 text-center mb-4">Forgot Password</h2>
                     <p class="text-secondary mb-4">Enter your email address and your password will be reset and emailed
                         to you.</p>
-                    <form action="<?=base_url('reset-password')?>" method="POST" autocomplete="off" novalidate>
+                    <?php if(!empty(session()->getFlashdata('success'))) : ?>
+                        <div class="alert alert-success" role="alert">
+                            <?= session()->getFlashdata('success'); ?>
+                        </div>
+                    <?php endif; ?>
+                    <form action="<?=base_url('request-new-password')?>" method="POST" autocomplete="off" novalidate>
                         <?=csrf_field();?>
                         <div class="mb-3">
                             <label class="form-label">Email address</label>
-                            <input type="email" class="form-control" name="email" placeholder="your@email.com"
-                                value="<?=set_value('email')?>" autocomplete="off" />
+                            <input type="email" class="form-control" name="email" placeholder="your@email.com" autocomplete="off" />
                             <div class="text-danger">
                                 <small><?=isset($validation)? display_error($validation,'email') : '' ?></small>
                             </div>

@@ -7,71 +7,41 @@ class Restore extends BaseController
 {    
     public function restoreFile()
     {
-        $server = $this->request->getPost('server');
+        $hostname = $this->request->getPost('server');
 		$username = $this->request->getPost('username');
 		$password = $this->request->getPost('password');
-		$dbname = $this->request->getPost('database');
- 
-		$filename = $_FILES['file']['name'];
-		move_uploaded_file($_FILES['file']['tmp_name'],'Upload/' . $filename);
-		$file_location = 'Upload/' . $filename;
+		$database = $this->request->getPost('database');
 
-        function restore($server, $username, $password, $dbname, $location){
-            //connection
-            $conn = mysqli_connect($server, $username, $password, $dbname); 
-         
-            //variable use to store queries from our sql file
-            $sql = '';
-         
-            //get our sql file
-            $lines = file($location);
-         
-            //return message
-            $output = array('error'=>false);
-         
-            //loop each line of our sql file
-            foreach ($lines as $line){
-         
-                //skip comments
-                if(substr($line, 0, 2) == '--' || $line == ''){
-                    continue;
-                }
-         
-                //add each line to our query
-                $sql .= $line;
-         
-                //check if its the end of the line due to semicolon
-                if (substr(trim($line), -1, 1) == ';'){
-                    //perform our query
-                    $query = $conn->query($sql);
-                    if(!$query){
-                        $output['error'] = true;
-                        $output['message'] = $conn->error;
-                    }
-                    else{
-                        $output['message'] = 'Database restored successfully';
-                    }
-         
-                    //reset our query variable
-                    $sql = '';
-         
-                }
+        $backupDir = FCPATH . 'Import';
+        // Ensure the directory exists, create it if it doesn't
+        if (!is_dir($backupDir)) {
+            mkdir($backupDir, 0777, true);  // Make directory with write permissions
+        }
+		$filename = $_FILES['file']['name'];
+		move_uploaded_file($_FILES['file']['tmp_name'],$backupDir .'/'. $filename);
+		$filePath = $backupDir .'/'. $filename;
+        $db = \Config\Database::connect([
+            'hostname' => $hostname,
+            'username' => $username,
+            'password' => $password,
+            'database' => $database,
+            'DBDriver' => 'MySQLi',  // Assuming MySQL database
+        ]);
+
+        // Read the SQL file contents
+        $sql = file_get_contents($filePath);
+
+        // Split the SQL file into individual queries
+        $queries = explode(";", $sql);
+
+        // Loop through each query and execute it
+        foreach ($queries as $query) {
+            // Skip empty queries
+            if (trim($query)) {
+                $db->query($query);
             }
-         
-            return $output;
         }
- 
-		//restore database using our function
-		$restore = restore($server, $username, $password, $dbname, $file_location);
-        if($restore['error'])
-        {
-            session()->setFlashdata('fail','Error! Something went wrong.'.$restore['message']);
-            return redirect()->to('recovery')->withInput();
-        }
-        else
-        {
-            session()->setFlashdata('success',$restore['message']);
-            return redirect()->to('recovery')->withInput();
-        }
+        session()->setFlashdata('success','Successfully restored');
+        return redirect()->to('recovert')->withInput();
     }
 }

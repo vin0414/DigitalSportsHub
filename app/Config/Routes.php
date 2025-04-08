@@ -22,6 +22,7 @@ $routes->post('register-now','User::registerNow');
 //authentication
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
+$routes->post('request-new-password','Home::requestNewPassword');
 //fan
 $routes->post('validate','User::validateUser');
 $routes->post('register','User::register');
