@@ -66,12 +66,12 @@ class Restore extends BaseController
         if($restore['error'])
         {
             session()->setFlashdata('fail','Error! Something went wrong.'.$restore['message']);
-            return redirect()->to('/about')->withInput();
+            return redirect()->to('recovery')->withInput();
         }
         else
         {
             session()->setFlashdata('success',$restore['message']);
-            return redirect()->to('/about')->withInput();
+            return redirect()->to('recovery')->withInput();
         }
     }
 }

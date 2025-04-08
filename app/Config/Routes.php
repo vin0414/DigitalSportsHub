@@ -78,6 +78,9 @@ $routes->post('minus-score-team-2','Home::minusScore2');
 $routes->get('team1-score','Home::teamHome');
 $routes->get('team2-score','Home::teamGuest');
 $routes->post('end-game','Home::endGame');
+//recovery
+$routes->post('restore','Restore::restoreFile');
+$routes->get('download','Download::downloadFile');
 
 $routes->group('',['filter'=>'UserAlreadyLoggedIn'],function($routes)
 {
