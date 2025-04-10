@@ -48,9 +48,15 @@ class Home extends BaseController
         $time = date('H:i');
         $matchModel = new \App\Models\matchModel();
         $game = $matchModel->WHERE('date',$date)->WHERE('time <=',$time)->WHERE('status',1)->first();
-        
+        //ads
+        $adModel = new \App\Models\adModel();
+        $ads = $adModel->findAll();
+        $videoModel = new \App\Models\videoModel();
+        //all videos
+        $recent = $videoModel->orderBy('video_id','DESC')
+                          ->limit(5)->findAll();
 
-        $data = ['title'=>$title,'game'=>$game];
+        $data = ['title'=>$title,'game'=>$game,'ads'=>$ads,'recent'=>$recent];
         return view('watch-now',$data);
     }
 
@@ -3023,6 +3029,134 @@ class Home extends BaseController
                     return $this->response->setJSON(['success' => 'Successfully submitted']);
                 }
             }
+        }
+    }
+
+    public function sponsors()
+    {
+        $title = "Sponsorship";
+        //ads
+        $adModel = new \App\Models\adModel();
+        $ads = $adModel->findAll();
+
+        $data = ['title'=>$title,'ads'=>$ads];
+        return view('main/sponsorship',$data);
+    }
+
+    public function saveAds()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'title'=>'required',
+            'from'=>'required',
+            'to'=>'required',
+            'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]'
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            function generateRandomString($length = 64) {
+                // Generate random bytes and convert them to hexadecimal
+                $bytes = random_bytes($length);
+                return substr(bin2hex($bytes), 0, $length);
+            }
+            $token_code = generateRandomString(64);
+            //save the logo
+            $file->move('admin/images/ads/',$originalName);
+            //save the data
+            $adModel = new \App\Models\adModel();
+            $data = ['title'=>$this->request->getPost('title'),
+                    'image_url'=>$originalName,
+                    'views'=>0,
+                    'clicks'=>0,
+                    'start_date'=>$this->request->getPost('from'),
+                    'end_date'=>$this->request->getPost('to'),
+                    'token'=>$token_code,
+                    'dateCreated'=>date('Y-m-d')];
+            $adModel->save($data);
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'Added new ads : '.$this->request->getPost('title'),
+                    'page'=>'Sponsors'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
+        }
+    }
+
+    public function fetchAds()
+    {
+        $val = $this->request->getGet('value');
+        $adModel = new \App\Models\adModel();
+        $ad = $adModel->WHERE('ads_id',$val)->first();
+        $data = [
+            'id'=>$ad['ads_id'],
+            'title'=>$ad['title'],
+            'from'=>$ad['start_date'],
+            'to'=>$ad['end_date'],
+        ];
+        return $this->response->SetJSON($data);
+    }
+
+    public function editAds()
+    {
+        $validation = $this->validate([
+            'csrf_test_name'=>'required',
+            'title'=>'required',
+            'from'=>'required',
+            'to'=>'required',
+        ]);
+
+        if(!$validation)
+        {
+            return $this->response->SetJSON(['error' => $this->validator->getErrors()]);
+        }
+        else
+        {
+            $adModel = new \App\Models\adModel();
+            $id = $this->request->getPost('ads_id');
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            if(empty($file->getClientName()))
+            {
+                $data = ['title'=>$this->request->getPost('title'),
+                        'start_date'=>$this->request->getPost('from'),
+                        'end_date'=>$this->request->getPost('to')];
+                $adModel->update($id,$data);
+            }
+            else
+            {
+                //save the logo
+                $file->move('admin/images/ads/',$originalName);
+                //save the data
+                
+                $data = ['title'=>$this->request->getPost('title'),
+                        'image_url'=>$originalName,
+                        'start_date'=>$this->request->getPost('from'),
+                        'end_date'=>$this->request->getPost('to')];
+                $adModel->update($id,$data);
+            }
+            //logs
+            date_default_timezone_set('Asia/Manila');
+            $logModel = new \App\Models\logModel();
+            $data = [
+                    'date'=>date('Y-m-d H:i:s a'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'activities'=>'modify ads : '.$this->request->getPost('title'),
+                    'page'=>'Sponsors'
+                    ];        
+            $logModel->save($data);
+            return $this->response->SetJSON(['success' => 'Successfully added']);
         }
     }
 }

@@ -1,0 +1,564 @@
+ERROR - 2025-04-10 08:56:48 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_hub', 3306, '', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#13 {main}
+CRITICAL - 2025-04-10 08:56:48 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `matches`
+WHERE `date` = :date:
+AND `time` <= :time:
+AND `status` = :status:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-10 08:57:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 08:57:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:57:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:57:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:57:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:58:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:58:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:59:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 00:59:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:00:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:00:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:00:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:00:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:01:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:01:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:03:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:04:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:06:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:08:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:10:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:11:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:32:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:43:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:44:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:45:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:45:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:45:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:45:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:45:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:46:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:46:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:51:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:53:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:53:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:55:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 01:55:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:00:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:00:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:09:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:10:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:11:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:11:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:11:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:37:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-10 02:39:00 --> mysqli_sql_exception: Unknown column 'starts_date' in 'field list' in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ad...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ad...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ad...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ad...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(3076): CodeIgniter\BaseModel->save(Array)
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#16 {main}
+CRITICAL - 2025-04-10 02:39:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'starts_date' in 'field list'
+[Method: POST, Route: save-ads]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 02:39:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'starts_date' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023900logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'189f979bd7c96efaf86ebb2781cef19d912eb3b0376a0b6fe507e84054cb91d7\', \'2025-04-10\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023900logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'189f979bd7c96efaf86ebb2781cef19d912eb3b0376a0b6fe507e84054cb91d7\', \'2025-04-10\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 02:39:00 --> [Caused by] mysqli_sql_exception: Unknown column 'starts_date' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023900logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'189f979bd7c96efaf86ebb2781cef19d912eb3b0376a0b6fe507e84054cb91d7\', \'2025-04-10\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023900logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'189f979bd7c96efaf86ebb2781cef19d912eb3b0376a0b6fe507e84054cb91d7\', \'2025-04-10\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023900logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'189f979bd7c96efaf86ebb2781cef19d912eb3b0376a0b6fe507e84054cb91d7\', \'2025-04-10\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-04-10 02:39:10 --> mysqli_sql_exception: Unknown column 'starts_date' in 'field list' in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ad...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ad...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ad...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ad...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(839): CodeIgniter\Model->doInsert(Array)
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(800): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(750): CodeIgniter\Model->insert(Array, false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(3076): CodeIgniter\BaseModel->save(Array)
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#14 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#15 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#16 {main}
+CRITICAL - 2025-04-10 02:39:10 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'starts_date' in 'field list'
+[Method: POST, Route: save-ads]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 2 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 5 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 6 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 02:39:10 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'starts_date' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023910logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'9f70682af67135c7d8959103754a497f07f0165f7eed3d353cb7e2ed7a8bd218\', \'2025-04-10\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023910logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'9f70682af67135c7d8959103754a497f07f0165f7eed3d353cb7e2ed7a8bd218\', \'2025-04-10\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 4 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 7 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 8 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 02:39:10 --> [Caused by] mysqli_sql_exception: Unknown column 'starts_date' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023910logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'9f70682af67135c7d8959103754a497f07f0165f7eed3d353cb7e2ed7a8bd218\', \'2025-04-10\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023910logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'9f70682af67135c7d8959103754a497f07f0165f7eed3d353cb7e2ed7a8bd218\', \'2025-04-10\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (\'Sample of Ads Title\', \'20250410023910logo.jpg\', 0, 0, \'2025-04-10\', \'2025-04-18\', \'9f70682af67135c7d8959103754a497f07f0165f7eed3d353cb7e2ed7a8bd218\', \'2025-04-10\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `ads` (`title`, `image_url`, `views`, `clicks`, `starts_date`, `end_date`, `token`, `dateCreated`) VALUES (:title:, :image_url:, :views:, :clicks:, :starts_date:, :end_date:, :token:, :dateCreated:)', [...], false)
+ 5 SYSTEMPATH\Model.php(394): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(839): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(800): CodeIgniter\BaseModel->insert([...], false)
+ 8 SYSTEMPATH\BaseModel.php(750): CodeIgniter\Model->insert([...], false)
+ 9 APPPATH\Controllers\Home.php(3076): CodeIgniter\BaseModel->save([...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->saveAds()
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-10 10:39:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:39:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:40:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:41:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:42:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:42:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:42:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:42:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 10:43:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:43:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:43:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:44:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:44:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:45:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:49:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 02:49:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:10:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-10 03:10:27 --> ErrorException: Undefined array key "to_date"
+[Method: GET, Route: fetch-data]
+in APPPATH\Controllers\Home.php on line 3100.
+ 1 APPPATH\Controllers\Home.php(3100): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "to_date"', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Controllers\\Home.php', 3100)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->fetchAds()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 03:10:39 --> ErrorException: Undefined array key "to_date"
+[Method: GET, Route: fetch-data]
+in APPPATH\Controllers\Home.php on line 3100.
+ 1 APPPATH\Controllers\Home.php(3100): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "to_date"', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Controllers\\Home.php', 3100)
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->fetchAds()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-10 03:11:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:14:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:14:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:15:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:21:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:21:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:22:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:22:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:25:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:25:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:25:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:32:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-10 03:32:53 --> mysqli_sql_exception: Unknown column 'ads.ad_id' in 'where clause' in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `ads` SE...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SE...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SE...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SE...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(1027): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(863): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(3129): CodeIgniter\Model->update('2', Array)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->editAds()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#15 {main}
+CRITICAL - 2025-04-10 03:32:53 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'ads.ad_id' in 'where clause'
+[Method: POST, Route: edit-ads]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 2 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 03:32:53 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'ads.ad_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 4 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 7 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 03:32:53 --> [Caused by] mysqli_sql_exception: Unknown column 'ads.ad_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 5 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-04-10 03:33:13 --> mysqli_sql_exception: Unknown column 'ads.ad_id' in 'where clause' in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `ads` SE...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SE...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SE...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SE...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(1027): CodeIgniter\Model->doUpdate(Array, Array)
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(863): CodeIgniter\BaseModel->update(Array, Array)
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(3129): CodeIgniter\Model->update('2', Array)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->editAds()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#14 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#15 {main}
+CRITICAL - 2025-04-10 03:33:13 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'ads.ad_id' in 'where clause'
+[Method: POST, Route: edit-ads]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 2 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 3 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 4 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 5 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 03:33:13 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'ads.ad_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 4 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 5 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 6 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 7 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 03:33:13 --> [Caused by] mysqli_sql_exception: Unknown column 'ads.ad_id' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('UPDATE `ads` SET `title` = \'The quick brown fox jumps over the lazy dog\', `start_date` = \'2024-04-11\', `end_date` = \'2025-04-11\'
+WHERE `ads`.`ad_id` IN (\'2\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2521): CodeIgniter\Database\BaseConnection->query('UPDATE `ads` SET `title` = :title:, `start_date` = :start_date:, `end_date` = :end_date:
+WHERE `ads`.`ad_id` IN :ads.ad_id:', [...], false)
+ 5 SYSTEMPATH\Model.php(461): CodeIgniter\Database\BaseBuilder->update()
+ 6 SYSTEMPATH\BaseModel.php(1027): CodeIgniter\Model->doUpdate([...], [...])
+ 7 SYSTEMPATH\Model.php(863): CodeIgniter\BaseModel->update([...], [...])
+ 8 APPPATH\Controllers\Home.php(3129): CodeIgniter\Model->update('2', [...])
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->editAds()
+10 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-10 11:35:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:35:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:36:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:38:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:38:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:39:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:40:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:40:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:43:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:43:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-10 11:52:37 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2025-04-10'
+AND `end_date` <= '2025-04-10'' at line 3 in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *\nFROM `...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(53): CodeIgniter\BaseModel->findAll()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->watchNow()
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#14 {main}
+CRITICAL - 2025-04-10 11:52:37 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2025-04-10'
+AND `end_date` <= '2025-04-10'' at line 3
+[Method: GET, Route: watch-now]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `ads`
+WHERE `start_date` = > :start_date=:
+AND `end_date` <= :end_date:', [...], false)
+ 2 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\Home.php(53): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->watchNow()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 11:52:37 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2025-04-10'
+AND `end_date` <= '2025-04-10'' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `ads`
+WHERE `start_date` = > \'2025-04-10\'
+AND `end_date` <= \'2025-04-10\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `ads`
+WHERE `start_date` = > \'2025-04-10\'
+AND `end_date` <= \'2025-04-10\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `ads`
+WHERE `start_date` = > :start_date=:
+AND `end_date` <= :end_date:', [...], false)
+ 4 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\Home.php(53): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->watchNow()
+ 8 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-10 11:52:37 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '> '2025-04-10'
+AND `end_date` <= '2025-04-10'' at line 3
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT *
+FROM `ads`
+WHERE `start_date` = > \'2025-04-10\'
+AND `end_date` <= \'2025-04-10\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *
+FROM `ads`
+WHERE `start_date` = > \'2025-04-10\'
+AND `end_date` <= \'2025-04-10\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *
+FROM `ads`
+WHERE `start_date` = > \'2025-04-10\'
+AND `end_date` <= \'2025-04-10\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `ads`
+WHERE `start_date` = > :start_date=:
+AND `end_date` <= :end_date:', [...], false)
+ 5 SYSTEMPATH\Model.php(286): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(675): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\Home.php(53): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->watchNow()
+ 9 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+12 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+13 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+14 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-10 11:53:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:53:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:54:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:55:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:56:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:56:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:57:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 11:58:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 03:59:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:00:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:14:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:41:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:42:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:43:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:43:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:43:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-10 12:45:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

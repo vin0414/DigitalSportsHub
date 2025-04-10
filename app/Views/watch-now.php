@@ -35,6 +35,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/fontawesome.min.css"
         integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .ad-container {
+            display: flex;
+            justify-content: start;  /* Align ads to the left */
+            overflow: hidden;  /* Hide ads when they are outside the container */
+            width: 100%;  /* Full width of the container */
+            position: relative;
+            }
+
+            .ad {
+                width: 300px;  /* Set each ad's width */
+                height: 250px;  /* Set each ad's height */
+                flex-shrink: 0;  /* Prevent the ads from shrinking */
+                animation: slideIn 12s infinite; /* Apply the sliding animation to each ad */
+                margin-right: 20px;  /* Space between ads */
+            }
+
+            .ad img {
+                width: 100%;  /* Make the image take up the full width of the container */
+                height: 100%;  /* Make the image fill the height of the container */
+                object-fit: cover;  /* Ensure the image covers the area without distorting */
+                border-radius: 8px;
+                display: block;
+                border: 1px solid #ddd;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+
+            /* Keyframes for scrolling each ad one by one */
+            @keyframes slideIn {
+            0% {
+                transform: translateX(100%);  /* Start off-screen to the right */
+            }
+            10%, 20% {
+                transform: translateX(0);  /* Slide to visible area */
+            }
+            40%, 50% {
+                transform: translateX(0);  /* Stay visible for a while */
+            }
+            60%, 100% {
+                transform: translateX(-100%);  /* Move to the left, completely off-screen */
+            }
+            }
+
+            /* Delaying animations for each ad */
+            .ad:nth-child(1) {
+            animation-delay: 0s;
+            }
+
+            .ad:nth-child(2) {
+            animation-delay: 4s;  /* Start second ad after 4 seconds */
+            }
+
+            .ad:nth-child(3) {
+            animation-delay: 8s;  /* Start third ad after 8 seconds */
+            }
+    </style>
 </head>
 
 <body>
@@ -115,32 +171,56 @@
 
 
     <!--================= Gallery Section Start Here =================-->
-    <div class="rts-gallery-section home-four">
+    <div class="news-feed-section section-gap">
         <div class="container">
-            <div class="top-wrap">
-                <div class="section-title-area section-title-area1">
-                    <h1 class="title">LIVE STREAMING</h1>
+            <div class="row">
+                <div class="col-xl-9 col-md-8"> 
+                    <div class="item">
+                        <video id="remote" width="100%" autoplay controls></video>
+                    </div>
                 </div>
-            </div>
-            <div class="filterd-items home">
-                <div class="gallery-grid">
-                    <div class="row">
-                        <div class="col-lg-9">
-                            <div class="item">
-                                <video id="remote" autoplay controls></video>
-                                <?php if(!empty($game)): ?>
-                                <?php
-                                $teamModel = new \App\Models\teamModel();
-                                $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
-                                $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();      
-                                ?>
-                                <span class="tag text-danger">LIVE</span> <?=$team1['team_name']?> <span>VS</span>
-                                <?=$team2['team_name']?>
-                                <?php endif; ?>
+                <div class="col-xl-3 col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="widget-sub-title2 fs-20">Our Sponsors</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="ad-container">
+                                <?php foreach($ads as $row): ?>
+                                <div class="ad">
+                                    <img src="<?=base_url('admin/images/ads/')?><?=$row['image_url']?>" alt="Ad 1">
+                                </div>
+                                <?php endforeach; ?>
                             </div>
                         </div>
-                        <div class="col-lg-3">
-
+                    </div>
+                    <br/>
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="ti ti-calendar-week"></i>&nbsp;Recent Videos
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <?php if(empty($recent)): ?>
+                            <div style="padding:5px;margin:5px;">No video(s) Has Been Added Yet</div>
+                            <?php else : ?>
+                            <?php foreach($recent as $row): ?>
+                            <div class="row">
+                                <div class="col-5">
+                                    <video src="<?=base_url('admin/videos/')?><?=$row['file']?>"
+                                        class="w-100 h-100 object-cover card-img-start"
+                                        alt="<?=$row['file_name'] ?>"></video>
+                                </div>
+                                <div class="col-7">
+                                    <a href="<?=site_url('videos/play/')?><?=$row['Token']?>">
+                                    <b><?=substr($row['file_name'],0,25) ?></b>...
+                                    </a><br />
+                                    <small><?=$row['sportName']?></small>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>

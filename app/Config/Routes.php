@@ -83,6 +83,10 @@ $routes->post('end-game','Home::endGame');
 //recovery
 $routes->post('restore','Restore::restoreFile');
 $routes->get('download','Download::downloadFile');
+//ads
+$routes->post('save-ads','Home::saveAds');
+$routes->get('fetch-data','Home::fetchAds');
+$routes->post('edit-ads','Home::editAds');
 
 $routes->group('',['filter'=>'UserAlreadyLoggedIn'],function($routes)
 {
@@ -138,6 +142,8 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('news/topic/(:any)','Home::topic/$1');
     $routes->get('new-article','Home::newPost');
     $routes->get('news/edit/(:any)','Home::editPost/$1');
+    //sponsors
+    $routes->get('sponsors','Home::sponsors');
     //settings
     $routes->get('settings','Home::settings');
     $routes->get('recovery','Home::recovery');
