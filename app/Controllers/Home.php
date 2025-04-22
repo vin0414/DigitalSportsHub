@@ -1047,8 +1047,10 @@ class Home extends BaseController
                             ->orderBy('event_id', 'desc') 
                             ->limit(5)  // Limit to 5 records
                             ->findAll(); 
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->findAll();
 
-        $data = ['title'=>$title,'event'=>$event];
+        $data = ['title'=>$title,'event'=>$event,'sports'=>$sports];
         return view('main/new-event',$data);
     }
 

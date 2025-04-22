@@ -41,6 +41,7 @@
                                 <a href="<?=site_url('events')?>" class="btn btn-secondary">
                                     <i class="ti ti-arrow-left"></i>&nbsp;Back
                                 </a>
+                                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -67,6 +68,7 @@
                                         <path d="M5 12l14 0" />
                                     </svg>
                                 </a>
+                                <?php endif; ?>
                             </div>
                             <!-- BEGIN MODAL -->
                             <!-- END MODAL -->
@@ -102,7 +104,7 @@
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-3">
                                                     <label class="form-label">Event Type</label>
                                                     <select name="event_type" class="form-select" required>
                                                         <option value="">Choose</option>
@@ -112,12 +114,22 @@
                                                     </select>
                                                     <div id="event_type-error" class="error-message text-danger text-sm"></div>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-3">
+                                                    <label class="form-label">Sports</label>
+                                                    <select name="sports" class="form-select" required>
+                                                        <option value="">Choose</option>
+                                                        <?php foreach($sports as $row): ?>
+                                                        <option value="<?=$row['sportsID']?>"><?=$row['Name']?></option>
+                                                        <?php endforeach; ?>
+                                                    </select>
+                                                    <div id="sports-error" class="error-message text-danger text-sm"></div>
+                                                </div>
+                                                <div class="col-lg-3">
                                                     <label class="form-label">From</label>
                                                     <input type="date" class="form-control" name="from_date"/>
                                                     <div id="from_date-error" class="error-message text-danger text-sm"></div>
                                                 </div>
-                                                <div class="col-lg-4">
+                                                <div class="col-lg-3">
                                                     <label class="form-label">To</label>
                                                     <input type="date" class="form-control" name="to_date"/>
                                                     <div id="to_date-error" class="error-message text-danger text-sm"></div>

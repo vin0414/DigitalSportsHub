@@ -41,6 +41,7 @@
                             <div class="btn-list">
                                 <a href="<?=site_url('teams')?>" class="btn btn-secondary">
                                     <i class="ti ti-arrow-left"></i> Back</a>
+                                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->
@@ -67,6 +68,7 @@
                                         <path d="M5 12l14 0" />
                                     </svg>
                                 </a>
+                                <?php endif;?>
                             </div>
                             <!-- BEGIN MODAL -->
                             <!-- END MODAL -->

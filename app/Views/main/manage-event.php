@@ -280,6 +280,7 @@
                                                 <th>Email</th>
                                                 <th>Age</th>
                                                 <th>Address</th>
+                                                <th>Remarks</th>
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>

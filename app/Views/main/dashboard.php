@@ -43,6 +43,7 @@
                             <h2 class="page-title"><?=$title?></h2>
                         </div>
                         <!-- Page title actions -->
+                        <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
                                 <a href="<?=site_url('upload-video')?>" class="btn btn-secondary"><i
@@ -83,6 +84,7 @@
                             <!-- BEGIN MODAL -->
                             <!-- END MODAL -->
                         </div>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

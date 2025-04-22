@@ -90,7 +90,7 @@
                             </span>
                             <span class="nav-link-title"> Home </span>
                         </a>
-                    </li>
+                    </li> 
                     <li
                         class="nav-item <?= ($title == 'Events' || $title == 'New Event' || $title == 'Manage Event') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('events')?>">
@@ -147,6 +147,7 @@
                             <span class="nav-link-title"> Teams </span>
                         </a>
                     </li>
+                    <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                     <li
                         class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article' ||$title == 'Manage') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('news')?>">
@@ -252,6 +253,7 @@
                             </a>
                         </div>
                     </li>
+                    <?php endif; ?>
                 </ul>
                 <!-- END NAVBAR MENU -->
             </div>
