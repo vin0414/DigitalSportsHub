@@ -42,7 +42,8 @@
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <i class="ti ti-calendar-clock"></i>&nbsp;Manage
                                 </a>
-                                <a href="<?=site_url('manage-event')?>" class="btn btn-primary btn-6 d-sm-none btn-icon">
+                                <a href="<?=site_url('manage-event')?>"
+                                    class="btn btn-primary btn-6 d-sm-none btn-icon">
                                     <i class="ti ti-calendar-clock"></i>
                                 </a>
                             </div>
@@ -106,33 +107,20 @@
         headerToolbar: {
             start: 'title', // will normally be on the left. if RTL, will be on the right
             center: '',
-            end: 'today prev,next' // will normally be on the right. if RTL, will be on the left
+            end: 'today prev,next dayGridMonth timeGridWeek timeGridDay' // will normally be on the right. if RTL, will be on the left
         },
         selectable: true,
         editable: true,
+        events: jsonData,
         views: {
-            month: {
-                titleFormat: {
-                    month: "long",
-                    year: "numeric"
-                }
+            // Customize the timeGridWeek and timeGridDay views
+            timeGridWeek: {
+                buttonText: 'Week'
             },
-            agendaWeek: {
-                titleFormat: {
-                    month: "long",
-                    year: "numeric",
-                    day: "numeric"
-                }
+            timeGridDay: {
+                buttonText: 'Day'
             },
-            agendaDay: {
-                titleFormat: {
-                    month: "short",
-                    year: "numeric",
-                    day: "numeric"
-                }
-            }
-        },
-        events: jsonData
+        }
     });
 
     calendar.render();

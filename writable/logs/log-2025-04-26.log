@@ -1,0 +1,185 @@
+DEBUG - 2025-04-26 09:21:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:21:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:22:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:22:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:22:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:22:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:23:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:23:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:33:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:33:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:34:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:35:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:38:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:40:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:41:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:41:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 09:41:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:41:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:42:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:43:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:43:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:43:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:46:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:46:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:47:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:47:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:48:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:48:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:48:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-26 01:48:24 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: latest-events/details/Super%20Bowl%20LVIII]
+in APPPATH\Views\event-details.php on line 131.
+ 1 APPPATH\Views\event-details.php(131): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\xampp\\htdocs\\DigitalSportsHub\\app\\Views\\event-details.php', 131)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\xampp\\htdocs\\DigitalSportsHub\\app\\Views\\event-details.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('event-details', [], true)
+ 5 APPPATH\Controllers\Home.php(85): view('event-details', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->eventDetails('Super Bowl LVIII')
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-26 01:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:49:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:49:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:50:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:50:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+WARNING - 2025-04-26 01:53:35 --> [DEPRECATED] addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Download.php on line 49.
+ 1 APPPATH\Controllers\Download.php(49): addslashes(null)
+ 2 [internal function]: App\Controllers\Download->App\Controllers\{closure}(null)
+ 3 APPPATH\Controllers\Download.php(48): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Download->downloadFile()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Download))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+WARNING - 2025-04-26 01:53:35 --> [DEPRECATED] addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Download.php on line 49.
+ 1 APPPATH\Controllers\Download.php(49): addslashes(null)
+ 2 [internal function]: App\Controllers\Download->App\Controllers\{closure}(null)
+ 3 APPPATH\Controllers\Download.php(48): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Download->downloadFile()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Download))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+WARNING - 2025-04-26 01:53:35 --> [DEPRECATED] addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Download.php on line 49.
+ 1 APPPATH\Controllers\Download.php(49): addslashes(null)
+ 2 [internal function]: App\Controllers\Download->App\Controllers\{closure}(null)
+ 3 APPPATH\Controllers\Download.php(48): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Download->downloadFile()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Download))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+WARNING - 2025-04-26 01:53:35 --> [DEPRECATED] addslashes(): Passing null to parameter #1 ($string) of type string is deprecated in APPPATH\Controllers\Download.php on line 49.
+ 1 APPPATH\Controllers\Download.php(49): addslashes(null)
+ 2 [internal function]: App\Controllers\Download->App\Controllers\{closure}(null)
+ 3 APPPATH\Controllers\Download.php(48): array_map(Object(Closure), [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Download->downloadFile()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Download))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-04-26 01:55:05 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''<p><span style=\"color: rgb(0, 0, 0)' at line 2 in C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\xampp\htdocs\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('\n\n\n-- Inserting...', 0)
+#1 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('\n\n\n-- Inserting...')
+#2 C:\xampp\htdocs\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('\n\n\n-- Inserting...')
+#3 C:\xampp\htdocs\DigitalSportsHub\app\Controllers\Restore.php(30): CodeIgniter\Database\BaseConnection->query('\n\n\n-- Inserting...')
+#4 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Restore->restoreFile()
+#5 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Restore))
+#6 C:\xampp\htdocs\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 C:\xampp\htdocs\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 C:\xampp\htdocs\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\xampp\\htdocs...')
+#11 {main}
+CRITICAL - 2025-04-26 01:55:05 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''<p><span style=\"color: rgb(0, 0, 0)' at line 2
+[Method: POST, Route: restore]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 APPPATH\Controllers\Restore.php(30): CodeIgniter\Database\BaseConnection->query('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Restore->restoreFile()
+ 3 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Restore))
+ 4 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-26 01:55:05 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''<p><span style=\"color: rgb(0, 0, 0)' at line 2
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 3 APPPATH\Controllers\Restore.php(30): CodeIgniter\Database\BaseConnection->query('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Restore->restoreFile()
+ 5 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Restore))
+ 6 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-26 01:55:05 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''<p><span style=\"color: rgb(0, 0, 0)' at line 2
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 4 APPPATH\Controllers\Restore.php(30): CodeIgniter\Database\BaseConnection->query('
+
+
+-- Inserting data into news --
+INSERT INTO `news` (news_id,date,author,topic,news_type,details,image,headline,status,accountID) VALUES (\'1\',\'2025-03-27\',\'Dyan Castillejo\',\'Alex Eala dedicates historic Miami Open feat to Philippines\',\'Badminton\',\'<p><span style=\\"color: rgb(0, 0, 0)')
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Restore->restoreFile()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Restore))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\xampp\\htdocs\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-26 01:58:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:58:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 01:59:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 02:01:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 10:01:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 10:02:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-26 02:02:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

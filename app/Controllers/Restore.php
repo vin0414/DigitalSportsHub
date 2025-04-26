@@ -7,11 +7,6 @@ class Restore extends BaseController
 {    
     public function restoreFile()
     {
-        $hostname = $this->request->getPost('server');
-		$username = $this->request->getPost('username');
-		$password = $this->request->getPost('password');
-		$database = $this->request->getPost('database');
-
         $backupDir = FCPATH . 'Import';
         // Ensure the directory exists, create it if it doesn't
         if (!is_dir($backupDir)) {
@@ -20,13 +15,7 @@ class Restore extends BaseController
 		$filename = $_FILES['file']['name'];
 		move_uploaded_file($_FILES['file']['tmp_name'],$backupDir .'/'. $filename);
 		$filePath = $backupDir .'/'. $filename;
-        $db = \Config\Database::connect([
-            'hostname' => $hostname,
-            'username' => $username,
-            'password' => $password,
-            'database' => $database,
-            'DBDriver' => 'MySQLi',  // Assuming MySQL database
-        ]);
+        $db = \Config\Database::connect();
 
         // Read the SQL file contents
         $sql = file_get_contents($filePath);
@@ -42,6 +31,6 @@ class Restore extends BaseController
             }
         }
         session()->setFlashdata('success','Successfully restored');
-        return redirect()->to('recovert')->withInput();
+        return redirect()->to('recovery')->withInput();
     }
 }

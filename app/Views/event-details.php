@@ -125,7 +125,11 @@
                         <div class="btn btn-primary" style="margin-bottom:10px;">
                             <?=$event['event_type']?>
                         </div>
-                        <h2 class="event-info-title"><?=$event['event_title']?></h2>
+                        <h2 class="event-info-title">
+                            <?=$event['event_title']?>
+                        </h2>
+                        <div><small>Date : <?=$event['date']?></small> | <small>Sports : <?=$sports['Name']?></small>
+                        </div>
                         <div class="contents">
                             <p class="p1"><?=$event['event_description']?></p>
                         </div>
@@ -145,12 +149,13 @@
                                 <div class="info-item">
                                     <div class="icon"><i class="far fa-clock"></i></div>
                                     <span class="q-span">Start:</span>
-                                    <span class="a-span"><?=date('F d Y',strtotime($event['start_date']))?></span>
+                                    <span
+                                        class="a-span"><?=date('F d Y H:i:s a',strtotime($event['start_date']))?></span>
                                 </div>
                                 <div class="info-item">
                                     <div class="icon"><i class="far fa-clock"></i></div>
                                     <span class="q-span">End:</span>
-                                    <span class="a-span"><?=date('F d Y',strtotime($event['end_date']))?></span>
+                                    <span class="a-span"><?=date('F d Y H:i:s a',strtotime($event['end_date']))?></span>
                                 </div>
                             </div>
                         </div>

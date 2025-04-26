@@ -77,8 +77,11 @@ class Home extends BaseController
         //events
         $eventModel = new \App\Models\eventModel();
         $events = $eventModel->WHERE('event_title',$id)->first();
+        //sports
+        $sportsModel = new \App\Models\sportsModel();
+        $sports = $sportsModel->WHERE('sportsID',$events['sportsID'])->first();
         
-        $data = ['title'=>$title,'event'=>$events];
+        $data = ['title'=>$title,'event'=>$events,'sports'=>$sports];
         return view('event-details',$data);
     }
 
@@ -1199,6 +1202,7 @@ class Home extends BaseController
             'event_description'=>'required',
             'event_location'=>'required',
             'event_type'=>'required',
+            'sports'=>'required',
             'from_date'=>'required',
             'to_date'=>'required'
         ]);
@@ -1219,6 +1223,7 @@ class Home extends BaseController
                             'event_description'=>$this->request->getPost('event_description'),
                             'event_location'=>$this->request->getPost('event_location'),
                             'event_type'=>$this->request->getPost('event_type'),
+                            'sportsID'=>$this->request->getPost('sports'),
                             'start_date'=>$this->request->getPost('from_date'),
                             'end_date'=>$this->request->getPost('to_date'),
                             'status'=>1,
@@ -1233,6 +1238,7 @@ class Home extends BaseController
                             'event_description'=>$this->request->getPost('event_description'),
                             'event_location'=>$this->request->getPost('event_location'),
                             'event_type'=>$this->request->getPost('event_type'),
+                            'sportsID'=>$this->request->getPost('sports'),
                             'start_date'=>$this->request->getPost('from_date'),
                             'end_date'=>$this->request->getPost('to_date'),
                             'status'=>0,
@@ -1251,6 +1257,7 @@ class Home extends BaseController
                             'event_description'=>$this->request->getPost('event_description'),
                             'event_location'=>$this->request->getPost('event_location'),
                             'event_type'=>$this->request->getPost('event_type'),
+                            'sportsID'=>$this->request->getPost('sports'),
                             'start_date'=>$this->request->getPost('from_date'),
                             'end_date'=>$this->request->getPost('to_date'),
                             'status'=>1,
@@ -1265,6 +1272,7 @@ class Home extends BaseController
                             'event_description'=>$this->request->getPost('event_description'),
                             'event_location'=>$this->request->getPost('event_location'),
                             'event_type'=>$this->request->getPost('event_type'),
+                            'sportsID'=>$this->request->getPost('sports'),
                             'start_date'=>$this->request->getPost('from_date'),
                             'end_date'=>$this->request->getPost('to_date'),
                             'status'=>0,

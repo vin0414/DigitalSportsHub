@@ -89,18 +89,20 @@
                                         <?=csrf_field()?>
                                         <div class="col-lg-12">
                                             <label class="form-label">Event Title</label>
-                                            <input type="text" class="form-control" name="event_title" required/>
+                                            <input type="text" class="form-control" name="event_title" required />
                                             <div id="event_title-error" class="error-message text-danger text-sm"></div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Description</label>
                                             <textarea class="form-control" name="event_description" required></textarea>
-                                            <div id="event_description-error" class="error-message text-danger text-sm"></div>
-                                        </div> 
+                                            <div id="event_description-error" class="error-message text-danger text-sm">
+                                            </div>
+                                        </div>
                                         <div class="col-lg-12">
                                             <label class="form-label">Location</label>
                                             <textarea class="form-control" name="event_location" required></textarea>
-                                            <div id="event_location-error" class="error-message text-danger text-sm"></div>
+                                            <div id="event_location-error" class="error-message text-danger text-sm">
+                                            </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <div class="row g-3">
@@ -112,7 +114,8 @@
                                                         <option>Practice Game</option>
                                                         <option>Try-outs</option>
                                                     </select>
-                                                    <div id="event_type-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="event_type-error"
+                                                        class="error-message text-danger text-sm"></div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <label class="form-label">Sports</label>
@@ -122,23 +125,28 @@
                                                         <option value="<?=$row['sportsID']?>"><?=$row['Name']?></option>
                                                         <?php endforeach; ?>
                                                     </select>
-                                                    <div id="sports-error" class="error-message text-danger text-sm"></div>
+                                                    <div id="sports-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <label class="form-label">From</label>
-                                                    <input type="date" class="form-control" name="from_date"/>
-                                                    <div id="from_date-error" class="error-message text-danger text-sm"></div>
+                                                    <input type="datetime-local" class="form-control"
+                                                        name="from_date" />
+                                                    <div id="from_date-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                                 <div class="col-lg-3">
                                                     <label class="form-label">To</label>
-                                                    <input type="date" class="form-control" name="to_date"/>
-                                                    <div id="to_date-error" class="error-message text-danger text-sm"></div>
+                                                    <input type="datetime-local" class="form-control" name="to_date" />
+                                                    <div id="to_date-error" class="error-message text-danger text-sm">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-12">
                                             <label class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" name="agree" value="1" />
+                                                <input type="checkbox" class="form-check-input" name="agree"
+                                                    value="1" />
                                                 <label class="form-check-label">
                                                     With registration form?
                                                 </label>
@@ -166,23 +174,25 @@
                                                 <th>Date</th>
                                             </thead>
                                             <tbody>
-                                            <?php if(empty($event)){ ?>
+                                                <?php if(empty($event)){ ?>
                                                 <tr>
-                                                    <td colspan="2"><center><span>No Event(s) found</span></center></td>
+                                                    <td colspan="2">
+                                                        <center><span>No Event(s) found</span></center>
+                                                    </td>
                                                 </tr>
-                                            <?php }else { ?>
-                                            <?php foreach($event as $row): ?>
+                                                <?php }else { ?>
+                                                <?php foreach($event as $row): ?>
                                                 <tr>
                                                     <td>
-                                                        <b><?php echo $row['event_title'] ?></b><br/>
+                                                        <b><?php echo $row['event_title'] ?></b><br />
                                                         <small><?php echo substr($row['event_description'],0,30) ?>...</small>
                                                     </td>
                                                     <td>
-                                                    <?php echo date('Y-M-d',strtotime($row['start_date'])) ?>
+                                                        <?php echo date('Y-M-d',strtotime($row['start_date'])) ?>
                                                     </td>
                                                 </tr>
-                                            <?php endforeach; ?>
-                                            <?php } ?>
+                                                <?php endforeach; ?>
+                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

@@ -67,31 +67,8 @@
                                         <?= session()->getFlashdata('success'); ?>
                                     </div>
                                     <?php endif; ?>
-                                    <form method="POST" class="row g-3" enctype="multipart/form-data" action="<?=base_url('restore')?>">
-                                        <div class="col-lg-12">
-                                            <span class="form-label">Server/Host</span>
-                                            <input type="text" class="form-control bg-transparent" name="server"
-                                                value="localhost" required />
-                                        </div>
-                                        <div class="col-lg-12">
-                                            <div class="row g-3">
-                                                <div class="col-lg-4">
-                                                    <span class="form-label">Username</span>
-                                                    <input type="text" class="form-control bg-transparent"
-                                                        name="username" value="<?php echo getenv('database.default.username') ?>" required />
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <span class="form-label">Password</span>
-                                                    <input type="password" class="form-control bg-transparent"
-                                                        name="password" value="<?php echo getenv('database.default.password') ?>" required />
-                                                </div>
-                                                <div class="col-lg-4">
-                                                    <span class="form-label">Schema</span>
-                                                    <input type="text" class="form-control bg-transparent"
-                                                        name="database" value="<?php echo getenv('database.default.database') ?>" required />
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <form method="POST" class="row g-3" enctype="multipart/form-data"
+                                        action="<?=base_url('restore')?>">
                                         <div class="col-lg-12">
                                             <span class="form-label">SQL File</span>
                                             <input type="file" class="form-control bg-transparent" name="file"
