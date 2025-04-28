@@ -91,6 +91,7 @@
                             <span class="nav-link-title"> Home </span>
                         </a>
                     </li> 
+                    <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"||session()->get('role')=="Coach"): ?>
                     <li
                         class="nav-item <?= ($title == 'Events' || $title == 'New Event' || $title == 'Manage Event') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('events')?>">
@@ -112,6 +113,7 @@
                             <span class="nav-link-title"> Events </span>
                         </a>
                     </li>
+                    <?php endif; ?>
                     <li
                         class="nav-item <?= ($title == 'Athletes' || $title == 'New Athlete' || $title == 'Profile' || $title == 'Edit Profile') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('athletes')?>">

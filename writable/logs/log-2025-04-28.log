@@ -1,0 +1,514 @@
+ERROR - 2025-04-28 13:47:42 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_hub', 3306, '', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#13 {main}
+CRITICAL - 2025-04-28 13:47:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `matches`
+WHERE `date` = :date:
+AND `time` <= :time:
+AND `status` = :status:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-04-28 13:47:42 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'root'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'root', Object(SensitiveParameterValue), 'db_hub', 3306, '', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#13 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#14 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:246
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(421): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\system\BaseModel.php(713): CodeIgniter\Model->doFirst()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->index()
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#13 {main}
+CRITICAL - 2025-04-28 13:47:42 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 467.
+ 1 SYSTEMPATH\Database\BaseConnection.php(620): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `matches`
+WHERE `date` = :date:
+AND `time` <= :time:
+AND `status` = :status:
+ LIMIT 1', [...], false)
+ 3 SYSTEMPATH\Model.php(330): CodeIgniter\Database\BaseBuilder->get()
+ 4 SYSTEMPATH\BaseModel.php(713): CodeIgniter\Model->doFirst()
+ 5 APPPATH\Controllers\Home.php(21): CodeIgniter\BaseModel->first()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-28 13:47:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 13:48:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 05:59:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 05:59:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:07:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:08:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:08:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:08:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:08:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:18:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:19:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:19:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:19:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 14:26:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:26:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 14:35:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 14:37:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 14:39:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:41:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-04-28 06:41:01 --> ErrorException: Undefined variable $title
+[Method: GET, Route: watch/86c1403c584Ft5d9]
+in APPPATH\Views\templates\header.php on line 10.
+ 1 APPPATH\Views\templates\header.php(10): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $title', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\templates\\header.php', 10)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\templates\\header.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('templates/header', [], true)
+ 5 APPPATH\Views\watch-video.php(142): view('templates/header')
+ 6 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\watch-video.php')
+ 7 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('watch-video', [], true)
+ 9 APPPATH\Controllers\Home.php(72): view('watch-video', [...])
+10 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->watch('86c1403c584Ft5d9')
+11 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+14 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+15 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+16 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-28 06:41:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:42:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:42:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:42:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:43:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:43:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:43:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:44:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:44:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:45:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:45:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:45:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:46:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:58:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:58:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:58:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:59:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 06:59:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:00:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:00:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:01:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:01:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:03:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:03:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:03:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:03:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:03:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:04:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:04:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:05:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:05:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:06:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:06:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:07:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:07:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:08:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:08:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:08:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:08:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:08:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:09:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:10:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:10:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:30:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:30:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:31:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:31:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:31:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:33:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:34:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:36:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:36:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:37:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:43:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-28 07:43:24 --> mysqli_sql_exception: FUNCTION db_hub.AVE does not exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`fil...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`fil...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`fil...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`fil...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-04-28 07:43:24 --> CodeIgniter\Database\Exceptions\DatabaseException: FUNCTION db_hub.AVE does not exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 2 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:43:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: FUNCTION db_hub.AVE does not exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 4 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:43:24 --> [Caused by] mysqli_sql_exception: FUNCTION db_hub.AVE does not exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 5 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-28 07:43:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-28 07:43:42 --> mysqli_sql_exception: FUNCTION db_hub.AVERAGE does not exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`fil...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`fil...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`fil...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`fil...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-04-28 07:43:42 --> CodeIgniter\Database\Exceptions\DatabaseException: FUNCTION db_hub.AVERAGE does not exist
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 2 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:43:42 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: FUNCTION db_hub.AVERAGE does not exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 4 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:43:42 --> [Caused by] mysqli_sql_exception: FUNCTION db_hub.AVERAGE does not exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVERAGE(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 5 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-28 07:44:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-04-28 07:44:08 --> mysqli_sql_exception: Unknown column 'watch_seconds' in 'field list' in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`fil...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`fil...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`fil...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`fil...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-04-28 07:44:08 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'watch_seconds' in 'field list'
+[Method: GET, Route: dashboard]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 2 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:44:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'watch_seconds' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 4 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-04-28 07:44:08 --> [Caused by] mysqli_sql_exception: Unknown column 'watch_seconds' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT `a`.`file_name`, `b`.`total`, `b`.`ave_total`
+FROM `videos` `a`
+LEFT JOIN (select video_id,SUM(total_view)total, AVG(watch_seconds)ave_total from views group by video_id)b ON `b`.`video_id`=`a`.`video_id`
+GROUP BY `a`.`video_id`', [], false)
+ 5 APPPATH\Controllers\Home.php(399): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-04-28 07:44:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:44:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:44:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:45:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:46:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:46:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:46:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:46:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:46:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:47:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:47:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:47:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:48:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:49:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:49:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:50:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:50:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:51:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:51:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:51:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:51:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:51:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:52:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:52:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:52:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:52:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:52:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:53:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:53:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:54:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:54:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 15:54:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:54:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:55:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:56:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:56:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:56:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 07:59:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 08:00:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 08:00:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 08:00:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 08:00:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 16:00:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-04-28 16:00:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

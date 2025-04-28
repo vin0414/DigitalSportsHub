@@ -11,6 +11,8 @@ $routes->get('latest-news','Home::latestNews');
 $routes->get('latest-news/stories/(:any)','Home::stories/$1');
 $routes->get('watch-now','Home::watchNow');
 $routes->get('watch/(:any)','Home::watch/$1');
+$routes->post('incrementViews/(:num)', 'Home::incrementViews/$1');
+$routes->post('save_watch_time','Home::saveWatchTime');
 $routes->get('latest-events','Home::latestEvents');
 $routes->get('latest-events/details/(:any)','Home::eventDetails/$1');
 $routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
@@ -18,6 +20,7 @@ $routes->get('shop-near-me','Home::shopNearMe');
 $routes->get('contact-us','Home::contactUs');
 //functions for user 
 $routes->post('register-now','User::registerNow');
+$routes->post('new-password','User::newPassword');
 
 //authentication
 $routes->post('check','Home::checkAccount');

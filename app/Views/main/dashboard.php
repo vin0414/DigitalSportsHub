@@ -169,16 +169,23 @@
                                 <div class="col-lg-12">
                                     <div class="card">
                                         <div class="card-body">
-                                            <div class="card-title"><i class="ti ti-cast"></i>&nbsp;Live Streaming</div>
+                                            <div class="card-title"><i class="ti ti-cast"></i>&nbsp;Live/Video Streaming</div>
                                             <div class="table-responsive">
                                                 <table class="table table-striped table-bordered" id="tbl_trend">
                                                     <thead>
-                                                        <th>Videos</th>
-                                                        <th>Views</th>
-                                                        <th>Users</th>
+                                                        <th>Filename</th>
+                                                        <th>Total Views</th>
                                                         <th>Ave. Duration</th>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody>
+                                                    <?php foreach($trends as $row): ?>
+                                                    <tr>
+                                                        <td><?=$row->file_name?></td>
+                                                        <td><?=$row->total?></td>
+                                                        <td><?=$row->ave_total?></td>
+                                                    </tr>
+                                                    <?php endforeach; ?>
+                                                    </tbody>
                                                 </table>
                                             </div>
                                         </div>

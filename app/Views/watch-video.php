@@ -13,8 +13,6 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap.min.css')?>">
     <!--================= Font Awesome 5 CSS =================-->
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/all.min.css')?>">
-    <!--================= RT Icons CSS =================-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/rt-icons.css')?>">
     <!--================= Animate css =================-->
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/animate.min.css')?>">
     <!--================= Magnific popup Plugin =================-->
@@ -176,25 +174,48 @@
             <div class="row">
                 <div class="col-xl-9 col-md-8"> 
                     <div class="item">
-                        <video id="remote" width="100%" autoplay controls></video>
+                        <video id="video-preview" width="100%" controls>
+                            <source src="<?=base_url('admin/videos/')?><?=$video['file']?>"
+                                type="video/mp4">
+                            <source src="<?=base_url('admin/videos/')?><?=$video['file']?>"
+                                type="video/webm">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
-                </div>
-                <div class="col-xl-3 col-md-4">
-                    <div class="card">
-                        <div class="card-header">
-                            <h4 class="widget-sub-title2 fs-20">Our Sponsors</h4>
-                        </div>
-                        <div class="card-body">
-                            <div class="ad-container">
-                                <?php foreach($ads as $row): ?>
-                                <div class="ad">
-                                    <img src="<?=base_url('admin/images/ads/')?><?=$row['image_url']?>" alt="Ad 1">
+                    <div class="row g-3">
+                        <div class="col-lg-12">
+                            <div class="row g-2">
+                                <div class="col-lg-12">
+                                    <label class="form-label" style="font-size: 1.5rem;">
+                                        <?=$video['file_name']?>
+                                    </label>
                                 </div>
-                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="row g-3">
+                                <div class="col-lg-9">
+                                    <div class="badge bg-success">
+                                        <label><b>Posted Date :</b> </label>
+                                        <?=date('Y-M-d',strtotime($video['date']))?>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="badge bg-success" style="float:right;">
+                                        <label><b>Category :</b> </label> <?=$video['sportName']?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="card card-body">
+                                <label class="form-label"><b>Description</b></label>
+                                <?=$video['description']?>
                             </div>
                         </div>
                     </div>
-                    <br/>
+                </div>
+                <div class="col-xl-3 col-md-4">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
@@ -251,7 +272,6 @@
     <!--================= metisMenu Plugin =================-->
     <script src="<?=base_url('assets/js/vendors/metisMenu.min.js')?>"></script>
     <!--================= Main Menu Plugin =================-->
-    <script src="<?=base_url('assets/js/vendors/rtsmenu.js')?>"></script>
     <!--================= Mobile Menu Plugin =================-->
     <script src="<?=base_url('assets/js/vendors/metisMenu.min.js')?>"></script>
     <!--================= Magnefic Popup Plugin =================-->
@@ -261,47 +281,38 @@
     <!--================= Main Script =================-->
     <script src="<?=base_url('assets/js/main.js')?>"></script>
     <script>
-    const remote = document.querySelector("video#remote");
-    let peerConnection;
-
-    const channel = new BroadcastChannel("stream-video");
-    channel.onmessage = e => {
-        if (e.data.type === "icecandidate") {
-            peerConnection?.addIceCandidate(e.data.candidate)
-        } else if (e.data.type === "offer") {
-            console.log("Received offer")
-            handleOffer(e.data)
-        }
-    }
-
-    function handleOffer(offer) {
-        const config = {};
-        peerConnection = new RTCPeerConnection(config);
-        peerConnection.addEventListener("track", e => remote.srcObject = e.streams[0]);
-        peerConnection.addEventListener("icecandidate", e => {
-            let candidate = null;
-            if (e.candidate !== null) {
-                candidate = {
-                    candidate: e.candidate.candidate,
-                    sdpMid: e.candidate.sdpMid,
-                    sdpMLineIndex: e.candidate.sdpMLineIndex,
-                }
+    let video = document.getElementById("video-preview");
+    let totalWatched = 0;
+    let lastTime = 0;
+    document.getElementById('video-preview').addEventListener('play', function () {
+        fetch('<?=site_url('incrementViews')?>/<?= $video['video_id'] ?>', {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
             }
-            channel.postMessage({
-                type: "icecandidate",
-                candidate
+        });
+        lastTime = video.currentTime;
+    }, { once: true });
+
+    video.addEventListener("pause", () => {
+        totalWatched += video.currentTime - lastTime;
+        sendWatchedTime(totalWatched);
+    });
+
+    video.addEventListener("ended", () => {
+        totalWatched += video.duration - lastTime;
+        sendWatchedTime(totalWatched);
+    });
+
+    function sendWatchedTime(secondsWatched) {
+        fetch("<?= site_url('save_watch_time'); ?>", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+            video_id: <?=$video['video_id']?>,
+            watched_seconds: Math.floor(secondsWatched)
             })
         });
-        peerConnection.setRemoteDescription(offer)
-            .then(() => peerConnection.createAnswer())
-            .then(async answer => {
-                await peerConnection.setLocalDescription(answer);
-                console.log("Created answer, sending...")
-                channel.postMessage({
-                    type: "answer",
-                    sdp: answer.sdp,
-                });
-            });
     }
     </script>
 </body>

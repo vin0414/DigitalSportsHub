@@ -199,9 +199,12 @@
                     </div>
                 </li>
                 <?php endif; ?>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"||session()->get('role')=="Coach"): ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>
+                <?php endif; ?>
+                <?php if(session()->get('role')=="Coach"): ?>
                 <li class="nav-item <?= ($title == 'New Event') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-event')?>">
                         <span ss="nav-link-icon d-md-none d-lg-inline-block">
@@ -222,6 +225,7 @@
                         <span class="nav-link-title"> &nbsp;&nbsp;New Event </span>
                     </a>
                 </li>
+                <?php endif; ?>
                 <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item <?= ($title == 'New Athlete') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-athlete')?>">

@@ -60,6 +60,44 @@ class Home extends BaseController
         return view('watch-now',$data);
     }
 
+    public function watch($id)
+    {
+        $title = "Watch";
+        $videoModel = new \App\Models\videoModel();
+        $video = $videoModel->WHERE('token',$id)->first();
+        //recent
+        $recent = $videoModel->WHERE('token!=',$id)->orderBy('video_id','DESC')
+                          ->limit(5)->findAll();
+
+        $data = ['video'=>$video,'recent'=>$recent,'title'=>$title];
+        return view('watch-video',$data);
+    }
+
+    public function incrementViews($id)
+    {
+        if ($this->request->isAJAX()) {
+            $ipAddress = $this->request->getIPAddress();
+            $viewsModel = new \App\Models\viewsModel();
+            $data = ['video_id'=>$id,'total_view'=>1,'date'=>date('Y-m-d'),'ip_address'=>$ipAddress];
+            $viewsModel->save($data);
+
+            return $this->response->setJSON(['status' => 'success']);
+        }
+        return $this->response->setStatusCode(403);
+    }
+
+    public function saveWatchTime()
+    {
+        $data = $this->request->getJSON(true);
+        $viewsModel = new \App\Models\viewsModel();
+        $ipAddress = $this->request->getIPAddress();
+        //get the id
+        $views = $viewsModel->WHERE('video_id',$data['video_id'])->WHERE('ip_address',$ipAddress)->first();
+        $record = ['watched_seconds'=>$data['watched_seconds']];
+        $viewsModel->update($views['view_id'],$record);
+        return $this->response->setStatusCode(200);
+    }
+
     public function latestEvents()
     {
         $title = "Events";
@@ -354,12 +392,16 @@ class Home extends BaseController
         $builder->groupBy('a.video_id');
         $video_view = $builder->get()->getResult();
         //video trends
-
+        $builder = $this->db->table('videos a');
+        $builder->select('a.file_name,b.total,b.ave_total');
+        $builder->join('(select video_id,SUM(total_view)total, AVG(watched_seconds)ave_total from views group by video_id)b','b.video_id=a.video_id','LEFT');
+        $builder->groupBy('a.video_id');
+        $trends = $builder->get()->getResult();
 
         $data = ['title'=>$title,'total'=>$account,'player'=>$player,
                 'team'=>$team,'shop'=>$shop,'event'=>$event,
                 'total_event'=>$totalEvents,'video'=>$video,
-                'video_view'=>$video_view,'views'=>$views];
+                'video_view'=>$video_view,'views'=>$views,'trends'=>$trends];
         return view('main/dashboard',$data);
     }
 

@@ -12,7 +12,7 @@ class viewsModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['video_id','total_view','date','ip_address'];
+    protected $allowedFields    = ['video_id','total_view','date','watched_seconds','ip_address'];
 
     // Dates
     protected $useTimestamps = false;
