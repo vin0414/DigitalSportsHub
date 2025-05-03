@@ -39,6 +39,13 @@ class Home extends BaseController
         return view('welcome_message',$data);
     }
 
+    public function viewMatches()
+    {
+        $title = "Matches";
+        $data = ['title'=>$title];
+        return view('view-match',$data);
+    }
+
     public function watchNow()
     {
         date_default_timezone_set('Asia/Manila');

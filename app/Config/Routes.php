@@ -7,6 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 //pages
 $routes->get('/', 'Home::index');
+$routes->get('view-matches','Home::viewMatches');
 $routes->get('latest-news','Home::latestNews');
 $routes->get('latest-news/stories/(:any)','Home::stories/$1');
 $routes->get('watch-now','Home::watchNow');

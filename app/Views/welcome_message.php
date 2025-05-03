@@ -204,94 +204,7 @@
     <section class="rts-player-static pt--100 pb--100">
         <div class="container">
             <div class="section-inner">
-                <div class="row">
-                    <div class="col-lg-8">
-                        <div class="left-side-content">
-                            <div class="section-title-area section-ttile-area2">
-                                <h1 class="section-title">PLAYER STATISTICS</h1>
-                            </div>
-                            <div class="content-area">
-                                <div class="image">
-                                    <img src="assets/images/team/team09.png" alt="">
-                                </div>
-                                <div class="stat-table">
-                                    <div class="table-area">
-                                        <div class="table-top">
-                                            <div class="player">
-                                                <span class="tag">NAME</span>
-                                                <h2 class="name">
-                                                    <a href="team.html">NICK CELIS</a>
-                                                </h2>
-                                            </div>
-                                            <div class="point">
-                                                <span class="tag">RANKING POINTS</span>
-                                                <div class="number">1,176,768</div>
-                                            </div>
-                                        </div>
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr class="head-tr">
-                                                    <th scope="col">BY YEAR</th>
-                                                    <th scope="col">TEAM</th>
-                                                    <th scope="col">GP</th>
-                                                    <th scope="col">MIN</th>
-                                                    <th scope="col">PTS</th>
-                                                    <th scope="col">FGM</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td><span class="position-number">2022-23</span></td>
-                                                    <td><span class="player">MAN</span></td>
-                                                    <td><span class="win-count">7</span></td>
-                                                    <td><span class="win-count">41.0</span></td>
-                                                    <td><span class="win-count">14.0</span></td>
-                                                    <td><span class="win-count">2.1</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><span class="position-number">2020-21</span></td>
-                                                    <td><span class="player">WES</span></td>
-                                                    <td><span class="win-count">5</span></td>
-                                                    <td><span class="win-count">48.4</span></td>
-                                                    <td><span class="win-count">17.0</span></td>
-                                                    <td><span class="win-count">8.1</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <a href="#" class="table-btn btn">VIEW PROFILE</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="right-side-content">
-                            <div class="section-title-area section-ttile-area2">
-                                <h1 class="section-title">POINT TABLE</h1>
-                            </div>
-                            <div class="table-area">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr class="head-tr">
-                                            <th scope="col">TEAM</th>
-                                            <th scope="col">WIN</th>
-                                            <th scope="col">LOSS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php foreach($team as $row): ?>
-                                        <tr>
-                                            <td><?=$row->team_name ?></td>
-                                            <td class="text-center"><?=$row->W ?></td>
-                                            <td class="text-center"><?=$row->L ?></td>
-                                        </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>
@@ -301,7 +214,7 @@
     <!--================= Next Match Section Start Here =================-->
     <section class="rts-next-match home-four pt--100">
         <div class="container">
-            <div class="section-inner">
+            <div class="section-inner" style="margin-bottom:20px;">
                 <div class="section-title-area text-center section-tile-area2">
                     <h1 class="section-title">UPCOMING Match</h1>
                 </div>
@@ -345,6 +258,7 @@
                     <?php endif;?>
                 </div>
             </div>
+            <center><a href="<?=site_url('view-matches')?>">View more</a></center>
         </div>
     </section>
     <!--================= Next Match Section End Here =================-->
