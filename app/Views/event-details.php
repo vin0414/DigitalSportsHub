@@ -219,36 +219,45 @@
     var locationName = "<?=$event['event_location']?>";
     // Initialize the map centered at a default location
     var map = L.map('map').setView([14.3134, 120.8926], 11);
-
-    // Add OpenStreetMap tile layer to the map
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Create a geocoder control to search by location name
-    var geocoder = L.Control.Geocoder.nominatim();
-    var searchControl = new L.Control.Geocoder({
-        geocoder: geocoder
-    }).addTo(map);
+    function geocodeLocation() {
+        var location = "<?=$event['event_location']?>";
+        if (location) {
+            // URL for the Nominatim geocoding API (OpenStreetMap)
+            var url = `https://nominatim.openstreetmap.org/search?format=json&q=${location}`;
 
-    // Function to search for a location and display it on the map
-    function searchLocation(locationName) {
-        geocoder.geocode(locationName, function(results) {
-            if (results && results.length > 0) {
-                var latlng = results[0].center; // Get the latitude and longitude of the first result
-                map.setView(latlng, 13); // Center the map on the location
-                L.marker(latlng).addTo(map) // Add a marker at the location
-                    .bindPopup(results[0].name) // Show the location name in a popup
-                    .openPopup();
-            } else {
-                alert('Location not found. Please check the name or try a different one.');
-            }
-            console.log('Geocoding results:', results); // Log the results to the console for debugging
-        });
+            // Fetch the geocoding results
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        var lat = data[0].lat;
+                        var lon = data[0].lon;
+
+                        // Center the map on the new coordinates
+                        map.setView([lat, lon], 13);
+
+                        // Add a marker to the map
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup(`<b>${location}</b>`)
+                            .openPopup();
+                    } else {
+                        alert("Location not found.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error during geocoding:", error);
+                });
+        } else {
+            alert("Please enter a location name.");
+        }
     }
 
     window.onload = function() {
-        searchLocation(locationName);
+        geocodeLocation(); // Call the function to geocode the location when the page loads
     };
     </script>
 </body>
