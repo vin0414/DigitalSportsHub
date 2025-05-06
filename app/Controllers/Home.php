@@ -647,25 +647,25 @@ class Home extends BaseController
                     'address'=>$this->request->getPost('address'),
                     'image'=>$originalName];
             $playerModel->save($data);
-            if ($this->request->getPost('agree') !== null)
-            {
-                function generateRandomString($length = 64) {
-                    // Generate random bytes and convert them to hexadecimal
-                    $bytes = random_bytes($length);
-                    return substr(bin2hex($bytes), 0, $length);
-                }
-                $token_code = generateRandomString(64);
-                $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
-                $accountModel = new \App\Models\AccountModel();
-                $data = ['Email'=>$this->request->getPost('email'),
-                        'Password'=>Hash::make('Abc12345'),
-                        'Fullname'=>$fullname,
-                        'Role'=>'End-user',
-                        'Status'=>1,
-                        'Token'=>$token_code,
-                        'DateCreated'=>date('Y-m-d')];
-                $accountModel->save($data);
-            }
+            // if ($this->request->getPost('agree') !== null)
+            // {
+            //     function generateRandomString($length = 64) {
+            //         // Generate random bytes and convert them to hexadecimal
+            //         $bytes = random_bytes($length);
+            //         return substr(bin2hex($bytes), 0, $length);
+            //     }
+            //     $token_code = generateRandomString(64);
+            //     $fullname = $this->request->getPost('first_name').' '.$this->request->getPost('mi').' '.$this->request->getPost('last_name');
+            //     $accountModel = new \App\Models\AccountModel();
+            //     $data = ['Email'=>$this->request->getPost('email'),
+            //             'Password'=>Hash::make('Abc12345'),
+            //             'Fullname'=>$fullname,
+            //             'Role'=>'End-user',
+            //             'Status'=>1,
+            //             'Token'=>$token_code,
+            //             'DateCreated'=>date('Y-m-d')];
+            //     $accountModel->save($data);
+            // }
             //logs
             date_default_timezone_set('Asia/Manila');
             $logModel = new \App\Models\logModel();

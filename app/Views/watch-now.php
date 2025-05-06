@@ -36,60 +36,83 @@
         integrity="sha512-v8QQ0YQ3H4K6Ic3PJkym91KoeNT5S3PnDKvqnwqFD1oiqIl653crGZplPdU5KKtHjO0QKcQ2aUlQZYjHczkmGw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .ad-container {
-            display: flex;
-            justify-content: start;  /* Align ads to the left */
-            overflow: hidden;  /* Hide ads when they are outside the container */
-            width: 100%;  /* Full width of the container */
-            position: relative;
-            }
+    .ad-container {
+        display: flex;
+        justify-content: start;
+        /* Align ads to the left */
+        overflow: hidden;
+        /* Hide ads when they are outside the container */
+        width: 100%;
+        /* Full width of the container */
+        position: relative;
+    }
 
-            .ad {
-                width: 300px;  /* Set each ad's width */
-                height: 250px;  /* Set each ad's height */
-                flex-shrink: 0;  /* Prevent the ads from shrinking */
-                animation: slideIn 12s infinite; /* Apply the sliding animation to each ad */
-                margin-right: 20px;  /* Space between ads */
-            }
+    .ad {
+        width: 300px;
+        /* Set each ad's width */
+        height: 250px;
+        /* Set each ad's height */
+        flex-shrink: 0;
+        /* Prevent the ads from shrinking */
+        animation: slideIn 12s infinite;
+        /* Apply the sliding animation to each ad */
+        margin-right: 20px;
+        /* Space between ads */
+    }
 
-            .ad img {
-                width: 100%;  /* Make the image take up the full width of the container */
-                height: 100%;  /* Make the image fill the height of the container */
-                object-fit: cover;  /* Ensure the image covers the area without distorting */
-                border-radius: 8px;
-                display: block;
-                border: 1px solid #ddd;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
+    .ad img {
+        width: 100%;
+        /* Make the image take up the full width of the container */
+        height: 100%;
+        /* Make the image fill the height of the container */
+        object-fit: cover;
+        /* Ensure the image covers the area without distorting */
+        border-radius: 8px;
+        display: block;
+        border: 1px solid #ddd;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
 
-            /* Keyframes for scrolling each ad one by one */
-            @keyframes slideIn {
-            0% {
-                transform: translateX(100%);  /* Start off-screen to the right */
-            }
-            10%, 20% {
-                transform: translateX(0);  /* Slide to visible area */
-            }
-            40%, 50% {
-                transform: translateX(0);  /* Stay visible for a while */
-            }
-            60%, 100% {
-                transform: translateX(-100%);  /* Move to the left, completely off-screen */
-            }
-            }
+    /* Keyframes for scrolling each ad one by one */
+    @keyframes slideIn {
+        0% {
+            transform: translateX(100%);
+            /* Start off-screen to the right */
+        }
 
-            /* Delaying animations for each ad */
-            .ad:nth-child(1) {
-            animation-delay: 0s;
-            }
+        10%,
+        20% {
+            transform: translateX(0);
+            /* Slide to visible area */
+        }
 
-            .ad:nth-child(2) {
-            animation-delay: 4s;  /* Start second ad after 4 seconds */
-            }
+        40%,
+        50% {
+            transform: translateX(0);
+            /* Stay visible for a while */
+        }
 
-            .ad:nth-child(3) {
-            animation-delay: 8s;  /* Start third ad after 8 seconds */
-            }
+        60%,
+        100% {
+            transform: translateX(-100%);
+            /* Move to the left, completely off-screen */
+        }
+    }
+
+    /* Delaying animations for each ad */
+    .ad:nth-child(1) {
+        animation-delay: 0s;
+    }
+
+    .ad:nth-child(2) {
+        animation-delay: 4s;
+        /* Start second ad after 4 seconds */
+    }
+
+    .ad:nth-child(3) {
+        animation-delay: 8s;
+        /* Start third ad after 8 seconds */
+    }
     </style>
 </head>
 
@@ -174,9 +197,12 @@
     <div class="news-feed-section section-gap">
         <div class="container">
             <div class="row">
-                <div class="col-xl-9 col-md-8"> 
-                    <div class="item">
+                <div class="col-xl-9 col-md-8">
+                    <div class="item mb-2">
                         <video id="remote" width="100%" autoplay controls></video>
+                    </div>
+                    <div class="card">
+                        <div class="card-body" id="liveChat"></div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-4">
@@ -188,13 +214,14 @@
                             <div class="ad-container">
                                 <?php foreach($ads as $row): ?>
                                 <div class="ad">
-                                    <img src="<?=base_url('admin/images/ads/')?><?=$row['image_url']?>" alt="Ad 1">
+                                    <img src="<?=base_url('admin/images/ads/')?><?=$row['image_url']?>" alt="Ad 1"
+                                        height="200px;">
                                 </div>
                                 <?php endforeach; ?>
                             </div>
                         </div>
                     </div>
-                    <br/>
+                    <br />
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">
@@ -214,7 +241,7 @@
                                 </div>
                                 <div class="col-7">
                                     <a href="<?=site_url('watch/')?><?=$row['Token']?>">
-                                    <b><?=substr($row['file_name'],0,25) ?></b>...
+                                        <b><?=substr($row['file_name'],0,25) ?></b>...
                                     </a><br />
                                     <small><?=$row['sportName']?></small>
                                 </div>
@@ -304,6 +331,7 @@
             });
     }
     </script>
+    <script src="<?=base_url('assets/js/livechat.js')?>"></script>
 </body>
 
 </html>

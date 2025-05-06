@@ -121,9 +121,6 @@
                                                         <option
                                                             <?php echo ($account['Role'] == 'Coach') ? 'selected' : ''; ?>>
                                                             Coach</option>
-                                                        <option
-                                                            <?php echo ($account['Role'] == 'End-user') ? 'selected' : ''; ?>>
-                                                            End-user</option>
                                                     </select>
                                                     <div id="role-error" class="error-message text-danger text-sm">
                                                     </div>

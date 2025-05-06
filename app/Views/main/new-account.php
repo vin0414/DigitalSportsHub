@@ -107,7 +107,6 @@
                                                         <option>Super-admin</option>
                                                         <option>Organizer</option>
                                                         <option>Coach</option>
-                                                        <option>End-user</option>
                                                     </select>
                                                     <div id="role-error" class="error-message text-danger text-sm">
                                                     </div>

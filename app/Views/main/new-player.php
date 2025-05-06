@@ -204,14 +204,6 @@
                                     <div id="file-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <label class="form-check form-check-inline">
-                                        <input type="checkbox" class="form-check-input" name="agree" value="1" />
-                                        <label class="form-check-label">
-                                            Would you like to create account for this athlete?
-                                        </label>
-                                    </label>
-                                </div>
-                                <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">
                                         <i class="ti ti-device-floppy"></i>&nbsp;Save
                                     </button>
