@@ -196,7 +196,7 @@
     <!--================= Gallery Section Start Here =================-->
     <div class="news-feed-section section-gap">
         <div class="container">
-            <div class="row">
+            <div class="row g-3">
                 <div class="col-xl-9 col-md-8">
                     <div class="item mb-2">
                         <video id="remote" width="100%" autoplay controls></video>
