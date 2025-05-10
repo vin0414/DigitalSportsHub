@@ -113,6 +113,27 @@
         animation-delay: 8s;
         /* Start third ad after 8 seconds */
     }
+
+    .chat-container {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .messages {
+        height: 300px;
+        overflow-y: scroll;
+        border: 1px solid #ccc;
+        padding: 10px;
+    }
+
+    .user-message {
+        text-align: right;
+        margin-left: auto;
+    }
+
+    .send-btn {
+        padding: 10px;
+    }
     </style>
 </head>
 
@@ -198,11 +219,22 @@
         <div class="container">
             <div class="row g-3">
                 <div class="col-xl-9 col-md-8">
-                    <div class="item mb-2">
+                    <div class="item mb-4">
                         <video id="remote" width="100%" autoplay controls></video>
                     </div>
-                    <div class="card">
-                        <div class="card-body" id="liveChat"></div>
+                    <div class="chat-container">
+                        <h3>Live Chat</h3>
+                        <div class="messages" id="messages"></div>
+                        <div class="row g-2">
+                            <div class="col-lg-10">
+                                <input type="text" id="message" style="margin-top:5px;margin-bottom:5px;"
+                                    class="form-control" placeholder="Type a message">
+                            </div>
+                            <div class="col-lg-2">
+                                <button class="send-btn btn btn-primary form-control" onclick="sendMessage()"
+                                    style="margin-top:5px;margin-bottom:5px;font-size:10px;">Send</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-md-4">
@@ -331,7 +363,55 @@
             });
     }
     </script>
-    <script src="<?=base_url('assets/js/livechat.js')?>"></script>
+    <script>
+    function loadMessages() {
+        fetch(window.location.origin + '/chat/getMessages')
+            .then(response => response.json())
+            .then(messages => {
+                const messagesContainer = document.getElementById('messages');
+                let user = <?=session()->get('loggedInUser')?>;
+                messagesContainer.innerHTML = '';
+                messages.forEach(message => {
+                    let sender = message.sender_id;
+                    let messageElement = document.createElement('div');
+                    messageElement.classList.add('message');
+                    messageElement.textContent = message.message;
+                    if (parseInt(sender) === parseInt(user)) {
+                        messageElement.classList.add('user-message');
+                        console.log("This message is from the user.");
+                    }
+                    messagesContainer.appendChild(messageElement);
+                });
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            });
+    }
+
+    function sendMessage() {
+        const message = $('#message').val();
+        if (message) {
+            $.ajax({
+                url: window.location.origin + "/chat/sendMessage",
+                method: "POST",
+                data: {
+                    message: message
+                },
+                dataType: "JSON",
+                success: function(response) {
+                    if (response.status === 'success') {
+                        loadMessages();
+                        $('#message').val('');
+                    }
+                }
+            });
+        }
+    }
+
+
+    loadMessages();
+
+    // Poll for new messages every 3 seconds
+    setInterval(loadMessages, 3000);
+    </script>
 </body>
 
 </html>

@@ -62,6 +62,7 @@ class Home extends BaseController
         //all videos
         $recent = $videoModel->orderBy('video_id','DESC')
                           ->limit(5)->findAll();
+        //chat
 
         $data = ['title'=>$title,'game'=>$game,'ads'=>$ads,'recent'=>$recent];
         return view('watch-now',$data);

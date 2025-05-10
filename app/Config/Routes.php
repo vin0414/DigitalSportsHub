@@ -11,6 +11,8 @@ $routes->get('view-matches','Home::viewMatches');
 $routes->get('latest-news','Home::latestNews');
 $routes->get('latest-news/stories/(:any)','Home::stories/$1');
 $routes->get('watch-now','Home::watchNow');
+$routes->get('/chat/getMessages', 'ChatController::getMessages');
+$routes->post('/chat/sendMessage', 'ChatController::sendMessage');
 $routes->get('watch/(:any)','Home::watch/$1');
 $routes->post('incrementViews/(:num)', 'Home::incrementViews/$1');
 $routes->post('save_watch_time','Home::saveWatchTime');
