@@ -222,6 +222,38 @@
                     <div class="item mb-4">
                         <video id="remote" width="100%" autoplay controls></video>
                     </div>
+                    <?php if(!empty($game)): ?>
+                    <?php
+                    $teamModel = new \App\Models\teamModel();
+                    $team1 = $teamModel->WHERE('team_id',$game['team1_id'])->first();
+                    $team2 = $teamModel->WHERE('team_id',$game['team2_id'])->first();  
+                    ?>
+                    <div class="row g-3 mb-4">
+                        <div class="col-lg-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="text-center"><?=$team1['team_name']?></h5>
+                                    <h2 class="text-center" id="home">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="card bg-danger">
+                                <div class="card-body">
+                                    <h4 class="text-white text-center">VS</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="text-center"><?=$team2['team_name']?></h5>
+                                    <h2 class="text-center" id="guest">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                     <div class="chat-container">
                         <h3>Live Chat</h3>
                         <div class="messages" id="messages"></div>
@@ -364,12 +396,54 @@
     }
     </script>
     <script>
+    $(document).ready(function() {
+        home();
+        guest();
+
+        setInterval(function() {
+            home();
+            guest();
+        }, 3000);
+    });
+
+    function guest() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        let team = <?= isset($game['team2_id']) ? $game['team2_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('team2-score')?>",
+            method: "GET",
+            data: {
+                match: match,
+                team: team
+            },
+            success: function(response) {
+                $('#guest').html(response);
+            }
+        });
+    }
+
+    function home() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        let team = <?= isset($game['team1_id']) ? $game['team1_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('team1-score')?>",
+            method: "GET",
+            data: {
+                match: match,
+                team: team
+            },
+            success: function(response) {
+                $('#home').html(response);
+            }
+        });
+    }
+
     function loadMessages() {
         fetch(window.location.origin + '/chat/getMessages')
             .then(response => response.json())
             .then(messages => {
                 const messagesContainer = document.getElementById('messages');
-                let user = <?=session()->get('loggedInUser')?>;
+                let user = "<?=session()->get('loggedInUser')?>";
                 messagesContainer.innerHTML = '';
                 messages.forEach(message => {
                     let sender = message.sender_id;
@@ -379,6 +453,8 @@
                     if (parseInt(sender) === parseInt(user)) {
                         messageElement.classList.add('user-message');
                         console.log("This message is from the user.");
+                    } else {
+                        messageElement.classList.remove('user-message');
                     }
                     messagesContainer.appendChild(messageElement);
                 });
@@ -388,21 +464,26 @@
 
     function sendMessage() {
         const message = $('#message').val();
-        if (message) {
-            $.ajax({
-                url: window.location.origin + "/chat/sendMessage",
-                method: "POST",
-                data: {
-                    message: message
-                },
-                dataType: "JSON",
-                success: function(response) {
-                    if (response.status === 'success') {
-                        loadMessages();
-                        $('#message').val('');
+        let user = "<?=session()->get('loggedInUser')?>";
+        if (user === "") {
+            window.location.href = "/login";
+        } else {
+            if (message) {
+                $.ajax({
+                    url: window.location.origin + "/chat/sendMessage",
+                    method: "POST",
+                    data: {
+                        message: message
+                    },
+                    dataType: "JSON",
+                    success: function(response) {
+                        if (response.status === 'success') {
+                            loadMessages();
+                            $('#message').val('');
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 

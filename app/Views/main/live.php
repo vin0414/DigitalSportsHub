@@ -80,10 +80,12 @@
                                             </video>
                                         </div>
                                         <div class="col-lg-12">
-                                            <button type="button" id="start" class="btn btn-primary" onclick="start(this)">
+                                            <button type="button" id="start" class="btn btn-primary"
+                                                onclick="start(this)">
                                                 <i class="ti ti-player-play"></i>&nbsp;Start
                                             </button>
-                                            <button type="button" class="btn btn-primary" id="stopStream" onclick="stopStream()" disabled>
+                                            <button type="button" class="btn btn-primary" id="stopStream"
+                                                onclick="stopStream()" disabled>
                                                 <i class="ti ti-player-stop"></i>&nbsp;Stop
                                             </button>
                                             <button type="button" class="btn btn-danger" id="stream"
@@ -104,29 +106,35 @@
                                     <?php if(empty($match)): ?>
                                     <div style="padding:5px;margin:5px;">No Incoming Match(es) Yet</div>
                                     <?php else : ?>
-                                        <?php if($match): ?>
-                                            <?php
+                                    <?php if($match): ?>
+                                    <?php
                                             $teamModel = new \App\Models\teamModel();
                                             $team1 = $teamModel->WHERE('team_id',$match['team1_id'])->first();
                                             $team2 = $teamModel->WHERE('team_id',$match['team2_id'])->first();
                                             ?>
-                                            <div class="row" style="margin:10px;padding:10px;">
-                                                <div class="col-lg-5">
-                                                    <span style="font-size: 1.2rem;"><center><?=$team1['team_name']?></center></span>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <p class="text-center bg-danger text-white">VS</p>
-                                                </div>
-                                                <div class="col-lg-5">
-                                                    <span style="font-size: 1.2rem;"><center><?=$team2['team_name']?></center></span>
-                                                </div>
-                                                <center><small><?=date('M d, Y',strtotime($match['date']))?> | <?=date('h:i A',strtotime($match['time']))?> | <?php echo $match['location'] ?></small></center>
-                                            </div>
-                                        <?php endif; ?>
+                                    <div class="row" style="margin:10px;padding:10px;">
+                                        <div class="col-lg-5">
+                                            <span style="font-size: 1.2rem;">
+                                                <center><?=$team1['team_name']?></center>
+                                            </span>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <p class="text-center bg-danger text-white">VS</p>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <span style="font-size: 1.2rem;">
+                                                <center><?=$team2['team_name']?></center>
+                                            </span>
+                                        </div>
+                                        <center><small><?=date('M d, Y',strtotime($match['date']))?> |
+                                                <?=date('h:i A',strtotime($match['time']))?> |
+                                                <?php echo $match['location'] ?></small></center>
+                                    </div>
+                                    <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
                             </div>
-                            <br/>
+                            <br />
                             <div class="card">
                                 <div class="card-header">
                                     <div class="card-title">Current Match</div>
@@ -142,34 +150,47 @@
                                     ?>
                                     <div class="row">
                                         <div class="col-lg-5">
-                                            <span style="font-size: 1.0rem;"><center><?=$team1['team_name']?></center></span>
+                                            <span style="font-size: 1.0rem;">
+                                                <center><?=$team1['team_name']?></center>
+                                            </span>
                                             <h1 class="text-center" id="home">0</h1>
                                         </div>
                                         <div class="col-lg-2">
                                             <p class="text-center bg-danger text-white">VS</p>
                                         </div>
                                         <div class="col-lg-5">
-                                            <span style="font-size: 1.0rem;"><center><?=$team2['team_name']?></center></span>
+                                            <span style="font-size: 1.0rem;">
+                                                <center><?=$team2['team_name']?></center>
+                                            </span>
                                             <h1 class="text-center" id="guest">0</h1>
                                         </div>
                                     </div>
-                                    <hr/>
+                                    <hr />
                                     <div class="row g-3">
                                         <div class="col-lg-12">
-                                            <div class="row g-3">
+                                            <div class="row g-1">
                                                 <div class="col-lg-6">
-                                                    <button type="button" class="btn btn-primary add_team1" value="<?=$team1['team_id']?>"><i class="ti ti-plus"></i>&nbsp;Add</button>
-                                                    <button type="button" class="btn btn-danger minus_team1" value="<?=$team1['team_id']?>"><i class="ti ti-minus"></i>&nbsp;Minus</button>
+                                                    <button type="button" class="btn btn-primary add_team1"
+                                                        value="<?=$team1['team_id']?>"><i
+                                                            class="ti ti-plus"></i>&nbsp;Add</button>
+                                                    <button type="button" class="btn btn-danger minus_team1"
+                                                        value="<?=$team1['team_id']?>"><i
+                                                            class="ti ti-minus"></i>&nbsp;Minus</button>
                                                 </div>
                                                 <div class="col-lg-6">
-                                                    <button type="button" class="btn btn-primary add_team2" value="<?=$team2['team_id']?>"><i class="ti ti-plus"></i>&nbsp;Add</button>
-                                                    <button type="button" class="btn btn-danger minus_team2" value="<?=$team2['team_id']?>"><i class="ti ti-minus"></i>&nbsp;Minus</button>
+                                                    <button type="button" class="btn btn-primary add_team2"
+                                                        value="<?=$team2['team_id']?>"><i
+                                                            class="ti ti-plus"></i>&nbsp;Add</button>
+                                                    <button type="button" class="btn btn-danger minus_team2"
+                                                        value="<?=$team2['team_id']?>"><i
+                                                            class="ti ti-minus"></i>&nbsp;Minus</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <?php if($game['status']==1): ?>
                                         <div class="col-lg-12">
-                                            <button type="button" class="form-control btn btn-primary endGame" value="<?=$game['match_id']?>">
+                                            <button type="button" class="form-control btn btn-primary endGame"
+                                                value="<?=$game['match_id']?>">
                                                 <i class="ti ti-square-rounded-x"></i>&nbsp;End Game
                                             </button>
                                         </div>
@@ -212,110 +233,166 @@
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        $(document).ready(function(){
-            guest();home();
-        });
-        $(document).on('click','.endGame',function(){
-            Swal.fire({
-                title: "Are you sure?",
-                text: "Do you want to end this match?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes!"
-                }).then((result) => {
-                if (result.isConfirmed) 
-                {
-                    stopStream();
-                    let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-                    $.ajax({
-                        url:"<?=site_url('end-game')?>",
-                        method:"POST",data:{match:match},
-                        success:function(response)
-                        {
-                            if(response.success){location.reload();}else{Swal.fire({title: 'Warning!',text: response,icon: 'warning'});}
+    $(document).ready(function() {
+        guest();
+        home();
+    });
+    $(document).on('click', '.endGame', function() {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "Do you want to end this match?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                stopStream();
+                let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+                $.ajax({
+                    url: "<?=site_url('end-game')?>",
+                    method: "POST",
+                    data: {
+                        match: match
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            location.reload();
+                        } else {
+                            Swal.fire({
+                                title: 'Warning!',
+                                text: response,
+                                icon: 'warning'
+                            });
                         }
+                    }
+                });
+            }
+        });
+    });
+
+    function guest() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        let team = <?= isset($game['team2_id']) ? $game['team2_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('team2-score')?>",
+            method: "GET",
+            data: {
+                match: match,
+                team: team
+            },
+            success: function(response) {
+                $('#guest').html(response);
+            }
+        });
+    }
+
+    function home() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        let team = <?= isset($game['team1_id']) ? $game['team1_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('team1-score')?>",
+            method: "GET",
+            data: {
+                match: match,
+                team: team
+            },
+            success: function(response) {
+                $('#home').html(response);
+            }
+        });
+    }
+    //team 1
+    $(document).on('click', '.add_team1', function() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('add-score-team-1')?>",
+            method: "POST",
+            data: {
+                match: match,
+                team: $(this).val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    home();
+                } else {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: response,
+                        icon: 'warning'
                     });
                 }
-            });
+            }
         });
-        function guest()
-        {
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            let team = <?= isset($game['team2_id']) ? $game['team2_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('team2-score')?>",
-                method:"GET",data:{match:match,team:team},
-                success:function(response)
-                {
-                    $('#guest').html(response);
+    });
+    $(document).on('click', '.minus_team1', function() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('minus-score-team-1')?>",
+            method: "POST",
+            data: {
+                match: match,
+                team: $(this).val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    home();
+                } else {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: response,
+                        icon: 'warning'
+                    });
                 }
-            });
-        }
-        function home()
-        {
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            let team = <?= isset($game['team1_id']) ? $game['team1_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('team1-score')?>",
-                method:"GET",data:{match:match,team:team},
-                success:function(response)
-                {
-                    $('#home').html(response);
-                }
-            });
-        } 
-        //team 1
-        $(document).on('click','.add_team1',function(){
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('add-score-team-1')?>",
-                method:"POST",
-                data:{match:match,team:$(this).val()},
-                success:function(response)
-                {
-                    if(response.success){home();}else{Swal.fire({title: 'Warning!',text: response,icon: 'warning'});}
-                }
-            });
+            }
         });
-        $(document).on('click','.minus_team1',function(){
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('minus-score-team-1')?>",
-                method:"POST",
-                data:{match:match,team:$(this).val()},
-                success:function(response)
-                {
-                    if(response.success){home();}else{Swal.fire({title: 'Warning!',text: response,icon: 'warning'});}
+    });
+    //team 2
+    $(document).on('click', '.add_team2', function() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('add-score-team-2')?>",
+            method: "POST",
+            data: {
+                match: match,
+                team: $(this).val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    guest();
+                } else {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: response,
+                        icon: 'warning'
+                    });
                 }
-            });
+            }
         });
-        //team 2
-        $(document).on('click','.add_team2',function(){
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('add-score-team-2')?>",
-                method:"POST",
-                data:{match:match,team:$(this).val()},
-                success:function(response)
-                {
-                    if(response.success){guest();}else{Swal.fire({title: 'Warning!',text: response,icon: 'warning'});}
+    });
+    $(document).on('click', '.minus_team2', function() {
+        let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
+        $.ajax({
+            url: "<?=site_url('minus-score-team-2')?>",
+            method: "POST",
+            data: {
+                match: match,
+                team: $(this).val()
+            },
+            success: function(response) {
+                if (response.success) {
+                    guest();
+                } else {
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: response,
+                        icon: 'warning'
+                    });
                 }
-            });
+            }
         });
-        $(document).on('click','.minus_team2',function(){
-            let match = <?= isset($game['match_id']) ? $game['match_id'] : 0; ?>;
-            $.ajax({
-                url:"<?=site_url('minus-score-team-2')?>",
-                method:"POST",
-                data:{match:match,team:$(this).val()},
-                success:function(response)
-                {
-                    if(response.success){guest();}else{Swal.fire({title: 'Warning!',text: response,icon: 'warning'});}
-                }
-            });
-        });
+    });
     </script>
     <script>
     const local = document.querySelector("video#local");
@@ -401,7 +478,9 @@
 
         // When recording stops, create a downloadable link
         mediaRecorder.onstop = () => {
-            const blob = new Blob(recordedChunks, { type: 'video/webm' });
+            const blob = new Blob(recordedChunks, {
+                type: 'video/webm'
+            });
             const url = URL.createObjectURL(blob);
             const downloadLink = document.createElement('a');
             downloadLink.href = url;
