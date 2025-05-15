@@ -220,7 +220,9 @@
             <div class="row g-3">
                 <div class="col-xl-9 col-md-8">
                     <div class="item mb-4">
-                        <video id="remote" width="100%" autoplay controls></video>
+                        <!-- <video id="remote" width="100%" autoplay controls></video> -->
+                        <iframe src="https://player.livepush.io/live/em9kc0bz8xPgH-5l" width="100%" height="480"
+                            allowFullScreen="1" frameBorder="0"></iframe>
                     </div>
                     <?php if(!empty($game)): ?>
                     <?php
