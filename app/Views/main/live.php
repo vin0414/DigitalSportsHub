@@ -76,10 +76,11 @@
                                     <div class="card-title"><?=$title?></div>
                                     <div class="row g-2">
                                         <div class="col-lg-12">
-                                            <video id="local" autoplay muted width="100%" controls>
-                                            </video>
+                                            <iframe
+                                                src="https://player.livepush.io/live/<?=!empty($code['code']) ? $code['code'] : ''?>"
+                                                width="100%" height="480" allowFullScreen="1" frameBorder="0"></iframe>
                                         </div>
-                                        <div class="col-lg-12">
+                                        <!-- <div class="col-lg-12">
                                             <button type="button" id="start" class="btn btn-primary"
                                                 onclick="start(this)">
                                                 <i class="ti ti-player-play"></i>&nbsp;Start
@@ -92,6 +93,21 @@
                                                 onclick="stream(this)" disabled>
                                                 <i class="ti ti-building-broadcast-tower"></i>&nbsp;Live
                                             </button>
+                                        </div> -->
+                                        <div class="col-lg-12">
+                                            <label class="form-label">Enter the Code</label>
+                                        </div>
+                                        <div class="col-lg-12">
+                                            <form class="row g-3" method="POST" action="<?=site_url('save-code')?>">
+                                                <div class="col-lg-10">
+                                                    <input type="text" name="code" class="form-control"
+                                                        value="<?=!empty($code['code']) ? $code['code'] : ''?>" />
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <button type="submit"
+                                                        class="btn btn-primary form-control">Save</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>

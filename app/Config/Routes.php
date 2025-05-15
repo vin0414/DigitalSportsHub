@@ -24,7 +24,6 @@ $routes->get('contact-us','Home::contactUs');
 //functions for user 
 $routes->post('register-now','User::registerNow');
 $routes->post('new-password','User::newPassword');
-
 //authentication
 $routes->post('check','Home::checkAccount');
 $routes->get('logout','Home::logout');
@@ -76,6 +75,8 @@ $routes->get('filter-news','Home::filterNews');
 $routes->post('save-video','Home::saveVideo');
 $routes->post('edit-video','Home::modifyVideo');
 $routes->get('filter-videos','Home::filterVideos');
+//live
+$routes->post('save-code','Home::saveCode');
 //matches
 $routes->post('save-match','Home::saveMatch');
 $routes->post('stats','Home::stats');

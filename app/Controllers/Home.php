@@ -62,9 +62,11 @@ class Home extends BaseController
         //all videos
         $recent = $videoModel->orderBy('video_id','DESC')
                           ->limit(5)->findAll();
-        //chat
+        //code
+            $liveCodeModel = new \App\Models\liveCodeModel();
+            $code = $liveCodeModel->first();
 
-        $data = ['title'=>$title,'game'=>$game,'ads'=>$ads,'recent'=>$recent];
+        $data = ['title'=>$title,'game'=>$game,'ads'=>$ads,'recent'=>$recent,'code'=>$code];
         return view('watch-now',$data);
     }
 
@@ -1580,9 +1582,30 @@ class Home extends BaseController
                                 ->first();
             //in game 
             $game = $matchModel->WHERE('date',$date)->WHERE('time <=',$time)->WHERE('status',1)->first();
-            
-            $data = ['title'=>$title,'match'=>$match,'game'=>$game];
+            //code
+            $liveCodeModel = new \App\Models\liveCodeModel();
+            $code = $liveCodeModel->first();
+
+            $data = ['title'=>$title,'match'=>$match,'game'=>$game,'code'=>$code];
             return view('main/live',$data);
+        }
+        return redirect()->back();
+    }
+
+    public function saveCode()
+    {
+        $liveCodeModel = new \App\Models\liveCodeModel();
+        $code = $this->request->getPost('code');
+        $data = ['code'=>$code];
+        //validate if empty
+        $liveCode = $liveCodeModel->first();
+        if(empty($liveCode))
+        {
+            $liveCodeModel->save($data);
+        }
+        else
+        {
+            $liveCodeModel->update($liveCode['code_id'],$data);
         }
         return redirect()->back();
     }
