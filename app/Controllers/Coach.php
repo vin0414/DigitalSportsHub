@@ -25,6 +25,24 @@ class Coach extends BaseController
         $builder->WHERE('team_id',$team['team_id']);
         $builder->groupBy('team_id');
         $stats = $builder->get()->getResult();
+        //win
+        $builder = $this->db->table('team_stats');
+        $builder->select('IFNULL(SUM(wins),0)total');
+        $builder->WHERE('team_id',$team['team_id']);
+        $builder->groupBy('team_id');
+        $winner = $builder->get()->getRow();
+        if (!$winner) {
+            $winner = (object)['total' => 0];
+        }
+        //loss
+        $builder = $this->db->table('team_stats');
+        $builder->select('IFNULL(SUM(losses),0)total');
+        $builder->WHERE('team_id',$team['team_id']);
+        $builder->groupBy('team_id');
+        $loss = $builder->get()->getRow();
+        if (!$loss) {
+            $loss = (object)['total' => 0];
+        }
         //match
         $builder = $this->db->table('matches a');
         $builder->select('a.date,a.location,a.result,b.team_name as team1,c.team_name as team2');
@@ -35,7 +53,7 @@ class Coach extends BaseController
         $builder->orderBy('a.date','DESC')->limit(5);
         $match = $builder->get()->getResult();
 
-        $data = ['title'=>$title,'totalPlayer'=>$totalPlayer,'stats'=>$stats,'match'=>$match];
+        $data = ['title'=>$title,'totalPlayer'=>$totalPlayer,'stats'=>$stats,'match'=>$match,'win'=>$winner,'loss'=>$loss];
         return view('coach/dashboard',$data);
     }
 

@@ -1341,3 +1341,108 @@ DEBUG - 2025-05-20 07:21:02 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2025-05-20 07:22:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-20 07:22:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2025-05-20 07:22:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:31:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-20 07:34:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:34:11 --> ErrorException: Undefined array key "win"
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "win"', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:34:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:34:37 --> ErrorException: Attempt to read property "win" on array
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "win" on array', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:35:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:35:32 --> ErrorException: Attempt to read property "total" on null
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "total" on null', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:35:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:35:59 --> ErrorException: Attempt to read property "total" on null
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "total" on null', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:36:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:36:46 --> ErrorException: Attempt to read property "total" on array
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "total" on array', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:37:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-20 07:37:13 --> ErrorException: Attempt to read property "total" on null
+[Method: GET, Route: overview]
+in APPPATH\Views\coach\dashboard.php on line 74.
+ 1 APPPATH\Views\coach\dashboard.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "total" on null', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php', 74)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\dashboard.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/dashboard', [], true)
+ 5 APPPATH\Controllers\Coach.php(51): view('coach/dashboard', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->dashboard()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-20 07:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

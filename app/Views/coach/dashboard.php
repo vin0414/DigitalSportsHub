@@ -71,7 +71,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title">Total Win</div>
-                                    <h1>0</h1>
+                                    <h1><?=$win->total?></h1>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title">Total Loss</div>
-                                    <h1>0</h1>
+                                    <h1><?=$loss->total?></h1>
                                 </div>
                             </div>
                         </div>
