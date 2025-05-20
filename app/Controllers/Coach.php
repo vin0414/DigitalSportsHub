@@ -182,6 +182,13 @@ class Coach extends BaseController
         return view('coach/my-schedule',$data);
     }
 
+    public function gameResults()
+    {
+        $title = "Game Result";
+        $data = ['title'=>$title];
+        return view('coach/game-result',$data);
+    }
+
     public function myAccount()
     {
         $title = "My Profile";

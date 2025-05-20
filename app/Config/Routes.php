@@ -165,4 +165,5 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('my-schedule','Coach::mySchedule');
     $routes->get('my-profile','Coach::myAccount');
     $routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
+    $routes->get('results','Coach::gameResults');
 });

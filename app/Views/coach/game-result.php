@@ -44,7 +44,7 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    <div id='calendar'></div>
+                    
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -77,44 +77,7 @@
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
-    <script>
-    <?php $eventData = array();?>
-    <?php 
-        $teamModel = new \App\Models\teamModel();
-        $team = $teamModel->WHERE('accountID',session()->get('loggedUser'))->first();
-        $matchModel = new \App\Models\matchModel();
-        $event = $matchModel->WHERE('team1_id',$team['team_id'])->orWhere('team2_id',$team['team_id'])->findAll();
-        foreach($event as $row)
-        {
-            $tempArray = array( "title" =>'Game Match',"description" =>'Competition',"start" => $row['date'].'' .$row['time'] ,"end" => $row['date']);
-            array_push($eventData, $tempArray);
-        }
-      ?>
-    const jsonData = <?php echo json_encode($eventData); ?>;   
-    var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-        initialView: "dayGridMonth",
-        headerToolbar: {
-            start: 'title', // will normally be on the left. if RTL, will be on the right
-            center: '',
-            end: 'today prev,next dayGridMonth timeGridWeek timeGridDay' // will normally be on the right. if RTL, will be on the left
-        },
-        selectable: true,
-        editable: true,
-        events: jsonData,
-        views: {
-            // Customize the timeGridWeek and timeGridDay views
-            timeGridWeek: {
-                buttonText: 'Week'
-            },
-            timeGridDay: {
-                buttonText: 'Day'
-            },
-        }
-    });
 
-    calendar.render();
-    </script>
 </body>
 
 </html>
