@@ -187,10 +187,8 @@ class User extends BaseController
         $validation = $this->validate([
             'csrf_test_name'=>'required',
             'fullname'=>'required',
-            'email'=>'required|valid_email',
-            'phone'=>'required|regex_match[/^[0-9]{11}$/]',
-            'birth_date'=>'required',
-            'address'=>'required'
+            'team_name'=>'required',
+            'school'=>'required'
         ]);
 
         if(!$validation)
@@ -199,16 +197,11 @@ class User extends BaseController
         }
         else
         {
-            $registerModel = new \App\Models\registerModel();
-            $data = ['event_id'=>$this->request->getPost('event'),
-                    'fullname'=>$this->request->getPost('fullname'),
-                    'email'=>$this->request->getPost('email'),
-                    'phone'=>$this->request->getPost('phone'),
-                    'birth_date'=>$this->request->getPost('birth_date'),
-                    'address'=>$this->request->getPost('address'),
-                    'status'=>0,
-                    'remarks'=>'',
-                    'datecreated'=>date('Y-m-d')];
+            $registerModel = new \App\Models\teamRegistrationModel();
+            $data = ['event_id'=>$this->request->getPost('event_id'),
+                    'team_id'=>$this->request->getPost('team_id'),
+                    'accountID'=>session()->get('loggedUser'),
+                    'status'=>0];
             $registerModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully registered']);
         }

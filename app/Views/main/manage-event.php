@@ -88,7 +88,6 @@
                     <div class="card">
                         <div class="card-header">
                             <ul class="nav nav-tabs card-header-tabs" data-bs-toggle="tabs">
-                                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                                 <li class="nav-item">
                                     <a href="#tabs-home-8" class="nav-link active" data-bs-toggle="tab">
                                         <i class="ti ti-calendar-stats"></i>&nbsp;Incoming Event
@@ -104,23 +103,10 @@
                                         <i class="ti ti-calendar-week"></i>&nbsp;Registration
                                     </a>
                                 </li>
-                                <?php else : ?>
-                                <li class="nav-item">
-                                    <a href="#tabs-profile-8" class="nav-link active" data-bs-toggle="tab">
-                                        <i class="ti ti-calendar-week"></i>&nbsp;My Request
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="#tabs-register-8" class="nav-link" data-bs-toggle="tab">
-                                        <i class="ti ti-calendar-week"></i>&nbsp;Registration
-                                    </a>
-                                </li>
-                                <?php endif; ?>
                             </ul>
                         </div>
                         <div class="card-body">
                             <div class="tab-content">
-                                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                                 <div class="tab-pane fade active show" id="tabs-home-8">
                                     <div class="table-responsive">
                                         <table class="table table-selectable card-table table-vcenter datatable"
@@ -183,138 +169,46 @@
                                         <table class="table table-bordered table-striped" id="tblregistration">
                                             <thead>
                                                 <th>Event</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Fullname</th>
-                                                <th>Email</th>
-                                                <th>Age</th>
-                                                <th>Address</th>
-                                                <th>Remarks</th>
-                                                <th>Action</th>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach($members as $row): ?>
-                                                <?php
-                                            $dob = $row->birth_date;
-                                            $dob = new DateTime($dob);
-                                            $now = new DateTime();
-                                            $age = $now->diff($dob);
-                                            ?>
-                                                <tr>
-                                                    <td><?=$row->event_title ?></td>
-                                                    <td><?=$row->start_date ?></td>
-                                                    <td><?=$row->end_date ?></td>
-                                                    <td><?=$row->fullname ?></td>
-                                                    <td><?=$row->email ?></td>
-                                                    <td><?=$age->y ?></td>
-                                                    <td><?=$row->address ?></td>
-                                                    <td><?=$row->remarks?></td>
-                                                    <td>
-                                                        <?php if($row->status==0): ?>
-                                                        <button type="button" class="btn btn-primary evaluate"
-                                                            value="<?=$row->register_id?>">
-                                                            <i class="ti ti-settings"></i>&nbsp;Evaluate
-                                                        </button>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <?php else : ?>
-                                <div class="tab-pane fade active show" id="tabs-profile-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-striped table-bordered" id="tblrequest">
-                                            <thead>
-                                                <th>#</th>
-                                                <th>Event</th>
-                                                <th>Description</th>
-                                                <th>Location</th>
-                                                <th>From</th>
-                                                <th>To</th>
+                                                <th>Sports</th>
+                                                <th>Team</th>
+                                                <th>Coach</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </thead>
                                             <tbody>
-                                                <?php foreach($event as $row): ?>
-                                                <tr>
-                                                    <td><?php echo $row['event_id'] ?></td>
-                                                    <td><?php echo $row['event_title'] ?></td>
-                                                    <td><small><?php echo $row['event_description'] ?></small></td>
-                                                    <td><?php echo $row['event_location'] ?></td>
-                                                    <td><?php echo date('Y-M-d',strtotime($row['start_date'])) ?></td>
-                                                    <td><?php echo date('Y-M-d',strtotime($row['end_date']))  ?></td>
-                                                    <td>
-                                                        <?php if($row['status']==0):?>
-                                                        <span class="badge bg-warning text-white">Pending</span>
-                                                        <?php elseif($row['status']==1): ?>
-                                                        <span class="badge bg-success text-white">Approved</span>
-                                                        <?php else : ?>
-                                                        <span class="badge bg-danger text-white">Cancelled</span>
-                                                        <?php endif;?>
-                                                    </td>
-                                                    <td>
-                                                        <?php if($row['status']==0): ?>
-                                                        <button type="button" class="btn btn-danger cancel"
-                                                            value="<?php echo $row['event_id'] ?>">
-                                                            <i class="ti ti-cancel"></i>&nbsp;Cancel
-                                                        </button>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
+                                            <?php foreach($registered as $row): ?>
+                                            <tr>
+                                                <td><?=$row->event_title ?></td>
+                                                <td><?=$row->Name ?></td>
+                                                <td><?=$row->team_name ?></td>
+                                                <td><?=$row->coach_name ?></td>
+                                                <td>
+                                                    <?php if($row->status==0){ ?>
+                                                        <span class="badge bg-warning text-white">PENDING</span>
+                                                    <?php } else if($row->status==1){ ?>
+                                                        <span class="badge bg-success text-white">APPROVED</span>
+                                                    <?php }else { ?>
+                                                        <span class="badge bg-danger text-white">REJECTED</span>
+                                                    <?php } ?>
+                                                </td>
+                                                <td>
+                                                    <?php if($row->status==0){ ?>
+                                                    <button type="button" class="btn btn-primary btn-sm evaluate" value="<?=$row->registration_id?>">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-checkup-list"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z" /><path d="M9 14h.01" /><path d="M9 17h.01" /><path d="M12 16l1 1l3 -3" /></svg>
+                                                        Evaluate
+                                                    </button>
+                                                    <?php } ?>   
+                                                    <a href="<?=site_url('teams/details')?>/<?php echo $row->team_id ?>" target="_blank" class="btn btn-secondary btn-sm">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                                                        View
+                                                    </a> 
+                                                </td>
+                                            </tr>
+                                            <?php endforeach; ?>
                                             </tbody>
                                         </table>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="tabs-register-8">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered table-striped" id="tblregistration">
-                                            <thead>
-                                                <th>Event</th>
-                                                <th>From</th>
-                                                <th>To</th>
-                                                <th>Fullname</th>
-                                                <th>Email</th>
-                                                <th>Age</th>
-                                                <th>Address</th>
-                                                <th>Remarks</th>
-                                                <th>Action</th>
-                                            </thead>
-                                            <tbody>
-                                                <?php foreach($members as $row): ?>
-                                                <?php
-                                            $dob = $row->birth_date;
-                                            $dob = new DateTime($dob);
-                                            $now = new DateTime();
-                                            $age = $now->diff($dob);
-                                            ?>
-                                                <tr>
-                                                    <td><?=$row->event_title ?></td>
-                                                    <td><?=$row->start_date ?></td>
-                                                    <td><?=$row->end_date ?></td>
-                                                    <td><?=$row->fullname ?></td>
-                                                    <td><?=$row->email ?></td>
-                                                    <td><?=$age->y ?></td>
-                                                    <td><?=$row->address ?></td>
-                                                    <td><?=$row->remarks?></td>
-                                                    <td>
-                                                        <?php if($row->status==0): ?>
-                                                        <button type="button" class="btn btn-primary evaluate"
-                                                            value="<?=$row->register_id?>">
-                                                            <i class="ti ti-settings"></i>&nbsp;Evaluate
-                                                        </button>
-                                                        <?php endif; ?>
-                                                    </td>
-                                                </tr>
-                                                <?php endforeach; ?>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -358,17 +252,8 @@
                             <label class="form-label">Remarks</label>
                             <select class="form-select" name="status" required>
                                 <option value="">Choose</option>
-                                <option>Passed</option>
-                                <option>Failed</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-12">
-                            <label class="form-label">Team</label>
-                            <select class="form-select" name="team" required>
-                                <option value="">Choose</option>
-                                <?php foreach($team as $row): ?>
-                                <option value="<?=$row['team_id']?>"><?=$row['team_name']?></option>
-                                <?php endforeach; ?>
+                                <option value="1">Passed</option>
+                                <option value="2">Failed</option>
                             </select>
                         </div>
                         <div class="col-lg-12">
@@ -407,7 +292,7 @@
                 if (response.success) {
                     Swal.fire({
                         title: 'Great!',
-                        text: "Successfully added",
+                        text: "Successfully accepted",
                         icon: 'success',
                         confirmButtonText: 'Continue'
                     }).then((result) => {

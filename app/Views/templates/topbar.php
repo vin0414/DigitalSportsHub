@@ -29,12 +29,22 @@
             <?php endif; ?>
         </div>
         <div class="top-bar-right">
+            <?php if(empty(session()->get('role'))):  ?>
             <?php if(empty(session()->get('loggedInUser'))): ?>
             <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
             <a href="<?=site_url('sign-up')?>" class="sign-up-btn">SIGN UP</a>
             <?php else : ?>
             <a href="javascript:void(0);" class="login-btn"><?=session()->get('fullname')?></a>
             <a href="<?=site_url('sign-out')?>" class="sign-up-btn">Sign Out</a>
+            <?php endif; ?>
+            <?php else : ?>
+            <?php if(empty(session()->get('loggedUser'))): ?>
+            <a href="<?=site_url('login')?>" class="login-btn">LOG IN</a>
+            <a href="<?=site_url('sign-up')?>" class="sign-up-btn">SIGN UP</a>
+            <?php else : ?>
+            <a href="javascript:void(0);" class="login-btn"><?=session()->get('fullname')?></a>
+            <a href="<?=site_url('sign-out')?>" class="sign-up-btn">Sign Out</a>
+            <?php endif; ?>
             <?php endif; ?>
         </div>
     </div>

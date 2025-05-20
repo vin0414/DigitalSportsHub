@@ -18,7 +18,6 @@ $routes->post('incrementViews/(:num)', 'Home::incrementViews/$1');
 $routes->post('save_watch_time','Home::saveWatchTime');
 $routes->get('latest-events','Home::latestEvents');
 $routes->get('latest-events/details/(:any)','Home::eventDetails/$1');
-$routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
 $routes->get('shop-near-me','Home::shopNearMe');
 $routes->get('contact-us','Home::contactUs');
 //functions for user 
@@ -156,4 +155,13 @@ $routes->group('',['filter'=>'AuthCheck'],function($routes)
     $routes->get('recovery','Home::recovery');
     //accounts
     $routes->get('my-account','Home::myAccount');
+    //coach
+    $routes->get('overview','Coach::dashboard');
+    $routes->get('my-players','Coach::myPlayers');
+    $routes->get('view/(:any)','Coach::viewPlayer/$1');
+    $routes->get('new-player','Coach::newPlayer');
+    $routes->get('my-team','Coach::myTeam');
+    $routes->get('my-schedule','Coach::mySchedule');
+    $routes->get('my-profile','Coach::myAccount');
+    $routes->get('latest-events/register/(:any)','Home::eventRegistration/$1');
 });

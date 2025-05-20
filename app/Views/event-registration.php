@@ -127,39 +127,24 @@
                         <div class="info-body">
                             <form method="POST" class="row g-3" id="frmRegister">
                                 <?=csrf_field()?>
-                                <input type="hidden" name="event" value="<?=$id?>"/>
+                                <input type="hidden" name="event_id" value="<?=$id?>"/>
+                                <input type="hidden" name="team_id" value="<?=$team['team_id']?>"/>
                                 <div class="col-lg-12">
-                                    <label>Complete Name</label>
+                                    <label>Coach's Name</label>
                                     <input type="text" class="form-control" name="fullname"
-                                        placeholder="e.g. Juan Dela Cruz" value="<?=set_value('fullname')?>" required />
+                                        placeholder="e.g. Juan Dela Cruz" value="<?=session()->get('fullname')?>" required />
                                     <div id="fullname-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div cs="col-lg-12">
-                                    <label>Email Address</label>
-                                    <input type="email" class="form-control" name="email"
-                                        placeholder="e.g. juan.delacruz@gmail.com" value="<?=set_value('email')?>" required />
-                                    <div id="email-error" class="error-message text-danger text-sm"></div>
+                                    <label>Team's Name</label>
+                                    <input type="text" class="form-control" name="team_name" value="<?=$team['team_name']?>" required />
+                                    <div id="team_name-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
-                                    <div class="row g-3">
-                                        <div class="col-lg-6">
-                                            <label>Contact No</label>
-                                            <input type="phone" class="form-control" name="phone"
-                                                placeholder="e.g. 09123456789" value="<?=set_value('phone')?>" minlength="11" maxlength="11" required />
-                                            <div id="phone-error" class="error-message text-danger text-sm"></div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Birth Date</label>
-                                            <input type="date" class="form-control" name="birth_date" value="<?=set_value('birth_date')?>" required />
-                                            <div id="birth_date-error" class="error-message text-danger text-sm"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <label>Address</label>
-                                    <textarea name="address" class="form-control" style="height:150px;"
-                                        required><?=set_value('address')?></textarea>
-                                    <div id="address-error" class="error-message text-danger text-sm"></div>
+                                    <label>School/University</label>
+                                    <textarea name="school" class="form-control" style="height:150px;"
+                                        required><?=$team['school']?></textarea>
+                                    <div id="school-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">Register</button>
@@ -216,7 +201,6 @@
                 success:function(response)
                 {
                     if (response.success) {
-                        $('#frmRegister')[0].reset();
                         Swal.fire({
                             title: 'Great!',
                             text: "Successfully registered",

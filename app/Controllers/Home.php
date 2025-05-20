@@ -139,8 +139,11 @@ class Home extends BaseController
         //event details
         $eventModel = new \App\Models\eventModel();
         $events = $eventModel->WHERE('event_id',$id)->first();
+        //load my team 
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->WHERE('accountID',session()->get('loggedUser'))->first();
         if($events['registration']==1):
-        $data = ['title'=>$title,'events'=>$events,'id'=>$id];
+        $data = ['title'=>$title,'events'=>$events,'id'=>$id,'team'=>$team];
         return view('event-registration',$data);
         else :
         return redirect()->back();
@@ -284,7 +287,11 @@ class Home extends BaseController
                         'page'=>'login page'
                         ];        
                 $logModel->save($data);
+                if($account['Role']=="Organizer"||$account['Role']=="Super-admin"):
                 return redirect()->to('dashboard');
+                else :
+                return redirect()->to('overview');
+                endif;
             }
         }
     }
@@ -465,10 +472,20 @@ class Home extends BaseController
             ->orderBy('match_id','DESC')->first();
 
         //stats
-        $builder = $this->db->table('player_performance');
-        $builder->select('*');
-        $builder->WHERE('player_id',value: $id)->WHERE('match_id',$match['match_id']);
-        $recentStats = $builder->get()->getResult();
+        if(empty($match['match_id']))
+        {
+            $builder = $this->db->table('player_performance');
+            $builder->select('*');
+            $builder->WHERE('player_id',value: $id);
+            $recentStats = $builder->get()->getResult();
+        }
+        else
+        {
+            $builder = $this->db->table('player_performance');
+            $builder->select('*');
+            $builder->WHERE('player_id',value: $id)->WHERE('match_id',$match['match_id']);
+            $recentStats = $builder->get()->getResult();
+        }
         //all stats
         $sql = "SELECT stat_type,sum(stat_value)total FROM player_performance where player_id=:id: group by stat_type";
         $query = $this->db->query($sql,['id'=>$id]);
@@ -1039,11 +1056,11 @@ class Home extends BaseController
 
     public function saveTeam()
     {
+        $teamModel = new \App\Models\teamModel();
         $validation = $this->validate([
             'csrf_test_name'=>'required',
             'sports_name'=>'required',
-            'team'=>'required|is_unique[teams.team_name]',
-            'coach'=>'required',
+            'team'=>'required',
             'school'=>'required',
             'file'=>'uploaded[file]|mime_in[file,image/jpg,image/jpeg,image/png]|max_size[file,10240]'
         ]);
@@ -1054,32 +1071,44 @@ class Home extends BaseController
         }
         else
         {
-            $file = $this->request->getFile('file');
-            $originalName = date('YmdHis').$file->getClientName();
-            //save the logo
-            $file->move('admin/images/team/',$originalName);
-            //save the data
-            $teamModel = new \App\Models\teamModel();
-            //get the id of the coach
-            $accountModel = new \App\Models\AccountModel();
-            $account = $accountModel->WHERE('accountID',$this->request->getPost('coach'))->first();
-            $data = ['team_name'=>$this->request->getPost('team'),
-                    'coach_name'=>$account['Fullname'],
-                    'accountID'=>$account['accountID'],
-                    'sportsID'=>$this->request->getPost('sports_name'),
-                    'school'=>$this->request->getPost('school'),
-                    'image'=>$originalName];
-            $teamModel->save($data);
-            //logs
-            date_default_timezone_set('Asia/Manila');
-            $logModel = new \App\Models\logModel();
-            $data = [
-                    'date'=>date('Y-m-d H:i:s a'),
-                    'accountID'=>session()->get('loggedUser'),
-                    'activities'=>'Added new team : '.$this->request->getPost('team'),
-                    'page'=>'New Team'
-                    ];        
-            $logModel->save($data);
+            //validate if the coach has already registered or created a team
+            $team = $teamModel->WHERE('accountID',session()->get('loggedUser'))
+                              ->WHERE('sportsID',$this->request->getPost('sports_name'))
+                              ->first();
+            if(empty($team))
+            {
+                $file = $this->request->getFile('file');
+                $originalName = date('YmdHis').$file->getClientName();
+                //save the logo
+                $file->move('admin/images/team/',$originalName);
+                //save the data
+                $accountModel = new \App\Models\AccountModel();
+                $account = $accountModel->WHERE('accountID',session()->get('loggedUser'))->first();
+                $data = ['team_name'=>$this->request->getPost('team'),
+                        'coach_name'=>$account['Fullname'],
+                        'accountID'=>$account['accountID'],
+                        'sportsID'=>$this->request->getPost('sports_name'),
+                        'school'=>$this->request->getPost('school'),
+                        'image'=>$originalName];
+                $teamModel->save($data);
+            }
+            else
+            {
+                $file = $this->request->getFile('file');
+                $originalName = date('YmdHis').$file->getClientName();
+                //save the logo
+                $file->move('admin/images/team/',$originalName);
+                //save the data
+                $accountModel = new \App\Models\AccountModel();
+                $account = $accountModel->WHERE('accountID',session()->get('loggedUser'))->first();
+                $data = ['team_name'=>$this->request->getPost('team'),
+                        'coach_name'=>$account['Fullname'],
+                        'accountID'=>$account['accountID'],
+                        'sportsID'=>$this->request->getPost('sports_name'),
+                        'school'=>$this->request->getPost('school'),
+                        'image'=>$originalName];
+                $teamModel->update($team['team_id'],$data);
+            }
             return $this->response->SetJSON(['success' => 'Successfully added']);
         }
     }
@@ -1116,16 +1145,18 @@ class Home extends BaseController
         $eventModel = new \App\Models\eventModel();
         $event = $eventModel->WHERE('accountID',session()->get('loggedUser'))->findAll();
         //registered user
-        $builder = $this->db->table('event_registration a');
-        $builder->select('a.*,b.event_title,b.start_date,b.end_date');
-        $builder->join('events b','b.event_id=a.event_id','LEFT');
-        $builder->groupby('a.register_id');
-        $members = $builder->get()->getResult();
+        $builder = $this->db->table('team_registration a');
+        $builder->select('a.*,b.team_name,b.coach_name,c.Name,d.event_title');
+        $builder->join('teams b','b.team_id=a.team_id','LEFT');
+        $builder->join('sports c','c.sportsID=b.sportsID','LEFT');
+        $builder->join('events d','d.event_id=a.event_id','LEFT');
+        $builder->groupby('a.registration_id');
+        $registered = $builder->get()->getResult();
         //teams
         $teamModel = new \App\Models\teamModel();
         $team = $teamModel->findAll();
 
-        $data = ['title'=>$title,'event'=>$event,'members'=>$members,'team'=>$team];
+        $data = ['title'=>$title,'event'=>$event,'team'=>$team,'registered'=>$registered];
         return view('main/manage-event',$data);
     }
 
@@ -1349,9 +1380,7 @@ class Home extends BaseController
 
     public function addRemarks()
     {
-        $registerModel = new \App\Models\registerModel();
-        $teamModel = new \App\Models\teamModel();
-        $playerModel = new \App\Models\playerModel();
+        $registerModel = new \App\Models\teamRegistrationModel();
         $validation = $this->validate([
             'csrf_test_name'=>'required'
         ]);
@@ -1363,35 +1392,9 @@ class Home extends BaseController
         {
             $id = $this->request->getPost('id');
             $status = $this->request->getPost('status');
-            $team = $this->request->getPost('team');
             //update
-            $data = ['status'=>1,'remarks'=>$status];
+            $data = ['status'=>$status];
             $registerModel->update($id,$data);
-            //get the player details from event registration
-            $player = $registerModel->WHERE('register_id',$id)->first();
-            $team_id = $teamModel->WHERE('team_id',$team)->first();
-            $nameParts = explode(" ", $player['fullname']);
-            $firstName = $nameParts[0];
-            $lastName = array_pop($nameParts);
-            $middleInitial = '';
-            if (count($nameParts) > 1) {
-                $middleInitial = strtoupper(substr($nameParts[1], 0, 1));
-            }
-            //save the records with assigned team
-            $record = ['team_id'=>$team,
-                        'first_name'=>$firstName,
-                        'last_name'=>$lastName,
-                        'mi'=>$middleInitial,
-                        'date_of_birth'=>$player['birth_date'],
-                        'sportsID'=>$team_id['sportsID'],
-                        'roleID'=>1,
-                        'jersey_num'=>0,
-                        'gender'=>'male',
-                        'email'=>$player['email'],
-                        'height'=>0,
-                        'weight'=>0,
-                        'address'=>$player['address']];
-            $playerModel->save($record);
             return $this->response->SetJSON(['success' => 'Successfully submitted']);
         }
     }
