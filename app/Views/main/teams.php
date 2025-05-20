@@ -39,9 +39,6 @@
                         <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                         <div class="col-auto ms-auto d-print-none">
                             <div class="btn-list">
-                                <a href="<?=site_url('new-team')?>" class="btn btn-secondary">
-                                    <i class="ti ti-plus"></i>&nbsp;New Team
-                                </a>
                                 <a href="<?=site_url('go-live')?>"
                                     class="btn btn-primary btn-5 d-none d-sm-inline-block">
                                     <!-- Download SVG icon from http://tabler.io/icons/icon/plus -->

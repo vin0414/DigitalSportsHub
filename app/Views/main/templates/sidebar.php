@@ -199,12 +199,11 @@
                     </div>
                 </li>
                 <?php endif; ?>
-                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"||session()->get('role')=="Coach"): ?>
+                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">Entries</h6>
                 </li>
                 <?php endif; ?>
-                <?php if(session()->get('role')=="Coach"): ?>
                 <li class="nav-item <?= ($title == 'New Event') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-event')?>">
                         <span ss="nav-link-icon d-md-none d-lg-inline-block">
@@ -225,8 +224,7 @@
                         <span class="nav-link-title"> &nbsp;&nbsp;New Event </span>
                     </a>
                 </li>
-                <?php endif; ?>
-                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
+                <?php if(session()->get('role')=="Super-admin"): ?>
                 <li class="nav-item <?= ($title == 'New Account') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-account')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -245,7 +243,7 @@
                         <span class="nav-link-title"> New Account </span>
                     </a>
                 </li>
-
+                <?php endif; ?>
                 <li class="nav-item <?= ($title == 'New Article') ? 'active' : '' ?>">
                     <a class="nav-link" href="<?=site_url('new-article')?>">
                         <span class="nav-link-icon d-md-none d-lg-inline-block">
@@ -261,8 +259,8 @@
                         <span class="nav-link-title"> New Article </span>
                     </a>
                 </li>
-                <?php endif; ?>
-                <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
+                
+                <?php if(session()->get('role')=="Super-admin"): ?>
                 <li class="nav-item mt-3">
                     <h6 class="ps-4 text-uppercase text-xs font-weight-bolder opacity-6">System</h6>
                 </li>

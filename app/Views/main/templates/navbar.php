@@ -91,7 +91,6 @@
                             <span class="nav-link-title"> Home </span>
                         </a>
                     </li> 
-                    <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"||session()->get('role')=="Coach"): ?>
                     <li
                         class="nav-item <?= ($title == 'Events' || $title == 'New Event' || $title == 'Manage Event') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('events')?>">
@@ -113,7 +112,6 @@
                             <span class="nav-link-title"> Events </span>
                         </a>
                     </li>
-                    <?php endif; ?>
                     <li
                         class="nav-item <?= ($title == 'Athletes' || $title == 'New Athlete' || $title == 'Profile' || $title == 'Edit Profile') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('athletes')?>">
@@ -149,7 +147,6 @@
                             <span class="nav-link-title"> Teams </span>
                         </a>
                     </li>
-                    <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
                     <li
                         class="nav-item <?= ($title == 'News'|| $title == 'Topic' ||$title == 'New Article' ||$title == 'Manage') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('news')?>">
@@ -214,6 +211,7 @@
                             <span class="nav-link-title"> Sponsors </span>
                         </a>
                     </li>
+                    <?php if(session()->get('role')=="Super-admin"): ?>
                     <li class="nav-item <?= ($title == 'Accounts') ? 'active' : '' ?>">
                         <a class="nav-link" href="<?=site_url('accounts')?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -227,7 +225,7 @@
                             </svg>
                             <span class="nav-link-title"> Accounts </span>
                         </a>
-                    </li>
+                    </li>       
                     <li
                         class="nav-item dropdown <?= ($title == 'Maintenance'||$title == 'Recovery'||$title == 'Settings') ? 'active' : '' ?>">
                         <a class="nav-link dropdown-toggle" href="#navbar-help" data-bs-toggle="dropdown"
