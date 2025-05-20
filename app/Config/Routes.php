@@ -52,6 +52,7 @@ $routes->get('filter-team','Home::filterTeam');
 $routes->post('save-player','Home::savePlayer');
 $routes->get('get-position','Home::getPosition');
 $routes->get('filter-players','Home::filterPlayers');
+$routes->get('search-players','Coach::searchPlayers');
 $routes->post('edit-player','Home::editPlayer');
 //map
 $routes->get('shop-location','Home::shopLocation');

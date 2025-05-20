@@ -96,12 +96,6 @@
                                 <div class="card-body">
                                     <div class="card-title">
                                         Player's Information
-                                        <?php if(session()->get('role')=="Super-admin"||session()->get('role')=="Organizer"): ?>
-                                        <a href="<?=site_url('athletes/edit-profile/')?><?=$player['player_id']?>"
-                                            class="btn btn-primary btn-md" style="float:right;">
-                                            <i class="ti ti-edit"></i>&nbsp;Edit
-                                        </a>
-                                        <?php endif;?>
                                     </div>
                                     <br />
                                     <div class="row g-3">

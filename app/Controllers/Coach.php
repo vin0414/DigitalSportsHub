@@ -123,6 +123,58 @@ class Coach extends BaseController
         return view('coach/view-player',$data);
     }
 
+    public function searchPlayers()
+    {
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->WHERE('accountID',session()->get('loggedUser'))->first();
+        $text = "%".$this->request->getGet('search')."%";
+        $builder = $this->db->table('players a');
+        $builder->select('a.*,b.team_name,c.roleName');
+        $builder->join('teams b','b.team_id=a.team_id','LEFT');
+        $builder->join('player_role c','c.roleID=a.roleID','LEFT');
+        $builder->WHERE('a.team_id',$team['team_id']);
+        $builder->LIKE('a.last_name',$text);
+        $players = $builder->get()->getResult();
+        foreach($players as $row)
+        {
+            ?>
+            <div class="col-md-6 col-lg-3">
+                <div class="card">
+                    <div class="card-body p-4 text-center">
+                        <span class="avatar avatar-xl mb-3 rounded"
+                            style="background-image: url(<?=base_url('admin/images/profile')?>/<?php echo $row->image ?>);width:100%;height:10rem;"></span>
+                        <h3 class="m-0 mb-1">
+                            <a href="<?=site_url('view')?>/<?php echo $row->player_id ?>">
+                                <?php echo $row->last_name ?>, <?php echo $row->first_name ?>
+                                <?php echo $row->mi ?>
+                            </a>
+                        </h3>
+                        <div class="text-secondary"><?php echo $row->roleName ?></div>
+                        <div class="mt-3">
+                            <span class="badge bg-success-lt"><?php echo $row->team_name ?></span>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <a href="mailto:<?php echo $row->email ?>" class="card-btn">
+                            <i class="ti ti-mail"></i>&nbsp;Message
+                            <?php 
+                                if (isset($row->gender) && $row->gender == 'male') {
+                                    echo 'Him';
+                                } else {
+                                    echo 'Her';
+                                }
+                            ?>
+                        </a>
+                        <a href="<?=site_url('view')?>/<?php echo $row->player_id ?>" class="card-btn">
+                            <i class="ti ti-address-book"></i>&nbsp;Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <?php
+        }
+    }
+
     public function mySchedule()
     {
         $title = "My Schedule";

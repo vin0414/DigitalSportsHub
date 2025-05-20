@@ -145,6 +145,28 @@
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    $('#frmSearch').on('submit', function(e) {
+        e.preventDefault();
+        let data = $(this).serialize();
+        $.ajax({
+            url: "<?=site_url('search-players')?>",
+            method: "GET",
+            data: data,
+            success: function(response) {
+                if (response === "") {
+                    Swal.fire({
+                        title: 'Sorry!',
+                        text: "No Record(s) found. Please try again",
+                        icon: 'warning',
+                    });
+                } else {
+                    $('#results').html(response);
+                }
+            }
+        });
+    });
+    </script>
 </body>
 
 </html>
