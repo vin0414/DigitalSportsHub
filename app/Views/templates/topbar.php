@@ -43,7 +43,7 @@
             <a href="<?=site_url('sign-up')?>" class="sign-up-btn">SIGN UP</a>
             <?php else : ?>
             <a href="javascript:void(0);" class="login-btn"><?=session()->get('fullname')?></a>
-            <a href="<?=site_url('sign-out')?>" class="sign-up-btn">Sign Out</a>
+            <a href="<?=site_url('logout')?>" class="sign-up-btn">Sign Out</a>
             <?php endif; ?>
             <?php endif; ?>
         </div>
