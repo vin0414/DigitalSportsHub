@@ -87,7 +87,16 @@
         $event = $matchModel->WHERE('team1_id',$team['team_id'])->orWhere('team2_id',$team['team_id'])->findAll();
         foreach($event as $row)
         {
-            $tempArray = array( "title" =>'Game Match',"description" =>'Competition',"start" => $row['date'].'' .$row['time'] ,"end" => $row['date']);
+            // Combine date and time with a space
+            $start = $row['date'] . (isset($row['time']) && $row['time'] ? ' ' . $row['time'] : '');
+            // Optionally, set end time (here, just using start for both)
+            $end = $start;
+            $tempArray = array(
+                "title" => 'Game Match',
+                "description" => 'Competition',
+                "start" => $start,
+                "end" => $end
+            );
             array_push($eventData, $tempArray);
         }
       ?>

@@ -52,8 +52,14 @@ class Coach extends BaseController
         $builder->orWhere('a.team2_id', $team['team_id']);
         $builder->orderBy('a.date','DESC')->limit(5);
         $match = $builder->get()->getResult();
+        //count the incoming matches
+        $matchModel = new \App\Models\matchModel();
+        $totalMatch = $matchModel->WHERE('team1_id',$team['team_id'])
+                            ->orWhere('team2_id',$team['team_id'])
+                            ->WHERE('status',1)->countAllResults();
 
-        $data = ['title'=>$title,'totalPlayer'=>$totalPlayer,'stats'=>$stats,'match'=>$match,'win'=>$winner,'loss'=>$loss];
+        $data = ['title'=>$title,'totalPlayer'=>$totalPlayer,'stats'=>$stats,'match'=>$match,
+                    'win'=>$winner,'loss'=>$loss,'totalMatch'=>$totalMatch];
         return view('coach/dashboard',$data);
     }
 
@@ -184,8 +190,20 @@ class Coach extends BaseController
 
     public function gameResults()
     {
-        $title = "Game Result";
-        $data = ['title'=>$title];
+        $title = "Game Result"; 
+        $teamModel = new \App\Models\teamModel();
+        $team = $teamModel->WHERE('accountID',session()->get('loggedUser'))->first();
+        //scores
+        $builder = $this->db->table('team_stats a');
+        $builder->select('a.*,b.Fullname,d.team_name as team1,e.team_name as team2');
+        $builder->join('accounts b','b.accountID=a.coachID','LEFT');
+        $builder->join('matches c','c.match_id=a.match_id','LEFT');
+        $builder->join('teams d','d.team_id=c.team1_id','LEFT');
+        $builder->join('teams e','e.team_id=c.team2_id','LEFT');
+        $builder->WHERE('a.team_id',$team['team_id']);
+        $score = $builder->get()->getResult();
+
+        $data = ['title'=>$title,'score'=>$score];
         return view('coach/game-result',$data);
     }
 

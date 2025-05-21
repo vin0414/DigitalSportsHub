@@ -55,7 +55,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-title">Incoming Matches</div>
-                                    <h1>0</h1>
+                                    <h1><?=$totalMatch ?></h1>
                                 </div>
                             </div>
                         </div>

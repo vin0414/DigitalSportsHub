@@ -1,0 +1,522 @@
+DEBUG - 2025-05-21 09:45:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:47:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:50:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:50:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:51:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:51:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:51:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:52:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:52:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-21 09:52:52 --> ErrorException: Undefined array key "location"
+[Method: GET, Route: /]
+in APPPATH\Views\welcome_message.php on line 247.
+ 1 APPPATH\Views\welcome_message.php(247): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "location"', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\welcome_message.php', 247)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\welcome_message.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('welcome_message', [], true)
+ 5 APPPATH\Controllers\Home.php(39): view('welcome_message', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-21 09:53:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:54:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:55:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-21 01:56:51 --> mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-05-21 01:56:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+[Method: GET, Route: chat/getMessages]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 2 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 4 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:51 --> [Caused by] mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 5 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-05-21 01:56:54 --> mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-05-21 01:56:54 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+[Method: GET, Route: chat/getMessages]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 2 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:54 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 4 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:54 --> [Caused by] mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 5 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-05-21 01:56:57 --> mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-05-21 01:56:57 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+[Method: GET, Route: chat/getMessages]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 2 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:57 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 4 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:56:57 --> [Caused by] mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 5 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-05-21 01:57:00 --> mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-05-21 01:57:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+[Method: GET, Route: chat/getMessages]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 2 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:57:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 4 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:57:00 --> [Caused by] mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 5 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+ERROR - 2025-05-21 01:57:03 --> mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist in C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php:327
+Stack trace:
+#0 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b...', 0)
+#1 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b...')
+#2 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b...')
+#3 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b...', Array, false)
+#4 C:\Users\Warvin B Mogate\DigitalSportsHub\app\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+#6 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+#7 C:\Users\Warvin B Mogate\DigitalSportsHub\system\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(334): CodeIgniter\CodeIgniter->run()
+#9 C:\Users\Warvin B Mogate\DigitalSportsHub\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\Users\Warvin B Mogate\DigitalSportsHub\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 C:\Users\Warvin B Mogate\DigitalSportsHub\system\rewrite.php(44): require_once('C:\\Users\\Warvin...')
+#12 {main}
+CRITICAL - 2025-05-21 01:57:03 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+[Method: GET, Route: chat/getMessages]
+in SYSTEMPATH\Database\BaseConnection.php on line 692.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 2 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 4 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 5 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:57:03 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 332.
+ 1 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 2 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 4 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 6 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 7 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+CRITICAL - 2025-05-21 01:57:03 --> [Caused by] mysqli_sql_exception: Table 'db_hub.chat_messages' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 327.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(327): mysqli->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 3 SYSTEMPATH\Database\BaseConnection.php(652): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT CONCAT(b.fullname, \' : \', a.message)message, `a`.`id`, `a`.`sender_id`, `b`.`user_id`
+FROM `chat_messages` `a`
+LEFT JOIN `users` `b` ON `b`.`user_id`=`a`.`sender_id`
+ORDER BY `a`.`id` ASC', [], false)
+ 5 APPPATH\Controllers\ChatController.php(21): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\ChatController->getMessages()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\ChatController))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-21 01:57:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:57:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:58:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 09:58:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:58:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:59:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:59:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:59:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:59:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 01:59:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-21 01:59:59 --> ErrorException: Trying to access array offset on value of type null
+[Method: GET, Route: my-schedule]
+in APPPATH\Views\coach\my-schedule.php on line 87.
+ 1 APPPATH\Views\coach\my-schedule.php(87): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Trying to access array offset on value of type null', 'C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\my-schedule.php', 87)
+ 2 SYSTEMPATH\View\View.php(224): include('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\app\\Views\\coach\\my-schedule.php')
+ 3 SYSTEMPATH\View\View.php(227): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1173): CodeIgniter\View\View->render('coach/my-schedule', [], true)
+ 5 APPPATH\Controllers\Coach.php(182): view('coach/my-schedule', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Coach->mySchedule()
+ 7 SYSTEMPATH\CodeIgniter.php(507): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Coach))
+ 8 SYSTEMPATH\CodeIgniter.php(354): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(334): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('C:\\Users\\Warvin B Mogate\\DigitalSportsHub\\public\\index.php')
+DEBUG - 2025-05-21 10:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:00:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:00:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:00:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:04:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:06:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:06:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:13:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:18:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:18:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:18:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:18:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:21:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:21:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:22:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:23:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:23:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:23:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:31:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:31:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:31:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:31:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 02:32:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:06:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:08:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:09:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:11:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:11:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 11:12:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:12:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:13:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:14:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:15:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 11:15:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:15:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:16:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:16:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:16:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:16:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:17:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:17:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:17:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:17:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:17:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:21:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:33:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 11:34:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:34:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:36:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:36:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:36:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:44:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:44:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:45:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:48:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:48:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 11:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:48:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:48:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2025-05-21 03:48:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

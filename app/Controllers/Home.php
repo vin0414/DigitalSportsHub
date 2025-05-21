@@ -2415,19 +2415,30 @@ class Home extends BaseController
         else
         {
             $matchModel = new \App\Models\matchModel();
-            $data = [
-                'date'=>$this->request->getPost('date'),
-                'time'=>$this->request->getPost('time'),
-                'team1_id'=>$this->request->getPost('team1'),
-                'team1_score'=>0,
-                'team2_id'=>$this->request->getPost('team2'),
-                'team2_score'=>0,
-                'location'=>$this->request->getPost('location'),
-                'result'=>'-',
-                'status'=>1
-            ];
-            $matchModel->save($data);
-            return $this->response->SetJSON(['success' => 'Successfully added']);
+            $match = $matchModel->WHERE('date',$this->request->getPost('date'))
+                                ->WHERE('time',$this->request->getPost('time'))
+                                ->first();
+            if(empty($match))
+            {
+                $data = [
+                    'date'=>$this->request->getPost('date'),
+                    'time'=>$this->request->getPost('time'),
+                    'team1_id'=>$this->request->getPost('team1'),
+                    'team1_score'=>0,
+                    'team2_id'=>$this->request->getPost('team2'),
+                    'team2_score'=>0,
+                    'location'=>$this->request->getPost('location'),
+                    'result'=>'-',
+                    'status'=>1
+                ];
+                $matchModel->save($data);
+                return $this->response->SetJSON(['success' => 'Successfully added']);
+            }
+            else
+            {
+                $error = ['time'=>'Please select other date or time to proceed'];
+                return $this->response->SetJSON(['error' => $error]);
+            }
         }
     }
 

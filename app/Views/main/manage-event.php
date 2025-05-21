@@ -172,6 +172,7 @@
                                                 <th>Sports</th>
                                                 <th>Team</th>
                                                 <th>Coach</th>
+                                                <th>Attachment</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </thead>
@@ -182,6 +183,9 @@
                                                 <td><?=$row->Name ?></td>
                                                 <td><?=$row->team_name ?></td>
                                                 <td><?=$row->coach_name ?></td>
+                                                <td>
+                                                    <a href="admin/files/<?=$row->file ?>" target="_blank"><?=$row->file ?></a>
+                                                </td>
                                                 <td>
                                                     <?php if($row->status==0){ ?>
                                                         <span class="badge bg-warning text-white">PENDING</span>

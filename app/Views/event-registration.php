@@ -125,7 +125,7 @@
                             <span class="info-title">Register Now - <?=$events['event_title']?></span>
                         </div>
                         <div class="info-body">
-                            <form method="POST" class="row g-3" id="frmRegister">
+                            <form method="POST" class="row g-3" enctype="multipart/form-data" id="frmRegister">
                                 <?=csrf_field()?>
                                 <input type="hidden" name="event_id" value="<?=$id?>"/>
                                 <input type="hidden" name="team_id" value="<?=$team['team_id']?>"/>
@@ -145,6 +145,11 @@
                                     <textarea name="school" class="form-control" style="height:150px;"
                                         required><?=$team['school']?></textarea>
                                     <div id="school-error" class="error-message text-danger text-sm"></div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <label>Attachment</label>
+                                    <input type="file" name="file" class="form-control" required/>
+                                    <div id="file-error" class="error-message text-danger text-sm"></div>
                                 </div>
                                 <div class="col-lg-12">
                                     <button type="submit" class="btn btn-primary">Register</button>
@@ -196,8 +201,12 @@
             e.preventDefault();
             let data = $(this).serialize();
             $.ajax({
-                url:"<?=base_url('register-now')?>",
-                method:"POST",data:data,
+                url:"<?=site_url('register-now')?>",
+                method:"POST",
+                data: new FormData(this),
+                contentType: false,
+                cache: false,
+                processData: false,
                 success:function(response)
                 {
                     if (response.success) {
@@ -206,6 +215,7 @@
                             text: "Successfully registered",
                             icon: 'success',
                         });
+                        location.reload();
                     } else {
                         var errors = response.error;
                         // Iterate over each error and display it under the corresponding input field

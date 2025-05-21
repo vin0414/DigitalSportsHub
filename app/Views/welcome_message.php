@@ -237,20 +237,15 @@
                     $team1 = $teamModel->WHERE('team_id',$row['team1_id'])->first();
                     $team2 = $teamModel->WHERE('team_id',$row['team2_id'])->first();
                     ?>
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <div class="match-wrapper">
-                            <div class="logo">
-                                <img src="<?=base_url('admin/images/team/')?><?=$team1['image']?>" style="width:75px;"
-                                    alt="">
-                            </div>
                             <div class="content" style="margin:5px;">
+                                <center>
                                 <p class="date"><?=date('M d,Y',strtotime($row['date']))?></p>
                                 <p class="time"><?=date('h:i A',strtotime($row['time']))?></p>
                                 <h4 class="team"><?=$team1['team_name']?> <span>VS</span> <?=$team2['team_name']?></h4>
-                            </div>
-                            <div class="logo">
-                                <img src="<?=base_url('admin/images/team/')?><?=$team2['image']?>" style="width:75px;"
-                                    alt="">
+                                <h4><?=$row['location']?></h4>
+                                </center>
                             </div>
                         </div>
                     </div>

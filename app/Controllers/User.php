@@ -188,7 +188,8 @@ class User extends BaseController
             'csrf_test_name'=>'required',
             'fullname'=>'required',
             'team_name'=>'required',
-            'school'=>'required'
+            'school'=>'required',
+            'file'=>'uploaded[file]|mime_in[file,application/zip,application/x-zip-compressed,application/pdf]|max_size[file,10240]'
         ]);
 
         if(!$validation)
@@ -198,10 +199,15 @@ class User extends BaseController
         else
         {
             $registerModel = new \App\Models\teamRegistrationModel();
+            $file = $this->request->getFile('file');
+            $originalName = date('YmdHis').$file->getClientName();
+            $file->move('admin/files/',$originalName);
             $data = ['event_id'=>$this->request->getPost('event_id'),
                     'team_id'=>$this->request->getPost('team_id'),
                     'accountID'=>session()->get('loggedUser'),
-                    'status'=>0];
+                    'status'=>0,
+                    'file'=>$originalName
+                    ];
             $registerModel->save($data);
             return $this->response->SetJSON(['success' => 'Successfully registered']);
         }

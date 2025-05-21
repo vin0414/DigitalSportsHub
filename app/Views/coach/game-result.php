@@ -44,7 +44,51 @@
             <!-- BEGIN PAGE BODY -->
             <div class="page-body">
                 <div class="container-xl">
-                    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered" id="tblscore">
+                                    <thead>
+                                        <th>VS</th>
+                                        <th>Wins</th>
+                                        <th>Losses</th>
+                                        <th>Draws</th>
+                                        <th>Score</th>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($score as $row): ?>
+                                        <tr>
+                                            <td><?php echo $row->team1 ?> <i class="ti ti-vs"></i>
+                                                <?php echo $row->team2 ?></td>
+                                            <td>
+                                                <?php if($row->wins==1){?>
+                                                <i class="ti ti-check"></i>
+                                                <?php }else {?>
+                                                <i class="ti ti-x"></i>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($row->losses==1){?>
+                                                <i class="ti ti-check"></i>
+                                                <?php }else {?>
+                                                <i class="ti ti-x"></i>
+                                                <?php } ?>
+                                            </td>
+                                            <td>
+                                                <?php if($row->draws==1){?>
+                                                <i class="ti ti-check"></i>
+                                                <?php }else {?>
+                                                <i class="ti ti-x"></i>
+                                                <?php } ?>
+                                            </td>
+                                            <td><?php echo $row->score ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- END PAGE BODY -->
@@ -77,7 +121,11 @@
     <!-- END DEMO SCRIPTS -->
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+    <script>
+    $('#tblscore').DataTable();
+    </script>
 </body>
 
 </html>

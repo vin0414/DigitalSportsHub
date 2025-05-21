@@ -12,7 +12,7 @@ class teamRegistrationModel extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ['event_id','team_id','accountID','status'];
+    protected $allowedFields    = ['event_id','team_id','accountID','status','file'];
 
     // Dates
     protected $useTimestamps = true;
